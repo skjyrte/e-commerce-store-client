@@ -1,8 +1,13 @@
+import css from "./App.module.scss";
+import AppContainer from "./AppContainer";
+import {FC} from "react";
 
-export const App = () => {
+export const App: FC<{}> = () => {
   return (
-    <>
-      <h1>React TypeScript Webpack Starter Template</h1>
-    </>
-  )
-}
+    /*     <Routes> */
+    <div className={css.backgroundWrapper}>
+      <AppContainer />
+    </div>
+    /*     </Routes> */
+  );
+};

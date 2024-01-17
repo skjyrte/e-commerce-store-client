@@ -1,0 +1,21 @@
+.imageButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+  width: 50px;
+  border-radius: 50%;
+  transition: filter 0.3s;
+  background-color: var(--pale-orange);
+  padding: 3px;
+  border: 0;
+  fill: var(--button-enabled);
+}
+.imageButton:active {
+  background-color: var(--basic-orange);
+}
+
+.imageButton > img {
+  height: 100%;
+  width: 100%;
+}

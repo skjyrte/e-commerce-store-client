@@ -1,0 +1,14 @@
+.iconButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20px;
+  width: 20px;
+  transition: filter 0.3s;
+  margin: 15px 10px;
+  border: none;
+  padding: 0 0;
+  background: transparent;
+  fill: var(--button-enabled);
+  border-radius: 3px;
+}

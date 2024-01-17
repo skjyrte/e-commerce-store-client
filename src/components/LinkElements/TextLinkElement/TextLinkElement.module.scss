@@ -1,0 +1,29 @@
+.LinkElement {
+  display: flex;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  color: var(--button-enabled);
+  border: none;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 0 10px;
+  letter-spacing: 0.2rem;
+  font-family: inherit;
+  text-decoration: none;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
+  &:hover {
+    background-color: green;
+    transition: background-color 1s;
+  }
+}
+
+.medium {
+  font-size: 16px;
+}
+
+.large {
+  font-size: 24px;
+}
