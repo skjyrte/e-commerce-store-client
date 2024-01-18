@@ -1,11 +1,11 @@
 import {FC} from "react";
 import css from "./AppContainer.module.scss";
 import Header from "../Header";
-import {BrowserRouter as Router, Route, Link, Routes} from "react-router-dom";
+import {HashRouter, Route, Routes} from "react-router-dom";
 
 const AppContainer: FC = ({}) => {
   return (
-    <Router>
+    <HashRouter>
       <div className={css.appContainer}>
         <Header />
         <Routes>
@@ -16,7 +16,7 @@ const AppContainer: FC = ({}) => {
           <Route path="/contact" element={<div>contact</div>} />
         </Routes>
       </div>
-    </Router>
+    </HashRouter>
   );
 };
 export default AppContainer;
