@@ -1,0 +1,59 @@
+.box {
+  display: flex;
+  flex-direction: column;
+  background-color: beige;
+  width: 520px;
+  padding: 60px;
+}
+
+.brand {
+  font-size: 12px;
+  padding: 10px 0;
+}
+
+.model {
+  font-size: 36px;
+  padding: 10px 0;
+}
+
+.description {
+  padding: 10px 0;
+  display: flex;
+  flex-direction: row;
+}
+
+.priceWrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  height: 50px;
+}
+
+.price {
+  font-size: 30px;
+  padding: 0 10px;
+}
+
+.priceDrop {
+  font-size: 16px;
+  background-color: aqua;
+  border-radius: 5px;
+  height: 20px;
+}
+
+.priceWas {
+  text-decoration: line-through;
+  font-size: 16px;
+  padding: 5px 10px;
+}
+
+.actionBox {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  /*   width: 360px; */
+  height: 80px;
+  background-color: yellowgreen;
+  border-radius: 10px;
+}
