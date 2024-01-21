@@ -51,6 +51,17 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
     console.log(currentIndex);
   };
 
+  const offset = () => {
+    const imageWidth = -100;
+    if (currentIndex < 2) {
+      return 0;
+    } else if (currentIndex > imagesList.length - 2) {
+      return imageWidth * (imagesList.length - 4);
+    } else {
+      return imageWidth * (currentIndex - 2);
+    }
+  };
+
   return (
     <div className={`${css.componentBox} ${css.preventSelect}`}>
       <div className={css.mainImageBox}>
@@ -70,7 +81,7 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
       </div>
       <div className={css.thumbnailBoxOverflow}>
         <ul
-          style={{transform: `translate(${currentIndex * -70}px)`}}
+          style={{transform: `translate(${offset()}px)`}}
           className={css.thumbnailBox}
         >
           {thumbnailArray}
