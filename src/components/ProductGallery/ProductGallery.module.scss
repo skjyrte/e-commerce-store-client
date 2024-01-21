@@ -83,7 +83,7 @@
   width: calc(var(--thumbnail-size) * 4 + (--thumbnail-margin) * 6);
   height: var(--thumbnail-size);
   padding: 30px 0;
-  overflow: hidden;
+
   display: flex;
   flex-direction: row;
   align-items: center;
