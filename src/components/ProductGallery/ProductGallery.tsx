@@ -1,6 +1,7 @@
 import {FC, useState} from "react";
 import css from "./ProductGallery.module.scss";
 import IconButton from "../Buttons/IconButton";
+import TextButton from "../Buttons/TextButton";
 import NarrowArrowNext from "../Icons/NarrowArrowNext";
 import NarrowArrowPrev from "../Icons/NarrowArrowPrev";
 
@@ -17,6 +18,7 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
       className={`${css.mainImageList} ${index === currentIndex ? css.current : ""} `}
       draggable="false"
       style={{backgroundImage: `url(${element})`}}
+      id={index.toString()}
     />
   ));
 
@@ -33,11 +35,11 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
   });
 
   const minThumbnailXOffset = 0;
-  const maxThumbnailXOffset = 350;
-  const thumbnailXOffsetStep = 200;
+  const maxThumbnailXOffset = 800;
+  const thumbnailXOffsetStep = 400;
   const thumbnailWidth = 100;
 
-  const checkThumbnailSlide = (direction: string) => {
+  const checkThumbnailLimits = (direction: string) => {
     if (direction === "next") {
       return currentThumbnailXOffset + thumbnailXOffsetStep <=
         maxThumbnailXOffset
@@ -53,41 +55,38 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
   };
 
   const onSlideMainImage = (direction: string) => {
-    console.log("currentIndex");
-    console.log(currentIndex);
-    console.log("currentThumbnailXOffset");
-    console.log(currentThumbnailXOffset);
     if (direction === "next") {
-      setCurrentIndex(() => {
+      setCurrentIndex((currentIndex) => {
         return currentIndex < imagesList.length - 1
           ? currentIndex + 1
           : imagesList.length - 1;
       });
       if (
-        currentThumbnailXOffset <
-          currentIndex * thumbnailWidth - thumbnailXOffsetStep &&
-        currentThumbnailXOffset < maxThumbnailXOffset
+        currentThumbnailXOffset <=
+        //slider custom parameter
+        (currentIndex + 1) * thumbnailWidth - thumbnailXOffsetStep
       ) {
-        setCurrentThumbnailXOffset(checkThumbnailSlide("next"));
+        setCurrentThumbnailXOffset(() => checkThumbnailLimits("next"));
       }
     } else if (direction === "prev") {
-      setCurrentIndex(() => (currentIndex > 0 ? currentIndex - 1 : 0));
-
+      setCurrentIndex((currentIndex) =>
+        currentIndex > 0 ? currentIndex - 1 : 0
+      );
       if (
-        currentThumbnailXOffset >
-          currentIndex * thumbnailWidth - thumbnailXOffsetStep &&
-        currentThumbnailXOffset > minThumbnailXOffset
+        currentThumbnailXOffset >=
+        //slider custom parameter
+        (currentIndex + 4) * thumbnailWidth - thumbnailXOffsetStep
       ) {
-        setCurrentThumbnailXOffset(checkThumbnailSlide("prev"));
+        setCurrentThumbnailXOffset(() => checkThumbnailLimits("prev"));
       }
     } else throw new Error("invalid index");
   };
 
   const onSlideThumbnail = (direction: string) => {
     if (direction === "next") {
-      setCurrentThumbnailXOffset(checkThumbnailSlide("next"));
+      setCurrentThumbnailXOffset(checkThumbnailLimits("next"));
     } else if (direction === "prev") {
-      setCurrentThumbnailXOffset(checkThumbnailSlide("prev"));
+      setCurrentThumbnailXOffset(checkThumbnailLimits("prev"));
     } else throw new Error("invalid index");
   };
 
@@ -97,35 +96,45 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
         <button
           className={`${css.carouselButton} ${css.prev}`}
           onClick={() => onSlideMainImage("prev")}
+          disabled={currentIndex === 0 ? true : false}
         >
           ⇐
         </button>
         <button
           className={`${css.carouselButton} ${css.next}`}
           onClick={() => onSlideMainImage("next")}
+          disabled={currentIndex === imagesList.length - 1 ? true : false}
         >
           ⇒
         </button>
         {mainImageArray};
       </div>
-      <div className={css.thumbnailBoxOverflow}>
+      <div className={css.thumbnailBoxWrapper}>
         <IconButton
           IconComponent={NarrowArrowPrev}
           buttonClass={["carouselButton", "prev"]}
           onClick={() => onSlideThumbnail("prev")}
+          isDisabled={
+            currentThumbnailXOffset === minThumbnailXOffset ? true : false
+          }
         />
-        <ul
-          style={{
-            transform: `translate(${-currentThumbnailXOffset}px)`,
-          }}
-          className={css.thumbnailBox}
-        >
-          {thumbnailArray}
-        </ul>
+        <div className={css.thumbnailBoxOverflow}>
+          <ul
+            style={{
+              transform: `translate(${-currentThumbnailXOffset}px)`,
+            }}
+            className={css.thumbnailBox}
+          >
+            {thumbnailArray}
+          </ul>
+        </div>
         <IconButton
           IconComponent={NarrowArrowNext}
           buttonClass={["carouselButton", "next"]}
           onClick={() => onSlideThumbnail("next")}
+          isDisabled={
+            currentThumbnailXOffset === maxThumbnailXOffset ? true : false
+          }
         />
       </div>
     </div>

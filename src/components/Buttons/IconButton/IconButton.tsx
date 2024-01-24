@@ -22,7 +22,7 @@ const IconButton: FC<Props> = ({
   const buttonClassName = classNames(
     css.iconButton,
     ...buttonClass.map((el) => css[el]),
-    isDisabled && `${css.iconButton}_disabled`
+    isDisabled && css.disabled
   );
   return (
     <button

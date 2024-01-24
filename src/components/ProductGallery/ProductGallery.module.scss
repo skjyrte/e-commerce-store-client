@@ -1,5 +1,5 @@
 .componentBox {
-  width: 450px;
+  width: 500px;
   padding: 0;
   margin: 0;
 }
@@ -12,13 +12,15 @@
 
 .mainImageBox {
   position: relative;
-  width: 450px;
-  height: 450px;
+  width: 500px;
+  height: 500px;
 }
 
 .mainImageList {
   position: absolute;
   list-style-type: none;
+  opacity: 0;
+  transition: opacity 0.5s;
   width: 100%;
   height: 100%;
   background-size: contain;
@@ -29,16 +31,14 @@
   width: 100%;
   height: 100%;
   border-radius: 10px;
-  position: absolute;
   inset: 0;
   opacity: 0;
   z-index: 0;
-  transition: 200ms opacity ease-in-out;
-  transition-delay: 200ms;
   border: 1px solid beige;
 }
 
 .current {
+  transition: opacity 0.5s;
   opacity: 1;
   z-index: 1;
   transition-delay: 0ms;
@@ -53,34 +53,48 @@
   top: 50%;
   transform: translateY(-50%);
   color: white;
-  opacity: 0.2;
+  opacity: 0.4;
   &:hover {
-    opacity: 0.5;
+    opacity: 0.8;
     cursor: pointer;
+    background-color: blue;
+  }
+  &:active {
+    filter: hue-rotate(90deg);
   }
 }
 
 .carouselButton.prev {
   left: 0.5rem;
+  &:disabled {
+    background-color: red;
+  }
 }
 
 .carouselButton.next {
   right: 0.5rem;
+  &:disabled {
+    background-color: red;
+  }
+}
+
+.thumbnailBoxWrapper {
+  width: 500px;
+  position: relative;
 }
 
 .thumbnailBoxOverflow {
   position: relative;
-  width: 450px;
+  width: 400px;
   height: 100px;
   margin-top: 30px;
-  margin-left: 0;
-  overflow: clip;
-  overflow-clip-margin: -0px;
+  margin-left: 50px;
+  overflow: hidden;
 }
 
 .thumbnailBox {
   --thumbnail-size: 100px;
-  width: auto;
+  width: 400px;
   height: var(--thumbnail-size);
   padding: 30px 0;
   display: flex;

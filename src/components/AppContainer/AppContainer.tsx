@@ -13,6 +13,10 @@ import image5 from "../../images/product/image-product-1.jpg";
 import image6 from "../../images/product/image-product-2.jpg";
 import image7 from "../../images/product/image-product-3.jpg";
 import image8 from "../../images/product/image-product-4.jpg";
+import image9 from "../../images/product/image-product-1.jpg";
+import image10 from "../../images/product/image-product-2.jpg";
+import image11 from "../../images/product/image-product-3.jpg";
+import image12 from "../../images/product/image-product-4.jpg";
 
 const AppContainer: FC = ({}) => {
   return (
@@ -38,6 +42,10 @@ const AppContainer: FC = ({}) => {
               image6,
               image7,
               image8,
+              image9,
+              image10,
+              image11,
+              image12,
             ]}
           />
           <ProductDescription />

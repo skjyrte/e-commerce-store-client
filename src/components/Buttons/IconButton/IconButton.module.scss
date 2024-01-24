@@ -4,7 +4,7 @@
   align-items: center;
   padding: 0 0;
   border: none;
-  background: transparent;
+  background-color: transparent;
 }
 
 .cartButton {
@@ -24,7 +24,12 @@
   top: 50%;
   transform: translateY(-50%);
   &:hover {
+    opacity: 0.5;
     cursor: pointer;
+    background-color: blue;
+  }
+  &:active {
+    filter: hue-rotate(90deg);
   }
 }
 
@@ -34,4 +39,8 @@
 
 .carouselButton.next {
   right: 0;
+}
+
+.disabled {
+  background-color: red;
 }
