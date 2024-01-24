@@ -33,7 +33,7 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
   });
 
   const minThumbnailXOffset = 0;
-  const maxThumbnailXOffset = 400;
+  const maxThumbnailXOffset = 350;
   const thumbnailXOffsetStep = 200;
   const thumbnailWidth = 100;
 
