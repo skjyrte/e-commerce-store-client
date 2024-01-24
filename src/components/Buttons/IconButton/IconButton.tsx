@@ -8,6 +8,7 @@ interface Props {
   isDisabled?: boolean;
   IconComponent: ElementType;
   dataTestId?: string;
+  buttonClass: Array<string>;
 }
 
 const IconButton: FC<Props> = ({
@@ -16,9 +17,11 @@ const IconButton: FC<Props> = ({
   isDisabled = false,
   IconComponent,
   dataTestId,
+  buttonClass,
 }) => {
   const buttonClassName = classNames(
     css.iconButton,
+    ...buttonClass.map((el) => css[el]),
     isDisabled && `${css.iconButton}_disabled`
   );
   return (

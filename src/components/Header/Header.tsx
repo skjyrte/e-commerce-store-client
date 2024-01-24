@@ -46,6 +46,7 @@ const Header: FC = ({}) => {
           <IconButton
             IconComponent={IconCart}
             onClick={() => console.log("Cart")}
+            buttonClass={["cartButton"]}
           />
         </div>
         <div className={css.imageButtonWrapper}>

@@ -23,7 +23,6 @@ const IconButton: FC<Props> = ({
   );
   return (
     <button
-      /*       style={{backgroundColor: "red"}} */
       data-testid={dataTestId}
       className={classNames(buttonClassName)}
       onClick={onClick}
