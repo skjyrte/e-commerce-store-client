@@ -39,17 +39,17 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
   const thumbnailXOffsetStep = 400;
   const thumbnailWidth = 100;
 
-  const checkThumbnailLimits = (direction: string) => {
+  const checkThumbnailLimits = (direction: string, stepMultiplier = 1) => {
     if (direction === "next") {
-      return currentThumbnailXOffset + thumbnailXOffsetStep <=
+      return currentThumbnailXOffset + thumbnailXOffsetStep * stepMultiplier <=
         maxThumbnailXOffset
-        ? currentThumbnailXOffset + thumbnailXOffsetStep
+        ? currentThumbnailXOffset + thumbnailXOffsetStep * stepMultiplier
         : maxThumbnailXOffset;
     }
     if (direction === "prev") {
-      return currentThumbnailXOffset - thumbnailXOffsetStep >=
+      return currentThumbnailXOffset - thumbnailXOffsetStep * stepMultiplier >=
         minThumbnailXOffset
-        ? currentThumbnailXOffset - thumbnailXOffsetStep
+        ? currentThumbnailXOffset - thumbnailXOffsetStep * stepMultiplier
         : minThumbnailXOffset;
     } else throw new Error("invalid index");
   };
@@ -61,23 +61,37 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
           ? currentIndex + 1
           : imagesList.length - 1;
       });
+      const stepMultiplierNext = Math.floor(
+        ((currentIndex + 1) * thumbnailWidth - currentThumbnailXOffset) /
+          thumbnailXOffsetStep
+      );
       if (
         currentThumbnailXOffset <=
-        //slider custom parameter
-        (currentIndex + 1) * thumbnailWidth - thumbnailXOffsetStep
+          //slider custom parameter
+          (currentIndex + 1) * thumbnailWidth - thumbnailXOffsetStep ||
+        currentThumbnailXOffset > (currentIndex + 1) * thumbnailWidth
       ) {
-        setCurrentThumbnailXOffset(() => checkThumbnailLimits("next"));
+        setCurrentThumbnailXOffset(() =>
+          checkThumbnailLimits("next", stepMultiplierNext)
+        );
       }
     } else if (direction === "prev") {
       setCurrentIndex((currentIndex) =>
         currentIndex > 0 ? currentIndex - 1 : 0
       );
+      const stepMultiplierPrev = Math.floor(
+        (currentThumbnailXOffset - (currentIndex - 4) * thumbnailWidth) /
+          thumbnailXOffsetStep
+      );
       if (
         currentThumbnailXOffset >=
-        //slider custom parameter
-        (currentIndex + 4) * thumbnailWidth - thumbnailXOffsetStep
+          //slider custom parameter
+          (currentIndex + 4) * thumbnailWidth - thumbnailXOffsetStep ||
+        currentThumbnailXOffset < (currentIndex + 1) * thumbnailWidth
       ) {
-        setCurrentThumbnailXOffset(() => checkThumbnailLimits("prev"));
+        setCurrentThumbnailXOffset(() =>
+          checkThumbnailLimits("prev", stepMultiplierPrev)
+        );
       }
     } else throw new Error("invalid index");
   };

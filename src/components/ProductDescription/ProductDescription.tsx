@@ -1,7 +1,10 @@
 import {FC} from "react";
 import css from "./ProductDescription.module.scss";
+import TextButton from "../Buttons/TextButton";
+import {useState} from "react";
 
 const ProductDescription: FC<{}> = () => {
+  const [itemsCount, setItemsCount] = useState(1);
   return (
     <div className={css.box}>
       <div className={css.brand}>SNEAKER COMPANY</div>
@@ -17,7 +20,12 @@ const ProductDescription: FC<{}> = () => {
         <div className={css.priceDrop}>50%</div>
       </div>
       <div className={css.priceWas}>$250</div>
-      <div className={css.actionBox}>- 3 + Add to cart</div>
+      <div className={css.actionBox}>
+        <TextButton displayedText="-" />
+        <div className={css.itemsCount}>{itemsCount}</div>
+        <TextButton displayedText="+" />
+        <TextButton displayedText="Add to cart" />
+      </div>
     </div>
   );
 };
