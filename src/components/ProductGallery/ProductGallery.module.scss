@@ -49,7 +49,7 @@
   z-index: 2;
   background: none;
   border: none;
-  font-size: 2rem;
+  font-size: 3rem;
   top: 50%;
   transform: translateY(-50%);
   color: white;
@@ -65,14 +65,14 @@
 }
 
 .carouselButton.prev {
-  left: 0.5rem;
+  left: 1rem;
   &:disabled {
     background-color: red;
   }
 }
 
 .carouselButton.next {
-  right: 0.5rem;
+  right: 1rem;
   &:disabled {
     background-color: red;
   }
@@ -87,7 +87,7 @@
   position: relative;
   width: 400px;
   height: 100px;
-  margin-top: 30px;
+  margin: 0;
   margin-left: 50px;
   overflow: hidden;
 }

@@ -1,7 +1,7 @@
 .box {
   display: flex;
   flex-direction: column;
-  background-color: beige;
+  background-color: hsl(0, 0%, 100%);
   width: 520px;
   padding: 60px;
 }
@@ -60,6 +60,8 @@
 .itemsCount {
   display: flex;
   justify-content: center;
+  align-items: center;
   width: 40px;
-  background-color: gray;
+  height: 55px;
+  background-color: hsl(230, 60%, 98%);
 }

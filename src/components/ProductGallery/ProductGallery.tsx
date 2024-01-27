@@ -1,12 +1,14 @@
 import {FC, useState} from "react";
 import css from "./ProductGallery.module.scss";
 import IconButton from "../Buttons/IconButton";
-import TextButton from "../Buttons/TextButton";
+import IconTextButton from "../Buttons/IconTextButton";
 import NarrowArrowNext from "../Icons/NarrowArrowNext";
 import NarrowArrowPrev from "../Icons/NarrowArrowPrev";
+import DotCounter from "../DotCounter";
+import PictureLandscape from "../Icons/PictureLandscape";
 
 type Props = {
-  imagesList: Array<any>;
+  imagesList: Array<string>;
 };
 
 const ProductGallery: FC<Props> = ({imagesList}) => {
@@ -18,7 +20,7 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
       className={`${css.mainImageList} ${index === currentIndex ? css.current : ""} `}
       draggable="false"
       style={{backgroundImage: `url(${element})`}}
-      id={index.toString()}
+      key={index.toString()}
     />
   ));
 
@@ -30,6 +32,7 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
         draggable="false"
         style={{backgroundImage: `url(${element})`}}
         onClick={() => setCurrentIndex(index)}
+        id={index.toString()}
       />
     );
   });
@@ -107,30 +110,30 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
   return (
     <div className={`${css.componentBox} ${css.preventSelect}`}>
       <div className={css.mainImageBox}>
-        <button
-          className={`${css.carouselButton} ${css.prev}`}
-          onClick={() => onSlideMainImage("prev")}
-          disabled={currentIndex === 0 ? true : false}
-        >
-          ⇐
-        </button>
-        <button
-          className={`${css.carouselButton} ${css.next}`}
-          onClick={() => onSlideMainImage("next")}
-          disabled={currentIndex === imagesList.length - 1 ? true : false}
-        >
-          ⇒
-        </button>
-        {mainImageArray};
-      </div>
-      <div className={css.thumbnailBoxWrapper}>
         <IconButton
           IconComponent={NarrowArrowPrev}
+          buttonClass={["carouselButton", "prev", "filled"]}
+          onClick={() => onSlideMainImage("prev")}
+          isDisabled={currentIndex === 0 ? true : false}
+        />
+        <IconButton
+          IconComponent={NarrowArrowNext}
+          buttonClass={["carouselButton", "next", "filled"]}
+          onClick={() => onSlideMainImage("next")}
+          isDisabled={currentIndex === imagesList.length - 1 ? true : false}
+        />
+        {mainImageArray};
+      </div>
+      <DotCounter currentItem={currentIndex} totalItem={imagesList.length} />
+      <div className={css.thumbnailBoxWrapper}>
+        <IconTextButton
+          IconComponent={PictureLandscape}
           buttonClass={["carouselButton", "prev"]}
           onClick={() => onSlideThumbnail("prev")}
           isDisabled={
             currentThumbnailXOffset === minThumbnailXOffset ? true : false
           }
+          displayedText={`${Math.floor(currentThumbnailXOffset / thumbnailWidth)}`}
         />
         <div className={css.thumbnailBoxOverflow}>
           <ul
@@ -142,13 +145,14 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
             {thumbnailArray}
           </ul>
         </div>
-        <IconButton
-          IconComponent={NarrowArrowNext}
+        <IconTextButton
+          IconComponent={PictureLandscape}
           buttonClass={["carouselButton", "next"]}
           onClick={() => onSlideThumbnail("next")}
           isDisabled={
             currentThumbnailXOffset === maxThumbnailXOffset ? true : false
           }
+          displayedText={`${Math.floor((imagesList.length * thumbnailWidth - currentThumbnailXOffset - thumbnailXOffsetStep) / thumbnailWidth)}`}
         />
       </div>
     </div>

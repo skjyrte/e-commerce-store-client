@@ -1,6 +1,7 @@
 import {FC} from "react";
 import css from "./ProductDescription.module.scss";
-import TextButton from "../Buttons/TextButton";
+import GeneralTextButton from "../Buttons/GeneralTextButton";
+import ChangeAmountButton from "../Buttons/ChangeAmountButton";
 import {useState} from "react";
 
 const ProductDescription: FC<{}> = () => {
@@ -21,10 +22,25 @@ const ProductDescription: FC<{}> = () => {
       </div>
       <div className={css.priceWas}>$250</div>
       <div className={css.actionBox}>
-        <TextButton displayedText="-" />
+        <ChangeAmountButton
+          displayedText="-"
+          onClick={() => {
+            if (itemsCount > 0) {
+              setItemsCount(itemsCount - 1);
+            }
+          }}
+          classProp={["left"]}
+        />
         <div className={css.itemsCount}>{itemsCount}</div>
-        <TextButton displayedText="+" />
-        <TextButton displayedText="Add to cart" />
+        <ChangeAmountButton
+          displayedText="+"
+          onClick={() => setItemsCount(itemsCount + 1)}
+          classProp={["right"]}
+        />
+        <GeneralTextButton
+          displayedText="Add to cart"
+          classProp={["addToCart"]}
+        />
       </div>
     </div>
   );

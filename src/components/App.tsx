@@ -1,13 +1,13 @@
 import css from "./App.module.scss";
 import AppContainer from "./AppContainer";
-import {FC} from "react";
+import {FC, StrictMode} from "react";
 
 export const App: FC<{}> = () => {
   return (
-    /*     <Routes> */
-    <div className={css.backgroundWrapper}>
-      <AppContainer />
-    </div>
-    /*     </Routes> */
+    <StrictMode>
+      <div className={css.backgroundWrapper}>
+        <AppContainer />
+      </div>
+    </StrictMode>
   );
 };

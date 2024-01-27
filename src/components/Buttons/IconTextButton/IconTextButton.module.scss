@@ -1,31 +1,35 @@
-.iconButton {
+.iconTextButton {
+  font-family: inherit;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   padding: 0 0;
   border: none;
   background-color: transparent;
+
   &:disabled {
     opacity: 0.1;
     filter: grayscale(0.6);
   }
+  color: navy;
 }
 
-.cartButton {
-  height: 20px;
-  width: 20px;
-  transition: filter 0.3s;
-  margin: 15px 10px;
-  fill: var(--button-enabled);
-  border-radius: 3px;
+.displayedText {
+  margin-top: -8px;
+  font-size: 14px;
+  font-variation-settings:
+    "wght" 700,
+    "YOPQ" 300;
 }
 
 .carouselButton {
-  border: 1px solid gray;
-  border-radius: 50%;
+  /*   border: 1px solid gray; */
+  background-color: rgb(255, 221, 158);
+  border-radius: 10px;
   position: absolute;
-  height: 35px;
-  width: 35px;
+  height: 45px;
+  width: 45px;
   z-index: 2;
   top: 50%;
   transform: translateY(-50%);
@@ -37,6 +41,11 @@
   &:active {
     filter: hue-rotate(90deg);
   }
+}
+
+.iconBox {
+  width: 30px;
+  height: 30px;
 }
 
 .filled {

@@ -1,30 +1,26 @@
-import css from "./TextButton.module.scss";
+import css from "./ChangeAmountButton.module.scss";
 import {FC} from "react";
 import classNames from "classnames";
 
 interface Props {
   onClick?: () => void;
   displayedText: string;
-  isLoading?: boolean;
   isDisabled?: boolean;
-  isNowSelected?: boolean;
-  size?: ButtonSizes;
   dataTestId?: string;
+  classProp?: Array<string>;
 }
 
-type ButtonSizes = "medium" | "small";
-/*     `text-button_${size} */
-const TextButton: FC<Props> = ({
+const ChangeAmountButton: FC<Props> = ({
   onClick,
   displayedText,
   isDisabled = false,
-  isNowSelected = false,
-  size = "medium",
   dataTestId,
+  classProp = [],
 }) => {
   const buttonClassName = classNames(
-    css.textButton,
-    `${css.textButton}_${size}`
+    css.changeAmountButton,
+    ...classProp.map((el) => css[el]),
+    isDisabled ? css.disabled : ""
   );
   return (
     <button
@@ -38,4 +34,4 @@ const TextButton: FC<Props> = ({
   );
 };
 
-export default TextButton;
+export default ChangeAmountButton;
