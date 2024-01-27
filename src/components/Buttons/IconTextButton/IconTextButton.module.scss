@@ -7,11 +7,6 @@
   padding: 0 0;
   border: none;
   background-color: transparent;
-
-  &:disabled {
-    opacity: 0.1;
-    filter: grayscale(0.6);
-  }
   color: navy;
 }
 
@@ -24,7 +19,6 @@
 }
 
 .carouselButton {
-  /*   border: 1px solid gray; */
   background-color: rgb(255, 221, 158);
   border-radius: 10px;
   position: absolute;
@@ -41,6 +35,14 @@
   &:active {
     filter: hue-rotate(90deg);
   }
+  &:disabled {
+    opacity: 0.1;
+    filter: grayscale(0.6);
+    &:hover {
+      cursor: unset;
+      background-color: transparent;
+    }
+  }
 }
 
 .iconBox {
@@ -50,7 +52,6 @@
 
 .filled {
   background-color: white;
-
   height: 60px;
   width: 60px;
   padding: 10px;
