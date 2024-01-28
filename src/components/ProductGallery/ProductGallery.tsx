@@ -6,23 +6,33 @@ import NarrowArrowNext from "../Icons/NarrowArrowNext";
 import NarrowArrowPrev from "../Icons/NarrowArrowPrev";
 import DotCounter from "../DotCounter";
 import PictureLandscape from "../Icons/PictureLandscape";
-import {createPortal} from "react-dom";
 
 type Props = {
   imagesList: Array<string>;
 };
 
+type ThumbnailSettings = {
+  thumbnailWidth: number;
+  thumbnailCountPerView: number;
+  thumbnailOffsetMin: number;
+  thumbnailOffsetStep: number;
+  thumbnailOffsetMax: number;
+};
+
 const ProductGallery: FC<Props> = ({imagesList}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [currentThumbnailXOffset, setCurrentThumbnailXOffset] = useState(0);
+  const [thumbnailCurrentOffset, setThumbnailCurrentOffset] = useState(0);
 
   const mainImageArray = imagesList.map((element, index) => (
     <li
-      className={`${css.mainImageList} ${index === currentIndex ? css.current : ""} `}
+      className={`${css.mainImageElement} ${index === currentIndex ? css.current : ""} `}
       draggable="false"
-      style={{backgroundImage: `url(${element})`}}
+      /*       style={{backgroundImage: `url(${element})`}} */
       key={index.toString()}
-    />
+    >
+      {" "}
+      <img src={`${element}`} />{" "}
+    </li>
   ));
 
   const thumbnailArray = imagesList.map((element, index) => {
@@ -38,27 +48,58 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
     );
   });
 
-  const minThumbnailXOffset = 0;
-  const maxThumbnailXOffset = 800;
-  const thumbnailXOffsetStep = 400;
-  const thumbnailWidth = 100;
+  const thumbnailSettings = {
+    thumbnailWidth: 100,
+    /* container MUST have exactly 'thumbnailCountPerView' width */
+    thumbnailCountPerView: 4,
+    thumbnailOffsetMin: 0,
+    get thumbnailOffsetStep() {
+      return this.thumbnailCountPerView * this.thumbnailWidth;
+    },
+    get thumbnailOffsetMax() {
+      return (
+        (imagesList.length - this.thumbnailCountPerView) * this.thumbnailWidth
+      );
+    },
+  };
 
-  const checkThumbnailLimits = (direction: string, stepMultiplier = 1) => {
+  const checkThumbnailLimits = (
+    direction: string,
+    stepMultiplier = 1,
+    thumbnailSettings: ThumbnailSettings
+  ) => {
+    const {thumbnailOffsetMin, thumbnailOffsetStep, thumbnailOffsetMax} =
+      thumbnailSettings;
+
     if (direction === "next") {
-      return currentThumbnailXOffset + thumbnailXOffsetStep * stepMultiplier <=
-        maxThumbnailXOffset
-        ? currentThumbnailXOffset + thumbnailXOffsetStep * stepMultiplier
-        : maxThumbnailXOffset;
+      const calculatedOffset =
+        thumbnailCurrentOffset + thumbnailOffsetStep * stepMultiplier <=
+        thumbnailOffsetMax
+          ? thumbnailCurrentOffset + thumbnailOffsetStep * stepMultiplier
+          : thumbnailOffsetMax;
+      return calculatedOffset >= thumbnailOffsetMin
+        ? calculatedOffset
+        : thumbnailOffsetMin;
     }
     if (direction === "prev") {
-      return currentThumbnailXOffset - thumbnailXOffsetStep * stepMultiplier >=
-        minThumbnailXOffset
-        ? currentThumbnailXOffset - thumbnailXOffsetStep * stepMultiplier
-        : minThumbnailXOffset;
+      const calculatedOffset =
+        thumbnailCurrentOffset - thumbnailOffsetStep * stepMultiplier >=
+        thumbnailOffsetMin
+          ? thumbnailCurrentOffset - thumbnailOffsetStep * stepMultiplier
+          : thumbnailOffsetMin;
+      return calculatedOffset <= thumbnailOffsetMax
+        ? calculatedOffset
+        : thumbnailOffsetMax;
     } else throw new Error("invalid index");
   };
 
-  const onSlideMainImage = (direction: string) => {
+  const onSlideMainImage = (
+    direction: string,
+    thumbnailSettings: ThumbnailSettings
+  ) => {
+    const {thumbnailWidth, thumbnailCountPerView, thumbnailOffsetStep} =
+      thumbnailSettings;
+
     if (direction === "next") {
       setCurrentIndex((currentIndex) => {
         return currentIndex < imagesList.length - 1
@@ -66,17 +107,16 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
           : imagesList.length - 1;
       });
       const stepMultiplierNext = Math.floor(
-        ((currentIndex + 1) * thumbnailWidth - currentThumbnailXOffset) /
-          thumbnailXOffsetStep
+        ((currentIndex + 1) * thumbnailWidth - thumbnailCurrentOffset) /
+          thumbnailOffsetStep
       );
       if (
-        currentThumbnailXOffset <=
-          //slider custom parameter
-          (currentIndex + 1) * thumbnailWidth - thumbnailXOffsetStep ||
-        currentThumbnailXOffset > (currentIndex + 1) * thumbnailWidth
+        thumbnailCurrentOffset <=
+          (currentIndex + 1) * thumbnailWidth - thumbnailOffsetStep ||
+        thumbnailCurrentOffset > (currentIndex + 1) * thumbnailWidth
       ) {
-        setCurrentThumbnailXOffset(() =>
-          checkThumbnailLimits("next", stepMultiplierNext)
+        setThumbnailCurrentOffset(() =>
+          checkThumbnailLimits("next", stepMultiplierNext, thumbnailSettings)
         );
       }
     } else if (direction === "prev") {
@@ -84,17 +124,18 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
         currentIndex > 0 ? currentIndex - 1 : 0
       );
       const stepMultiplierPrev = Math.floor(
-        (currentThumbnailXOffset - (currentIndex - 4) * thumbnailWidth) /
-          thumbnailXOffsetStep
+        (thumbnailCurrentOffset -
+          (currentIndex - thumbnailCountPerView) * thumbnailWidth) /
+          thumbnailOffsetStep
       );
       if (
-        currentThumbnailXOffset >=
-          //slider custom parameter
-          (currentIndex + 4) * thumbnailWidth - thumbnailXOffsetStep ||
-        currentThumbnailXOffset < (currentIndex + 1) * thumbnailWidth
+        thumbnailCurrentOffset >=
+          (currentIndex + 1 + thumbnailCountPerView) * thumbnailWidth -
+            thumbnailOffsetStep ||
+        thumbnailCurrentOffset < (currentIndex + 1) * thumbnailWidth
       ) {
-        setCurrentThumbnailXOffset(() =>
-          checkThumbnailLimits("prev", stepMultiplierPrev)
+        setThumbnailCurrentOffset(() =>
+          checkThumbnailLimits("prev", stepMultiplierPrev, thumbnailSettings)
         );
       }
     } else throw new Error("invalid index");
@@ -102,31 +143,53 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
 
   const onSlideThumbnail = (direction: string) => {
     if (direction === "next") {
-      setCurrentThumbnailXOffset(checkThumbnailLimits("next"));
+      setThumbnailCurrentOffset(
+        checkThumbnailLimits("next", 1, thumbnailSettings)
+      );
     } else if (direction === "prev") {
-      setCurrentThumbnailXOffset(checkThumbnailLimits("prev"));
+      setThumbnailCurrentOffset(
+        checkThumbnailLimits("prev", 1, thumbnailSettings)
+      );
+    } else throw new Error("invalid index");
+  };
+
+  const thumbnailCountRemaining = (
+    direction: string,
+    thumbnailSettings: ThumbnailSettings
+  ) => {
+    const {thumbnailWidth, thumbnailCountPerView} = thumbnailSettings;
+    if (direction === "prev") {
+      return `${Math.floor(thumbnailCurrentOffset / thumbnailWidth)}`;
+    } else if (direction === "next") {
+      return `${Math.floor((imagesList.length * thumbnailWidth - thumbnailCurrentOffset) / thumbnailWidth) - thumbnailCountPerView}`;
+    } else throw new Error("invalid index");
+  };
+
+  const disableThumbnailBtn = (
+    direction: string,
+    thumbnailSettings: ThumbnailSettings
+  ) => {
+    const {thumbnailOffsetMin, thumbnailOffsetMax} = thumbnailSettings;
+    if (direction === "prev") {
+      return thumbnailCurrentOffset === thumbnailOffsetMin ? true : false;
+    } else if (direction === "next") {
+      return thumbnailCurrentOffset === thumbnailOffsetMax ? true : false;
     } else throw new Error("invalid index");
   };
 
   return (
     <div className={`${css.componentBox} ${css.preventSelect}`}>
       <div className={css.mainImageBox}>
-        {createPortal(
-          <div className={css.portal}>
-            This child is placed in the document body.
-          </div>,
-          document.body
-        )}
         <IconButton
           IconComponent={NarrowArrowPrev}
           buttonClass={["carouselButton", "prev"]}
-          onClick={() => onSlideMainImage("prev")}
+          onClick={() => onSlideMainImage("prev", thumbnailSettings)}
           isDisabled={currentIndex === 0 ? true : false}
         />
         <IconButton
           IconComponent={NarrowArrowNext}
           buttonClass={["carouselButton", "next"]}
-          onClick={() => onSlideMainImage("next")}
+          onClick={() => onSlideMainImage("next", thumbnailSettings)}
           isDisabled={currentIndex === imagesList.length - 1 ? true : false}
         />
         {mainImageArray};
@@ -137,15 +200,13 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
           IconComponent={PictureLandscape}
           buttonClass={["carouselButton", "prev"]}
           onClick={() => onSlideThumbnail("prev")}
-          isDisabled={
-            currentThumbnailXOffset === minThumbnailXOffset ? true : false
-          }
-          displayedText={`${Math.floor(currentThumbnailXOffset / thumbnailWidth)}`}
+          isDisabled={disableThumbnailBtn("prev", thumbnailSettings)}
+          displayedText={thumbnailCountRemaining("prev", thumbnailSettings)}
         />
         <div className={css.thumbnailBoxOverflow}>
           <ul
             style={{
-              transform: `translate(${-currentThumbnailXOffset}px)`,
+              transform: `translate(${-thumbnailCurrentOffset}px)`,
             }}
             className={css.thumbnailBox}
           >
@@ -156,10 +217,8 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
           IconComponent={PictureLandscape}
           buttonClass={["carouselButton", "next"]}
           onClick={() => onSlideThumbnail("next")}
-          isDisabled={
-            currentThumbnailXOffset === maxThumbnailXOffset ? true : false
-          }
-          displayedText={`${Math.floor((imagesList.length * thumbnailWidth - currentThumbnailXOffset - thumbnailXOffsetStep) / thumbnailWidth)}`}
+          isDisabled={disableThumbnailBtn("next", thumbnailSettings)}
+          displayedText={thumbnailCountRemaining("next", thumbnailSettings)}
         />
       </div>
     </div>

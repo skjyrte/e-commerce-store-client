@@ -1,29 +1,39 @@
 .componentBox {
-  width: 500px;
-  padding: 0;
-  margin: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.mainImageBox {
+  position: relative;
+  width: 100%;
+  margin-left: auto;
+  margin-right: auto;
+  flex: 1;
+}
+
+.mainImageElement {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  list-style-type: none;
+  opacity: 0;
+  transition: opacity 0.5s;
+  height: 100%;
+  width: auto;
+  & > img {
+    width: auto;
+    height: 100%;
+  }
 }
 
 .preventSelect {
   -webkit-user-select: none; /* Safari */
   -ms-user-select: none; /* IE 10 and IE 11 */
   user-select: none; /* Standard syntax */
-}
-
-.mainImageBox {
-  position: relative;
-  width: 500px;
-  height: 500px;
-}
-
-.mainImageList {
-  position: absolute;
-  list-style-type: none;
-  opacity: 0;
-  transition: opacity 0.5s;
-  width: 100%;
-  height: 100%;
-  background-size: contain;
 }
 
 .mainImage {
@@ -80,14 +90,18 @@
 
 .thumbnailBoxWrapper {
   width: 500px;
+  margin: auto;
+  /*   padding: 0 10px; */
   position: relative;
+  /*   padding-top: 10px; */
+  padding: auto;
 }
 
 .thumbnailBoxOverflow {
   position: relative;
   width: 400px;
   height: 100px;
-  margin: 0;
+  margin-bottom: 0;
   margin-left: 50px;
   overflow: hidden;
 }
@@ -120,4 +134,21 @@
 
 .currentThumbnail {
   border: 3px solid gray;
+}
+
+.portal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: rgba(100, 100, 111, 0.3) 0px 7px 29px 0px;
+  background-color: white;
+  border: 2px solid rgb(240, 240, 240);
+  border-radius: 12px;
+  position: fixed;
+  width: 1200px;
+  height: 800px;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 9;
 }

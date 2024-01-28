@@ -4,6 +4,7 @@ import Header from "../Header";
 import {HashRouter, Route, Routes, Navigate} from "react-router-dom";
 import ProductDescription from "../ProductDescription";
 import ProductGallery from "../ProductGallery";
+import {createPortal} from "react-dom";
 
 import image1 from "../../images/product/image-product-1.jpg";
 import image2 from "../../images/product/image-product-2.jpg";
@@ -22,6 +23,27 @@ const AppContainer: FC = ({}) => {
   return (
     <HashRouter>
       <div className={css.appContainer}>
+        {createPortal(
+          <div className={css.portal}>
+            <ProductGallery
+              imagesList={[
+                image1,
+                image2,
+                image3,
+                image4,
+                image5,
+                image6,
+                image7,
+                image8,
+                image9,
+                image10,
+                image11,
+                image12,
+              ]}
+            />
+          </div>,
+          document.body
+        )}
         <Header />
         <Routes>
           <Route path="/" element={<div>home</div>} />
@@ -31,23 +53,27 @@ const AppContainer: FC = ({}) => {
           <Route path="/contact" element={<div>contact</div>} />
           <Route path="/*" element={<Navigate to="/" replace={true} />} />
         </Routes>
+
         <div className={css.product}>
-          <ProductGallery
-            imagesList={[
-              image1,
-              image2,
-              image3,
-              image4,
-              image5,
-              image6,
-              image7,
-              image8,
-              image9,
-              image10,
-              image11,
-              image12,
-            ]}
-          />
+          <div className={css.mainGalleryWrapper}>
+            <ProductGallery
+              imagesList={[
+                image1,
+                image2,
+                image3,
+                image4,
+                image5,
+                image6,
+                image7,
+                image8,
+                image9,
+                image10,
+                image11,
+                image12,
+              ]}
+            />
+          </div>
+
           <ProductDescription />
         </div>
       </div>
