@@ -19,29 +19,29 @@
 }
 
 .carouselButton {
-  background-color: rgb(255, 221, 158);
-  border-radius: 10px;
+  border-radius: 5px;
   position: absolute;
   height: 45px;
   width: 45px;
   z-index: 2;
   top: 50%;
   transform: translateY(-50%);
-  &:hover {
-    opacity: 1;
-    cursor: pointer;
-    background-color: blue;
-  }
-  &:active {
-    filter: hue-rotate(90deg);
-  }
+  opacity: 0.9;
   &:disabled {
     opacity: 0.1;
     filter: grayscale(0.6);
     &:hover {
+      opacity: 0.1;
       cursor: unset;
-      background-color: transparent;
     }
+  }
+}
+
+@media (hover: hover) {
+  .carouselButton:hover {
+    opacity: 1;
+    cursor: pointer;
+    background-color: hsl(26, 87%, 80%);
   }
 }
 

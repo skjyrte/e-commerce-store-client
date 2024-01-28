@@ -6,6 +6,7 @@ import NarrowArrowNext from "../Icons/NarrowArrowNext";
 import NarrowArrowPrev from "../Icons/NarrowArrowPrev";
 import DotCounter from "../DotCounter";
 import PictureLandscape from "../Icons/PictureLandscape";
+import {createPortal} from "react-dom";
 
 type Props = {
   imagesList: Array<string>;
@@ -110,15 +111,21 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
   return (
     <div className={`${css.componentBox} ${css.preventSelect}`}>
       <div className={css.mainImageBox}>
+        {createPortal(
+          <div className={css.portal}>
+            This child is placed in the document body.
+          </div>,
+          document.body
+        )}
         <IconButton
           IconComponent={NarrowArrowPrev}
-          buttonClass={["carouselButton", "prev", "filled"]}
+          buttonClass={["carouselButton", "prev"]}
           onClick={() => onSlideMainImage("prev")}
           isDisabled={currentIndex === 0 ? true : false}
         />
         <IconButton
           IconComponent={NarrowArrowNext}
-          buttonClass={["carouselButton", "next", "filled"]}
+          buttonClass={["carouselButton", "next"]}
           onClick={() => onSlideMainImage("next")}
           isDisabled={currentIndex === imagesList.length - 1 ? true : false}
         />

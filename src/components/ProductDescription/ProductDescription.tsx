@@ -15,12 +15,15 @@ const ProductDescription: FC<{}> = () => {
         Featuring a durable rubber outer sole, they'll withstand everything the
         weather can offer.
       </div>
-
-      <div className={css.priceWrapper}>
-        <div className={css.price}>$125</div>
-        <div className={css.priceDrop}>50%</div>
+      <div className={css.currentPriceWrapper}>
+        <div className={css.currentPrice}>$125</div>
+        <div className={css.note}>incl. VAT</div>
       </div>
-      <div className={css.priceWas}>$250</div>
+
+      <div className={css.pastPriceWrapper}>
+        <div className={css.priceWas}>$250</div>
+        <div className={css.priceDrop}>-50%</div>
+      </div>
       <div className={css.actionBox}>
         <ChangeAmountButton
           displayedText="-"

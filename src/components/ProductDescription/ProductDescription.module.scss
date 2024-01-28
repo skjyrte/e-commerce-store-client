@@ -22,29 +22,40 @@
   flex-direction: row;
 }
 
-.priceWrapper {
+.currentPriceWrapper {
+  padding: 10px;
   display: flex;
   flex-direction: row;
-  align-items: center;
-  height: 50px;
+  align-items: end;
+  & .currentPrice {
+    padding: 0 10px;
+    font-size: 36px;
+  }
+  & .sale {
+    color: red;
+  }
+  & .note {
+    color: gray;
+    font-size: 14px;
+  }
 }
 
-.price {
-  font-size: 30px;
-  padding: 0 10px;
-}
-
-.priceDrop {
-  font-size: 16px;
-  background-color: aqua;
-  border-radius: 5px;
-  height: 20px;
-}
-
-.priceWas {
-  text-decoration: line-through;
-  font-size: 16px;
-  padding: 5px 10px;
+.pastPriceWrapper {
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  align-items: end;
+  padding-left: 10px;
+  & .priceWas {
+    text-decoration: line-through;
+    font-size: 18px;
+  }
+  & .priceDrop {
+    color: red;
+    font-size: 18px;
+    border-radius: 5px;
+    padding: 0 10px;
+  }
 }
 
 .actionBox {
