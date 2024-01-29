@@ -36,17 +36,6 @@
   user-select: none; /* Standard syntax */
 }
 
-.mainImage {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 10px;
-  inset: 0;
-  opacity: 0;
-  z-index: 0;
-  border: 1px solid beige;
-}
-
 .current {
   transition: opacity 0.5s;
   opacity: 1;
@@ -54,55 +43,20 @@
   transition-delay: 0ms;
 }
 
-.carouselButton {
-  position: absolute;
-  z-index: 2;
-  background: none;
-  border: none;
-  font-size: 3rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: white;
-  opacity: 0.4;
-  &:hover {
-    opacity: 0.8;
-    cursor: pointer;
-    background-color: blue;
-  }
-  &:active {
-    filter: hue-rotate(90deg);
-  }
-}
-
-.carouselButton.prev {
-  left: 1rem;
-  &:disabled {
-    background-color: red;
-  }
-}
-
-.carouselButton.next {
-  right: 1rem;
-  &:disabled {
-    background-color: red;
-  }
-}
-
 .thumbnailBoxWrapper {
-  width: 500px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
   margin: auto;
-  /*   padding: 0 10px; */
-  position: relative;
-  /*   padding-top: 10px; */
   padding: auto;
+  margin-bottom: 10px;
 }
 
 .thumbnailBoxOverflow {
   position: relative;
   width: 400px;
   height: 100px;
-  margin-bottom: 0;
-  margin-left: 50px;
   overflow: hidden;
 }
 

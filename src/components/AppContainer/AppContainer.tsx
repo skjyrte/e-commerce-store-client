@@ -25,22 +25,24 @@ const AppContainer: FC = ({}) => {
       <div className={css.appContainer}>
         {createPortal(
           <div className={css.portal}>
-            <ProductGallery
-              imagesList={[
-                image1,
-                image2,
-                image3,
-                image4,
-                image5,
-                image6,
-                image7,
-                image8,
-                image9,
-                image10,
-                image11,
-                image12,
-              ]}
-            />
+            <div className={css.portalGalleryWrapper}>
+              <ProductGallery
+                imagesList={[
+                  image1,
+                  image2,
+                  image3,
+                  image4,
+                  image5,
+                  image6,
+                  image7,
+                  image8,
+                  image9,
+                  image10,
+                  image11,
+                  image12,
+                ]}
+              />
+            </div>
           </div>,
           document.body
         )}

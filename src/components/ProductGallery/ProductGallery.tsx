@@ -198,7 +198,7 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
       <div className={css.thumbnailBoxWrapper}>
         <IconTextButton
           IconComponent={PictureLandscape}
-          buttonClass={["carouselButton", "prev"]}
+          buttonClass={["carouselButton"]}
           onClick={() => onSlideThumbnail("prev")}
           isDisabled={disableThumbnailBtn("prev", thumbnailSettings)}
           displayedText={thumbnailCountRemaining("prev", thumbnailSettings)}
@@ -215,7 +215,7 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
         </div>
         <IconTextButton
           IconComponent={PictureLandscape}
-          buttonClass={["carouselButton", "next"]}
+          buttonClass={["carouselButton"]}
           onClick={() => onSlideThumbnail("next")}
           isDisabled={disableThumbnailBtn("next", thumbnailSettings)}
           displayedText={thumbnailCountRemaining("next", thumbnailSettings)}
