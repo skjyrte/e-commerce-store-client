@@ -9,6 +9,7 @@ import PictureLandscape from "../Icons/PictureLandscape";
 
 type Props = {
   imagesList: Array<string>;
+  onClickZoom?: () => void;
 };
 
 type ThumbnailSettings = {
@@ -19,7 +20,7 @@ type ThumbnailSettings = {
   thumbnailOffsetMax: number;
 };
 
-const ProductGallery: FC<Props> = ({imagesList}) => {
+const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [thumbnailCurrentOffset, setThumbnailCurrentOffset] = useState(0);
 
@@ -167,7 +168,7 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
 
   return (
     <div className={`${css.componentBox} ${css.preventSelect}`}>
-      <div className={css.mainImageBox}>
+      <div className={`${css.mainImageBox} ${onClickZoom ? css.zoom : ""}`}>
         <IconButton
           IconComponent={NarrowArrowPrev}
           buttonClass={["carouselButton", "prev"]}
@@ -180,7 +181,11 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
           onClick={() => onSlideMainImage("next", thumbnailSettings)}
           isDisabled={currentIndex === imagesList.length - 1}
         />
-        <img key={currentIndex} src={`${imagesList[currentIndex]}`} />
+        <img
+          key={currentIndex}
+          src={`${imagesList[currentIndex]}`}
+          onClick={onClickZoom}
+        />
       </div>
       <DotCounter currentItem={currentIndex} totalItem={imagesList.length} />
       <div className={css.thumbnailBoxWrapper}>
