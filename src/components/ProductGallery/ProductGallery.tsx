@@ -23,18 +23,6 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [thumbnailCurrentOffset, setThumbnailCurrentOffset] = useState(0);
 
-  const mainImageArray = imagesList.map((element, index) => (
-    <li
-      className={`${css.mainImageElement} ${index === currentIndex ? css.current : ""} `}
-      draggable="false"
-      /*       style={{backgroundImage: `url(${element})`}} */
-      key={index.toString()}
-    >
-      {" "}
-      <img src={`${element}`} />{" "}
-    </li>
-  ));
-
   const thumbnailArray = imagesList.map((element, index) => {
     return (
       <li
@@ -171,9 +159,9 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
   ) => {
     const {thumbnailOffsetMin, thumbnailOffsetMax} = thumbnailSettings;
     if (direction === "prev") {
-      return thumbnailCurrentOffset === thumbnailOffsetMin ? true : false;
+      return thumbnailCurrentOffset === thumbnailOffsetMin;
     } else if (direction === "next") {
-      return thumbnailCurrentOffset === thumbnailOffsetMax ? true : false;
+      return thumbnailCurrentOffset === thumbnailOffsetMax;
     } else throw new Error("invalid index");
   };
 
@@ -184,15 +172,15 @@ const ProductGallery: FC<Props> = ({imagesList}) => {
           IconComponent={NarrowArrowPrev}
           buttonClass={["carouselButton", "prev"]}
           onClick={() => onSlideMainImage("prev", thumbnailSettings)}
-          isDisabled={currentIndex === 0 ? true : false}
+          isDisabled={currentIndex === 0}
         />
         <IconButton
           IconComponent={NarrowArrowNext}
           buttonClass={["carouselButton", "next"]}
           onClick={() => onSlideMainImage("next", thumbnailSettings)}
-          isDisabled={currentIndex === imagesList.length - 1 ? true : false}
+          isDisabled={currentIndex === imagesList.length - 1}
         />
-        {mainImageArray};
+        <img key={currentIndex} src={`${imagesList[currentIndex]}`} />
       </div>
       <DotCounter currentItem={currentIndex} totalItem={imagesList.length} />
       <div className={css.thumbnailBoxWrapper}>

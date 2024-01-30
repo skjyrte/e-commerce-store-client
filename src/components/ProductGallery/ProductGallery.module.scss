@@ -1,10 +1,6 @@
 .componentBox {
   width: 100%;
   height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 .mainImageBox {
@@ -13,21 +9,20 @@
   margin-left: auto;
   margin-right: auto;
   flex: 1;
+
+  & > img {
+    animation: fade 3s infinite;
+    width: 100%;
+    height: auto;
+  }
 }
 
 .mainImageElement {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
   list-style-type: none;
   opacity: 0;
   transition: opacity 0.5s;
-  height: 100%;
-  width: auto;
-  & > img {
-    width: auto;
-    height: 100%;
-  }
+  height: auto;
+  width: 100%;
 }
 
 .preventSelect {
