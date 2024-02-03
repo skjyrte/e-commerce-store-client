@@ -1,0 +1,25 @@
+.gridWrapper {
+  width: 100%;
+  padding: 20px 30px;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fit, minmax(calc(100%), 1fr));
+}
+
+@media (min-width: 600px) {
+  .gridWrapper {
+    grid-template-columns: repeat(auto-fit, minmax(calc(50% - 1rem), 1fr));
+  }
+}
+
+@media (min-width: 766px) {
+  .gridWrapper {
+    grid-template-columns: repeat(auto-fit, minmax(calc(50% - 1rem), 1fr));
+  }
+}
+
+@media (min-width: 900px) {
+  .gridWrapper {
+    grid-template-columns: repeat(auto-fit, minmax(calc(33.3% - 2rem), 1fr));
+  }
+}

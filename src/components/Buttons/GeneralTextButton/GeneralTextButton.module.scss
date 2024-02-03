@@ -18,7 +18,9 @@
 }
 
 .addToCart {
-  width: 270px;
+  max-width: 270px;
+  flex: 1;
+  min-width: 110px;
   margin-left: 20px;
 }
 
