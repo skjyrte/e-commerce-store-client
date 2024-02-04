@@ -6,6 +6,7 @@ import ProductDescription from "../../components/ProductDescription";
 import IconButton from "../../components/Buttons/IconButton";
 import IconCross from "../../components/Icons/IconCross";
 import {useParams} from "react-router-dom";
+import {ApiResponseContextMan} from "../../components/AppContainer/AppContainer";
 
 interface Props {
   imagesList: string[];
@@ -31,7 +32,7 @@ const ProductView: FC<Props> = ({imagesList}) => {
   return (
     <div className={css.product}>
       <div className={css.mainGalleryWrapper}>
-        <ProductGallery imagesList={imagesList} onClickZoom={handleOpenModal} />
+        <ProductGallery productId={productId} onClickZoom={handleOpenModal} />
       </div>
       <PortalModal visible={modalVisible}>
         <div className={css.portalGalleryWrapper}>
@@ -40,10 +41,10 @@ const ProductView: FC<Props> = ({imagesList}) => {
             IconComponent={IconCross}
             buttonClass={["closeModalButton"]}
           />
-          <ProductGallery imagesList={imagesList} />
+          <ProductGallery productId={productId} />
         </div>
       </PortalModal>
-      <ProductDescription />
+      <ProductDescription productId={productId} />
     </div>
   );
 };

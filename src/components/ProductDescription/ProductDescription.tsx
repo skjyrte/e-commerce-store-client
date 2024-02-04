@@ -1,27 +1,30 @@
-import {FC} from "react";
+import {FC, useContext, useState} from "react";
 import css from "./ProductDescription.module.scss";
 import GeneralTextButton from "../Buttons/GeneralTextButton";
 import ChangeAmountButton from "../Buttons/ChangeAmountButton";
-import {useState} from "react";
+import {ApiResponseContextMan} from "../../components/AppContainer/AppContainer";
 
-const ProductDescription: FC<{}> = () => {
+const ProductDescription: FC<{productId: string}> = ({productId}) => {
   const [itemsCount, setItemsCount] = useState(1);
+  const responseObject = useContext(ApiResponseContextMan);
+
+  const product =
+    responseObject.products.find((el) => el.id === productId) ?? {};
+
+  const {description, model, brand, price, initialPrice} = product as Product;
+
   return (
     <div className={css.box}>
-      <div className={css.brand}>SNEAKER COMPANY</div>
-      <div className={css.model}>Fall Limited Sneakers</div>
-      <div className={css.description}>
-        These low-profile sneakers are your perfect casual wear companion.
-        Featuring a durable rubber outer sole, they'll withstand everything the
-        weather can offer.
-      </div>
+      <div className={css.brand}>{brand}</div>
+      <div className={css.model}>{model}</div>
+      <div className={css.description}>{description}</div>
       <div className={css.currentPriceWrapper}>
-        <div className={css.currentPrice}>$125</div>
+        <div className={css.currentPrice}>${price}</div>
         <div className={css.note}>incl. VAT</div>
       </div>
 
       <div className={css.pastPriceWrapper}>
-        <div className={css.priceWas}>$250</div>
+        <div className={css.priceWas}>${initialPrice}</div>
         <div className={css.priceDrop}>-50%</div>
       </div>
       <div className={css.actionBox}>

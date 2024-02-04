@@ -5,6 +5,7 @@ import {Link} from "react-router-dom";
 
 type Props = {
   responseObject: ResponseObject;
+  productId: string;
 };
 
 const CategoryView: FC<Props> = ({responseObject}) => {
@@ -14,17 +15,7 @@ const CategoryView: FC<Props> = ({responseObject}) => {
     </Link>
   ));
 
-  return (
-    <div className={css.gridWrapper}>
-      {[
-        ...categoryContent,
-        ...categoryContent,
-        ...categoryContent,
-        ...categoryContent,
-        ...categoryContent,
-      ]}
-    </div>
-  );
+  return <div className={css.gridWrapper}>{[...categoryContent]}</div>;
 };
 
 export default CategoryView;

@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, useState, useContext} from "react";
 import css from "./ProductGallery.module.scss";
 import IconButton from "../Buttons/IconButton";
 import IconTextButton from "../Buttons/IconTextButton";
@@ -6,10 +6,12 @@ import NarrowArrowNext from "../Icons/NarrowArrowNext";
 import NarrowArrowPrev from "../Icons/NarrowArrowPrev";
 import DotCounter from "../DotCounter";
 import PictureLandscape from "../Icons/PictureLandscape";
+import {ApiResponseContextMan} from "../../components/AppContainer/AppContainer";
 
 type Props = {
   imagesList: Array<string>;
   onClickZoom?: () => void;
+  productId: string | undefined;
 };
 
 type ThumbnailSettings = {
@@ -20,22 +22,35 @@ type ThumbnailSettings = {
   thumbnailOffsetMax: number;
 };
 
-const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
+const ProductGallery: FC<Props> = ({imagesList, onClickZoom, productId}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [thumbnailCurrentOffset, setThumbnailCurrentOffset] = useState(0);
+  const responseObject = useContext(ApiResponseContextMan);
 
-  const thumbnailArray = imagesList.map((element, index) => {
+  const product =
+    responseObject.products.find((el) => el.id === productId) ?? {};
+  const {images} = product as Product;
+
+  console.log(images);
+
+  const thumbnailArray = images.map((element, index) => {
     return (
       <li
         className={`${css.thumbnailList} ${index === currentIndex ? css.currentThumbnail : ""}`}
         key={index}
         draggable="false"
-        style={{backgroundImage: `url(${element})`}}
+        /*         style={{
+          backgroundImage: `url(${element})`,
+        }} */
         onClick={() => setCurrentIndex(index)}
         id={index.toString()}
-      />
+      >
+        <img key={currentIndex} src={element} />
+      </li>
     );
   });
+
+  console.log(thumbnailArray);
 
   const thumbnailSettings = {
     thumbnailWidth: 100,
@@ -46,9 +61,7 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
       return this.thumbnailCountPerView * this.thumbnailWidth;
     },
     get thumbnailOffsetMax() {
-      return (
-        (imagesList.length - this.thumbnailCountPerView) * this.thumbnailWidth
-      );
+      return (images.length - this.thumbnailCountPerView) * this.thumbnailWidth;
     },
   };
 
@@ -91,9 +104,9 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
 
     if (direction === "next") {
       setCurrentIndex((currentIndex) => {
-        return currentIndex < imagesList.length - 1
+        return currentIndex < images.length - 1
           ? currentIndex + 1
-          : imagesList.length - 1;
+          : images.length - 1;
       });
       const stepMultiplierNext = Math.floor(
         ((currentIndex + 1) * thumbnailWidth - thumbnailCurrentOffset) /
@@ -150,7 +163,7 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
     if (direction === "prev") {
       return `${Math.floor(thumbnailCurrentOffset / thumbnailWidth)}`;
     } else if (direction === "next") {
-      return `${Math.floor((imagesList.length * thumbnailWidth - thumbnailCurrentOffset) / thumbnailWidth) - thumbnailCountPerView}`;
+      return `${Math.floor((images.length * thumbnailWidth - thumbnailCurrentOffset) / thumbnailWidth) - thumbnailCountPerView}`;
     } else throw new Error("invalid index");
   };
 
@@ -179,15 +192,15 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
           IconComponent={NarrowArrowNext}
           buttonClass={["carouselButton", "next"]}
           onClick={() => onSlideMainImage("next", thumbnailSettings)}
-          isDisabled={currentIndex === imagesList.length - 1}
+          isDisabled={currentIndex === images.length - 1}
         />
         <img
           key={currentIndex}
-          src={`${imagesList[currentIndex]}`}
+          src={images[currentIndex]}
           onClick={onClickZoom}
         />
       </div>
-      <DotCounter currentItem={currentIndex} totalItem={imagesList.length} />
+      <DotCounter currentItem={currentIndex} totalItem={images.length} />
       <div className={css.thumbnailBoxWrapper}>
         <IconTextButton
           IconComponent={PictureLandscape}

@@ -5,7 +5,7 @@ import classNames from "classnames";
 type Props = {product: Product};
 
 const CategoryThumbnail: FC<Props> = ({
-  product: {id, title, price, brand, thumbnail, initialPrice, stock},
+  product: {id, model, price, brand, thumbnail, initialPrice, stock},
 }) => {
   const [hovered, setHovered] = useState(false);
   const [height, setHeight] = useState(0);
@@ -71,8 +71,8 @@ const CategoryThumbnail: FC<Props> = ({
         <div className={classNames(css.brand, css.rowFlexContainer)}>
           {brand}
         </div>
-        <div className={classNames(css.title, css.rowFlexContainer)}>
-          {title}
+        <div className={classNames(css.model, css.rowFlexContainer)}>
+          {model}
         </div>
         <div className={classNames(css.priceBox, css.rowFlexContainer)}>
           <div className={classNames(css.price, css.rowFlexContainer)}>

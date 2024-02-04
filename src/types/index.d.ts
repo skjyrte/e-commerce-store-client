@@ -6,15 +6,17 @@ type ResponseObject = {
 };
 
 type Product = {
-  id: number;
-  title: string;
+  id: string;
+  brand: string;
+  model: string;
+  category: string;
+  shortDescription: string;
   description: string;
+  features: string[];
   price: number;
   initialPrice: number;
   rating: number;
   stock: {size: string; count: number}[];
-  brand: string;
-  category: string;
   thumbnail: string;
   images: string[];
 };
