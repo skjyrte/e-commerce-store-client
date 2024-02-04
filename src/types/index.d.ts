@@ -12,7 +12,7 @@ type Product = {
   price: number;
   initialPrice: number;
   rating: number;
-  stock: number;
+  stock: {size: string; count: number}[];
   brand: string;
   category: string;
   thumbnail: string;
