@@ -23,9 +23,9 @@ export const mansProducts = (() => ({
         {size: "45.5", count: 0},
         {size: "46", count: 2},
         {size: "47", count: 1},
-        {size: "48", count: 0},
+        /*         {size: "48", count: 0},
         {size: "49", count: 0},
-        {size: "50", count: 0},
+        {size: "50", count: 0}, */
       ],
       brand: "Sneakers",
       category: "mens-shoes",

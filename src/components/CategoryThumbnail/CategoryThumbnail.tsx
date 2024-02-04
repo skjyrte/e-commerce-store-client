@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, useState, useRef, useEffect} from "react";
 import css from "./CategoryThumbnail.module.scss";
 import classNames from "classnames";
 
@@ -8,8 +8,41 @@ const CategoryThumbnail: FC<Props> = ({
   product: {id, title, price, brand, thumbnail, initialPrice, stock},
 }) => {
   const [hovered, setHovered] = useState(false);
-  console.log(hovered);
+  const [height, setHeight] = useState(0);
+
   const toggleHover = () => setHovered(!hovered);
+
+  const sizesStyle = {
+    "--getSizesHeight": `${height}px`,
+  } as React.CSSProperties;
+
+  const elementRef = useRef<HTMLDivElement>(null);
+
+  const sizeArray = stock.map((el) => (
+    <div
+      key={el.size}
+      className={classNames(css.sizeField, el.count > 0 ? "" : css.outOfStock)}
+    >
+      {el.size}
+    </div>
+  ));
+
+  useEffect(() => {
+    const element = elementRef?.current;
+
+    if (!element) return;
+
+    const observer = new ResizeObserver(() => {
+      if (elementRef.current !== null) {
+        setHeight(elementRef.current.offsetHeight);
+      }
+    });
+
+    observer.observe(element);
+    return () => {
+      observer.disconnect();
+    };
+  }, []);
 
   return (
     <div
@@ -23,6 +56,7 @@ const CategoryThumbnail: FC<Props> = ({
           css.absoluteImageFrame,
           hovered ? css.hovered : ""
         )}
+        style={sizesStyle}
       ></div>
       <div className={classNames(css.content, hovered ? css.hovered : "")}>
         <div className={css.cardImageBox}>
@@ -51,8 +85,9 @@ const CategoryThumbnail: FC<Props> = ({
       </div>
       <div
         className={classNames(css.sizeBox, hovered ? css.hovered : css.hide)}
+        ref={elementRef}
       >
-        <p className={css.sizeField}>12</p>
+        {sizeArray}
       </div>
     </div>
   );
