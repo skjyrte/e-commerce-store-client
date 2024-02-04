@@ -43,6 +43,10 @@ const AppContainer: FC = ({}) => {
           <Route path="/" element={<div>home</div>} />
           <Route
             path="/men"
+            element={<CategoryView responseObject={mansProducts} />}
+          />
+          <Route
+            path="/men/:productId"
             element={<ProductView imagesList={imagesList} />}
           />
           <Route

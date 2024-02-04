@@ -1,10 +1,11 @@
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import css from "./ProductView.module.scss";
 import ProductGallery from "../../components/ProductGallery";
 import PortalModal from "../../components/PortalModal";
 import ProductDescription from "../../components/ProductDescription";
 import IconButton from "../../components/Buttons/IconButton";
 import IconCross from "../../components/Icons/IconCross";
+import {useParams} from "react-router-dom";
 
 interface Props {
   imagesList: string[];
@@ -12,6 +13,8 @@ interface Props {
 
 const ProductView: FC<Props> = ({imagesList}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [currentProduct, setCurrentProduct] = useState(null);
+  const {productId} = useParams();
 
   const handleOpenModal = () => {
     setModalVisible(true);
@@ -20,6 +23,10 @@ const ProductView: FC<Props> = ({imagesList}) => {
   const handleCloseModal = () => {
     setModalVisible(false);
   };
+
+  useEffect(() => {
+    // Perform data fetching based on productId
+  }, [productId]);
 
   return (
     <div className={css.product}>

@@ -6,6 +6,11 @@
   grid-template-columns: repeat(auto-fit, minmax(calc(50% - 1rem), 1fr));
 }
 
+a {
+  color: inherit; /* blue colors for links too */
+  text-decoration: inherit; /* no underline */
+}
+
 /* @media (min-width: 600px) {
   .gridWrapper {
     grid-template-columns: repeat(auto-fit, minmax(calc(50% - 1rem), 1fr));
