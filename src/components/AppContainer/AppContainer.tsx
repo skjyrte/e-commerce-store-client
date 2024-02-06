@@ -1,4 +1,4 @@
-import {FC, createContext} from "react";
+import {FC, createContext, useState} from "react";
 import css from "./AppContainer.module.scss";
 import Header from "../Header";
 import {HashRouter, Route, Routes, Navigate} from "react-router-dom";
@@ -17,7 +17,7 @@ import image11 from "../../images/product/image-product-3.jpg";
 import image12 from "../../images/product/image-product-4.jpg";
 import ProductView from "../../views/ProductView";
 import CategoryView from "../../views/CategoryView";
-import {mansProducts} from "../Constants/data";
+import {emptyProduct} from "../../components/Constants/data";
 
 const imagesList = [
   image1,
@@ -33,35 +33,33 @@ const imagesList = [
   image11,
   image12,
 ];
-export const ApiResponseContextMan = createContext(mansProducts);
+
+export const ApiResponseContext = createContext<
+  (React.Dispatch<React.SetStateAction<ResponseObject>> | ResponseObject)[]
+>([]);
 
 const AppContainer: FC = ({}) => {
+  const [context, setContext] = useState(emptyProduct);
   return (
-    <ApiResponseContextMan.Provider value={mansProducts}>
+    <ApiResponseContext.Provider value={[context, setContext]}>
       <HashRouter>
         <div className={css.appContainer}>
           <Header />
           <Routes>
             <Route path="/" element={<div>home</div>} />
-            <Route
-              path="/men"
-              element={<CategoryView responseObject={mansProducts} />}
-            />
+            <Route path="/men" element={<CategoryView />} />
             <Route
               path="/men/:productId"
               element={<ProductView imagesList={imagesList} />}
             />
-            <Route
-              path="/women"
-              element={<CategoryView responseObject={mansProducts} />}
-            />
+            <Route path="/women" element={<CategoryView />} />
             <Route path="/about" element={<div>about</div>} />
             <Route path="/contact" element={<div>contact</div>} />
             <Route path="/*" element={<Navigate to="/" replace={true} />} />
           </Routes>
         </div>
       </HashRouter>
-    </ApiResponseContextMan.Provider>
+    </ApiResponseContext.Provider>
   );
 };
 export default AppContainer;

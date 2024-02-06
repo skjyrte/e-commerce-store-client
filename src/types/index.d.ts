@@ -5,9 +5,10 @@ type ResponseObject = {
 
 type Product = {
   id: string;
+  gender: string;
+  category: string;
   brand: string;
   model: string;
-  category: string;
   shortDescription: string;
   description: string;
   features: string[];

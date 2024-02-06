@@ -6,7 +6,7 @@ import NarrowArrowNext from "../Icons/NarrowArrowNext";
 import NarrowArrowPrev from "../Icons/NarrowArrowPrev";
 import DotCounter from "../DotCounter";
 import PictureLandscape from "../Icons/PictureLandscape";
-import {ApiResponseContextMan} from "../../components/AppContainer/AppContainer";
+import {ApiResponseContext} from "../../components/AppContainer/AppContainer";
 
 type Props = {
   imagesList: Array<string>;
@@ -25,7 +25,7 @@ type ThumbnailSettings = {
 const ProductGallery: FC<Props> = ({imagesList, onClickZoom, productId}) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [thumbnailCurrentOffset, setThumbnailCurrentOffset] = useState(0);
-  const responseObject = useContext(ApiResponseContextMan);
+  const responseObject = useContext(ApiResponseContext);
 
   const product =
     responseObject.products.find((el) => el.id === productId) ?? {};

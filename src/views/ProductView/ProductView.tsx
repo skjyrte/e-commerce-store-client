@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useEffect, useState, useContext} from "react";
 import css from "./ProductView.module.scss";
 import ProductGallery from "../../components/ProductGallery";
 import PortalModal from "../../components/PortalModal";
@@ -6,13 +6,14 @@ import ProductDescription from "../../components/ProductDescription";
 import IconButton from "../../components/Buttons/IconButton";
 import IconCross from "../../components/Icons/IconCross";
 import {useParams} from "react-router-dom";
-import {ApiResponseContextMan} from "../../components/AppContainer/AppContainer";
+import {ApiResponseContext} from "../../components/AppContainer/AppContainer";
 
 interface Props {
   imagesList: string[];
 }
 
 const ProductView: FC<Props> = ({imagesList}) => {
+  const [context, setContext] = useContext(ApiResponseContext);
   const [modalVisible, setModalVisible] = useState(false);
   const [currentProduct, setCurrentProduct] = useState(null);
   const {productId} = useParams();

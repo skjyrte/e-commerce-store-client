@@ -1,11 +1,90 @@
+export const emptyProduct = (() => ({
+  products: [
+    {
+      id: "",
+      gender: "",
+      category: "",
+      brand: "",
+      model: "",
+      shortDescription: "",
+      description: "",
+      features: [],
+      price: 0,
+      initialPrice: 0,
+      rating: {reviews: 0, value: 0},
+      stock: [{size: "", count: 0}],
+      thumbnail: "",
+      images: [],
+    },
+  ],
+  total: 0,
+}))();
+
+export const womansProducts = (() => ({
+  products: [
+    {
+      //1
+      id: "207fb65a-ba6d-4e72-a54e-fb9c7bce8863",
+      gender: "woman",
+      category: "sneaker-shoes",
+      brand: "InnoNex Solutions",
+      model: "PulseTech Precision Runners",
+      shortDescription:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
+      description:
+        "Lorem ipsum dolor sit amet consectetur adipisicing elit. Facere, ipsum.",
+      features: ["Lorem ipsum dolor sit amet."],
+      price: 25.9,
+      initialPrice: 33.9,
+      rating: {reviews: 1, value: 2},
+      stock: [
+        {size: "40", count: 3},
+        {size: "40.5", count: 1},
+        {size: "41", count: 20},
+        {size: "41.5", count: 9},
+        {size: "42", count: 43},
+        {size: "42.5", count: 16},
+        {size: "43", count: 21},
+        {size: "43.5", count: 22},
+        {size: "44", count: 16},
+        {size: "44.5", count: 9},
+        {size: "45", count: 8},
+        {size: "45.5", count: 0},
+        {size: "46", count: 2},
+        {size: "47", count: 1},
+        {size: "48", count: 0},
+        {size: "49", count: 0},
+        {size: "50", count: 0},
+      ],
+      thumbnail:
+        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/313be351-7e1b-4dbd-a430-0bc4fe380351/meskie-wodoszczelne-buty-do-biegania-w-terenie-pegasus-trail-4-gore-tex-tVWltb.png",
+      images: [
+        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/313be351-7e1b-4dbd-a430-0bc4fe380351/meskie-wodoszczelne-buty-do-biegania-w-terenie-pegasus-trail-4-gore-tex-tVWltb.png",
+        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/98a86196-75cd-4b7c-a1ee-9bbda1c2719e/meskie-wodoszczelne-buty-do-biegania-w-terenie-pegasus-trail-4-gore-tex-tVWltb.png",
+        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/146f5594-c188-470c-a095-3c2723eec8cf/meskie-wodoszczelne-buty-do-biegania-w-terenie-pegasus-trail-4-gore-tex-tVWltb.png",
+        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/489ab7a9-9a04-4d72-9e88-74148281a444/meskie-wodoszczelne-buty-do-biegania-w-terenie-pegasus-trail-4-gore-tex-tVWltb.png",
+        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/70ae285e-2160-4405-b758-8afe19a64218/meskie-wodoszczelne-buty-do-biegania-w-terenie-pegasus-trail-4-gore-tex-tVWltb.png",
+        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/5690cd0e-cb27-4c7d-a5b9-95b543ab1f26/meskie-wodoszczelne-buty-do-biegania-w-terenie-pegasus-trail-4-gore-tex-tVWltb.png",
+        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/5feb8dd2-1262-48c6-a12c-79631faff35b/meskie-wodoszczelne-buty-do-biegania-w-terenie-pegasus-trail-4-gore-tex-tVWltb.png",
+        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/43f4c0d9-5841-40d1-8113-94acac1df37e/meskie-wodoszczelne-buty-do-biegania-w-terenie-pegasus-trail-4-gore-tex-tVWltb.png",
+        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/7267a6b6-2fd3-45c6-ac6f-3ed73b33b12e/meskie-wodoszczelne-buty-do-biegania-w-terenie-pegasus-trail-4-gore-tex-tVWltb.png",
+        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/b8bda2f8-d313-48e1-80aa-a746ba2c3000/meskie-wodoszczelne-buty-do-biegania-w-terenie-pegasus-trail-4-gore-tex-tVWltb.png",
+        "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/ce03fd0f-e125-4adc-bd3d-05bb90747fe8/meskie-wodoszczelne-buty-do-biegania-w-terenie-pegasus-trail-4-gore-tex-tVWltb.png",
+      ],
+    },
+  ],
+  total: 1,
+}))();
+
 export const mansProducts = (() => ({
   products: [
     {
       //1
       id: "207fb65a-ba6d-4e72-a54e-fb9c7bce8863",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "InnoNex Solutions",
       model: "PulseTech Precision Runners",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit.",
       description:
@@ -52,9 +131,10 @@ export const mansProducts = (() => ({
     {
       //2
       id: "0e3a405d-80bd-4f2f-ad48-fe51dea707c5",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "QuantumSynth Innovations",
       model: "NovaNestle",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem ipsum, dolor sit amet consectetur adipisicing elit. Velit, dicta!",
       description:
@@ -94,9 +174,10 @@ export const mansProducts = (() => ({
     {
       //3
       id: "a554e792-619b-45f7-a18b-a05d5b03ed3b",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "QuantumSynth Innovations",
       model: "CelestialCraze",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Consequuntur labore velit quidem!",
       description:
@@ -139,9 +220,10 @@ export const mansProducts = (() => ({
     {
       //4
       id: "54746076-e7e5-4a42-ad15-6fef055680bf",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "QuantumSynth Innovations",
       model: "EchoElegance",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Autem recusandae tenetur neque architecto pariatur.",
       description:
@@ -187,9 +269,10 @@ export const mansProducts = (() => ({
     {
       //5
       id: "af7da8b7-d7c5-446e-9cd9-c6a0262ca841",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "SoleSynergy",
       model: "BlazeBrio",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Fugiat provident fugit sint, incidunt earum et veritatis?",
       description:
@@ -240,9 +323,10 @@ export const mansProducts = (() => ({
     {
       //6
       id: "50feb22e-2a53-4980-b52b-facf71a4b48c",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "SoleSynergy",
       model: "EtherealEclipse",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Aliquam eligendi ipsum perferendis. Recusandae debitis rem eos voluptate sequi!",
       description:
@@ -293,9 +377,10 @@ export const mansProducts = (() => ({
     {
       //7
       id: "80338793-8dbf-44cc-ac72-1b649880b457",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "SoleSynergy",
       model: "MirageMomentum",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem ipsum dolor sit amet, consectetur adipisicing elit. Necessitatibus dolorem dolores dignissimos odio quas illum laudantium. Hic, soluta.",
       description:
@@ -345,9 +430,10 @@ export const mansProducts = (() => ({
     {
       //8
       id: "0d69f963-7ec4-4494-a0e8-64a845dfaaff",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "EphemeralEleganceFootwearEmporium",
       model: "SereneSpectra",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt quasi nulla recusandae doloribus facilis doloremque similique, quam reprehenderit.",
       description:
@@ -391,9 +477,10 @@ export const mansProducts = (() => ({
     {
       //9
       id: "42d7498f-765a-4996-acea-bfc3d19421a6",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "EphemeralEleganceFootwearEmporium",
       model: "QuantumQuillbyEphemeralEleganceFootwearEmporium",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores laboriosam blanditiis officiis vero rem ipsa aspernatur eum id deserunt dolorem!",
       description:
@@ -436,9 +523,10 @@ export const mansProducts = (() => ({
     {
       //10
       id: "8a063df7-3222-4c73-b1a3-c420242b899c",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "EphemeralEleganceFootwearEmporium",
       model: "NebulaNectar",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat enim, id, nobis nam non odio, recusandae eos alias quae incidunt fugit laboriosam!",
       description:
@@ -477,9 +565,10 @@ export const mansProducts = (() => ({
     {
       //11
       id: "ec8b2eb6-b777-46d7-b85d-137ec94fe448",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "EphemeralEleganceFootwearEmporium",
       model: "VerveVortex",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci rerum magnam quibusdam, sint magni veritatis dolorum officia voluptatem ipsa? Alias obcaecati officia natus temporibus!",
       description:
@@ -520,10 +609,11 @@ export const mansProducts = (() => ({
     {
       //12
       id: "b6ed699f-a210-42ca-8276-cf8c90be76d5",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "Stride_Craft",
       model:
         "EchoEnigmabyStride_Craftmodel2000 long long long long long long long modelname",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum reiciendis sunt sapiente quia sequi possimus recusandae cupiditate totam, dolorem exercitationem! Autem minus dolore nobis provident quae!",
       description:
@@ -577,9 +667,10 @@ export const mansProducts = (() => ({
     {
       //13
       id: "fca0afb8-30ab-4529-87c3-6a4d9481b97c",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "Stride_Craft",
       model: "ZenithZephyr",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem ipsum dolor sit amet consectetur, adipisicing elit. Id cupiditate recusandae nostrum eius voluptates vero, necessitatibus odit? Accusamus, reprehenderit. Hic veritatis voluptatum laudantium eveniet! Soluta voluptatibus enim cumque!",
       description:
@@ -630,9 +721,10 @@ export const mansProducts = (() => ({
     {
       //14
       id: "fca0afb8-30ab-4529-87c3-6a4d9481b97c",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "Stride_Craft",
       model: "RadiantRover",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Corrupti consectetur voluptates qui, ratione facere labore adipisci hic amet error? Officia ad minus sapiente perspiciatis totam veniam consequuntur vel!",
       description:
@@ -685,9 +777,10 @@ export const mansProducts = (() => ({
     {
       //15
       id: "fca0afb8-30ab-4529-87c3-6a4d9481b97c",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "PinnaclePeds",
       model: "LunarLux",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Sed pariatur iure maxime sit? Eius eos architecto et placeat dicta magni, sunt excepturi laborum velit aut, fugit debitis nemo quis amet!",
       description:
@@ -730,9 +823,10 @@ export const mansProducts = (() => ({
     {
       //16
       id: "fca0afb8-30ab-4529-87c3-6a4d9481b97c",
+      gender: "man",
+      category: "sneaker-shoes",
       brand: "PinnaclePeds",
       model: "VelocityVista 9000",
-      category: "sneaker-shoes",
       shortDescription:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Neque autem quam corporis laborum suscipit cumque libero aut eos nemo reprehenderit architecto earum, dicta, commodi illum dignissimos animi illo praesentium veniam sint? Distinctio?",
       description:

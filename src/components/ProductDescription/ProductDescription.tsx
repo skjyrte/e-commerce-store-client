@@ -1,17 +1,20 @@
-import {FC, useContext, useState} from "react";
+import {FC, useState} from "react";
 import css from "./ProductDescription.module.scss";
 import GeneralTextButton from "../Buttons/GeneralTextButton";
 import ChangeAmountButton from "../Buttons/ChangeAmountButton";
-import {ApiResponseContextMan} from "../../components/AppContainer/AppContainer";
 
-const ProductDescription: FC<{productId: string}> = ({productId}) => {
+type Props = {
+  currentProduct: Product;
+};
+
+const ProductDescription: FC<Props> = ({currentProduct}) => {
   const [itemsCount, setItemsCount] = useState(1);
-  const responseObject = useContext(ApiResponseContextMan);
 
-  const product =
+  /*   const product =
     responseObject.products.find((el) => el.id === productId) ?? {};
-
-  const {description, model, brand, price, initialPrice} = product as Product;
+ */
+  const {description, model, brand, price, initialPrice} =
+    currentProduct as Product;
 
   return (
     <div className={css.box}>
