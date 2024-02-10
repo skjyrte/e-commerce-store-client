@@ -1,6 +1,5 @@
 type ResponseObject = {
   products: Product[];
-  total: number;
 };
 
 type Product = {

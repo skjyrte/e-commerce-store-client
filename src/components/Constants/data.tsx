@@ -1,31 +1,9 @@
-export const emptyProduct = (() => ({
-  products: [
-    {
-      id: "",
-      gender: "",
-      category: "",
-      brand: "",
-      model: "",
-      shortDescription: "",
-      description: "",
-      features: [],
-      price: 0,
-      initialPrice: 0,
-      rating: {reviews: 0, value: 0},
-      stock: [{size: "", count: 0}],
-      thumbnail: "",
-      images: [],
-    },
-  ],
-  total: 0,
-}))();
-
-export const womansProducts = (() => ({
+export const databaseProducts = {
   products: [
     {
       //1
       id: "207fb65a-ba6d-4e72-a54e-fb9c7bce8863",
-      gender: "woman",
+      gender: "women",
       category: "sneaker-shoes",
       brand: "InnoNex Solutions",
       model: "PulseTech Precision Runners",
@@ -72,16 +50,10 @@ export const womansProducts = (() => ({
         "https://static.nike.com/a/images/t_PDP_1728_v1/f_auto,q_auto:eco/ce03fd0f-e125-4adc-bd3d-05bb90747fe8/meskie-wodoszczelne-buty-do-biegania-w-terenie-pegasus-trail-4-gore-tex-tVWltb.png",
       ],
     },
-  ],
-  total: 1,
-}))();
-
-export const mansProducts = (() => ({
-  products: [
     {
       //1
       id: "207fb65a-ba6d-4e72-a54e-fb9c7bce8863",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "InnoNex Solutions",
       model: "PulseTech Precision Runners",
@@ -131,7 +103,7 @@ export const mansProducts = (() => ({
     {
       //2
       id: "0e3a405d-80bd-4f2f-ad48-fe51dea707c5",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "QuantumSynth Innovations",
       model: "NovaNestle",
@@ -174,7 +146,7 @@ export const mansProducts = (() => ({
     {
       //3
       id: "a554e792-619b-45f7-a18b-a05d5b03ed3b",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "QuantumSynth Innovations",
       model: "CelestialCraze",
@@ -220,7 +192,7 @@ export const mansProducts = (() => ({
     {
       //4
       id: "54746076-e7e5-4a42-ad15-6fef055680bf",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "QuantumSynth Innovations",
       model: "EchoElegance",
@@ -269,7 +241,7 @@ export const mansProducts = (() => ({
     {
       //5
       id: "af7da8b7-d7c5-446e-9cd9-c6a0262ca841",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "SoleSynergy",
       model: "BlazeBrio",
@@ -323,7 +295,7 @@ export const mansProducts = (() => ({
     {
       //6
       id: "50feb22e-2a53-4980-b52b-facf71a4b48c",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "SoleSynergy",
       model: "EtherealEclipse",
@@ -377,7 +349,7 @@ export const mansProducts = (() => ({
     {
       //7
       id: "80338793-8dbf-44cc-ac72-1b649880b457",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "SoleSynergy",
       model: "MirageMomentum",
@@ -430,7 +402,7 @@ export const mansProducts = (() => ({
     {
       //8
       id: "0d69f963-7ec4-4494-a0e8-64a845dfaaff",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "EphemeralEleganceFootwearEmporium",
       model: "SereneSpectra",
@@ -477,7 +449,7 @@ export const mansProducts = (() => ({
     {
       //9
       id: "42d7498f-765a-4996-acea-bfc3d19421a6",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "EphemeralEleganceFootwearEmporium",
       model: "QuantumQuillbyEphemeralEleganceFootwearEmporium",
@@ -523,7 +495,7 @@ export const mansProducts = (() => ({
     {
       //10
       id: "8a063df7-3222-4c73-b1a3-c420242b899c",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "EphemeralEleganceFootwearEmporium",
       model: "NebulaNectar",
@@ -565,7 +537,7 @@ export const mansProducts = (() => ({
     {
       //11
       id: "ec8b2eb6-b777-46d7-b85d-137ec94fe448",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "EphemeralEleganceFootwearEmporium",
       model: "VerveVortex",
@@ -609,7 +581,7 @@ export const mansProducts = (() => ({
     {
       //12
       id: "b6ed699f-a210-42ca-8276-cf8c90be76d5",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "Stride_Craft",
       model:
@@ -667,7 +639,7 @@ export const mansProducts = (() => ({
     {
       //13
       id: "fca0afb8-30ab-4529-87c3-6a4d9481b97c",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "Stride_Craft",
       model: "ZenithZephyr",
@@ -721,7 +693,7 @@ export const mansProducts = (() => ({
     {
       //14
       id: "fca0afb8-30ab-4529-87c3-6a4d9481b97c",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "Stride_Craft",
       model: "RadiantRover",
@@ -777,7 +749,7 @@ export const mansProducts = (() => ({
     {
       //15
       id: "fca0afb8-30ab-4529-87c3-6a4d9481b97c",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "PinnaclePeds",
       model: "LunarLux",
@@ -823,7 +795,7 @@ export const mansProducts = (() => ({
     {
       //16
       id: "fca0afb8-30ab-4529-87c3-6a4d9481b97c",
-      gender: "man",
+      gender: "men",
       category: "sneaker-shoes",
       brand: "PinnaclePeds",
       model: "VelocityVista 9000",
@@ -868,5 +840,4 @@ export const mansProducts = (() => ({
       ],
     },
   ],
-  total: 16,
-}))();
+};

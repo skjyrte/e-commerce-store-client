@@ -17,7 +17,6 @@ import image11 from "../../images/product/image-product-3.jpg";
 import image12 from "../../images/product/image-product-4.jpg";
 import ProductView from "../../views/ProductView";
 import CategoryView from "../../views/CategoryView";
-import {emptyProduct} from "../../components/Constants/data";
 
 const imagesList = [
   image1,
@@ -39,27 +38,24 @@ export const ApiResponseContext = createContext<
 >([]);
 
 const AppContainer: FC = ({}) => {
-  const [context, setContext] = useState(emptyProduct);
   return (
-    <ApiResponseContext.Provider value={[context, setContext]}>
-      <HashRouter>
-        <div className={css.appContainer}>
-          <Header />
-          <Routes>
-            <Route path="/" element={<div>home</div>} />
-            <Route path="/men" element={<CategoryView />} />
-            <Route
-              path="/men/:productId"
-              element={<ProductView imagesList={imagesList} />}
-            />
-            <Route path="/women" element={<CategoryView />} />
-            <Route path="/about" element={<div>about</div>} />
-            <Route path="/contact" element={<div>contact</div>} />
-            <Route path="/*" element={<Navigate to="/" replace={true} />} />
-          </Routes>
-        </div>
-      </HashRouter>
-    </ApiResponseContext.Provider>
+    <HashRouter>
+      <div className={css.appContainer}>
+        <Header />
+        <Routes>
+          <Route path="/" element={<div>home</div>} />
+          <Route path="/men" element={<CategoryView />} />
+          <Route
+            path="/men/:productId"
+            element={<ProductView imagesList={imagesList} />}
+          />
+          <Route path="/women" element={<CategoryView />} />
+          <Route path="/about" element={<div>about</div>} />
+          <Route path="/contact" element={<div>contact</div>} />
+          <Route path="/*" element={<Navigate to="/" replace={true} />} />
+        </Routes>
+      </div>
+    </HashRouter>
   );
 };
 export default AppContainer;
