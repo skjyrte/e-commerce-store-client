@@ -10,9 +10,6 @@ type Props = {
 const ProductDescription: FC<Props> = ({currentProduct}) => {
   const [itemsCount, setItemsCount] = useState(1);
 
-  /*   const product =
-    responseObject.products.find((el) => el.id === productId) ?? {};
- */
   const {description, model, brand, price, initialPrice} =
     currentProduct as Product;
 

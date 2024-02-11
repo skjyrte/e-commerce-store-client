@@ -1,4 +1,4 @@
-import {FC, useState, useContext} from "react";
+import {FC, useState} from "react";
 import css from "./ProductGallery.module.scss";
 import IconButton from "../Buttons/IconButton";
 import IconTextButton from "../Buttons/IconTextButton";
@@ -6,12 +6,10 @@ import NarrowArrowNext from "../Icons/NarrowArrowNext";
 import NarrowArrowPrev from "../Icons/NarrowArrowPrev";
 import DotCounter from "../DotCounter";
 import PictureLandscape from "../Icons/PictureLandscape";
-import {ApiResponseContext} from "../../components/AppContainer/AppContainer";
 
 type Props = {
   imagesList: Array<string>;
   onClickZoom?: () => void;
-  productId: string | undefined;
 };
 
 type ThumbnailSettings = {
@@ -22,16 +20,12 @@ type ThumbnailSettings = {
   thumbnailOffsetMax: number;
 };
 
-const ProductGallery: FC<Props> = ({imagesList, onClickZoom, productId}) => {
-  const [currentIndex, setCurrentIndex] = useState(0);
-  const [thumbnailCurrentOffset, setThumbnailCurrentOffset] = useState(0);
-  const responseObject = useContext(ApiResponseContext);
+const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
+  const [thumbnailCurrentOffset, setThumbnailCurrentOffset] =
+    useState<number>(0);
 
-  const product =
-    responseObject.products.find((el) => el.id === productId) ?? {};
-  const {images} = product as Product;
-
-  console.log(images);
+  const images = imagesList;
 
   const thumbnailArray = images.map((element, index) => {
     return (
@@ -39,9 +33,6 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom, productId}) => {
         className={`${css.thumbnailList} ${index === currentIndex ? css.currentThumbnail : ""}`}
         key={index}
         draggable="false"
-        /*         style={{
-          backgroundImage: `url(${element})`,
-        }} */
         onClick={() => setCurrentIndex(index)}
         id={index.toString()}
       >

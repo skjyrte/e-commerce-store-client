@@ -2,7 +2,7 @@ import {createSlice} from "@reduxjs/toolkit";
 import type {PayloadAction} from "@reduxjs/toolkit";
 
 interface selectedGender {
-  value: string | null;
+  value: "men" | "women" | null;
 }
 
 const initialState: selectedGender = {value: null};

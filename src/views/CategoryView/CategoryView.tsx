@@ -8,15 +8,11 @@ import {AppDispatch} from "../../redux/configureStore";
 import {selectProductsByCategory} from "../../redux/selectors";
 import {switchGender} from "../../redux/counter/selectedGenderSlice";
 
-type Props = {};
-
-const CategoryView: FC<Props> = ({}) => {
+const CategoryView: FC = () => {
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
 
   const products = useSelector(selectProductsByCategory);
-
-  console.log(products);
 
   const categoryContent = products.map((obj: Product) => (
     <Link className={css.linkWrapper} to={obj.id.toString()}>

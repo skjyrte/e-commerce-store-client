@@ -50,6 +50,10 @@ const AppContainer: FC = ({}) => {
             element={<ProductView imagesList={imagesList} />}
           />
           <Route path="/women" element={<CategoryView />} />
+          <Route
+            path="/women/:productId"
+            element={<ProductView imagesList={imagesList} />}
+          />
           <Route path="/about" element={<div>about</div>} />
           <Route path="/contact" element={<div>contact</div>} />
           <Route path="/*" element={<Navigate to="/" replace={true} />} />
