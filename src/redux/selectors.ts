@@ -6,7 +6,7 @@ export const selectProductsByCategory = createSelector(
   [
     // Pass input selectors with typed arguments
     (state: RootState) => state.response.value.products,
-    (state: RootState, gender: string) => gender,
+    (state: RootState) => state.gender.value,
   ],
   // Extracted values are passed to the result function for recalculation
   (products, gender) => {

@@ -1,4 +1,5 @@
 import {createSlice} from "@reduxjs/toolkit";
+import type {PayloadAction} from "@reduxjs/toolkit";
 
 interface selectedGender {
   value: string | null;
@@ -10,15 +11,12 @@ const selectedGenderSlice = createSlice({
   name: "selectedGender",
   initialState,
   reducers: {
-    switchMen: (state) => {
-      state.value = "men";
-    },
-    switchWomen: (state) => {
-      state.value = "women";
+    switchGender: (state, action: PayloadAction<"men" | "women">) => {
+      state.value = action.payload;
     },
   },
 });
 
-export const {switchMen, switchWomen} = selectedGenderSlice.actions;
+export const {switchGender} = selectedGenderSlice.actions;
 
 export default selectedGenderSlice.reducer;
