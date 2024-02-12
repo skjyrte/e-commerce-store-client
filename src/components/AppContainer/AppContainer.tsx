@@ -17,6 +17,7 @@ import image11 from "../../images/product/image-product-3.jpg";
 import image12 from "../../images/product/image-product-4.jpg";
 import ProductView from "../../views/ProductView";
 import CategoryView from "../../views/CategoryView";
+import InvalidPageView from "../../views/InvalidPageView";
 
 const imagesList = [
   image1,
@@ -44,6 +45,7 @@ const AppContainer: FC = ({}) => {
         <Header />
         <Routes>
           <Route path="/" element={<div>home</div>} />
+          <Route path="/home" element={<div>home</div>} />
           <Route path="/men" element={<CategoryView />} />
           <Route
             path="/men/:productId"
@@ -56,7 +58,7 @@ const AppContainer: FC = ({}) => {
           />
           <Route path="/about" element={<div>about</div>} />
           <Route path="/contact" element={<div>contact</div>} />
-          <Route path="/*" element={<Navigate to="/" replace={true} />} />
+          <Route path="/*" element={<InvalidPageView />} />
         </Routes>
       </div>
     </HashRouter>

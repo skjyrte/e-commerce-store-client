@@ -13,6 +13,8 @@ import {
   productCleanup,
 } from "../../redux/counter/selectedProductSlice";
 import {selectCurrentProduct} from "../../redux/selectors";
+import IconNoPhoto from "../../components/Icons/IconNoPhoto";
+import InvalidContent from "../../components/InvalidContent";
 
 interface Props {
   imagesList: string[];
@@ -21,10 +23,38 @@ interface Props {
 const ProductView: FC<Props> = ({}) => {
   const [modalVisible, setModalVisible] = useState(false);
   const {productId} = useParams();
+
   const dispatch = useDispatch<AppDispatch>();
+  if (productId !== undefined) {
+    dispatch(productUpdater(productId));
+  }
 
   const selectedProduct = useSelector(selectCurrentProduct);
-  const imagesList = selectedProduct?.images;
+
+  const renderGallery = () => {
+    if (selectedProduct.result !== null && selectedProduct.error === null) {
+      if (selectedProduct.result.images.length !== 0) {
+        return (
+          <ProductGallery
+            imagesList={selectedProduct.result.images}
+            onClickZoom={handleOpenModal}
+          />
+        );
+      } else {
+        return <IconNoPhoto />;
+      }
+    } else {
+      throw new Error("invalid object");
+    }
+  };
+
+  const renderDescription = () => {
+    if (selectedProduct.result !== null && selectedProduct.error === null) {
+      return <ProductDescription currentProduct={selectedProduct.result} />;
+    } else {
+      throw new Error("invalid object");
+    }
+  };
 
   const handleOpenModal = () => {
     setModalVisible(true);
@@ -34,24 +64,16 @@ const ProductView: FC<Props> = ({}) => {
   };
 
   useEffect(() => {
-    dispatch(productUpdater(productId));
     return () => {
       dispatch(productCleanup());
     };
   }, []);
 
-  return (
+  return selectedProduct.error !== null ? (
+    <InvalidContent />
+  ) : (
     <div className={css.product}>
-      <div className={css.mainGalleryWrapper}>
-        {imagesList === undefined ? (
-          "loading or empty"
-        ) : (
-          <ProductGallery
-            imagesList={imagesList}
-            onClickZoom={handleOpenModal}
-          />
-        )}
-      </div>
+      <div className={css.mainGalleryWrapper}>{renderGallery()}</div>
       <PortalModal visible={modalVisible}>
         <div className={css.portalGalleryWrapper}>
           <IconButton
@@ -59,21 +81,10 @@ const ProductView: FC<Props> = ({}) => {
             IconComponent={IconCross}
             buttonClass={["closeModalButton"]}
           />
-          {imagesList === undefined ? (
-            "loading or empty"
-          ) : (
-            <ProductGallery
-              imagesList={imagesList}
-              onClickZoom={handleOpenModal}
-            />
-          )}
+          {renderGallery()}
         </div>
       </PortalModal>
-      {selectedProduct === undefined ? (
-        "loading or empty"
-      ) : (
-        <ProductDescription currentProduct={selectedProduct} />
-      )}
+      {renderDescription()};
     </div>
   );
 };

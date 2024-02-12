@@ -21,15 +21,11 @@ export const selectCurrentProduct = createSelector(
   ],
   // Extracted values are passed to the result function for recalculation
   (products, id) => {
-    const results = products.filter((product) => product.id === id);
-    console.log(results);
-    if (results.length === 0) {
-      return undefined;
-    }
-    if (results.length === 1) {
-      return results[0];
+    const result = products.find((product) => product.id === id);
+    if (result !== undefined) {
+      return {result: result, error: null};
     } else {
-      throw new Error("invalid database key");
+      return {result: null, error: new Error("Product not found")};
     }
   }
 );
