@@ -15,6 +15,7 @@ import {
 import {selectCurrentProduct} from "../../redux/selectors";
 import IconNoPhoto from "../../components/Icons/IconNoPhoto";
 import InvalidContent from "../../components/InvalidContent";
+import SizeTable from "../../components/SizeTable";
 
 interface Props {
   imagesList: string[];
@@ -22,6 +23,7 @@ interface Props {
 
 const ProductView: FC<Props> = ({}) => {
   const [modalVisible, setModalVisible] = useState(false);
+  const [isSizeModalVisible, setIsSizeModalVisible] = useState(true);
   const {productId} = useParams();
 
   const dispatch = useDispatch<AppDispatch>();
@@ -43,6 +45,18 @@ const ProductView: FC<Props> = ({}) => {
       } else {
         return <IconNoPhoto />;
       }
+    } else {
+      throw new Error("invalid object");
+    }
+  };
+
+  const renderSizes = () => {
+    if (selectedProduct.result !== null && selectedProduct.error === null) {
+      return (
+        <PortalModal visible={true}>
+          <SizeTable sizesArray={selectedProduct.result.stock} />
+        </PortalModal>
+      );
     } else {
       throw new Error("invalid object");
     }
@@ -73,6 +87,7 @@ const ProductView: FC<Props> = ({}) => {
     <InvalidContent />
   ) : (
     <div className={css.product}>
+      {isSizeModalVisible ? renderSizes() : <></>}
       <div className={css.mainGalleryWrapper}>{renderGallery()}</div>
       <PortalModal visible={modalVisible}>
         <div className={css.portalGalleryWrapper}>
