@@ -53,7 +53,7 @@ const ProductView: FC<Props> = ({}) => {
   const renderSizes = () => {
     if (selectedProduct.result !== null && selectedProduct.error === null) {
       return (
-        <PortalModal visible={true}>
+        <PortalModal visible={true} lockBodyScroll={true}>
           <SizeTable sizesArray={selectedProduct.result.stock} />
         </PortalModal>
       );

@@ -3,7 +3,7 @@
   right: 0;
   top: 0;
   width: 300px;
-  height: auto;
+  height: 100vh;
   z-index: 9;
   background-color: white;
   font-variation-settings:
@@ -15,8 +15,7 @@
 }
 
 .sizeArrayWrapper {
-  position: relative;
-  height: auto;
+  max-height: calc(100vh - 45px);
   overflow-y: scroll;
 }
 
