@@ -10,12 +10,12 @@ type Props = {
 
 const AvailabilityBar: FC<Props> = (Props) => {
   const {thresholds, items, showNotInStock = true} = Props;
-  const displayBar = thresholds.map((el) => {
+  const displayBar = thresholds.map((el, index) => {
     const computedClass = classNames(
       css.bar,
       el < items ? css.avaiable : css.unavaiable
     );
-    return <div className={computedClass}></div>;
+    return <div className={computedClass} key={index}></div>;
   });
 
   if (showNotInStock === false) {

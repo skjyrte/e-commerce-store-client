@@ -16,6 +16,8 @@ import {selectCurrentProduct} from "../../redux/selectors";
 import IconNoPhoto from "../../components/Icons/IconNoPhoto";
 import InvalidContent from "../../components/InvalidContent";
 import SizeTable from "../../components/SizeTable";
+import {sizeUpdater, sizeCleanup} from "../../redux/counter/selectedSizeSlice";
+import {RootState} from "../../redux/configureStore";
 
 interface Props {
   imagesList: string[];
@@ -23,7 +25,7 @@ interface Props {
 
 const ProductView: FC<Props> = ({}) => {
   const [modalVisible, setModalVisible] = useState(false);
-  const [isSizeModalVisible, setIsSizeModalVisible] = useState(true);
+  const [isSizeModalVisible, setIsSizeModalVisible] = useState(false);
   const {productId} = useParams();
 
   const dispatch = useDispatch<AppDispatch>();
@@ -32,6 +34,25 @@ const ProductView: FC<Props> = ({}) => {
   }
 
   const selectedProduct = useSelector(selectCurrentProduct);
+  const selectedSize = useSelector((state: RootState) => state.size.value);
+
+  if (selectedProduct.result !== null && selectedProduct.error === null) {
+    const defaultSizeObject = selectedProduct.result.stock.find(
+      (el) => el.count > 0
+    );
+    {
+      console.log("stringify");
+      console.log(
+        JSON.stringify({
+          size: selectedSize,
+          defaultSizeObject: defaultSizeObject,
+        })
+      );
+      dispatch(
+        sizeUpdater({size: selectedSize, defaultSizeObject: defaultSizeObject})
+      );
+    }
+  }
 
   const renderGallery = () => {
     if (selectedProduct.result !== null && selectedProduct.error === null) {
@@ -50,11 +71,20 @@ const ProductView: FC<Props> = ({}) => {
     }
   };
 
+  const onChooseSize = (size: string) => {
+    console.log(`size choosen as ${size}`);
+    setIsSizeModalVisible(false);
+    dispatch(sizeUpdater({size: size, defaultSizeObject: undefined}));
+  };
+
   const renderSizes = () => {
     if (selectedProduct.result !== null && selectedProduct.error === null) {
       return (
         <PortalModal visible={true} lockBodyScroll={true}>
-          <SizeTable sizesArray={selectedProduct.result.stock} />
+          <SizeTable
+            sizesArray={selectedProduct.result.stock}
+            onClick={onChooseSize}
+          />
         </PortalModal>
       );
     } else {
@@ -64,7 +94,13 @@ const ProductView: FC<Props> = ({}) => {
 
   const renderDescription = () => {
     if (selectedProduct.result !== null && selectedProduct.error === null) {
-      return <ProductDescription currentProduct={selectedProduct.result} />;
+      return (
+        <ProductDescription
+          onClickSize={() => setIsSizeModalVisible(true)}
+          currentProduct={selectedProduct.result}
+          currentSize={selectedSize}
+        />
+      );
     } else {
       throw new Error("invalid object");
     }
@@ -80,6 +116,7 @@ const ProductView: FC<Props> = ({}) => {
   useEffect(() => {
     return () => {
       dispatch(productCleanup());
+      dispatch(sizeCleanup());
     };
   }, []);
 

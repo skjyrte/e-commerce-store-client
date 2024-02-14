@@ -29,3 +29,18 @@ export const selectCurrentProduct = createSelector(
     }
   }
 );
+
+/* export const selectCurrentSize = createSelector(
+  [
+
+    (state: RootState) => state.size.value,
+    selectCurrentProduct,
+  ],
+
+  (size, product) => {
+    const defaultSize = product.result?.stock.find((el) => el.count > 0)?.size;
+    if (size === null) return defaultSize;
+    else return size;
+  }
+);
+ */

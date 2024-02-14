@@ -59,6 +59,18 @@
   }
 }
 
+.SizeHeader {
+  font-size: 16px;
+  text-shadow: rgb(255, 254, 252) 1px 0 10px;
+  margin: 20px 0 5px 0;
+  text-decoration: underline;
+  word-spacing: 0.1rem;
+  letter-spacing: 0.15rem;
+  font-variation-settings:
+    "wght" 400,
+    "YOPQ" 300;
+}
+
 .actionBox {
   display: flex;
   flex-direction: row;

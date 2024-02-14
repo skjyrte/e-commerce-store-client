@@ -5,7 +5,7 @@
   justify-content: center;
   align-items: center;
   margin: 5px;
-  filter: drop-shadow(0 0 1px blue);
+  filter: drop-shadow(0 0 1px rgb(0, 0, 0));
 }
 
 .bar {
@@ -13,14 +13,15 @@
   min-height: 100%;
   margin: 0 1px;
   border-radius: 2px;
+  border: 1px solid gray;
 }
 
 .avaiable {
-  background-color: rgb(81, 151, 255);
+  background-color: rgb(136, 136, 136);
 }
 
 .unavaiable {
-  background-color: rgb(41, 41, 41);
+  background-color: rgb(255, 255, 255);
 }
 
 .notInStock {

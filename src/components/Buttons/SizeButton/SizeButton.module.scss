@@ -1,0 +1,27 @@
+.SizeButton {
+  display: flex;
+  width: 100%;
+  height: 40px;
+  border: 1px solid black;
+  background-color: white;
+  justify-content: space-between;
+  align-items: center;
+  font-family: inherit;
+  &:hover {
+    cursor: pointer;
+  }
+}
+
+.Size {
+  font-size: 24px;
+  font-variation-settings:
+    "wght" 500,
+    "YOPQ" 300;
+  padding-left: 5px;
+}
+
+.icon {
+  display: flex;
+  height: 100%;
+  width: auto;
+}
