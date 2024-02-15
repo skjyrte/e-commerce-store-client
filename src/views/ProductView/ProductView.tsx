@@ -18,6 +18,7 @@ import InvalidContent from "../../components/InvalidContent";
 import SizeTable from "../../components/SizeTable";
 import {sizeUpdater, sizeCleanup} from "../../redux/counter/selectedSizeSlice";
 import {RootState} from "../../redux/configureStore";
+import {changeItemsCount} from "../../redux/counter/responseSlice";
 
 interface Props {
   imagesList: string[];
@@ -77,6 +78,18 @@ const ProductView: FC<Props> = ({}) => {
     dispatch(sizeUpdater({size: size, defaultSizeObject: undefined}));
   };
 
+  const onAddToBasket = (changeBy: number) => {
+    if (productId !== undefined && selectedSize !== null) {
+      dispatch(
+        changeItemsCount({
+          currentProductId: productId,
+          currentSize: selectedSize,
+          changeBy: changeBy,
+        })
+      );
+    }
+  };
+
   const renderSizes = () => {
     if (selectedProduct.result !== null && selectedProduct.error === null) {
       return (
@@ -99,6 +112,7 @@ const ProductView: FC<Props> = ({}) => {
           onClickSize={() => setIsSizeModalVisible(true)}
           currentProduct={selectedProduct.result}
           currentSize={selectedSize}
+          onAddToBasket={onAddToBasket}
         />
       );
     } else {

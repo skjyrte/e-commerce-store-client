@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, useState, useEffect} from "react";
 import css from "./ProductDescription.module.scss";
 import GeneralTextButton from "../Buttons/GeneralTextButton";
 import ChangeAmountButton from "../Buttons/ChangeAmountButton";
@@ -8,17 +8,31 @@ type Props = {
   currentProduct: Product;
   onClickSize: () => void;
   currentSize: string | null;
+  onAddToBasket: (itemsCount: number) => void;
 };
 
 const ProductDescription: FC<Props> = ({
   currentProduct,
   onClickSize,
   currentSize,
+  onAddToBasket,
 }) => {
   const [itemsCount, setItemsCount] = useState(1);
 
   const {description, model, brand, price, initialPrice} =
     currentProduct as Product;
+
+  const avaiableItems = currentProduct.stock.find(
+    (sizeObj) => sizeObj.size === currentSize
+  )?.count;
+
+  useEffect(() => {
+    if (avaiableItems !== undefined) {
+      setItemsCount(Math.min(1, avaiableItems));
+    } else {
+      setItemsCount(1);
+    }
+  }, [currentSize, avaiableItems]);
 
   return (
     <div className={css.box}>
@@ -39,7 +53,7 @@ const ProductDescription: FC<Props> = ({
         <ChangeAmountButton
           displayedText="-"
           onClick={() => {
-            if (itemsCount > 0) {
+            if (itemsCount > 1) {
               setItemsCount(itemsCount - 1);
             }
           }}
@@ -48,12 +62,20 @@ const ProductDescription: FC<Props> = ({
         <div className={css.itemsCount}>{itemsCount}</div>
         <ChangeAmountButton
           displayedText="+"
-          onClick={() => setItemsCount(itemsCount + 1)}
+          onClick={() => {
+            if (avaiableItems && itemsCount < avaiableItems) {
+              setItemsCount(itemsCount + 1);
+            }
+          }}
           classProp={["right"]}
         />
         <GeneralTextButton
           displayedText="Add to cart"
           classProp={["addToCart"]}
+          onClick={() => {
+            console.log("logged");
+            onAddToBasket(itemsCount);
+          }}
         />
       </div>
     </div>
