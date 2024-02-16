@@ -1,5 +1,5 @@
 :root {
-  --change-amount-button-enabled: red;
+  --change-amount-button-enabled: rgb(254, 255, 196);
   --change-amount-button-disabled: yellow;
 }
 
@@ -18,7 +18,10 @@
   align-items: center;
   border: 1px solid rgb(212, 212, 212);
   margin: 0;
-  background-color: hsl(45, 100%, 95%);
+  background-color: orange;
+  &:disabled {
+    background-color: wheat;
+  }
 }
 
 .left {
@@ -31,10 +34,17 @@
 
 @media (hover: hover) {
   .changeAmountButton:hover {
-    filter: hue-rotate(20deg);
     font-variation-settings:
-      "wght" 700,
-      "YOPQ" 300;
+      "wght" 600,
+      "YOPQ" 200;
     transition: font-variation-settings 0.2s;
+    filter: hue-rotate(-30deg);
+    &:disabled {
+      background-color: wheat;
+      filter: unset;
+      font-variation-settings:
+        "wght" 400,
+        "YOPQ" 200;
+    }
   }
 }

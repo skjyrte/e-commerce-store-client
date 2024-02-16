@@ -1,22 +1,22 @@
 :root {
-  --general-text-button-enabled: red;
+  --general-text-button-enabled: rgb(17, 17, 17);
   --general-text-button-disabled: yellow;
 }
 
 .GeneralTextButton {
   font-family: inherit;
-  color: var(--button-enabled);
+  font-size: 24px;
+  color: var(--general-text-button-enabled);
   display: flex;
   height: 55px;
   justify-content: center;
   align-items: center;
   border: none;
   border-radius: 5px;
-  background-color: hsl(26, 100%, 55%);
+  background-color: orange;
   padding: 0;
   margin: 0;
   &:disabled {
-    filter: hue-rotate(20deg);
     background-color: wheat;
   }
 }
@@ -30,9 +30,11 @@
 
 @media (hover: hover) {
   .GeneralTextButton:hover {
-    background-color: wheat;
+    background-color: orange;
+    filter: hue-rotate(-30deg);
     &:disabled {
       background-color: wheat;
+      filter: unset;
     }
   }
 }

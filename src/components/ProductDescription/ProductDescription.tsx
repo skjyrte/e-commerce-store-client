@@ -97,7 +97,7 @@ const ProductDescription: FC<Props> = ({
           isDisabled={increaseCountDisabledCheck}
         />
         <GeneralTextButton
-          displayedText="Add to cart"
+          displayedText="🛒 Add to cart 🛒"
           classProp={["addToCart"]}
           onClick={() => {
             console.log("logged");
