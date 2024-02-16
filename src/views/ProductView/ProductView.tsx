@@ -20,8 +20,7 @@ import {sizeUpdater, sizeCleanup} from "../../redux/counter/selectedSizeSlice";
 import {RootState} from "../../redux/configureStore";
 import {changeItemsCount} from "../../redux/counter/responseSlice";
 
-interface Props {
-}
+interface Props {}
 
 const ProductView: FC<Props> = ({}) => {
   const [modalVisible, setModalVisible] = useState(false);
@@ -38,16 +37,9 @@ const ProductView: FC<Props> = ({}) => {
 
   if (selectedProduct.result !== null && selectedProduct.error === null) {
     const defaultSizeObject = selectedProduct.result.stock.find(
-      (el) => el.count > 0
+      (product) => product.count > 0
     );
     {
-      console.log("stringify");
-      console.log(
-        JSON.stringify({
-          size: selectedSize,
-          defaultSizeObject: defaultSizeObject,
-        })
-      );
       dispatch(
         sizeUpdater({size: selectedSize, defaultSizeObject: defaultSizeObject})
       );

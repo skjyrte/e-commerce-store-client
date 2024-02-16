@@ -15,6 +15,10 @@
   background-color: hsl(26, 100%, 55%);
   padding: 0;
   margin: 0;
+  &:disabled {
+    filter: hue-rotate(20deg);
+    background-color: wheat;
+  }
 }
 
 .addToCart {
@@ -26,10 +30,9 @@
 
 @media (hover: hover) {
   .GeneralTextButton:hover {
-    background-color: green;
+    background-color: wheat;
+    &:disabled {
+      background-color: wheat;
+    }
   }
-}
-
-.disabled {
-  color: var(--general-text-button-disabled);
 }

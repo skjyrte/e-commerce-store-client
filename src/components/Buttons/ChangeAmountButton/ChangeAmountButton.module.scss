@@ -4,21 +4,21 @@
 }
 
 .changeAmountButton {
+  font-variation-settings:
+    "wght" 400,
+    "YOPQ" 200;
   font-family: inherit;
+  font-size: 30px;
+  text-align: center;
   color: var(--change-amount-button-enabled);
   display: flex;
   width: 40px;
   height: 55px;
   justify-content: center;
   align-items: center;
-  border: none;
-  padding: 0;
+  border: 1px solid rgb(212, 212, 212);
   margin: 0;
-  background-color: hsl(230, 60%, 98%);
-}
-
-.disabled {
-  color: var(--change-amount-button-disabled);
+  background-color: hsl(45, 100%, 95%);
 }
 
 .left {
@@ -31,6 +31,10 @@
 
 @media (hover: hover) {
   .changeAmountButton:hover {
-    background-color: green;
+    filter: hue-rotate(20deg);
+    font-variation-settings:
+      "wght" 700,
+      "YOPQ" 300;
+    transition: font-variation-settings 0.2s;
   }
 }
