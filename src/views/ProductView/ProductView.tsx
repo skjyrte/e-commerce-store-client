@@ -21,7 +21,6 @@ import {RootState} from "../../redux/configureStore";
 import {changeItemsCount} from "../../redux/counter/responseSlice";
 
 interface Props {
-  imagesList: string[];
 }
 
 const ProductView: FC<Props> = ({}) => {
