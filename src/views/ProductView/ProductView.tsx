@@ -148,7 +148,7 @@ const ProductView: FC<Props> = ({}) => {
           {renderGallery()}
         </div>
       </PortalModal>
-      {renderDescription()};
+      {renderDescription()}
     </div>
   );
 };
