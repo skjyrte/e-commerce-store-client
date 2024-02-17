@@ -21,6 +21,8 @@ const selectedSizeSlice = createSlice({
         state.value = action.payload.size;
       } else if (action.payload.defaultSizeObject !== undefined) {
         state.value = action.payload.defaultSizeObject.size;
+      } else {
+        state.value = null;
       }
     },
     sizeCleanup: (state) => {

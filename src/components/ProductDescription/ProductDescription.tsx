@@ -45,18 +45,22 @@ const ProductDescription: FC<Props> = ({
   };
 
   const increaseCountDisabledCheck =
-    avaiableItems !== undefined && itemsCount >= avaiableItems ? true : false;
+    (avaiableItems !== undefined && itemsCount >= avaiableItems) ||
+    currentSize === null
+      ? true
+      : false;
 
   const addToCartButtonDisabledCheck =
     (avaiableItems !== undefined && itemsCount > avaiableItems) ||
-    avaiableItems === 0
+    avaiableItems === 0 ||
+    currentSize === null
       ? true
       : false;
 
   console.log(avaiableItems);
 
   useEffect(() => {
-    if (avaiableItems === 0) {
+    if (avaiableItems === 0 || currentSize === null) {
       setItemsCount(0);
     } else {
       setItemsCount(1);

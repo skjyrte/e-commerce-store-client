@@ -39,6 +39,8 @@ const ProductView: FC<Props> = ({}) => {
     const defaultSizeObject = selectedProduct.result.stock.find(
       (product) => product.count > 0
     );
+    console.log("defaultSizeObject");
+    console.log(defaultSizeObject);
     {
       dispatch(
         sizeUpdater({size: selectedSize, defaultSizeObject: defaultSizeObject})

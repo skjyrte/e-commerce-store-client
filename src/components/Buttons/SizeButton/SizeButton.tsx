@@ -10,6 +10,8 @@ type Props = {
 };
 
 const SizeButton: FC<Props> = ({onClick, currentSize, avaiableItems}) => {
+  console.log("currentSize");
+  console.log(currentSize);
   const displayStockInfo = (() => {
     if (avaiableItems !== undefined && avaiableItems < 3 && avaiableItems > 0) {
       return {
@@ -17,7 +19,7 @@ const SizeButton: FC<Props> = ({onClick, currentSize, avaiableItems}) => {
         displayStockClass: "lowStock",
       };
     }
-    if (avaiableItems === 0) {
+    if (avaiableItems === 0 || currentSize === null) {
       return {
         text: "No more items avaiable in stock",
         displayStockClass: "noMoreInStock",
