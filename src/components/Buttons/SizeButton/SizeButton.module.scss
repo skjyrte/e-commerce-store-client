@@ -29,3 +29,11 @@
 .noMoreInStock {
   color: rgb(100, 100, 100);
 }
+
+.AdditionalInfo {
+  &.lowStock {
+    color: rgb(61, 61, 61);
+    font-size: 14px;
+    margin-right: -150px;
+  }
+}

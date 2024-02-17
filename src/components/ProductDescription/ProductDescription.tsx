@@ -80,7 +80,7 @@ const ProductDescription: FC<Props> = ({
       <SizeButton
         onClick={onClickSize}
         currentSize={currentSize}
-        noMoreInStock={avaiableItems === 0 ? true : false}
+        avaiableItems={avaiableItems}
       />
       <div className={css.actionBox}>
         <ChangeAmountButton

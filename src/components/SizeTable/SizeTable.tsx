@@ -24,7 +24,9 @@ const SizeTable: FC<Props> = ({sizesArray, onClick}) => {
         <div className={css.title}>{obj.size}</div>
         <div className={css.barWrapper}>
           {obj.count < 3 && obj.count > 0 ? (
-            <div className={css.lowStockWarning}>{obj.count} item left</div>
+            <div className={css.lowStockWarning}>
+              {obj.count} item{obj.count === 1 ? "" : "s"} left
+            </div>
           ) : (
             <></>
           )}

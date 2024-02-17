@@ -6,26 +6,57 @@ import classNames from "classnames";
 type Props = {
   onClick: () => void;
   currentSize: string | null;
-  noMoreInStock: boolean;
+  avaiableItems?: number;
 };
 
-const SizeButton: FC<Props> = ({onClick, currentSize, noMoreInStock}) => {
-  const displayStockInfo = noMoreInStock
-    ? "No more items avaiable in stock"
-    : "";
-  const displayStockClass = noMoreInStock ? css.noMoreInStock : "";
+const SizeButton: FC<Props> = ({onClick, currentSize, avaiableItems}) => {
+  const displayStockInfo = (() => {
+    if (avaiableItems !== undefined && avaiableItems < 3 && avaiableItems > 0) {
+      return {
+        text: `${avaiableItems} item${avaiableItems === 1 ? "" : "s"} left`,
+        displayStockClass: "lowStock",
+      };
+    }
+    if (avaiableItems === 0) {
+      return {
+        text: "No more items avaiable in stock",
+        displayStockClass: "noMoreInStock",
+      };
+    } else {
+      return {text: "", displayStockClass: ""};
+    }
+  })();
+
   return (
     <button
       onClick={onClick}
-      className={classNames(css.SizeButton, displayStockClass)}
+      className={classNames(
+        css.SizeButton,
+        css[displayStockInfo.displayStockClass]
+      )}
     >
-      <div className={classNames(css.Size, displayStockClass)}>
+      <div
+        className={classNames(
+          css.Size,
+          css[displayStockInfo.displayStockClass]
+        )}
+      >
         {currentSize}
       </div>
-      <div className={classNames(css.AdditionalInfo, displayStockClass)}>
-        {displayStockInfo}
+      <div
+        className={classNames(
+          css.AdditionalInfo,
+          css[displayStockInfo.displayStockClass]
+        )}
+      >
+        {displayStockInfo.text}
       </div>
-      <div className={classNames(css.icon, displayStockClass)}>
+      <div
+        className={classNames(
+          css.icon,
+          css[displayStockInfo.displayStockClass]
+        )}
+      >
         <NarrowArrowNext />
       </div>
     </button>
