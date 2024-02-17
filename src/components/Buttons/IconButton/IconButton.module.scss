@@ -47,6 +47,9 @@
   border-radius: 5px;
   padding: 5px;
   z-index: 2;
+  &.size {
+    top: 0.5rem;
+  }
   &:disabled {
     opacity: 0.1;
     filter: grayscale(0.6);

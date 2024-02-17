@@ -23,8 +23,9 @@ import {changeItemsCount} from "../../redux/counter/responseSlice";
 interface Props {}
 
 const ProductView: FC<Props> = ({}) => {
-  const [modalVisible, setModalVisible] = useState(false);
-  const [isSizeModalVisible, setIsSizeModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState<null | "size" | "gallery">(
+    null
+  );
   const {productId} = useParams();
 
   const dispatch = useDispatch<AppDispatch>();
@@ -54,7 +55,7 @@ const ProductView: FC<Props> = ({}) => {
         return (
           <ProductGallery
             imagesList={selectedProduct.result.images}
-            onClickZoom={handleOpenModal}
+            onClickZoom={() => handleOpenModal("gallery")}
           />
         );
       } else {
@@ -65,9 +66,8 @@ const ProductView: FC<Props> = ({}) => {
     }
   };
 
-  const onChooseSize = (size: string) => {
-    console.log(`size choosen as ${size}`);
-    setIsSizeModalVisible(false);
+  const onSelectSize = (size: string) => {
+    handleCloseModal();
     dispatch(sizeUpdater({size: size, defaultSizeObject: undefined}));
   };
 
@@ -86,12 +86,10 @@ const ProductView: FC<Props> = ({}) => {
   const renderSizes = () => {
     if (selectedProduct.result !== null && selectedProduct.error === null) {
       return (
-        <PortalModal visible={true} lockBodyScroll={true}>
-          <SizeTable
-            sizesArray={selectedProduct.result.stock}
-            onClick={onChooseSize}
-          />
-        </PortalModal>
+        <SizeTable
+          sizesArray={selectedProduct.result.stock}
+          onClick={onSelectSize}
+        />
       );
     } else {
       throw new Error("invalid object");
@@ -102,7 +100,7 @@ const ProductView: FC<Props> = ({}) => {
     if (selectedProduct.result !== null && selectedProduct.error === null) {
       return (
         <ProductDescription
-          onClickSize={() => setIsSizeModalVisible(true)}
+          onClickSize={() => handleOpenModal("size")}
           currentProduct={selectedProduct.result}
           currentSize={selectedSize}
           onAddToBasket={onAddToBasket}
@@ -113,11 +111,11 @@ const ProductView: FC<Props> = ({}) => {
     }
   };
 
-  const handleOpenModal = () => {
-    setModalVisible(true);
+  const handleOpenModal = (modalType: "size" | "gallery") => {
+    setModalVisible(modalType);
   };
   const handleCloseModal = () => {
-    setModalVisible(false);
+    setModalVisible(null);
   };
 
   useEffect(() => {
@@ -131,9 +129,16 @@ const ProductView: FC<Props> = ({}) => {
     <InvalidContent />
   ) : (
     <div className={css.product}>
-      {isSizeModalVisible ? renderSizes() : <></>}
+      <PortalModal visible={modalVisible === "size"} lockBodyScroll={true}>
+        {renderSizes()}
+        <IconButton
+          onClick={handleCloseModal}
+          IconComponent={IconCross}
+          buttonClass={["closeModalButton", "size"]}
+        />
+      </PortalModal>
       <div className={css.mainGalleryWrapper}>{renderGallery()}</div>
-      <PortalModal visible={modalVisible}>
+      <PortalModal visible={modalVisible === "gallery"}>
         <div className={css.portalGalleryWrapper}>
           <IconButton
             onClick={handleCloseModal}
