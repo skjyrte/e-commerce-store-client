@@ -1,6 +1,6 @@
 import {FC} from "react";
 import css from "./SizeTable.module.scss";
-import AvailabilityBar from "../../components/AvailabilityBar";
+import AvailabilityBar from "../AvailabilityBar";
 import classNames from "classnames";
 
 type sizeObject = {size: string; count: number};

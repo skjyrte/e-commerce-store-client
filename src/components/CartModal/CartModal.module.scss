@@ -1,0 +1,56 @@
+.cartModalWrapper {
+  width: 300px;
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  position: absolute;
+  top: 58px; //override parent border 2px
+  right: -2px; //override parent border 2px
+  z-index: 1;
+  border: 2px solid gray;
+  padding: 10px;
+}
+
+.hideBorderBox {
+  position: absolute;
+  z-index: 1;
+  height: 2px;
+  width: 56px;
+  background-color: white;
+  top: -2px;
+  right: 0;
+}
+
+.emptyCart {
+  padding-bottom: 10px;
+  font-size: 18px;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
+}
+
+.redirectToOther {
+  padding-bottom: 5px;
+  font-size: 14px;
+}
+
+.linkElement {
+  color: white;
+  background-color: black;
+  border: 2px solid whitesmoke;
+  height: auto;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  padding: 10px;
+  letter-spacing: 0.2rem;
+  font-family: inherit;
+  text-decoration: none;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
+  &:hover {
+    transition: filter 0.2s;
+    filter: invert(75%);
+  }
+}

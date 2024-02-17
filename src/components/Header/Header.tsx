@@ -1,11 +1,9 @@
 import {FC} from "react";
 import css from "./Header.module.scss";
 import TextLinkElement from "../LinkElements/TextLinkElement";
-import IconButton from "../Buttons/IconButton";
-import IconCart from "../Icons/IconCart";
 import ImageButton from "../Buttons/ImageButton";
 import avatar from "../../images/image-avatar.png";
-import {BrowserRouter as Router, Route, Link, Routes} from "react-router-dom";
+import CartButton from "../Buttons/CartButton";
 
 const Header: FC = ({}) => {
   return (
@@ -42,13 +40,20 @@ const Header: FC = ({}) => {
         </ul>
 
         <div className={css.header__spacer}></div>
-        <div className={css.iconButtonWrapper}>
+        <CartButton />
+        {/*         <div
+          className={classNames(
+            css.cartButtonWrapper,
+            cartModalVisible === true ? css.cartOpened : ""
+          )}
+        >
           <IconButton
             IconComponent={IconCart}
-            onClick={() => console.log("Cart")}
+            onClick={onCartClick}
             buttonClass={["cartButton"]}
           />
-        </div>
+          {cartModalVisible === true ? <CartModal /> : <></>}
+        </div> */}
         <div className={css.imageButtonWrapper}>
           <ImageButton image={avatar} />
         </div>

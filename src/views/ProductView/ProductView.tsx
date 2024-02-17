@@ -1,4 +1,4 @@
-import {FC, useEffect, useState, useContext} from "react";
+import {FC, useEffect, useState} from "react";
 import css from "./ProductView.module.scss";
 import PortalModal from "../../components/PortalModal";
 import ProductGallery from "../../components/ProductGallery";
@@ -15,7 +15,7 @@ import {
 import {selectCurrentProduct} from "../../redux/selectors";
 import IconNoPhoto from "../../components/Icons/IconNoPhoto";
 import InvalidContent from "../../components/InvalidContent";
-import SizeTable from "../../components/SizeTable";
+import SizeTable from "../../components/SizeTableModal";
 import {sizeUpdater, sizeCleanup} from "../../redux/counter/selectedSizeSlice";
 import {RootState} from "../../redux/configureStore";
 import {changeItemsCount} from "../../redux/counter/responseSlice";
