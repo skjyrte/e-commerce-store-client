@@ -10,8 +10,6 @@ type Props = {
 };
 
 const SizeButton: FC<Props> = ({onClick, currentSize, avaiableItems}) => {
-  console.log("currentSize");
-  console.log(currentSize);
   const displayStockInfo = (() => {
     if (avaiableItems !== undefined && avaiableItems < 3 && avaiableItems > 0) {
       return {

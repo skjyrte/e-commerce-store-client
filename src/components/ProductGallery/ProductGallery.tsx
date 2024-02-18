@@ -41,8 +41,6 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
     );
   });
 
-  console.log(thumbnailArray);
-
   const thumbnailSettings = {
     thumbnailWidth: 100,
     /* container MUST have exactly 'thumbnailCountPerView' width */

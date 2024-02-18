@@ -19,6 +19,7 @@ import SizeTable from "../../components/SizeTableModal";
 import {sizeUpdater, sizeCleanup} from "../../redux/counter/selectedSizeSlice";
 import {RootState} from "../../redux/configureStore";
 import {changeItemsCount} from "../../redux/counter/responseSlice";
+import {addToCart} from "../../redux/counter/cartSlice";
 
 interface Props {}
 
@@ -40,8 +41,6 @@ const ProductView: FC<Props> = ({}) => {
     const defaultSizeObject = selectedProduct.result.stock.find(
       (product) => product.count > 0
     );
-    console.log("defaultSizeObject");
-    console.log(defaultSizeObject);
     {
       dispatch(
         sizeUpdater({size: selectedSize, defaultSizeObject: defaultSizeObject})
@@ -75,8 +74,15 @@ const ProductView: FC<Props> = ({}) => {
     if (productId !== undefined && selectedSize !== null) {
       dispatch(
         changeItemsCount({
-          currentProductId: productId,
-          currentSize: selectedSize,
+          id: productId,
+          size: selectedSize,
+          changeBy: changeBy,
+        })
+      );
+      dispatch(
+        addToCart({
+          id: productId,
+          size: selectedSize,
           changeBy: changeBy,
         })
       );

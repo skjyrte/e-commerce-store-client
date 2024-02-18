@@ -15,7 +15,7 @@ const CategoryView: FC = () => {
   const products = useSelector(selectProductsByCategory);
 
   const categoryContent = products.map((obj: Product) => (
-    <Link className={css.linkWrapper} to={obj.id.toString()}>
+    <Link key={obj.id} className={css.linkWrapper} to={obj.id.toString()}>
       <CategoryThumbnail product={obj} />
     </Link>
   ));

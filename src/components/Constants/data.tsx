@@ -2,7 +2,7 @@ export const databaseProducts = {
   products: [
     {
       //1
-      id: "45275be4-fabf-4920-876d-cf7e4dafc8e5",
+      id: "1f799015-281a-45a5-bbe8-69a4b54a9feb",
       gender: "women",
       category: "sneaker-shoes",
       brand: "InnoNex Solutions",
@@ -52,7 +52,7 @@ export const databaseProducts = {
     },
     {
       //1
-      id: "dd4e1d58-1cc6-4928-b9c5-5960ce6e3ca7",
+      id: "7883b867-647f-46c6-899f-68c1b46bb151",
       gender: "men",
       category: "sneaker-shoes",
       brand: "InnoNex Solutions",
@@ -102,7 +102,7 @@ export const databaseProducts = {
     },
     {
       //2
-      id: "54ce53ca-a943-4480-8cc9-cdb1c7304ac1",
+      id: "88768b4c-e9bf-4765-b20f-5089b72179f8",
       gender: "men",
       category: "sneaker-shoes",
       brand: "QuantumSynth Innovations",
@@ -145,7 +145,7 @@ export const databaseProducts = {
     },
     {
       //3
-      id: "37b31dce-d70e-4ed4-9057-cc52764036a3",
+      id: "f79ae645-ed78-4d9a-9764-a637bb13b713",
       gender: "men",
       category: "sneaker-shoes",
       brand: "QuantumSynth Innovations",
@@ -191,7 +191,7 @@ export const databaseProducts = {
     },
     {
       //4
-      id: "40804b7e-5a60-4cd9-b8fd-a7a59b863edd",
+      id: "820418a1-423e-46b1-bb42-402c07617b5e",
       gender: "men",
       category: "sneaker-shoes",
       brand: "QuantumSynth Innovations",
@@ -240,7 +240,7 @@ export const databaseProducts = {
     },
     {
       //5
-      id: "1eed0b7c-aba6-4b42-806a-6d3dccb17078",
+      id: "46f5c3d2-75e5-4047-8c0c-66cd7b92ac68",
       gender: "men",
       category: "sneaker-shoes",
       brand: "SoleSynergy",
@@ -294,7 +294,7 @@ export const databaseProducts = {
     },
     {
       //6
-      id: "39b39b66-1777-4167-8ffc-6e3bf7424d5c",
+      id: "c5314001-c804-4774-8b19-d24543d00ed7",
       gender: "men",
       category: "sneaker-shoes",
       brand: "SoleSynergy",
@@ -348,7 +348,7 @@ export const databaseProducts = {
     },
     {
       //7
-      id: "a9ee2f6f-6862-4ee6-80e8-78dc76d91e8a",
+      id: "bc92789a-ba8e-4724-bde3-5e950a55b3f8",
       gender: "men",
       category: "sneaker-shoes",
       brand: "SoleSynergy",
@@ -401,7 +401,7 @@ export const databaseProducts = {
     },
     {
       //8
-      id: "65ed8f91-4110-47c9-95ba-e1dacb4d65c3",
+      id: "1db5a1ed-9e8b-4f49-9992-77f97bb0420c",
       gender: "men",
       category: "sneaker-shoes",
       brand: "EphemeralEleganceFootwearEmporium",
@@ -448,7 +448,7 @@ export const databaseProducts = {
     },
     {
       //9
-      id: "f21dadf3-4211-41ef-880c-78355a2aadb2",
+      id: "c0beaa60-4970-4680-b3de-d3243065efbb",
       gender: "men",
       category: "sneaker-shoes",
       brand: "EphemeralEleganceFootwearEmporium",
@@ -494,7 +494,7 @@ export const databaseProducts = {
     },
     {
       //10
-      id: "adb22aea-7aed-4fc4-9987-74b578752616",
+      id: "9263eb25-0200-425d-a66b-b386943e2409",
       gender: "men",
       category: "sneaker-shoes",
       brand: "EphemeralEleganceFootwearEmporium",
@@ -536,7 +536,7 @@ export const databaseProducts = {
     },
     {
       //11
-      id: "11bb558c-01e7-4e77-8fbb-0a43aaad897b",
+      id: "c578ffb4-f1f2-4b1c-bc86-77f0d648794c",
       gender: "men",
       category: "sneaker-shoes",
       brand: "EphemeralEleganceFootwearEmporium",
@@ -580,7 +580,7 @@ export const databaseProducts = {
     },
     {
       //12
-      id: "5b1f0176-7c22-4d7f-8987-8d936e329fdb",
+      id: "58a82bd2-5252-4d17-a7ab-64f3ce60cd6e",
       gender: "men",
       category: "sneaker-shoes",
       brand: "Stride_Craft",
@@ -638,7 +638,7 @@ export const databaseProducts = {
     },
     {
       //13
-      id: "b4e02915-21aa-4ac4-b4d3-6b5969fef988",
+      id: "bd731593-91eb-4c20-bfc5-95ba166aebc8",
       gender: "men",
       category: "sneaker-shoes",
       brand: "Stride_Craft",
@@ -692,7 +692,7 @@ export const databaseProducts = {
     },
     {
       //14
-      id: "ce131118-7fa6-4243-9b05-d5a56db632a0",
+      id: "7e233c74-fe93-40f3-9557-f800380fa6e3",
       gender: "men",
       category: "sneaker-shoes",
       brand: "Stride_Craft",
@@ -748,7 +748,7 @@ export const databaseProducts = {
     },
     {
       //15
-      id: "9cca4a09-42c1-412b-b2a8-afdcc5d374cb",
+      id: "5b89fb8f-22ba-4b6d-80e1-37b1a4aa9759",
       gender: "men",
       category: "sneaker-shoes",
       brand: "PinnaclePeds",
@@ -794,7 +794,7 @@ export const databaseProducts = {
     },
     {
       //16
-      id: "46c9e4f2-90f8-4529-b004-fb32d44fff18",
+      id: "c39b1e57-3e5a-444e-8575-cc0778a210c9",
       gender: "men",
       category: "sneaker-shoes",
       brand: "PinnaclePeds",
@@ -841,7 +841,7 @@ export const databaseProducts = {
     },
     {
       //17
-      id: "46c9e4f2-90f8-4529-b124-fb32d44fff18",
+      id: "ffb07f7b-bf80-4e79-ae0d-6b1f5a8b8ec6",
       gender: "men",
       category: "sneaker-shoes",
       brand: "PinnaclePeds",

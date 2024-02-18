@@ -16,11 +16,10 @@ const PortalModal: FC<Props> = ({
   if (!visible) {
     return null;
   }
-
+  /* 
   useEffect(() => {
     if (lockBodyScroll === true) {
       document.body.style.overflow = "hidden";
-    } else {
     }
     return () => {
       if (lockBodyScroll === true) {
@@ -29,7 +28,7 @@ const PortalModal: FC<Props> = ({
       }
     };
   });
-
+ */
   return createPortal(
     <div className={css.portal}>{children}</div>,
     document.getElementById("root") as HTMLDivElement

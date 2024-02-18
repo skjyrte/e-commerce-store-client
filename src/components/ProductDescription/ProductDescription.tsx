@@ -57,8 +57,6 @@ const ProductDescription: FC<Props> = ({
       ? true
       : false;
 
-  console.log(avaiableItems);
-
   useEffect(() => {
     if (avaiableItems === 0 || currentSize === null) {
       setItemsCount(0);
@@ -104,7 +102,6 @@ const ProductDescription: FC<Props> = ({
           displayedText="🛒 Add to cart 🛒"
           classProp={["addToCart"]}
           onClick={() => {
-            console.log("logged");
             onAddToBasket(itemsCount);
           }}
           isDisabled={addToCartButtonDisabledCheck}
