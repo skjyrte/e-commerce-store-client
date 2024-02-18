@@ -31,6 +31,32 @@ export const selectCurrentProduct = createSelector(
 );
 
 export const selectCartItems = createSelector(
+  (state: RootState) => state.cart,
+  (state: RootState) => state.response.value.products,
+  (cart, products) => {
+    if (cart.value !== null) {
+      const itemCount = cart.value.reduce(
+        (accumulator, product) => accumulator + product.count,
+        0
+      );
+
+      const cartItemsWithResponseData = cart.value.map((product) => {
+        const additionalData = products.find(
+          (responseProduct) => responseProduct.id === product.id
+        );
+        if (additionalData !== undefined) {
+          return {...product, additionalData: additionalData};
+        } else return {...product, additionalData: null};
+      });
+
+      return {value: [...cartItemsWithResponseData], itemCount: itemCount};
+    } else {
+      return {value: null, itemCount: 0};
+    }
+  }
+);
+
+/* export const selectCartItems = createSelector(
   (state: RootState) => state,
   (state) => {
     if (state.cart.value !== null) {
@@ -44,3 +70,4 @@ export const selectCartItems = createSelector(
     }
   }
 );
+ */

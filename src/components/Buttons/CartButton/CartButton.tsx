@@ -12,9 +12,9 @@ type Props = {};
 const CartButton: FC<Props> = ({}) => {
   const [cartModalVisible, setCartModalVisible] = useState(false);
 
-  const getCartItems = useSelector(selectCartItems);
-  console.log("getCartItems");
-  console.log(getCartItems);
+  const cartItems = useSelector(selectCartItems);
+  console.log("cartItems");
+  console.log(cartItems);
 
   const onCartClick = () => {
     setCartModalVisible((prevState) => !prevState);
@@ -31,13 +31,17 @@ const CartButton: FC<Props> = ({}) => {
         cartModalVisible === true ? css.cartOpened : ""
       )}
     >
-      {renderItemsCountSticker(getCartItems.itemCount)}
+      {renderItemsCountSticker(cartItems.itemCount)}
       <IconButton
         IconComponent={IconCart}
         onClick={onCartClick}
         buttonClass={["cartButton"]}
       />
-      {cartModalVisible === true ? <CartModal onClick={onCartClick} /> : <></>}
+      {cartModalVisible === true ? (
+        <CartModal onClick={onCartClick} cartItems={cartItems} />
+      ) : (
+        <></>
+      )}
     </div>
   );
 };
