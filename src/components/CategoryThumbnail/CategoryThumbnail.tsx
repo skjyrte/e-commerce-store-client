@@ -68,17 +68,13 @@ const CategoryThumbnail: FC<Props> = ({
             src={thumbnail}
           />
         </div>
-        <div className={classNames(css.brand, css.rowFlexContainer)}>
-          {brand}
-        </div>
-        <div className={classNames(css.model, css.rowFlexContainer)}>
-          {model}
-        </div>
-        <div className={classNames(css.priceBox, css.rowFlexContainer)}>
-          <div className={classNames(css.price, css.rowFlexContainer)}>
+        <div className={classNames(css.brand, css.rowContainer)}>{brand}</div>
+        <div className={classNames(css.model, css.rowContainer)}>{model}</div>
+        <div className={classNames(css.priceBox, css.rowContainer)}>
+          <div className={classNames(css.price, css.rowContainer)}>
             ${price.toFixed(2)}
           </div>
-          <div className={classNames(css.initialPrice, css.rowFlexContainer)}>
+          <div className={classNames(css.initialPrice, css.rowContainer)}>
             ${initialPrice.toFixed(2)}
           </div>
         </div>

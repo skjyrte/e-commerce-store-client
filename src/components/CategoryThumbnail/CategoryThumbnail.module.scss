@@ -35,22 +35,32 @@
   }
 }
 
-.rowFlexContainer {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.rowContainer {
   margin: auto;
+  width: 100%;
+  padding: 0 30px;
+  text-align: center;
+
   &.brand {
     margin: 5px auto;
     font-size: 16px;
     font-variation-settings:
       "wght" 600,
       "YOPQ" 300;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  &.priceBox {
+    display: flex;
   }
   &.model {
     color: gray;
     margin: 5px auto;
-    font-size: 16px;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   &.price {
     margin: 5px auto;

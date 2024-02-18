@@ -32,6 +32,7 @@
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
+  width: 100%;
 }
 .boldChildBox {
   font-size: 12px;
@@ -44,10 +45,19 @@
     "YOPQ" 300;
 }
 .companyProdNameBox {
+  width: 110px;
 }
 .company {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .productName {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .price {
   font-size: 16px;

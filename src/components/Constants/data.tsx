@@ -404,7 +404,7 @@ export const databaseProducts = {
       id: "1db5a1ed-9e8b-4f49-9992-77f97bb0420c",
       gender: "men",
       category: "sneaker-shoes",
-      brand: "EphemeralEleganceFootwearEmporium",
+      brand: "EphemeralElegance FootwearEmporium",
       model: "SereneSpectra",
       shortDescription:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Deserunt quasi nulla recusandae doloribus facilis doloremque similique, quam reprehenderit.",
@@ -451,8 +451,8 @@ export const databaseProducts = {
       id: "c0beaa60-4970-4680-b3de-d3243065efbb",
       gender: "men",
       category: "sneaker-shoes",
-      brand: "EphemeralEleganceFootwearEmporium",
-      model: "QuantumQuillbyEphemeralEleganceFootwearEmporium",
+      brand: "EphemeralElegance FootwearEmporium",
+      model: "QuantumQuill by Ephemeral Elegance FootwearEmporium",
       shortDescription:
         "Lorem, ipsum dolor sit amet consectetur adipisicing elit. Dolores laboriosam blanditiis officiis vero rem ipsa aspernatur eum id deserunt dolorem!",
       description:
@@ -497,7 +497,7 @@ export const databaseProducts = {
       id: "9263eb25-0200-425d-a66b-b386943e2409",
       gender: "men",
       category: "sneaker-shoes",
-      brand: "EphemeralEleganceFootwearEmporium",
+      brand: "EphemeralElegance FootwearEmporium",
       model: "NebulaNectar",
       shortDescription:
         "Lorem ipsum dolor sit, amet consectetur adipisicing elit. Placeat enim, id, nobis nam non odio, recusandae eos alias quae incidunt fugit laboriosam!",
@@ -539,7 +539,7 @@ export const databaseProducts = {
       id: "c578ffb4-f1f2-4b1c-bc86-77f0d648794c",
       gender: "men",
       category: "sneaker-shoes",
-      brand: "EphemeralEleganceFootwearEmporium",
+      brand: "EphemeralElegance FootwearEmporium",
       model: "VerveVortex",
       shortDescription:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Adipisci rerum magnam quibusdam, sint magni veritatis dolorum officia voluptatem ipsa? Alias obcaecati officia natus temporibus!",
@@ -584,8 +584,7 @@ export const databaseProducts = {
       gender: "men",
       category: "sneaker-shoes",
       brand: "Stride_Craft",
-      model:
-        "EchoEnigmabyStride_Craftmodel2000 long long long long long long long modelname",
+      model: "EchoEnigmabyStride Craftmodel2000",
       shortDescription:
         "Lorem ipsum dolor sit amet consectetur adipisicing elit. Nostrum reiciendis sunt sapiente quia sequi possimus recusandae cupiditate totam, dolorem exercitationem! Autem minus dolore nobis provident quae!",
       description:
