@@ -29,3 +29,18 @@ export const selectCurrentProduct = createSelector(
     }
   }
 );
+
+export const selectCartItems = createSelector(
+  (state: RootState) => state,
+  (state) => {
+    if (state.cart.value !== null) {
+      const itemCount = state.cart.value.reduce(
+        (accumulator, product) => accumulator + product.count,
+        0
+      );
+      return {value: state.cart.value, itemCount: itemCount};
+    } else {
+      return {value: null, itemCount: 0};
+    }
+  }
+);

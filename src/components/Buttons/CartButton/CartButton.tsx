@@ -4,11 +4,17 @@ import classNames from "classnames";
 import IconButton from "../IconButton";
 import IconCart from "../../Icons/IconCart";
 import CartModal from "../../CartModal";
+import {useSelector} from "react-redux";
+import {selectCartItems} from "../../../redux/selectors";
 
 type Props = {};
 
 const CartButton: FC<Props> = ({}) => {
   const [cartModalVisible, setCartModalVisible] = useState(false);
+
+  const getCartItems = useSelector(selectCartItems);
+  console.log("getCartItems");
+  console.log(getCartItems);
 
   const onCartClick = () => {
     setCartModalVisible((prevState) => !prevState);
@@ -25,13 +31,13 @@ const CartButton: FC<Props> = ({}) => {
         cartModalVisible === true ? css.cartOpened : ""
       )}
     >
-      {renderItemsCountSticker(123)}
+      {renderItemsCountSticker(getCartItems.itemCount)}
       <IconButton
         IconComponent={IconCart}
         onClick={onCartClick}
         buttonClass={["cartButton"]}
       />
-      {cartModalVisible === true ? <CartModal /> : <></>}
+      {cartModalVisible === true ? <CartModal onClick={onCartClick} /> : <></>}
     </div>
   );
 };
