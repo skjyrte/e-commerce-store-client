@@ -55,4 +55,8 @@
     transition: filter 0.2s;
     filter: invert(75%);
   }
+  &.cart {
+    width: 100%;
+    text-align: center;
+  }
 }

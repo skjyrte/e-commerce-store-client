@@ -3,6 +3,7 @@ import css from "./CartModal.module.scss";
 import {Link} from "react-router-dom";
 import CartThumbnail from "../CartThumbnail";
 import CartFooter from "../CartFooter";
+import classNames from "classnames";
 
 type CartProductEntryWithData = {
   id: string;
@@ -31,7 +32,7 @@ const CartModal: FC<Props> = (props) => {
         />
       ));
     } else {
-      return <div>invalid data</div>;
+      return <div></div>;
     }
   };
 
@@ -46,7 +47,7 @@ const CartModal: FC<Props> = (props) => {
       }, 0);
       return <CartFooter shippingTotal={total} costTotal={0} />;
     } else {
-      return <div>invalid data</div>;
+      return <div></div>;
     }
   };
 
@@ -62,12 +63,25 @@ const CartModal: FC<Props> = (props) => {
     );
   };
 
-  return (
-    <div className={css.cartModalWrapper}>
-      {cartItems.itemCount === 0 ? renderEmptyCart() : renderCartList()}
-      {renderCartFooter()}
-    </div>
-  );
+  if (cartItems.itemCount > 0) {
+    return (
+      <>
+        <div className={css.cartModalWrapper}>
+          {renderCartList()}
+          {renderCartFooter()}
+          <Link
+            onClick={() => console.log("cart")}
+            className={classNames(css.linkElement, css.cart)}
+            to="/cart"
+          >
+            View cart
+          </Link>
+        </div>
+      </>
+    );
+  } else {
+    return <div className={css.cartModalWrapper}>{renderEmptyCart()}</div>;
+  }
 };
 
 export default CartModal;
