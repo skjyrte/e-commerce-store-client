@@ -29,7 +29,7 @@ const CartModal: FC<Props> = (props) => {
     if (cartItems.value !== null) {
       return cartItems.value.map((productInCart) => (
         <CartThumbnail
-          onClick={() => {}}
+          onClick={onClick}
           cartProductEntryWithData={productInCart}
         />
       ));

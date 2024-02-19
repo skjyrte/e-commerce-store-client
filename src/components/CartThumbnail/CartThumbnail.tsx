@@ -38,7 +38,7 @@ const CartThumbnail: FC<Props> = (props) => {
         key={cartProductEntryWithData.id}
         onClick={onClick}
         className={css.cartProduct}
-        to="/home"
+        to={`/${data.gender}/${data.id}`}
       >
         <div className={css.cartProductThumbnail}>
           <img className={classNames()} src={getTempThumbnail()} />

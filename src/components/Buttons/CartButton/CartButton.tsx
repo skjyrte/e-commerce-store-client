@@ -13,8 +13,6 @@ const CartButton: FC<Props> = ({}) => {
   const [cartModalVisible, setCartModalVisible] = useState(false);
 
   const cartItems = useSelector(selectCartItems);
-  console.log("cartItems");
-  console.log(cartItems);
 
   const onCartClick = () => {
     setCartModalVisible((prevState) => !prevState);
