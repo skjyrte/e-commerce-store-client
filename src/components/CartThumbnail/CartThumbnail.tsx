@@ -33,6 +33,9 @@ const CartThumbnail: FC<Props> = (props) => {
       </div>
     );
   } else {
+    const subtotal = (
+      Math.round(data.price * cartProductEntryWithData.count * 100) / 100
+    ).toFixed(2);
     return (
       <Link
         key={cartProductEntryWithData.id}
@@ -49,7 +52,7 @@ const CartThumbnail: FC<Props> = (props) => {
               <div className={css.company}>{data.brand}</div>
               <div className={css.productName}>{data.model}</div>
             </div>
-            <div className={css.price}>${data.price}</div>
+            <div className={css.price}>${subtotal}</div>
           </div>
           <div className={css.shadedChildBox}>
             <div className={css.productSize}>

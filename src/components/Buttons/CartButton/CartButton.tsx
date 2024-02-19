@@ -43,7 +43,10 @@ const CartButton: FC<Props> = ({}) => {
         buttonClass={["cartButton"]}
       />
       {cartModalVisible === true ? (
-        <CartModal onClick={onCartClick} cartItems={cartItems} />
+        <>
+          <div className={css.hideBorderBox}></div>
+          <CartModal onClick={onCartClick} cartItems={cartItems} />
+        </>
       ) : (
         <></>
       )}

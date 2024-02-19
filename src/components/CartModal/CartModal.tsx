@@ -1,8 +1,8 @@
 import {FC} from "react";
 import css from "./CartModal.module.scss";
 import {Link} from "react-router-dom";
-import classNames from "classnames";
 import CartThumbnail from "../CartThumbnail";
+import CartFooter from "../CartFooter";
 
 type CartProductEntryWithData = {
   id: string;
@@ -22,9 +22,6 @@ type Props = {
 const CartModal: FC<Props> = (props) => {
   const {onClick, cartItems} = props;
 
-  console.log("cartItems");
-  console.log(cartItems);
-
   const renderCartList = () => {
     if (cartItems.value !== null) {
       return cartItems.value.map((productInCart) => (
@@ -34,7 +31,22 @@ const CartModal: FC<Props> = (props) => {
         />
       ));
     } else {
-      return <div>abcd</div>;
+      return <div>invalid data</div>;
+    }
+  };
+
+  const renderCartFooter = () => {
+    if (cartItems.value !== null && cartItems.value) {
+      const total = cartItems.value.reduce((accumulator, product) => {
+        if (product.additionalData !== null) {
+          return product.additionalData.price * product.count + accumulator;
+        } else {
+          throw new Error("subtotal error");
+        }
+      }, 0);
+      return <CartFooter shippingTotal={total} costTotal={0} />;
+    } else {
+      return <div>invalid data</div>;
     }
   };
 
@@ -52,8 +64,8 @@ const CartModal: FC<Props> = (props) => {
 
   return (
     <div className={css.cartModalWrapper}>
-      <div className={css.hideBorderBox}></div>
       {cartItems.itemCount === 0 ? renderEmptyCart() : renderCartList()}
+      {renderCartFooter()}
     </div>
   );
 };

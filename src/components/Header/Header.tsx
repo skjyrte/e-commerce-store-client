@@ -1,9 +1,9 @@
 import {FC} from "react";
 import css from "./Header.module.scss";
 import TextLinkElement from "../LinkElements/TextLinkElement";
-import ImageButton from "../Buttons/ImageButton";
-import avatar from "../../images/image-avatar.png";
+import IconButton from "../Buttons/IconButton";
 import CartButton from "../Buttons/CartButton";
+import IconUserProfile from "../Icons/IconUserProfile";
 
 const Header: FC = ({}) => {
   return (
@@ -55,7 +55,11 @@ const Header: FC = ({}) => {
           {cartModalVisible === true ? <CartModal /> : <></>}
         </div> */}
         <div className={css.imageButtonWrapper}>
-          <ImageButton image={avatar} />
+          <IconButton
+            IconComponent={IconUserProfile}
+            onClick={() => console.log("user profile")}
+            buttonClass={["profileButton"]}
+          />
         </div>
       </div>
     </>

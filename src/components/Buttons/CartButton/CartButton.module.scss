@@ -35,3 +35,13 @@
     "wght" 600,
     "YOPQ" 300;
 }
+
+.hideBorderBox {
+  position: absolute;
+  z-index: 2;
+  height: 2px;
+  width: 56px;
+  background-color: white;
+  bottom: -2px;
+  right: 0;
+}

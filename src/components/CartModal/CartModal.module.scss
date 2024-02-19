@@ -10,16 +10,17 @@
   border: 2px solid gray;
   padding: 10px;
   transition: all 2s /*  ease-out */;
+  overflow-y: scroll;
+  max-height: 500px;
 }
 
-.hideBorderBox {
-  position: absolute;
-  z-index: 1;
-  height: 2px;
-  width: 56px;
-  background-color: white;
-  top: -2px;
-  right: 0;
+.cartModalWrapper::-webkit-scrollbar {
+  display: none;
+}
+
+.cartModalWrapper {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
 }
 
 .emptyCart {
