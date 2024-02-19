@@ -14,8 +14,13 @@ const CartButton: FC<Props> = ({}) => {
 
   const cartItems = useSelector(selectCartItems);
 
-  const onCartClick = () => {
-    setCartModalVisible((prevState) => !prevState);
+  const onCartClick = () => {};
+
+  const onMouseOver = () => {
+    setCartModalVisible(true);
+  };
+  const onMouseOut = () => {
+    setCartModalVisible(false);
   };
 
   const renderItemsCountSticker = (itemsCount: number) => {
@@ -28,6 +33,8 @@ const CartButton: FC<Props> = ({}) => {
         css.cartButtonWrapper,
         cartModalVisible === true ? css.cartOpened : ""
       )}
+      onMouseOver={onMouseOver}
+      onMouseOut={onMouseOut}
     >
       {renderItemsCountSticker(cartItems.itemCount)}
       <IconButton
