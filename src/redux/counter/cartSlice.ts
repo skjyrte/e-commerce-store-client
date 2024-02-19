@@ -24,6 +24,8 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<Payload>) => {
+      console.log("action");
+      console.log(action);
       if (state.value !== null) {
         const existingProduct = state.value.find(
           (product) =>
@@ -31,9 +33,12 @@ const cartSlice = createSlice({
             product.size === action.payload.size
         );
         //modify existing product
-        if (existingProduct) {
+        if (existingProduct !== undefined) {
           state.value = state.value.map((product) => {
-            if (product.id === action.payload.id) {
+            if (
+              product.id === action.payload.id &&
+              product.size === action.payload.size
+            ) {
               return {
                 ...product,
                 count: product.count + action.payload.changeBy,
