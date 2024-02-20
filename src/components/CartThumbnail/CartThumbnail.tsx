@@ -38,7 +38,6 @@ const CartThumbnail: FC<Props> = (props) => {
     ).toFixed(2);
     return (
       <Link
-        key={cartProductEntryWithData.id}
         onClick={onClick}
         className={css.cartProduct}
         to={`/${data.gender}/${data.id}`}

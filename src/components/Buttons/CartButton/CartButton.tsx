@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, useState, useEffect} from "react";
 import css from "./CartButton.module.scss";
 import classNames from "classnames";
 import IconButton from "../IconButton";
@@ -26,6 +26,10 @@ const CartButton: FC<Props> = ({}) => {
   const renderItemsCountSticker = (itemsCount: number) => {
     return <div className={css.itemCountSticker}>{itemsCount}</div>;
   };
+
+  useEffect(() => {
+    setCartModalVisible(true);
+  }, [cartItems]);
 
   return (
     <div

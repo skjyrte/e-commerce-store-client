@@ -25,12 +25,17 @@ const CartModal: FC<Props> = (props) => {
 
   const renderCartList = () => {
     if (cartItems.value !== null) {
-      return cartItems.value.map((productInCart) => (
-        <CartThumbnail
-          onClick={onClick}
-          cartProductEntryWithData={productInCart}
-        />
-      ));
+      return (
+        <div className={css.cartOverflowContainer}>
+          {cartItems.value.map((productInCart) => (
+            <CartThumbnail
+              onClick={onClick}
+              cartProductEntryWithData={productInCart}
+              key={`${productInCart.id}__${productInCart.size}`}
+            />
+          ))}
+        </div>
+      );
     } else {
       return <div></div>;
     }
@@ -45,7 +50,7 @@ const CartModal: FC<Props> = (props) => {
           throw new Error("subtotal error");
         }
       }, 0);
-      return <CartFooter shippingTotal={total} costTotal={0} />;
+      return <CartFooter shippingTotal={0} costTotal={total} />;
     } else {
       return <div></div>;
     }
