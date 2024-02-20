@@ -2,7 +2,7 @@ import {FC} from "react";
 import css from "./CartView.module.scss";
 import {useSelector} from "react-redux";
 import {selectCartItems} from "../../redux/selectors";
-import CartThumbnail from "../../components/CartThumbnail";
+import CartThumbnailLarge from "../../components/CartThumbnailLarge";
 
 const CartView: FC = () => {
   const cartItems = useSelector(selectCartItems);
@@ -12,12 +12,11 @@ const CartView: FC = () => {
       return (
         <div className={css.cartOverflowContainer}>
           {cartItems.value.map((productInCart) => (
-            <CartThumbnail
+            <CartThumbnailLarge
               onClick={() => {
                 1;
               }}
               cartProductEntryWithData={productInCart}
-              componentType="main"
               key={`${productInCart.id}__${productInCart.size}`}
             />
           ))}

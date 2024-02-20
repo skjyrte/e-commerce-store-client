@@ -31,7 +31,6 @@ const CartModal: FC<Props> = (props) => {
             <CartThumbnail
               onClick={onClick}
               cartProductEntryWithData={productInCart}
-              componentType="modal"
               key={`${productInCart.id}__${productInCart.size}`}
             />
           ))}

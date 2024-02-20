@@ -1,0 +1,123 @@
+.CartThumbnailLarge {
+  color: red;
+  background-color: white;
+  display: flex;
+  border: 2px solid whitesmoke;
+  height: 120px;
+  justify-content: start;
+  align-items: center;
+  border-radius: 5px;
+  padding: 10px;
+  font-family: inherit;
+  text-decoration: none;
+}
+
+.cartProductThumbnail {
+  display: flex;
+  height: 100%;
+  width: auto;
+  margin: 10px;
+  background-color: pink;
+  & > img {
+    width: auto;
+    height: 100%;
+  }
+}
+.cartProduct {
+  &:hover {
+    transition: filter 0.2s;
+    filter: invert(75%);
+  }
+  &:active {
+    filter: invert(25%);
+  }
+}
+.textBox {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+.boldChildBox {
+  font-size: 14px;
+  display: flex;
+  color: black;
+  justify-content: space-between;
+  letter-spacing: 0.2rem;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
+}
+.companyProdNameBox {
+  max-width: 400px;
+}
+.company {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.productName {
+  width: 100%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.shadedChildBox {
+  font-size: 12px;
+  color: gray;
+  letter-spacing: unset;
+  font-variation-settings:
+    "wght" 400,
+    "YOPQ" 200;
+}
+.productSize {
+  font-size: 13px;
+  padding: 5px 0;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
+}
+.productCount {
+}
+
+.prodNo {
+  text-transform: uppercase;
+}
+
+.gender {
+  text-transform: capitalize;
+}
+
+.actionBox {
+  color: black;
+  display: flex;
+  flex-direction: column;
+  min-width: 120px;
+  justify-content: space-between;
+  height: 100%;
+  align-items: end;
+}
+
+.price {
+  font-size: 24px;
+}
+
+.buttonGroupWrapper {
+  display: flex;
+}
+
+.itemsCount {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 40px;
+  height: 35px;
+  background-color: hsl(45, 100%, 95%);
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 200;
+  font-size: 24px;
+}

@@ -13,11 +13,10 @@ type CartProductEntryWithData = {
 type Props = {
   onClick: () => void;
   cartProductEntryWithData: CartProductEntryWithData;
-  componentType: "modal" | "main";
 };
 
 const CartThumbnail: FC<Props> = (props) => {
-  const {onClick, cartProductEntryWithData, componentType} = props;
+  const {onClick, cartProductEntryWithData} = props;
 
   const data = cartProductEntryWithData.additionalData;
 

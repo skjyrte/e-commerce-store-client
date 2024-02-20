@@ -18,9 +18,17 @@
   align-items: center;
   border: 1px solid rgb(212, 212, 212);
   margin: 0;
+  padding-bottom: 8px;
   background-color: orange;
   &:disabled {
     background-color: wheat;
+  }
+  &.cart {
+    border: none;
+    background-color: unset;
+    color: black;
+    width: 35px;
+    height: 35px;
   }
 }
 
