@@ -13,14 +13,15 @@ type CartProductEntryWithData = {
 type Props = {
   onClick: () => void;
   cartProductEntryWithData: CartProductEntryWithData;
+  componentType: "modal" | "main";
 };
 
 const CartThumbnail: FC<Props> = (props) => {
-  const {onClick, cartProductEntryWithData} = props;
+  const {onClick, cartProductEntryWithData, componentType} = props;
 
   const data = cartProductEntryWithData.additionalData;
 
-  const getTempThumbnail = () => {
+  const getThumbnail = () => {
     if (data !== null) {
       return data.thumbnail;
     }
@@ -43,7 +44,7 @@ const CartThumbnail: FC<Props> = (props) => {
         to={`/${data.gender}/${data.id}`}
       >
         <div className={css.cartProductThumbnail}>
-          <img className={classNames()} src={getTempThumbnail()} />
+          <img className={classNames()} src={getThumbnail()} />
         </div>
         <div className={css.textBox}>
           <div className={css.boldChildBox}>

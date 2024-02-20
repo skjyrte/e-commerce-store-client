@@ -6,6 +6,7 @@ import {HashRouter, Route, Routes, Navigate} from "react-router-dom";
 import ProductView from "../../views/ProductView";
 import CategoryView from "../../views/CategoryView";
 import InvalidPageView from "../../views/InvalidPageView";
+import CartView from "../../views/CartView";
 
 export const ApiResponseContext = createContext<
   (React.Dispatch<React.SetStateAction<ResponseObject>> | ResponseObject)[]
@@ -25,6 +26,7 @@ const AppContainer: FC = ({}) => {
           <Route path="/women/:productId" element={<ProductView />} />
           <Route path="/about" element={<div>about</div>} />
           <Route path="/contact" element={<div>contact</div>} />
+          <Route path="/cart" element={<CartView />} />
           <Route path="/*" element={<InvalidPageView />} />
         </Routes>
       </div>

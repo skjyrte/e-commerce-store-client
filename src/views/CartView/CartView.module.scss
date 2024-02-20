@@ -1,0 +1,36 @@
+.CartView {
+  width: 1000px;
+  border: 1px solid gray;
+  display: flex;
+}
+
+.productBox {
+  min-width: 500px;
+  flex: 1;
+  min-height: 50px;
+  border: 1px solid gray;
+  margin: 10px;
+}
+.header {
+  font-size: 24px;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
+}
+
+.largeCartThumbnailWrapper {
+  width: 100%;
+}
+
+.summaryBox {
+  min-width: 250px;
+  min-height: 50px;
+  border: 1px solid gray;
+  margin: 10px;
+}
+.productCostTotal {
+}
+.deliveryCost {
+}
+.summaryCost {
+}
