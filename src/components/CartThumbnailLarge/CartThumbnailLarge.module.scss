@@ -44,7 +44,7 @@
   display: flex;
   color: black;
   justify-content: space-between;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.05rem;
   font-variation-settings:
     "wght" 600,
     "YOPQ" 300;
@@ -75,16 +75,17 @@
 }
 .productSize {
   font-size: 13px;
+  letter-spacing: 0.05rem;
   padding: 5px 0;
+  color: black;
   font-variation-settings:
-    "wght" 600,
-    "YOPQ" 300;
-}
-.productCount {
+    "wght" 700,
+    "YOPQ" 250;
 }
 
 .prodNo {
   text-transform: uppercase;
+  font-size: 11px;
 }
 
 .gender {
@@ -95,14 +96,26 @@
   color: black;
   display: flex;
   flex-direction: column;
-  min-width: 120px;
+  min-width: 130px;
   justify-content: space-between;
   height: 100%;
   align-items: end;
 }
 
-.price {
-  font-size: 24px;
+.priceBox {
+  text-align: end;
+}
+
+.subtotalPrice {
+  font-size: 22px;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 200;
+}
+.itemPrice {
+  font-size: 11px;
+
+  padding-top: 5px;
 }
 
 .buttonGroupWrapper {
@@ -115,9 +128,8 @@
   align-items: center;
   width: 40px;
   height: 35px;
-  background-color: hsl(45, 100%, 95%);
   font-variation-settings:
     "wght" 600,
     "YOPQ" 200;
-  font-size: 24px;
+  font-size: 20px;
 }

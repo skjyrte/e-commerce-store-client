@@ -30,7 +30,7 @@ const CartView: FC = () => {
   return (
     <div className={css.CartView}>
       <div className={css.productBox}>
-        <div className={css.header}>Cart {`(${6}pcs)`}</div>
+        <div className={css.header}>Cart {`(${cartItems.itemCount}pcs)`}</div>
         <div className={css.largeCartThumbnailWrapper}>{renderCartList()}</div>
       </div>
       <div className={css.summaryBox}>

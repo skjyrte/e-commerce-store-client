@@ -1,14 +1,15 @@
 .CartView {
   width: 1000px;
-  border: 1px solid gray;
+  /*   border: 1px solid gray; */
   display: flex;
 }
 
 .productBox {
+  background-color: white;
   min-width: 500px;
   flex: 1;
   min-height: 50px;
-  border: 1px solid gray;
+  border: 1px solid rgb(216, 216, 216);
   margin: 10px;
 }
 .header {
@@ -16,6 +17,7 @@
   font-variation-settings:
     "wght" 600,
     "YOPQ" 300;
+  padding: 15px;
 }
 
 .largeCartThumbnailWrapper {
@@ -23,14 +25,9 @@
 }
 
 .summaryBox {
+  background-color: white;
   min-width: 250px;
   min-height: 50px;
   border: 1px solid gray;
   margin: 10px;
-}
-.productCostTotal {
-}
-.deliveryCost {
-}
-.summaryCost {
 }

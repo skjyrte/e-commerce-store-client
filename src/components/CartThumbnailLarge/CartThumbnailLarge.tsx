@@ -58,7 +58,7 @@ const CartThumbnailLarge: FC<Props> = (props) => {
           <div className={css.shadedChildBox}>
             <div className={css.additionalInfo}>
               <div className={css.gender}>Gender: {data.gender}</div>
-              <div className={css.prodNo}>Product No: {data.id}</div>
+              <div className={css.prodNo}>Article No: {data.id}</div>
             </div>
             <div className={css.productSize}>
               SIZE {cartProductEntryWithData.size}
@@ -66,8 +66,12 @@ const CartThumbnailLarge: FC<Props> = (props) => {
           </div>
         </div>
         <div className={css.actionBox}>
-          <div className={css.price}>${subtotal}</div>
-
+          <div className={css.priceBox}>
+            <div className={css.subtotalPrice}>${subtotal}</div>
+            <div
+              className={css.itemPrice}
+            >{`Single item price: $${subtotal}`}</div>
+          </div>
           <div className={css.buttonGroupWrapper}>
             <ChangeAmountButton
               displayedText="-"
