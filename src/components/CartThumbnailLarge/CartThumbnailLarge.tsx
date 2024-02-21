@@ -1,8 +1,9 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import css from "./CartThumbnailLarge.module.scss";
 import {Link} from "react-router-dom";
 import classNames from "classnames";
 import ChangeAmountButton from "../Buttons/ChangeAmountButton";
+import GeneralTextButton from "../Buttons/GeneralTextButton";
 
 type CartProductEntryWithData = {
   id: string;
@@ -12,12 +13,17 @@ type CartProductEntryWithData = {
 };
 
 type Props = {
-  onClick: () => void;
+  saveCartHandler: (
+    productId: string,
+    selectedSize: string,
+    changeBy: number
+  ) => void;
   cartProductEntryWithData: CartProductEntryWithData;
 };
 
 const CartThumbnailLarge: FC<Props> = (props) => {
-  const {onClick, cartProductEntryWithData} = props;
+  const {saveCartHandler, cartProductEntryWithData} = props;
+  const [editMode, setEditMode] = useState(false);
 
   const data = cartProductEntryWithData.additionalData;
 
@@ -25,6 +31,23 @@ const CartThumbnailLarge: FC<Props> = (props) => {
     if (data !== null) {
       return data.thumbnail;
     }
+  };
+
+  const onClickSave = () => {
+    saveCartHandler(
+      cartProductEntryWithData.id,
+      cartProductEntryWithData.size,
+      1
+    );
+    setEditMode((prev) => !prev);
+  };
+
+  const onClickDelete = () => {
+    saveCartHandler(
+      cartProductEntryWithData.id,
+      cartProductEntryWithData.size,
+      -1
+    );
   };
 
   if (data === null) {
@@ -44,11 +67,7 @@ const CartThumbnailLarge: FC<Props> = (props) => {
         </div>
         <div className={css.textBox}>
           <div className={css.boldChildBox}>
-            <Link
-              onClick={onClick}
-              className={css.cartProduct}
-              to={`/${data.gender}/${data.id}`}
-            >
+            <Link className={css.cartProduct} to={`/${data.gender}/${data.id}`}>
               <div className={css.companyProdNameBox}>
                 <div className={css.company}>{data.brand}</div>
                 <div className={css.productName}>{data.model}</div>
@@ -72,21 +91,49 @@ const CartThumbnailLarge: FC<Props> = (props) => {
               className={css.itemPrice}
             >{`Single item price: $${subtotal}`}</div>
           </div>
-          <div className={css.buttonGroupWrapper}>
-            <ChangeAmountButton
-              displayedText="-"
-              onClick={() => {}}
-              classProp={["left", "cart"]}
-              isDisabled={false}
-            />
-            <div className={css.itemsCount}>{1}</div>
-            <ChangeAmountButton
-              displayedText="+"
-              onClick={() => {}}
-              classProp={["right", "cart"]}
-              isDisabled={false}
+          <div className={css.deleteBox}>
+            <GeneralTextButton
+              displayedText="DELETE ITEM"
+              classProp={["deleteItems"]}
+              onClick={onClickDelete}
             />
           </div>
+          {editMode === true ? (
+            <div className={css.buttonGroupWrapper}>
+              <GeneralTextButton
+                displayedText="SAVE"
+                classProp={["editItems"]}
+                onClick={onClickSave}
+              />
+              <ChangeAmountButton
+                displayedText="-"
+                onClick={() => {}}
+                classProp={["left", "cart"]}
+                isDisabled={false}
+              />
+              <div className={css.itemsCount}>
+                {cartProductEntryWithData.count}
+              </div>
+              <ChangeAmountButton
+                displayedText="+"
+                onClick={() => {}}
+                classProp={["right", "cart"]}
+                isDisabled={false}
+              />
+            </div>
+          ) : (
+            <div className={css.buttonGroupWrapper}>
+              <div className={css.itemsCountTitle}>Count: </div>
+              <div className={css.itemsCount}>
+                {cartProductEntryWithData.count}
+              </div>
+              <GeneralTextButton
+                displayedText="EDIT"
+                classProp={["editItems"]}
+                onClick={() => setEditMode(true)}
+              />
+            </div>
+          )}
         </div>
       </div>
     );

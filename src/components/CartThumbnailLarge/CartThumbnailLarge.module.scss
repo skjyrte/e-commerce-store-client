@@ -25,8 +25,7 @@
 }
 .cartProduct {
   &:hover {
-    transition: filter 0.2s;
-    filter: invert(75%);
+    text-decoration-line: underline;
   }
   &:active {
     filter: invert(25%);
@@ -120,6 +119,8 @@
 
 .buttonGroupWrapper {
   display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 .itemsCount {
@@ -132,4 +133,8 @@
     "wght" 600,
     "YOPQ" 200;
   font-size: 20px;
+}
+
+.itemsCountTitle {
+  font-size: 12px;
 }

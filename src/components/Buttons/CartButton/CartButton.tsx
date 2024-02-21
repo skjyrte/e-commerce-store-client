@@ -6,11 +6,13 @@ import IconCart from "../../Icons/IconCart";
 import CartModal from "../../CartModal";
 import {useSelector} from "react-redux";
 import {selectCartItems} from "../../../redux/selectors";
+import {useLocation} from "react-router-dom";
 
 type Props = {};
 
 const CartButton: FC<Props> = ({}) => {
   const [cartModalVisible, setCartModalVisible] = useState(false);
+  let location = useLocation();
 
   const cartItems = useSelector(selectCartItems);
 
@@ -28,7 +30,11 @@ const CartButton: FC<Props> = ({}) => {
   };
 
   useEffect(() => {
-    setCartModalVisible(true);
+    console.log("location.pathname");
+    console.log(location.pathname);
+    if (location.pathname !== "/cart") {
+      setCartModalVisible(true);
+    }
   }, [cartItems]);
 
   return (
