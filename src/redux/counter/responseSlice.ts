@@ -24,11 +24,27 @@ const responseSlice = createSlice({
       );
 
       if (currentProduct !== undefined) {
-        const updatedStock = currentProduct.stock.map((sizeObj) =>
-          sizeObj.size === action.payload.size
-            ? {...sizeObj, count: sizeObj.count - action.payload.changeBy}
-            : sizeObj
-        );
+        const updatedStock = currentProduct.stock.map((sizeObj) => {
+          if (sizeObj.size === action.payload.size) {
+            try {
+              if (sizeObj.count - action.payload.changeBy >= 0) {
+                return {
+                  ...sizeObj,
+                  count: sizeObj.count - action.payload.changeBy,
+                };
+              } else {
+                throw new Error(
+                  "user requests more items than in present in stock"
+                );
+              }
+            } catch (e) {
+              console.error(e);
+              return sizeObj;
+            }
+          } else {
+            return sizeObj;
+          }
+        });
 
         const modifiedProducts = state.value.products.map((product) =>
           product.id === action.payload.id
@@ -36,6 +52,8 @@ const responseSlice = createSlice({
             : product
         );
         state.value = {...state.value, products: [...modifiedProducts]};
+      } else {
+        throw new Error("no such product in database");
       }
     },
   },

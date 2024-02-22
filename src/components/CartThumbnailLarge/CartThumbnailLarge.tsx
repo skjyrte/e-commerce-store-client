@@ -4,6 +4,8 @@ import {Link} from "react-router-dom";
 import classNames from "classnames";
 import ChangeAmountButton from "../Buttons/ChangeAmountButton";
 import GeneralTextButton from "../Buttons/GeneralTextButton";
+import {useSelector} from "react-redux";
+import {RootState} from "../../redux/configureStore";
 
 type CartProductEntryWithData = {
   id: string;
@@ -24,8 +26,17 @@ type Props = {
 const CartThumbnailLarge: FC<Props> = (props) => {
   const {saveCartHandler, cartProductEntryWithData} = props;
   const [editMode, setEditMode] = useState(false);
+  const [newQuantity, setNewQuantity] = useState(
+    cartProductEntryWithData.count
+  );
 
   const data = cartProductEntryWithData.additionalData;
+
+  const avaiableItems = useSelector((state: RootState) => {
+    return state.response.value.products.find((product) => {
+      return product.id === cartProductEntryWithData.id;
+    });
+  });
 
   const getThumbnail = () => {
     if (data !== null) {
@@ -33,13 +44,40 @@ const CartThumbnailLarge: FC<Props> = (props) => {
     }
   };
 
+  const onChangeQuantity = (action: "increase" | "decrease") => {
+    console.log("avaiableItems");
+    console.log(avaiableItems);
+    if (avaiableItems !== undefined) {
+      const itemInStock = avaiableItems.stock.find((size) => {
+        return size.size === cartProductEntryWithData.size;
+      })?.count;
+      if (itemInStock !== undefined) {
+        const changeBy = newQuantity - cartProductEntryWithData.count;
+        if (action === "increase" && changeBy < itemInStock) {
+          setNewQuantity((prev) => prev + 1);
+        }
+        if (action === "decrease" && newQuantity > 0) {
+          setNewQuantity((prev) => prev - 1);
+        }
+      }
+    } else {
+      throw new Error("no such product in database");
+    }
+  };
+
+  const onClickEdit = () => {
+    setEditMode(true);
+    setNewQuantity(cartProductEntryWithData.count);
+  };
+
   const onClickSave = () => {
+    const changeBy = newQuantity - cartProductEntryWithData.count;
     saveCartHandler(
       cartProductEntryWithData.id,
       cartProductEntryWithData.size,
-      1
+      changeBy
     );
-    setEditMode((prev) => !prev);
+    setEditMode(false);
   };
 
   const onClickDelete = () => {
@@ -107,16 +145,14 @@ const CartThumbnailLarge: FC<Props> = (props) => {
               />
               <ChangeAmountButton
                 displayedText="-"
-                onClick={() => {}}
+                onClick={() => onChangeQuantity("decrease")}
                 classProp={["left", "cart"]}
                 isDisabled={false}
               />
-              <div className={css.itemsCount}>
-                {cartProductEntryWithData.count}
-              </div>
+              <div className={css.itemsCount}>{newQuantity}</div>
               <ChangeAmountButton
                 displayedText="+"
-                onClick={() => {}}
+                onClick={() => onChangeQuantity("increase")}
                 classProp={["right", "cart"]}
                 isDisabled={false}
               />
@@ -130,7 +166,7 @@ const CartThumbnailLarge: FC<Props> = (props) => {
               <GeneralTextButton
                 displayedText="EDIT"
                 classProp={["editItems"]}
-                onClick={() => setEditMode(true)}
+                onClick={onClickEdit}
               />
             </div>
           )}
