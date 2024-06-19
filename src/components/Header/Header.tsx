@@ -1,9 +1,9 @@
 import {FC} from "react";
 import css from "./Header.module.scss";
 import TextLinkElement from "../LinkElements/TextLinkElement";
-import IconButton from "../Buttons/IconButton";
-import CartButton from "../Buttons/CartButton";
-import IconUserProfile from "../Icons/IconUserProfile";
+import IconButton from "../buttons/IconButton";
+import CartLinkElement from "../LinkElements/CartLinkElement";
+import IconUserProfile from "../icons/IconUserProfile";
 
 const Header: FC = ({}) => {
   return (
@@ -40,20 +40,7 @@ const Header: FC = ({}) => {
         </ul>
 
         <div className={css.header__spacer}></div>
-        <CartButton />
-        {/*         <div
-          className={classNames(
-            css.cartButtonWrapper,
-            cartModalVisible === true ? css.cartOpened : ""
-          )}
-        >
-          <IconButton
-            IconComponent={IconCart}
-            onClick={onCartClick}
-            buttonClass={["cartButton"]}
-          />
-          {cartModalVisible === true ? <CartModal /> : <></>}
-        </div> */}
+        <CartLinkElement />
         <div className={css.imageButtonWrapper}>
           <IconButton
             IconComponent={IconUserProfile}

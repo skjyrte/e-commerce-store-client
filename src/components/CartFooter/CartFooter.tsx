@@ -3,16 +3,16 @@ import css from "./CartFooter.module.scss";
 
 type Props = {
   shippingTotal: number;
-  costTotal: number;
+  subtotal: number;
 };
 
 const CartFooter: FC<Props> = (props) => {
-  const {shippingTotal, costTotal} = props;
+  const {shippingTotal, subtotal} = props;
   const shippingTotalFormatted = (
     Math.round(shippingTotal * 100) / 100
   ).toFixed(2);
 
-  const costTotalFormatted = (Math.round(costTotal * 100) / 100).toFixed(2);
+  const costTotalFormatted = (Math.round(subtotal * 100) / 100).toFixed(2);
   return (
     <div className={css.CartFooter}>
       <div className={css.shippingBox}>

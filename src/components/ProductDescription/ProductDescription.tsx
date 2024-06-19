@@ -1,8 +1,8 @@
 import {FC, useState, useEffect} from "react";
 import css from "./ProductDescription.module.scss";
-import GeneralTextButton from "../Buttons/GeneralTextButton";
-import ChangeAmountButton from "../Buttons/ChangeAmountButton";
-import SizeButton from "../Buttons/SizeButton";
+import GeneralTextButton from "../buttons/GeneralTextButton";
+import ChangeAmountButton from "../buttons/ChangeAmountButton";
+import SizeButton from "../buttons/SizeButton";
 
 type Props = {
   currentProduct: Product;

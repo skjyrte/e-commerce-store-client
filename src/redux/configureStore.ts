@@ -1,9 +1,9 @@
 import {configureStore} from "@reduxjs/toolkit";
-import responseReducer from "./counter/responseSlice";
-import selectedGenderReducer from "./counter/selectedGenderSlice";
-import selectedProductReducer from "./counter/selectedProductSlice";
-import selectedSizeReducer from "./counter/selectedSizeSlice";
-import cartReducer from "./counter/cartSlice";
+import responseReducer from "./slices/responseSlice";
+import selectedGenderReducer from "./slices/selectedGenderSlice";
+import selectedProductReducer from "./slices/selectedProductSlice";
+import selectedSizeReducer from "./slices/selectedSizeSlice";
+import cartReducer from "./slices/cartSlice";
 
 export const store = configureStore({
   reducer: {

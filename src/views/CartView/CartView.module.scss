@@ -31,3 +31,18 @@
   border: 1px solid gray;
   margin: 10px;
 }
+
+.emptyCartView {
+  display: flex;
+  width: 300px;
+  height: 300px;
+  justify-content: center;
+  align-items: center;
+}
+
+.emptyCart {
+  font-size: 18px;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
+}

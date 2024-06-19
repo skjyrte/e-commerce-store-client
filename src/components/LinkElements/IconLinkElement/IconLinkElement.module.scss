@@ -1,0 +1,18 @@
+.LinkElement {
+  border: none;
+  font-family: inherit;
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 0;
+  border: none;
+  background-color: transparent;
+  &:hover {
+  }
+}
+
+.cart {
+  width: 25px;
+  height: 25px;
+}

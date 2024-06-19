@@ -1,11 +1,11 @@
 import {FC, useState} from "react";
 import css from "./ProductGallery.module.scss";
-import IconButton from "../Buttons/IconButton";
-import IconTextButton from "../Buttons/IconTextButton";
-import NarrowArrowNext from "../Icons/NarrowArrowNext";
-import NarrowArrowPrev from "../Icons/NarrowArrowPrev";
+import IconButton from "../buttons/IconButton";
+import IconTextButton from "../buttons/IconTextButton";
+import IconNarrowArrowPrev from "../icons/IconNarrowArrowPrev";
+import IconNarrowArrowNext from "../icons/IconNarrowArrowNext";
 import DotCounter from "../DotCounter";
-import PictureLandscape from "../Icons/PictureLandscape";
+import IconPictureLandscape from "../icons/IconPictureLandscape";
 
 type Props = {
   imagesList: Array<string>;
@@ -172,13 +172,13 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
     <div className={`${css.componentBox} ${css.preventSelect}`}>
       <div className={`${css.mainImageBox} ${onClickZoom ? css.zoom : ""}`}>
         <IconButton
-          IconComponent={NarrowArrowPrev}
+          IconComponent={IconNarrowArrowPrev}
           buttonClass={["carouselButton", "prev"]}
           onClick={() => onSlideMainImage("prev", thumbnailSettings)}
           isDisabled={currentIndex === 0}
         />
         <IconButton
-          IconComponent={NarrowArrowNext}
+          IconComponent={IconNarrowArrowNext}
           buttonClass={["carouselButton", "next"]}
           onClick={() => onSlideMainImage("next", thumbnailSettings)}
           isDisabled={currentIndex === images.length - 1}
@@ -192,7 +192,7 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
       <DotCounter currentItem={currentIndex} totalItem={images.length} />
       <div className={css.thumbnailBoxWrapper}>
         <IconTextButton
-          IconComponent={PictureLandscape}
+          IconComponent={IconPictureLandscape}
           buttonClass={["carouselButton"]}
           onClick={() => onSlideThumbnail("prev")}
           isDisabled={disableThumbnailBtn("prev", thumbnailSettings)}
@@ -209,7 +209,7 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
           </ul>
         </div>
         <IconTextButton
-          IconComponent={PictureLandscape}
+          IconComponent={IconPictureLandscape}
           buttonClass={["carouselButton"]}
           onClick={() => onSlideThumbnail("next")}
           isDisabled={disableThumbnailBtn("next", thumbnailSettings)}

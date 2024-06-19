@@ -1,6 +1,6 @@
 import {FC} from "react";
 import css from "./SizeButton.module.scss";
-import NarrowArrowNext from "../../Icons/NarrowArrowNext";
+import IconNarrowArrowNext from "../../icons/IconNarrowArrowNext";
 import classNames from "classnames";
 
 type Props = {
@@ -57,7 +57,7 @@ const SizeButton: FC<Props> = ({onClick, currentSize, avaiableItems}) => {
           css[displayStockInfo.displayStockClass]
         )}
       >
-        <NarrowArrowNext />
+        <IconNarrowArrowNext />
       </div>
     </button>
   );

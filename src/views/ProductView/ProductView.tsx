@@ -1,25 +1,25 @@
 import {FC, useEffect, useState} from "react";
 import css from "./ProductView.module.scss";
-import PortalModal from "../../components/PortalModal";
+import PortalModal from "../../components/modals/PortalModal";
 import ProductGallery from "../../components/ProductGallery";
 import ProductDescription from "../../components/ProductDescription";
-import IconButton from "../../components/Buttons/IconButton";
-import IconCross from "../../components/Icons/IconCross";
+import IconButton from "../../components/buttons/IconButton";
+import IconCross from "../../components/icons/IconCross";
 import {useParams} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "../../redux/configureStore";
 import {
   productUpdater,
   productCleanup,
-} from "../../redux/counter/selectedProductSlice";
+} from "../../redux/slices/selectedProductSlice";
 import {selectCurrentProduct} from "../../redux/selectors";
-import IconNoPhoto from "../../components/Icons/IconNoPhoto";
+import IconNoPhoto from "../../components/icons/IconNoPhoto";
 import InvalidContent from "../../components/InvalidContent";
-import SizeTable from "../../components/SizeTableModal";
-import {sizeUpdater, sizeCleanup} from "../../redux/counter/selectedSizeSlice";
+import SizeTableModal from "../../components/modals/SizeTableModal";
+import {sizeUpdater, sizeCleanup} from "../../redux/slices/selectedSizeSlice";
 import {RootState} from "../../redux/configureStore";
-import {changeItemsCount} from "../../redux/counter/responseSlice";
-import {addToCart} from "../../redux/counter/cartSlice";
+import {changeItemsCount} from "../../redux/slices/responseSlice";
+import {addToCart} from "../../redux/slices/cartSlice";
 
 interface Props {}
 
@@ -92,7 +92,7 @@ const ProductView: FC<Props> = ({}) => {
   const renderSizes = () => {
     if (selectedProduct.result !== null && selectedProduct.error === null) {
       return (
-        <SizeTable
+        <SizeTableModal
           sizesArray={selectedProduct.result.stock}
           onClick={onSelectSize}
         />

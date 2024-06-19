@@ -1,12 +1,12 @@
 import {FC, useEffect} from "react";
 import css from "./CategoryView.module.scss";
-import CategoryThumbnail from "../../components/CategoryThumbnail";
+import CategoryProductThumbnail from "../../components/thumbnails/CategoryProductThumbnail";
 import {Link} from "react-router-dom";
 import {useLocation} from "react-router-dom";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "../../redux/configureStore";
 import {selectProductsByCategory} from "../../redux/selectors";
-import {switchGender} from "../../redux/counter/selectedGenderSlice";
+import {switchGender} from "../../redux/slices/selectedGenderSlice";
 
 const CategoryView: FC = () => {
   const location = useLocation();
@@ -16,7 +16,7 @@ const CategoryView: FC = () => {
 
   const categoryContent = products.map((obj: Product) => (
     <Link key={obj.id} className={css.linkWrapper} to={obj.id.toString()}>
-      <CategoryThumbnail product={obj} />
+      <CategoryProductThumbnail product={obj} />
     </Link>
   ));
 
