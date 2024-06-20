@@ -1,6 +1,7 @@
 import {FC, useState, useRef, useEffect} from "react";
 import css from "./CategoryProductThumbnail.module.scss";
 import classNames from "classnames";
+import IconNoPhoto from "../../icons/IconNoPhoto";
 
 type Props = {product: Product};
 
@@ -60,13 +61,17 @@ const CategoryProductThumbnail: FC<Props> = ({
       ></div>
       <div className={classNames(css.content, hovered ? css.hovered : "")}>
         <div className={css.cardImageBox}>
-          <img
-            className={classNames(
-              css.thumbnailImageImg,
-              hovered ? css.hovered : ""
-            )}
-            src={thumbnail}
-          />
+          {thumbnail ? (
+            <img
+              className={classNames(
+                css.thumbnailImageImg,
+                hovered ? css.hovered : ""
+              )}
+              src={thumbnail}
+            />
+          ) : (
+            <IconNoPhoto />
+          )}
         </div>
         <div className={classNames(css.brand, css.rowContainer)}>{brand}</div>
         <div className={classNames(css.model, css.rowContainer)}>{model}</div>

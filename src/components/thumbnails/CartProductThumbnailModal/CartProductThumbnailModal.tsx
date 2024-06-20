@@ -1,7 +1,7 @@
 import {FC} from "react";
 import css from "./CartProductThumbnailModal.module.scss";
 import {Link} from "react-router-dom";
-import classNames from "classnames";
+import IconNoPhoto from "../../icons/IconNoPhoto";
 
 type CartProductEntryWithData = {
   id: string;
@@ -19,12 +19,6 @@ const CartProductThumbnailModal: FC<Props> = (props) => {
 
   const data = cartProductEntryWithData.additionalData;
 
-  const getThumbnail = () => {
-    if (data !== null) {
-      return data.thumbnail;
-    }
-  };
-
   if (data === null) {
     return (
       <div className="isError">
@@ -38,7 +32,7 @@ const CartProductThumbnailModal: FC<Props> = (props) => {
     return (
       <Link className={css.cartProduct} to={`/${data.gender}/${data.id}`}>
         <div className={css.cartProductThumbnail}>
-          <img className={classNames()} src={getThumbnail()} />
+          {data.thumbnail ? <img src={data.thumbnail} /> : <IconNoPhoto />}
         </div>
         <div className={css.textBox}>
           <div className={css.boldChildBox}>

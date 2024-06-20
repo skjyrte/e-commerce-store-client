@@ -1,5 +1,4 @@
 .cartProduct {
-  color: red;
   background-color: white;
   display: flex;
   border: 2px solid whitesmoke;
@@ -24,7 +23,6 @@
   height: 100%;
   width: auto;
   margin: 10px;
-  background-color: pink;
   & > img {
     width: auto;
     height: 100%;
@@ -75,6 +73,4 @@
 }
 .productSize {
   padding: 5px 0;
-}
-.productCount {
 }
