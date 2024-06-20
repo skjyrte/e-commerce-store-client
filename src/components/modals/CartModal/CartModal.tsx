@@ -13,7 +13,6 @@ type CartProductEntryWithData = {
 };
 
 type Props = {
-  onClick: () => void;
   cartItems: {
     value: CartProductEntryWithData[] | null;
     itemCount: number;
@@ -21,7 +20,7 @@ type Props = {
 };
 
 const CartModal: FC<Props> = (props) => {
-  const {onClick, cartItems} = props;
+  const {cartItems} = props;
 
   const renderCartList = () => {
     if (cartItems.value !== null) {
@@ -29,7 +28,6 @@ const CartModal: FC<Props> = (props) => {
         <div className={css.cartOverflowContainer}>
           {cartItems.value.map((productInCart) => (
             <CartProductThumbnailModal
-              onClick={onClick}
               cartProductEntryWithData={productInCart}
               key={`${productInCart.id}__${productInCart.size}`}
             />
@@ -61,7 +59,7 @@ const CartModal: FC<Props> = (props) => {
       <>
         <div className={css.emptyCart}>YOUR CART IS EMPTY</div>
         <div className={css.redirectToOther}>DON’T KNOW WHERE TO START?</div>
-        <Link onClick={onClick} className={css.linkElement} to="/home">
+        <Link className={css.linkElement} to="/home">
           CHECK NEW OFFERS
         </Link>
       </>
@@ -74,11 +72,7 @@ const CartModal: FC<Props> = (props) => {
         <div className={css.cartModalWrapper}>
           {renderCartList()}
           {renderCartFooter()}
-          <Link
-            onClick={() => console.log("cart")}
-            className={classNames(css.linkElement, css.cart)}
-            to="/cart"
-          >
+          <Link className={classNames(css.linkElement, css.cart)} to="/cart">
             View cart
           </Link>
         </div>

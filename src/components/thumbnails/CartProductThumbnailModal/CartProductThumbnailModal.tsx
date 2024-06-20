@@ -11,12 +11,11 @@ type CartProductEntryWithData = {
 };
 
 type Props = {
-  onClick: () => void;
   cartProductEntryWithData: CartProductEntryWithData;
 };
 
 const CartProductThumbnailModal: FC<Props> = (props) => {
-  const {onClick, cartProductEntryWithData} = props;
+  const {cartProductEntryWithData} = props;
 
   const data = cartProductEntryWithData.additionalData;
 
@@ -37,11 +36,7 @@ const CartProductThumbnailModal: FC<Props> = (props) => {
       Math.round(data.price * cartProductEntryWithData.count * 100) / 100
     ).toFixed(2);
     return (
-      <Link
-        onClick={onClick}
-        className={css.cartProduct}
-        to={`/${data.gender}/${data.id}`}
-      >
+      <Link className={css.cartProduct} to={`/${data.gender}/${data.id}`}>
         <div className={css.cartProductThumbnail}>
           <img className={classNames()} src={getThumbnail()} />
         </div>

@@ -8,19 +8,16 @@ import {selectCartItems} from "../../../redux/selectors";
 import {useLocation} from "react-router-dom";
 import IconLinkElement from "../IconLinkElement";
 
-type Props = {};
-
-const CartLinkElement: FC<Props> = ({}) => {
+const CartLinkElement: FC = () => {
   const [cartModalVisible, setCartModalVisible] = useState(false);
   let location = useLocation();
 
   const cartItems = useSelector(selectCartItems);
 
-  const onCartClick = () => {};
-
   const onMouseOver = () => {
     setCartModalVisible(true);
   };
+
   const onMouseOut = () => {
     setCartModalVisible(false);
   };
@@ -30,9 +27,7 @@ const CartLinkElement: FC<Props> = ({}) => {
   };
 
   useEffect(() => {
-    console.log("location.pathname");
-    console.log(location.pathname);
-    if (location.pathname !== "/cart") {
+    if (location.pathname !== "/cart" && cartItems.itemCount !== 0) {
       setCartModalVisible(true);
     }
   }, [cartItems]);
@@ -55,7 +50,7 @@ const CartLinkElement: FC<Props> = ({}) => {
       {cartModalVisible === true ? (
         <>
           <div className={css.hideBorderBox}></div>
-          <CartModal onClick={onCartClick} cartItems={cartItems} />
+          <CartModal cartItems={cartItems} />
         </>
       ) : (
         <></>
