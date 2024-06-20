@@ -1,7 +1,7 @@
 import {FC, useState} from "react";
 import css from "./CartProductThumbnailLarge.module.scss";
 import {Link} from "react-router-dom";
-import classNames from "classnames";
+import IconNoPhoto from "../../icons/IconNoPhoto";
 import ChangeAmountButton from "../../buttons/ChangeAmountButton";
 import GeneralTextButton from "../../buttons/GeneralTextButton";
 import {useSelector} from "react-redux";
@@ -37,12 +37,6 @@ const CartProductThumbnailLarge: FC<Props> = (props) => {
       return product.id === cartProductEntryWithData.id;
     });
   });
-
-  const getThumbnail = () => {
-    if (data !== null) {
-      return data.thumbnail;
-    }
-  };
 
   const onChangeQuantity = (action: "increase" | "decrease") => {
     console.log("avaiableItems");
@@ -101,7 +95,7 @@ const CartProductThumbnailLarge: FC<Props> = (props) => {
     return (
       <div className={css.CartThumbnailLarge}>
         <div className={css.cartProductThumbnail}>
-          <img className={classNames()} src={getThumbnail()} />
+          {data.thumbnail ? <img src={data.thumbnail} /> : <IconNoPhoto />}
         </div>
         <div className={css.textBox}>
           <div className={css.boldChildBox}>
