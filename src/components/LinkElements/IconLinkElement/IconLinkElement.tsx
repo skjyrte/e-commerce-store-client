@@ -11,7 +11,7 @@ interface Props {
   linkClass?: Array<string>;
 }
 
-const TextLinkElement: FC<Props> = ({
+const IconLinkElement: FC<Props> = ({
   path,
   IconComponent,
   isDisabled = false,
@@ -30,4 +30,4 @@ const TextLinkElement: FC<Props> = ({
   );
 };
 
-export default TextLinkElement;
+export default IconLinkElement;

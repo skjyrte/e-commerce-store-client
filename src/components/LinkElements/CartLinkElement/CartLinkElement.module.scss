@@ -1,4 +1,4 @@
-.cartButtonWrapper {
+.cartLinkElementWrapper {
   display: flex;
   align-items: center;
   justify-content: center;
@@ -8,12 +8,12 @@
   position: relative;
   background-color: white;
   z-index: 3;
-  border: 2px solid transparent;
+  border: 4px solid transparent;
   border-bottom: none;
 }
 
 .cartOpened {
-  border: 2px solid gray;
+  border: 4px solid gray;
   border-bottom: none;
 }
 
@@ -39,9 +39,9 @@
 .hideBorderBox {
   position: absolute;
   z-index: 2;
-  height: 2px;
-  width: 56px;
+  height: 4px;
+  width: 52px;
   background-color: white;
-  bottom: -2px;
+  bottom: -4px;
   right: 0;
 }

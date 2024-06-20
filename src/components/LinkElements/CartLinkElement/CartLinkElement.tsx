@@ -10,7 +10,7 @@ import IconLinkElement from "../IconLinkElement";
 
 type Props = {};
 
-const CartButton: FC<Props> = ({}) => {
+const CartLinkElement: FC<Props> = ({}) => {
   const [cartModalVisible, setCartModalVisible] = useState(false);
   let location = useLocation();
 
@@ -40,7 +40,7 @@ const CartButton: FC<Props> = ({}) => {
   return (
     <div
       className={classNames(
-        css.cartButtonWrapper,
+        css.cartLinkElementWrapper,
         cartModalVisible === true ? css.cartOpened : ""
       )}
       onMouseOver={onMouseOver}
@@ -64,4 +64,4 @@ const CartButton: FC<Props> = ({}) => {
   );
 };
 
-export default CartButton;
+export default CartLinkElement;

@@ -1,3 +1,6 @@
 0_untracked/
 build/
 node_modules
+
+.env.prod
+.env

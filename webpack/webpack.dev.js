@@ -1,5 +1,11 @@
 const webpack = require("webpack");
 const ReactRefreshWebpackPlugin = require("@pmmmwh/react-refresh-webpack-plugin");
+const Dotenv = require("dotenv-webpack");
+
+module.exports = {
+  // other configurations
+  plugins: [new Dotenv()],
+};
 
 module.exports = {
   mode: "development",
@@ -7,7 +13,7 @@ module.exports = {
   devServer: {
     hot: true,
     open: true,
-    historyApiFallback: true, //redirects 404s to /index.html
+    historyApiFallback: true,
   },
   plugins: [
     new ReactRefreshWebpackPlugin(),
@@ -16,5 +22,6 @@ module.exports = {
         "[path][name]__[local]--[hash:base64:5]"
       ), */
     }),
+    new Dotenv({path: "./.env.dev"}),
   ],
 };
