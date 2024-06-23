@@ -121,7 +121,7 @@ const CartProductThumbnailLarge: FC<Props> = (props) => {
             <div className={css.subtotalPrice}>${subtotal}</div>
             <div
               className={css.itemPrice}
-            >{`Single item price: $${subtotal}`}</div>
+            >{`Single item price: $${Math.round(data.price * 100) / 100}`}</div>
           </div>
           <div className={css.deleteBox}>
             <GeneralTextButton

@@ -7,13 +7,10 @@ import {AppDispatch} from "../../redux/configureStore";
 import {changeItemsCount} from "../../redux/slices/responseSlice";
 import {addToCart} from "../../redux/slices/cartSlice";
 import CartFooter from "../../components/CartFooter";
-import {Link} from "react-router-dom";
 
 const CartView: FC = () => {
   const cartItems = useSelector(selectCartItems);
-
   const dispatch = useDispatch<AppDispatch>();
-
   const renderCartList = () => {
     if (cartItems.value !== null) {
       return (
@@ -80,12 +77,7 @@ const CartView: FC = () => {
             {renderCartList()}
           </div>
         </div>
-        <div className={css.summaryBox}>
-          {renderCartFooter()}
-          {/*           <div className={css.productCostTotal}></div>
-          <div className={css.deliveryCost}></div>
-          <div className={css.summaryCost}></div> */}
-        </div>
+        <div className={css.summaryBox}>{renderCartFooter()}</div>
       </div>
     );
   } else {
