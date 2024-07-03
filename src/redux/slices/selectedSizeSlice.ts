@@ -5,10 +5,10 @@ interface Size {
   value: string | null;
 }
 
-type Payload = {
+interface Payload {
   size: string | null;
   defaultSizeObject: {size: string; count: number} | undefined;
-};
+}
 
 const initialState: Size = {value: null};
 
