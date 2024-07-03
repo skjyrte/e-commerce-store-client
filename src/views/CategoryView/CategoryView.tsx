@@ -89,12 +89,18 @@ async function handleRequest<T, D = any>(
   }
 }
 
-async function handleGetProducts(gender: string) {
+async function handleGetProducts(
+  gender: string,
+  category: string | undefined = undefined
+) {
   handleRequest<ApiResponse>(
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     getAxiosWrapper<any>,
     {
-      url: `/gender/${gender}`,
+      url:
+        category !== undefined
+          ? `/gender/${gender}/category/${category}`
+          : `/gender/${gender}`,
       data: {},
       config: {
         params: {},
@@ -128,7 +134,7 @@ const CategoryView: FC = () => {
     if (location.pathname === "/men") {
       dispatch(switchGender("men"));
       /* PRINTS MEN */
-      handleGetProducts("men");
+      handleGetProducts("men", "sneakers");
     }
     if (location.pathname === "/women") {
       dispatch(switchGender("women"));
