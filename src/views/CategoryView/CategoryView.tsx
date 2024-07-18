@@ -1,20 +1,19 @@
-import {FC, useEffect} from "react";
-import {Link, useLocation} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
+import {FC, useEffect, useState} from "react";
+import {useLocation} from "react-router-dom";
+import {useDispatch} from "react-redux";
 import {AxiosResponse, AxiosRequestConfig} from "axios";
 /* custom components */
 import css from "./CategoryView.module.scss";
-import CategoryProductThumbnail from "../../components/thumbnails/CategoryProductThumbnail";
 import {AppDispatch} from "../../redux/configureStore";
-import {selectProductsByCategory} from "../../redux/selectors";
 import {switchGender} from "../../redux/slices/selectedGenderSlice";
 import createAxiosInstance from "../../api/createAxiosInstance";
+import FakeThumbnail from "./FakeThumbnail";
 
 /* api */
 
 const axiosInstance = createAxiosInstance();
 
-interface ProductTemp {
+interface Product {
   id: string;
   brand: string;
   model: string;
@@ -33,17 +32,19 @@ interface ProductTemp {
   color: string;
 }
 
-interface ProductWithStockAndImages extends ProductTemp {
+interface ProductWithStockAndImages extends Product {
   size?: string;
   count?: number;
   image_url?: string;
 }
 
-interface ApiResponse {
+interface ExpectedResponse {
   success: boolean;
   message: string;
-  data?: ProductWithStockAndImages[];
+  payload?: IncomingData;
 }
+
+type IncomingData = ProductWithStockAndImages[];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getAxiosWrapper<T, R = AxiosResponse<T>, D = any>(
@@ -62,10 +63,10 @@ async function handleRequest<T, D = any>(
     data: D,
     // eslint-disable-next-line no-unused-vars
     config: AxiosRequestConfig<D>
-  ) => Promise<AxiosResponse<ApiResponse>>,
+  ) => Promise<AxiosResponse<ExpectedResponse>>,
   requestConfig: {url: string; data: D; config: AxiosRequestConfig<D>},
   // eslint-disable-next-line no-unused-vars
-  successCallback?: (data: ApiResponse) => void,
+  successCallback?: (data: ExpectedResponse) => void,
   // eslint-disable-next-line no-unused-vars
   failureCallback?: (error: unknown) => void
 ): Promise<void> {
@@ -89,65 +90,73 @@ async function handleRequest<T, D = any>(
   }
 }
 
-async function handleGetProducts(
-  gender: string,
-  category: string | undefined = undefined
-) {
-  handleRequest<ApiResponse>(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    getAxiosWrapper<any>,
-    {
-      url:
-        category !== undefined
-          ? `/gender/${gender}/category/${category}`
-          : `/gender/${gender}`,
-      data: {},
-      config: {
-        params: {},
-      },
-    },
-    (data) => {
-      console.log("test data:");
-      console.log(data);
-    },
-    () => {
-      console.log("error cb");
-    }
-  );
-}
-
 /* component */
 
 const CategoryView: FC = () => {
+  const [products, setProducts] = useState<null | IncomingData>(null);
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
 
-  const products = useSelector(selectProductsByCategory);
+  async function handleGetProducts(
+    gender: string,
+    category: string | undefined = undefined
+  ) {
+    await handleRequest<ExpectedResponse>(
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      getAxiosWrapper<any>,
+      {
+        url:
+          category !== undefined
+            ? `/gender/${gender}/category/${category}`
+            : `/gender/${gender}`,
+        data: {},
+        config: {
+          params: {},
+        },
+      },
+      (data) => {
+        if (data.payload) {
+          setProducts(data.payload);
+        }
+      },
+      () => {
+        console.log("error cb");
+      }
+    );
+  }
 
-  const categoryContent = products.map((obj: Product) => (
-    <Link key={obj.id} className={css.linkWrapper} to={obj.id.toString()}>
-      <CategoryProductThumbnail product={obj} />
-    </Link>
-  ));
+  const categoryContent = () => {
+    if (products) {
+      const someArray = products.map((obj: Product) => (
+        <FakeThumbnail id={obj.id} />
+      ));
+      return someArray;
+    } else {
+      return <div></div>;
+    }
+  };
 
   useEffect(() => {
-    if (location.pathname === "/men") {
-      dispatch(switchGender("men"));
-      /* PRINTS MEN */
-      handleGetProducts("men", "sneakers");
-    }
-    if (location.pathname === "/women") {
-      dispatch(switchGender("women"));
-      /* PRINTS WOMEN */
-      handleGetProducts("women");
-    }
+    const getProducts = async () => {
+      try {
+        if (location.pathname === "/men") {
+          dispatch(switchGender("men"));
+          /* PRINTS MEN */
+          await handleGetProducts("men", "sneakers");
+        } else if (location.pathname === "/women") {
+          dispatch(switchGender("women"));
+          /* PRINTS WOMEN */
+          await handleGetProducts("women");
+        }
+      } catch {
+        console.log("get products error");
+      }
+    };
+
+    void getProducts();
   }, [location]);
 
-  return (
-    <div className={css.gridWrapper}>
-      {categoryContent.length > 0 ? categoryContent : "no products or loading"}
-    </div>
-  );
+  return <div className={css.gridWrapper}>{categoryContent()}</div>;
 };
 
 export default CategoryView;
