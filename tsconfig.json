@@ -1,5 +1,13 @@
 {
   "compilerOptions": {
+    "plugins": [
+      {
+        "name": "typescript-plugin-css-modules",
+        "options": {
+          "allowUnknownClassnames": true
+        }
+      }
+    ],
     /* Visit https://aka.ms/tsconfig to read more about this file */
 
     /* Projects */
