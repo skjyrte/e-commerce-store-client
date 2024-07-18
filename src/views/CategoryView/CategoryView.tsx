@@ -7,44 +7,11 @@ import css from "./CategoryView.module.scss";
 import {AppDispatch} from "../../redux/configureStore";
 import {switchGender} from "../../redux/slices/selectedGenderSlice";
 import createAxiosInstance from "../../api/createAxiosInstance";
-import FakeThumbnail from "./FakeThumbnail";
+import CategoryProductThumbnail from "../../components/thumbnails/CategoryProductThumbnail";
 
 /* api */
 
 const axiosInstance = createAxiosInstance();
-
-interface Product {
-  id: string;
-  brand: string;
-  model: string;
-  gender: string;
-  category: string;
-  material: string;
-  season: string;
-  shortDescription: string;
-  description: string;
-  features: string[];
-  price: number;
-  initialPrice: number;
-  ratingReviews: number;
-  ratingValue: number;
-  thumbnail: string;
-  color: string;
-}
-
-interface ProductWithStockAndImages extends Product {
-  size?: string;
-  count?: number;
-  image_url?: string;
-}
-
-interface ExpectedResponse {
-  success: boolean;
-  message: string;
-  payload?: IncomingData;
-}
-
-type IncomingData = ProductWithStockAndImages[];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 function getAxiosWrapper<T, R = AxiosResponse<T>, D = any>(
@@ -93,7 +60,7 @@ async function handleRequest<T, D = any>(
 /* component */
 
 const CategoryView: FC = () => {
-  const [products, setProducts] = useState<null | IncomingData>(null);
+  const [products, setProducts] = useState<null | ProductWithData[]>(null);
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -128,7 +95,7 @@ const CategoryView: FC = () => {
   const categoryContent = () => {
     if (products) {
       const someArray = products.map((obj: Product) => (
-        <FakeThumbnail id={obj.id} />
+        <CategoryProductThumbnail key={obj.id} productData={obj} />
       ));
       return someArray;
     } else {

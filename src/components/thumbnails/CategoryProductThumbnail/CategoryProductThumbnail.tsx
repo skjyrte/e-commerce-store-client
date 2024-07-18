@@ -3,33 +3,54 @@ import css from "./CategoryProductThumbnail.module.scss";
 import classNames from "classnames";
 import IconNoPhoto from "../../icons/IconNoPhoto";
 
-type Props = {product: Product};
+interface Props {
+  productData: ProductWithData;
+}
 
 const CategoryProductThumbnail: FC<Props> = ({
-  product: {id, model, price, brand, thumbnail, initialPrice, stock},
+  productData: {id, brand, model, price, initialPrice, thumbnail, stock},
 }) => {
   const [hovered, setHovered] = useState(false);
   const [height, setHeight] = useState(0);
 
-  const toggleHover = () => setHovered(!hovered);
+  const toggleHover = () => {
+    setHovered(!hovered);
+  };
 
   const sizesStyle = {
-    "--getSizesHeight": `${height}px`,
+    "--getSizesHeight": `${height.toString()}px`,
   } as React.CSSProperties;
 
   const elementRef = useRef<HTMLDivElement>(null);
 
-  const sizeArray = stock.map((el) => (
-    <div
-      key={el.size}
-      className={classNames(css.sizeField, el.count > 0 ? "" : css.outOfStock)}
-    >
-      {el.size}
-    </div>
-  ));
+  const renderSizeBox = () => {
+    let sizeArray = null;
+    try {
+      if (stock) {
+        sizeArray = stock.map((el) => (
+          <div
+            key={el.size}
+            className={classNames(
+              css.sizeField,
+              el.count > 0 ? "" : css.outOfStock
+            )}
+          >
+            {el.size}
+          </div>
+        ));
+      } else throw new Error("Size object undefined. Invalid props object");
+    } catch {
+      sizeArray = (
+        <div className={classNames(css.sizeField, css.outOfStock)}>
+          {"Not avaiable"}
+        </div>
+      );
+    }
+    return sizeArray;
+  };
 
   useEffect(() => {
-    const element = elementRef?.current;
+    const element = elementRef.current;
 
     if (!element) return;
 
@@ -77,10 +98,10 @@ const CategoryProductThumbnail: FC<Props> = ({
         <div className={classNames(css.model, css.rowContainer)}>{model}</div>
         <div className={classNames(css.priceBox, css.rowContainer)}>
           <div className={classNames(css.price, css.rowContainer)}>
-            ${price.toFixed(2)}
+            ${price}
           </div>
           <div className={classNames(css.initialPrice, css.rowContainer)}>
-            ${initialPrice.toFixed(2)}
+            ${initialPrice}
           </div>
         </div>
       </div>
@@ -88,7 +109,7 @@ const CategoryProductThumbnail: FC<Props> = ({
         className={classNames(css.sizeBox, hovered ? css.hovered : css.hide)}
         ref={elementRef}
       >
-        {sizeArray}
+        {renderSizeBox()}
       </div>
     </div>
   );
