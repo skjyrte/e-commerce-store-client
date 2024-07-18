@@ -16,13 +16,13 @@
   background-color: orange;
   padding: 0;
   margin: 0;
-  &:disabled {
-    background-color: wheat;
-  }
   max-width: 270px;
   flex: 1;
   min-width: 110px;
   margin-left: 20px;
+  &:disabled {
+    background-color: wheat;
+  }
 }
 
 .editItems {
