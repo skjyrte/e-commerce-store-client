@@ -61,6 +61,7 @@ async function handleRequest<T, D = any>(
 
 const CategoryView: FC = () => {
   const [products, setProducts] = useState<null | ProductWithData[]>(null);
+  const [hoveredID, setHoveredID] = useState<null | string>(null);
   const location = useLocation();
   const dispatch = useDispatch<AppDispatch>();
 
@@ -92,10 +93,19 @@ const CategoryView: FC = () => {
     );
   }
 
+  const onThumbnailHover = (id: null | string) => {
+    setHoveredID(id);
+  };
+
   const categoryContent = () => {
     if (products) {
       const someArray = products.map((obj: Product) => (
-        <CategoryProductThumbnail key={obj.id} productData={obj} />
+        <CategoryProductThumbnail
+          key={obj.id}
+          productData={obj}
+          onHover={onThumbnailHover}
+          hovered={hoveredID === obj.id ? true : false}
+        />
       ));
       return someArray;
     } else {

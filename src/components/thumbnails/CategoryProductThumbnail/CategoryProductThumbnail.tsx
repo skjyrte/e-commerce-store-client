@@ -5,17 +5,16 @@ import IconNoPhoto from "../../icons/IconNoPhoto";
 
 interface Props {
   productData: ProductWithData;
+  onHover: (id: null | string) => void;
+  hovered: boolean;
 }
 
 const CategoryProductThumbnail: FC<Props> = ({
   productData: {id, brand, model, price, initialPrice, thumbnail, stock},
+  onHover,
+  hovered,
 }) => {
-  const [hovered, setHovered] = useState(false);
   const [height, setHeight] = useState(0);
-
-  const toggleHover = () => {
-    setHovered(!hovered);
-  };
 
   const sizesStyle = {
     "--getSizesHeight": `${height.toString()}px`,
@@ -70,8 +69,12 @@ const CategoryProductThumbnail: FC<Props> = ({
     <div
       key={id}
       className={css.thumbnailBox}
-      onMouseEnter={toggleHover}
-      onMouseLeave={toggleHover}
+      onMouseEnter={() => {
+        onHover(id);
+      }}
+      onMouseLeave={() => {
+        onHover(null);
+      }}
     >
       <div
         className={classNames(
