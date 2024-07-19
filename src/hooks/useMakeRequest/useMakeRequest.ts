@@ -1,10 +1,6 @@
-import {useState} from "react";
+import {useState, useEffect} from "react";
 import {AxiosResponse, AxiosRequestConfig} from "axios";
-
-/* custom components */
 import createAxiosInstance from "../../api/createAxiosInstance";
-
-/* api */
 
 const axiosInstance = createAxiosInstance();
 
@@ -16,20 +12,16 @@ function getAxiosWrapper<T, R = AxiosResponse<T>, D = any>(
 ) {
   return axiosInstance.get<T, R, D>(url, config);
 }
+
 // eslint-disable-next-line
 async function handleRequest<T, D = any>(
   requestPromise: (
-    // eslint-disable-next-line no-unused-vars
     url: string,
-    // eslint-disable-next-line no-unused-vars
     data: D,
-    // eslint-disable-next-line no-unused-vars
     config: AxiosRequestConfig<D>
   ) => Promise<AxiosResponse<ExpectedResponse>>,
   requestConfig: {url: string; data: D; config: AxiosRequestConfig<D>},
-  // eslint-disable-next-line no-unused-vars
   successCallback?: (data: ExpectedResponse) => void,
-  // eslint-disable-next-line no-unused-vars
   failureCallback?: (error: unknown) => void
 ): Promise<void> {
   try {
@@ -52,31 +44,45 @@ async function handleRequest<T, D = any>(
   }
 }
 
-/* component */
+enum RequestType {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+}
 
-type requestType = "GET" | "POST";
+interface GetConfig {
+  gender?: string;
+  category?: string;
+}
 
-const useMakeRequest = (
-  requestType: requestType,
-  gender: string,
-  category: string | undefined = undefined
-) => {
+const useMakeRequest = (requestType: RequestType, config: GetConfig) => {
   const [responseData, setResponseData] = useState<null | ProductWithData[]>(
     null
   );
 
-  async function handleGetData(
-    gender: string,
-    category: string | undefined = undefined
-  ) {
+  async function handleGetData(config: GetConfig) {
+    const createFilterQuery = (config: GetConfig) => {
+      const {gender, category} = config;
+      try {
+        if (gender) {
+          if (category) {
+            return `/gender/${gender}/category/${category}`;
+          } else {
+            return `/gender/${gender}`;
+          }
+        } else throw new Error("gender not defined");
+      } catch (e) {
+        console.error(e);
+        return "";
+      }
+    };
+
     await handleRequest<ExpectedResponse>(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       getAxiosWrapper<any>,
       {
-        url:
-          category !== undefined
-            ? `/gender/${gender}/category/${category}`
-            : `/gender/${gender}`,
+        url: createFilterQuery(config),
         data: {},
         config: {
           params: {},
@@ -94,17 +100,36 @@ const useMakeRequest = (
     );
   }
 
-  if (requestType === "GET") {
-    const getData = async () => {
-      try {
-        await handleGetData(gender, category);
-      } catch {
-        console.log("get data error");
+  async function handleRequestType(requestType: RequestType) {
+    try {
+      switch (requestType) {
+        case RequestType.GET:
+          await handleGetData(config);
+          break;
+        case RequestType.PUT:
+          console.log("PUT");
+          break;
+        case RequestType.POST:
+          console.log("POST");
+          break;
+        case RequestType.DELETE:
+          console.log("DELETE");
+          break;
+        default:
+          throw new Error("Invalid request type");
       }
-    };
-
-    void getData();
+    } catch (e) {
+      console.error(e);
+    }
   }
+
+  useEffect(() => {
+    const asyncFunction = async () => {
+      await handleRequestType(requestType);
+    };
+    void asyncFunction();
+  }, [requestType, config]);
+
   return responseData;
 };
 
