@@ -22,9 +22,6 @@ const CategoryProductThumbnail: FC<Props> = ({
 
   const elementRef = useRef<HTMLDivElement>(null);
 
-  console.log("initialPrice");
-  console.log(initial_price);
-
   const renderSizeBox = () => {
     let sizeArray = null;
     try {
