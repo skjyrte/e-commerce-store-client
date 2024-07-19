@@ -10,7 +10,7 @@ interface Props {
 }
 
 const CategoryProductThumbnail: FC<Props> = ({
-  productData: {id, brand, model, price, initialPrice, thumbnail, stock},
+  productData: {id, brand, model, price, initial_price, thumbnail, stock},
   onHover,
   hovered,
 }) => {
@@ -21,6 +21,9 @@ const CategoryProductThumbnail: FC<Props> = ({
   } as React.CSSProperties;
 
   const elementRef = useRef<HTMLDivElement>(null);
+
+  console.log("initialPrice");
+  console.log(initial_price);
 
   const renderSizeBox = () => {
     let sizeArray = null;
@@ -104,7 +107,7 @@ const CategoryProductThumbnail: FC<Props> = ({
             ${price}
           </div>
           <div className={classNames(css.initialPrice, css.rowContainer)}>
-            ${initialPrice}
+            ${initial_price}
           </div>
         </div>
       </div>

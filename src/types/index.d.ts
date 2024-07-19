@@ -29,13 +29,13 @@ interface Product {
   category: string;
   material: string;
   season: string;
-  shortDescription: string;
+  short_description: string;
   description: string;
   features: string[];
   price: number;
-  initialPrice: number;
-  ratingReviews: number;
-  ratingValue: number;
+  initial_price: number;
+  rating_reviews: number;
+  rating_value: number;
   thumbnail: string;
   color: string;
 }
