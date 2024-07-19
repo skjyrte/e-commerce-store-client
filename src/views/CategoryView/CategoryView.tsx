@@ -1,11 +1,8 @@
 import {FC, useEffect, useState} from "react";
-import {useLocation} from "react-router-dom";
-import {useDispatch} from "react-redux";
 import {AxiosResponse, AxiosRequestConfig} from "axios";
+import {useParams} from "react-router-dom";
 /* custom components */
 import css from "./CategoryView.module.scss";
-import {AppDispatch} from "../../redux/configureStore";
-import {switchGender} from "../../redux/slices/selectedGenderSlice";
 import createAxiosInstance from "../../api/createAxiosInstance";
 import CategoryProductThumbnail from "../../components/thumbnails/CategoryProductThumbnail";
 
@@ -62,8 +59,9 @@ async function handleRequest<T, D = any>(
 const CategoryView: FC = () => {
   const [products, setProducts] = useState<null | ProductWithData[]>(null);
   const [hoveredID, setHoveredID] = useState<null | string>(null);
-  const location = useLocation();
-  const dispatch = useDispatch<AppDispatch>();
+
+  const {gender} = useParams();
+  console.log(gender);
 
   async function handleGetProducts(
     gender: string,
@@ -116,14 +114,8 @@ const CategoryView: FC = () => {
   useEffect(() => {
     const getProducts = async () => {
       try {
-        if (location.pathname === "/men") {
-          dispatch(switchGender("men"));
-          /* PRINTS MEN */
-          await handleGetProducts("men", "sneakers");
-        } else if (location.pathname === "/women") {
-          dispatch(switchGender("women"));
-          /* PRINTS WOMEN */
-          await handleGetProducts("women");
+        if (gender !== undefined) {
+          await handleGetProducts(gender);
         }
       } catch {
         console.log("get products error");
@@ -131,7 +123,7 @@ const CategoryView: FC = () => {
     };
 
     void getProducts();
-  }, [location]);
+  }, [gender]);
 
   return <div className={css.gridWrapper}>{categoryContent()}</div>;
 };
