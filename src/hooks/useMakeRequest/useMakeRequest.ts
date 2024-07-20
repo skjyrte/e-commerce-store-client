@@ -1,4 +1,4 @@
-import {useState, useEffect} from "react";
+import {useState, useEffect, useMemo} from "react";
 import {AxiosResponse, AxiosRequestConfig} from "axios";
 import createAxiosInstance from "../../api/createAxiosInstance";
 
@@ -54,6 +54,7 @@ enum RequestType {
 interface GetConfig {
   gender?: string;
   category?: string;
+  id?: string;
 }
 
 const useMakeRequest = (requestType: RequestType, config: GetConfig) => {
@@ -61,17 +62,26 @@ const useMakeRequest = (requestType: RequestType, config: GetConfig) => {
     null
   );
 
+  const memoConfig = useMemo(
+    () => config,
+    [config.gender, config.category, config.id]
+  );
+
   async function handleGetData(config: GetConfig) {
     const createFilterQuery = (config: GetConfig) => {
-      const {gender, category} = config;
+      const {gender, category, id} = config;
+      console.log("id passed to a hook");
+      console.log(id);
       try {
-        if (gender) {
+        if (id) {
+          return `/product/${id}`;
+        } else if (gender) {
           if (category) {
             return `/gender/${gender}/category/${category}`;
           } else {
             return `/gender/${gender}`;
           }
-        } else throw new Error("gender not defined");
+        } else return "";
       } catch (e) {
         console.error(e);
         return "";
@@ -128,7 +138,10 @@ const useMakeRequest = (requestType: RequestType, config: GetConfig) => {
       await handleRequestType(requestType);
     };
     void asyncFunction();
-  }, [requestType, config]);
+
+    console.log("config");
+    console.log(config);
+  }, [requestType, memoConfig]);
 
   return responseData;
 };
