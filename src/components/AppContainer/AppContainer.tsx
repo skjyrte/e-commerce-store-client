@@ -20,7 +20,7 @@ const AppContainer: FC = () => {
           <Route path="/contact" element={<div>contact</div>} />
           <Route path="/cart" element={<CartView />} />
           <Route path="/:gender" element={<CategoryView />} />
-          <Route path="/:gender/:productId" element={<ProductView />} />
+          <Route path="/:gender/:id" element={<ProductView />} />
           <Route path="/*" element={<InvalidPageView />} />
         </Routes>
       </div>

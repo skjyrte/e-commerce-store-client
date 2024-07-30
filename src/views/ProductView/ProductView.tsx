@@ -15,61 +15,55 @@ import {
 import {selectCurrentProduct} from "../../redux/selectors";
 import IconNoPhoto from "../../components/icons/IconNoPhoto";
 import InvalidContent from "../../components/InvalidContent";
-import SizeTableModal from "../../components/modals/SizeTableModal";
-import {sizeUpdater, sizeCleanup} from "../../redux/slices/selectedSizeSlice";
+/* import SizeTableModal from "../../components/modals/SizeTableModal"; */
 import {RootState} from "../../redux/configureStore";
 import {changeItemsCount} from "../../redux/slices/responseSlice";
 import {addToCart} from "../../redux/slices/cartSlice";
+import useMakeRequest from "../../hooks/useMakeRequest";
 
-interface Props {}
+enum RequestType {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+}
 
-const ProductView: FC<Props> = ({}) => {
+const ProductView: FC = () => {
   const [modalVisible, setModalVisible] = useState<null | "size" | "gallery">(
     null
   );
-  const {productId} = useParams();
+  const {id} = useParams();
 
-  const dispatch = useDispatch<AppDispatch>();
-  if (productId !== undefined) {
-    dispatch(productUpdater(productId));
-  }
-
-  const selectedProduct = useSelector(selectCurrentProduct);
-  const selectedSize = useSelector((state: RootState) => state.size.value);
-
-  if (selectedProduct.result !== null && selectedProduct.error === null) {
-    const defaultSizeObject = selectedProduct.result.stock.find(
-      (product) => product.count > 0
-    );
-    {
-      dispatch(
-        sizeUpdater({size: selectedSize, defaultSizeObject: defaultSizeObject})
-      );
-    }
-  }
+  const products = useMakeRequest(RequestType.GET, {
+    id,
+    baseUrl: process.env.REACT_APP_API_URL,
+  });
 
   const renderGallery = () => {
-    if (selectedProduct.result !== null && selectedProduct.error === null) {
-      if (selectedProduct.result.images.length !== 0) {
+    if (products !== null) {
+      console.log({products});
+      if (products[0].image_url && products[0].image_url.length > 0) {
         return (
           <ProductGallery
-            imagesList={selectedProduct.result.images}
-            onClickZoom={() => handleOpenModal("gallery")}
+            imagesList={products[0].image_url}
+            onClickZoom={() => {
+              handleOpenModal("gallery");
+            }}
           />
         );
       } else {
         return <IconNoPhoto />;
       }
     } else {
-      throw new Error("invalid object");
+      return;
     }
   };
 
-  const onSelectSize = (size: string) => {
+  /*   const onSelectSize = (size: string) => {
     handleCloseModal();
     dispatch(sizeUpdater({size: size, defaultSizeObject: undefined}));
-  };
-
+  }; */
+  /* 
   const onAddToBasket = (changeBy: number) => {
     if (productId !== undefined && selectedSize !== null) {
       dispatch(
@@ -88,8 +82,8 @@ const ProductView: FC<Props> = ({}) => {
       );
     }
   };
-
-  const renderSizes = () => {
+ */
+  /*   const renderSizes = () => {
     if (selectedProduct.result !== null && selectedProduct.error === null) {
       return (
         <SizeTableModal
@@ -100,13 +94,15 @@ const ProductView: FC<Props> = ({}) => {
     } else {
       throw new Error("invalid object");
     }
-  };
-
+  }; */
+  /* 
   const renderDescription = () => {
     if (selectedProduct.result !== null && selectedProduct.error === null) {
       return (
         <ProductDescription
-          onClickSize={() => handleOpenModal("size")}
+          onClickSize={() => {
+            handleOpenModal("size");
+          }}
           currentProduct={selectedProduct.result}
           currentSize={selectedSize}
           onAddToBasket={onAddToBasket}
@@ -115,7 +111,7 @@ const ProductView: FC<Props> = ({}) => {
     } else {
       throw new Error("invalid object");
     }
-  };
+  }; */
 
   const handleOpenModal = (modalType: "size" | "gallery") => {
     setModalVisible(modalType);
@@ -124,19 +120,10 @@ const ProductView: FC<Props> = ({}) => {
     setModalVisible(null);
   };
 
-  useEffect(() => {
-    return () => {
-      dispatch(productCleanup());
-      dispatch(sizeCleanup());
-    };
-  }, []);
-
-  return selectedProduct.error !== null ? (
-    <InvalidContent />
-  ) : (
+  return (
     <div className={css.product}>
       <PortalModal visible={modalVisible === "size"} lockBodyScroll={true}>
-        {renderSizes()}
+        {/* renderSizes() */}
         <IconButton
           onClick={handleCloseModal}
           IconComponent={IconCross}
@@ -154,7 +141,7 @@ const ProductView: FC<Props> = ({}) => {
           {renderGallery()}
         </div>
       </PortalModal>
-      {renderDescription()}
+      {/* renderDescription() */}
     </div>
   );
 };

@@ -1,27 +1,12 @@
-interface ObsoleteResponseObject {
-  products: Product[];
+//SECTION - data transfer object types
+
+interface ResponseObject {
+  success: boolean;
+  message: string;
+  payload?: ProductBasicDataResponse[] | ProductExtraDataResponse[];
 }
 
-interface ObsoleteProduct {
-  id: string;
-  gender: string;
-  category: string;
-  brand: string;
-  model: string;
-  shortDescription: string;
-  description: string;
-  features: string[];
-  price: number;
-  initialPrice: number;
-  rating: {reviews: number; value: number};
-  stock: {size: string; count: number}[];
-  thumbnail: string;
-  images: string[];
-}
-
-/* updated types */
-
-interface Product {
+interface ProductBasicDataResponse {
   id: string;
   brand: string;
   model: string;
@@ -29,29 +14,23 @@ interface Product {
   category: string;
   material: string;
   season: string;
-  short_description: string;
-  description: string;
-  features: string[];
-  price: number;
-  initial_price: number;
-  rating_reviews: number;
-  rating_value: number;
+  price: Decimal;
+  initial_price: Decimal;
   thumbnail: string;
   color: string;
+  stock_array: StockResponse[];
 }
 
-interface stock {
+interface StockResponse {
   size: string;
   count: number;
 }
 
-interface ProductWithData extends Product {
-  stock?: stock[];
-  imageUrlArray?: string[];
-}
-
-interface ExpectedResponse {
-  success: boolean;
-  message: string;
-  payload?: ProductWithData[];
+interface ProductExtraDataResponse extends ProductBasicDataResponse {
+  short_description: string;
+  description: string;
+  features: string[];
+  rating_reviews: number;
+  rating_value: Decimal;
+  image_url_array: string[];
 }

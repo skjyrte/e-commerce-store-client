@@ -19,9 +19,9 @@ async function handleRequest<T, D = any>(
     url: string,
     data: D,
     config: AxiosRequestConfig<D>
-  ) => Promise<AxiosResponse<ExpectedResponse>>,
+  ) => Promise<AxiosResponse<ResponseObject>>,
   requestConfig: {url: string; data: D; config: AxiosRequestConfig<D>},
-  successCallback?: (data: ExpectedResponse) => void,
+  successCallback?: (data: ResponseObject) => void,
   failureCallback?: (error: unknown) => void
 ): Promise<void> {
   try {
@@ -55,19 +55,24 @@ interface GetConfig {
   gender?: string;
   category?: string;
   id?: string;
+  baseUrl?: string;
 }
 
-const useMakeRequest = (requestType: RequestType, config: GetConfig) => {
-  const [responseData, setResponseData] = useState<null | ProductWithData[]>(
-    null
-  );
+const useMakeRequest = <
+  T extends ProductBasicDataResponse | ProductExtraDataResponse,
+>(
+  requestType: RequestType,
+  config: GetConfig
+) => {
+  const [responseData, setResponseData] = useState<null | T[]>(null);
 
   const memoConfig = useMemo(
     () => config,
-    [config.gender, config.category, config.id]
+    [config.gender, config.category, config.id, config.baseUrl]
   );
 
   async function handleGetData(config: GetConfig) {
+    const {baseUrl} = config;
     const createFilterQuery = (config: GetConfig) => {
       const {gender, category, id} = config;
       console.log("id passed to a hook");
@@ -76,6 +81,7 @@ const useMakeRequest = (requestType: RequestType, config: GetConfig) => {
         if (id) {
           return `/product/${id}`;
         } else if (gender) {
+          console.log(gender);
           if (category) {
             return `/gender/${gender}/category/${category}`;
           } else {
@@ -88,11 +94,19 @@ const useMakeRequest = (requestType: RequestType, config: GetConfig) => {
       }
     };
 
-    await handleRequest<ExpectedResponse>(
+    const createUrl = (baseUrl: unknown, toAppend: unknown) => {
+      if (typeof baseUrl !== "string" || typeof toAppend !== "string") {
+        throw new Error("invalid url");
+      } else {
+        return baseUrl + toAppend;
+      }
+    };
+
+    await handleRequest<T>(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       getAxiosWrapper<any>,
       {
-        url: createFilterQuery(config),
+        url: createUrl(baseUrl, createFilterQuery(config)),
         data: {},
         config: {
           params: {},
@@ -138,9 +152,6 @@ const useMakeRequest = (requestType: RequestType, config: GetConfig) => {
       await handleRequestType(requestType);
     };
     void asyncFunction();
-
-    console.log("config");
-    console.log(config);
   }, [requestType, memoConfig]);
 
   return responseData;

@@ -7,18 +7,18 @@ import IconNarrowArrowNext from "../icons/IconNarrowArrowNext";
 import DotCounter from "../DotCounter";
 import IconPictureLandscape from "../icons/IconPictureLandscape";
 
-type Props = {
-  imagesList: Array<string>;
+interface Props {
+  imagesList: string[];
   onClickZoom?: () => void;
-};
+}
 
-type ThumbnailSettings = {
+interface ThumbnailSettings {
   thumbnailWidth: number;
   thumbnailCountPerView: number;
   thumbnailOffsetMin: number;
   thumbnailOffsetStep: number;
   thumbnailOffsetMax: number;
-};
+}
 
 const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
@@ -26,6 +26,8 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
     useState<number>(0);
 
   const images = imagesList;
+  console.log("images");
+  console.log(typeof images);
 
   const thumbnailArray = images.map((element, index) => {
     return (
@@ -33,7 +35,9 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
         className={`${css.thumbnailList} ${index === currentIndex ? css.currentThumbnail : ""}`}
         key={index}
         draggable="false"
-        onClick={() => setCurrentIndex(index)}
+        onClick={() => {
+          setCurrentIndex(index);
+        }}
         id={index.toString()}
       >
         <img key={currentIndex} src={element} />
@@ -150,9 +154,14 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
   ) => {
     const {thumbnailWidth, thumbnailCountPerView} = thumbnailSettings;
     if (direction === "prev") {
-      return `${Math.floor(thumbnailCurrentOffset / thumbnailWidth)}`;
+      return Math.floor(thumbnailCurrentOffset / thumbnailWidth).toString();
     } else if (direction === "next") {
-      return `${Math.floor((images.length * thumbnailWidth - thumbnailCurrentOffset) / thumbnailWidth) - thumbnailCountPerView}`;
+      return (
+        Math.floor(
+          (images.length * thumbnailWidth - thumbnailCurrentOffset) /
+            thumbnailWidth
+        ) - thumbnailCountPerView
+      ).toString();
     } else throw new Error("invalid index");
   };
 
@@ -174,13 +183,17 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
         <IconButton
           IconComponent={IconNarrowArrowPrev}
           buttonClass={["carouselButton", "prev"]}
-          onClick={() => onSlideMainImage("prev", thumbnailSettings)}
+          onClick={() => {
+            onSlideMainImage("prev", thumbnailSettings);
+          }}
           isDisabled={currentIndex === 0}
         />
         <IconButton
           IconComponent={IconNarrowArrowNext}
           buttonClass={["carouselButton", "next"]}
-          onClick={() => onSlideMainImage("next", thumbnailSettings)}
+          onClick={() => {
+            onSlideMainImage("next", thumbnailSettings);
+          }}
           isDisabled={currentIndex === images.length - 1}
         />
         <img
@@ -194,14 +207,16 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
         <IconTextButton
           IconComponent={IconPictureLandscape}
           buttonClass={["carouselButton"]}
-          onClick={() => onSlideThumbnail("prev")}
+          onClick={() => {
+            onSlideThumbnail("prev");
+          }}
           isDisabled={disableThumbnailBtn("prev", thumbnailSettings)}
           displayedText={thumbnailCountRemaining("prev", thumbnailSettings)}
         />
         <div className={css.thumbnailBoxOverflow}>
           <ul
             style={{
-              transform: `translate(${-thumbnailCurrentOffset}px)`,
+              transform: `translate(${(-thumbnailCurrentOffset).toString()}px)`,
             }}
             className={css.thumbnailBox}
           >
@@ -211,7 +226,9 @@ const ProductGallery: FC<Props> = ({imagesList, onClickZoom}) => {
         <IconTextButton
           IconComponent={IconPictureLandscape}
           buttonClass={["carouselButton"]}
-          onClick={() => onSlideThumbnail("next")}
+          onClick={() => {
+            onSlideThumbnail("next");
+          }}
           isDisabled={disableThumbnailBtn("next", thumbnailSettings)}
           displayedText={thumbnailCountRemaining("next", thumbnailSettings)}
         />
