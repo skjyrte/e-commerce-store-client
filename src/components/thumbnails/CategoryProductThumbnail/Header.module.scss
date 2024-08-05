@@ -1,0 +1,40 @@
+.component-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 0;
+}
+
+.textfield-wrap {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.product-brand {
+  font-size: 16px;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
+}
+
+.product-model {
+  color: rgb(75 75 75);
+  margin: 5px auto;
+  font-size: 14px;
+}
+
+.current-price {
+  font-size: 18px;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
+}
+
+.is-loading {
+  width: 50%;
+  background-color: gray;
+  visibility: hidden;
+}

@@ -8,7 +8,7 @@ interface Props {
   isDisabled?: boolean;
   IconComponent: ElementType;
   dataTestId?: string;
-  buttonClass: Array<string>;
+  buttonClass: string[];
 }
 
 const IconButton: FC<Props> = ({

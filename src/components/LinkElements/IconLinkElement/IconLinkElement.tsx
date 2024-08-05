@@ -8,7 +8,7 @@ interface Props {
   IconComponent: ElementType;
   isDisabled?: boolean;
   dataTestId?: string;
-  linkClass?: Array<string>;
+  linkClass?: string[];
 }
 
 const IconLinkElement: FC<Props> = ({

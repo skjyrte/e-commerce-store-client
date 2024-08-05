@@ -3,6 +3,7 @@ import {useParams, Link} from "react-router-dom";
 import css from "./CategoryView.module.scss";
 import CategoryProductThumbnail from "../../components/thumbnails/CategoryProductThumbnail";
 import useMakeRequest from "../../hooks/useMakeRequest";
+import CategoryProductPlaceholder from "../../components/placeholders/CategoryProductPlaceholder/CategoryProductPlaceholder";
 
 enum RequestType {
   GET = "GET",
@@ -15,7 +16,7 @@ const CategoryView: FC = () => {
   const [hoveredID, setHoveredID] = useState<null | string>(null);
   const {gender} = useParams();
 
-  const products = useMakeRequest(RequestType.GET, {
+  const products = useMakeRequest<ProductBasicDataResponse>(RequestType.GET, {
     gender,
     baseUrl: process.env.REACT_APP_API_URL,
   });
@@ -25,6 +26,8 @@ const CategoryView: FC = () => {
   };
 
   const categoryContent = () => {
+    const placeholderArray = new Array(6).fill("placeholder");
+
     if (products) {
       return products.map((obj: ProductBasicDataResponse) => (
         <Link key={obj.id} className={css.linkWrapper} to={obj.id.toString()}>
@@ -37,7 +40,9 @@ const CategoryView: FC = () => {
         </Link>
       ));
     } else {
-      return <div>Loading...or no products?</div>;
+      return placeholderArray.map((obj: ProductBasicDataResponse, index) => (
+        <CategoryProductPlaceholder key={index} />
+      ));
     }
   };
   return <div className={css.gridWrapper}>{categoryContent()}</div>;

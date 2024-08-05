@@ -1,9 +1,9 @@
 .box {
   display: flex;
   flex-direction: column;
-  background-color: hsl(0, 0%, 100%);
+  background-color: hsl(0deg 0% 100%);
   max-width: 520px;
-  padding: 60px;
+  padding: 20px 60px;
 }
 
 .brand {
@@ -28,13 +28,16 @@
   display: flex;
   flex-direction: row;
   align-items: end;
+
   & .currentPrice {
     padding: 0 10px;
     font-size: 36px;
   }
+
   & .sale {
     color: red;
   }
+
   & .note {
     color: gray;
     font-size: 14px;
@@ -47,10 +50,12 @@
   flex-direction: row;
   align-items: end;
   padding-left: 10px;
+
   & .priceWas {
     text-decoration: line-through;
     font-size: 18px;
   }
+
   & .priceDrop {
     color: red;
     font-size: 18px;
@@ -61,8 +66,8 @@
 
 .SizeHeader {
   font-size: 16px;
-  text-shadow: rgb(255, 254, 252) 1px 0 10px;
-  margin: 20px 0 5px 0;
+  text-shadow: rgb(255 254 252) 1px 0 10px;
+  margin: 20px 0 5px;
   text-decoration: underline;
   word-spacing: 0.1rem;
   letter-spacing: 0.15rem;
@@ -76,7 +81,7 @@
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  height: 80px;
+  padding: 30px 0;
   border-radius: 10px;
 }
 
@@ -86,10 +91,18 @@
   align-items: center;
   width: 40px;
   height: 55px;
-  background-color: hsl(45, 100%, 95%);
-  border: 1px solid rgb(212, 212, 212);
+  background-color: hsl(45deg 100% 95%);
+  border: 1px solid rgb(212 212 212);
   font-variation-settings:
     "wght" 600,
     "YOPQ" 200;
   font-size: 24px;
+}
+
+.short-description-box {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
 }

@@ -2,11 +2,11 @@ import {createPortal} from "react-dom";
 import css from "./PortalModal.module.scss";
 import {FC, useEffect} from "react";
 
-type Props = {
+interface Props {
   visible: boolean;
   children: any;
   lockBodyScroll?: boolean;
-};
+}
 
 const PortalModal: FC<Props> = ({
   visible,
@@ -16,19 +16,18 @@ const PortalModal: FC<Props> = ({
   if (!visible) {
     return null;
   }
-  /* 
+
   useEffect(() => {
-    if (lockBodyScroll === true) {
+    if (lockBodyScroll) {
       document.body.style.overflow = "hidden";
     }
     return () => {
-      if (lockBodyScroll === true) {
+      if (lockBodyScroll) {
         document.body.style.overflow = "unset";
-      } else {
       }
     };
   });
- */
+
   return createPortal(
     <div className={css.portal}>{children}</div>,
     document.getElementById("root") as HTMLDivElement

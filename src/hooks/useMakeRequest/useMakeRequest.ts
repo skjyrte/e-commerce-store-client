@@ -4,8 +4,14 @@ import createAxiosInstance from "../../api/createAxiosInstance";
 
 const axiosInstance = createAxiosInstance();
 
+interface ResponseObject<T> {
+  success: boolean;
+  message: string;
+  payload?: T[];
+}
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getAxiosWrapper<T, R = AxiosResponse<T>, D = any>(
+function getAxiosWrapper<T, R = AxiosResponse<ResponseObject<T>>, D = any>(
   url: string,
   data: Record<string, never>,
   config: AxiosRequestConfig<D>
@@ -19,9 +25,9 @@ async function handleRequest<T, D = any>(
     url: string,
     data: D,
     config: AxiosRequestConfig<D>
-  ) => Promise<AxiosResponse<ResponseObject>>,
+  ) => Promise<AxiosResponse<ResponseObject<T>>>,
   requestConfig: {url: string; data: D; config: AxiosRequestConfig<D>},
-  successCallback?: (data: ResponseObject) => void,
+  successCallback?: (data: ResponseObject<T>) => void,
   failureCallback?: (error: unknown) => void
 ): Promise<void> {
   try {
@@ -81,7 +87,6 @@ const useMakeRequest = <
         if (id) {
           return `/product/${id}`;
         } else if (gender) {
-          console.log(gender);
           if (category) {
             return `/gender/${gender}/category/${category}`;
           } else {

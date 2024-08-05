@@ -5,7 +5,7 @@ import IconButton from "../buttons/IconButton";
 import CartLinkElement from "../LinkElements/CartLinkElement";
 import IconUserProfile from "../icons/IconUserProfile";
 
-const Header: FC = ({}) => {
+const Header: FC = () => {
   return (
     <>
       <div className={css.header}>
@@ -44,7 +44,9 @@ const Header: FC = ({}) => {
         <div className={css.imageButtonWrapper}>
           <IconButton
             IconComponent={IconUserProfile}
-            onClick={() => console.log("user profile")}
+            onClick={() => {
+              console.log("user profile");
+            }}
             buttonClass={["profileButton"]}
           />
         </div>

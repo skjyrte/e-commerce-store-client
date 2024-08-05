@@ -1,10 +1,10 @@
 import {FC} from "react";
 import css from "./DotCounter.module.scss";
 
-type Props = {
+interface Props {
   currentItem: number;
   totalItem: number;
-};
+}
 
 const DotCounter: FC<Props> = ({currentItem, totalItem}) => {
   const dotList = Array(totalItem)

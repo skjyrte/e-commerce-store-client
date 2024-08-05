@@ -1,0 +1,118 @@
+.main-component-box {
+  position: relative;
+  width: 100%;
+  height: 40px;
+  border: none;
+  box-sizing: border-box;
+}
+
+.hide-dropdown {
+  opacity: 0;
+  pointer-events: none;
+}
+
+.dropdown-wrapper {
+  width: 100%;
+}
+
+.dropdown-main-button {
+  width: calc(100% - 4px);
+  height: 100%;
+  background-color: white;
+  border-radius: 0;
+  font-size: 20px;
+  text-align: start;
+  border: 2px solid black;
+  font-family: inherit;
+  font-variation-settings:
+    "wght" 700,
+    "YOPQ" 300;
+}
+
+.button-size-text {
+  padding: 0 10px;
+}
+
+.button-placeholder-text {
+  font-size: 16px;
+  color: gray;
+}
+
+.dropdown-list-box {
+  position: relative;
+  width: 100%;
+  max-height: 250px;
+  background-color: white;
+  border-radius: 0;
+  border: 2px solid black;
+  font-size: 16px;
+  text-align: start;
+  padding: 0;
+  color: gray;
+  overflow-y: scroll;
+}
+
+.input-element {
+  width: 20px;
+  height: 20px;
+  left: 0;
+  position: absolute;
+  opacity: 0;
+}
+
+.li-wrapper {
+  display: flex;
+  width: 100%;
+  height: 50px;
+}
+
+.hidden-dropdown {
+  display: none;
+}
+
+.ul-label {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: 0 20px;
+
+  &:hover {
+    cursor: pointer;
+    background-color: lightgray;
+  }
+}
+
+.ul-content {
+  color: black;
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+  border-top: 1px solid lightgray;
+  border-bottom: 1px solid lightgray;
+  font-variation-settings:
+    "wght" 700,
+    "YOPQ" 300;
+}
+
+.li-wrapper:first-child .ul-content {
+  border-top: 1px solid transparent;
+}
+
+.li-wrapper:last-child .ul-content {
+  border-bottom: 1px solid transparent;
+}
+
+.hide-border-element {
+  position: absolute;
+  width: calc(100% - 4px);
+  height: 6px;
+  bottom: -6px;
+  left: 2px;
+  background-color: white;
+  z-index: 2;
+}
+
+.button-placeholder-text {
+  padding: 0 10px;
+}

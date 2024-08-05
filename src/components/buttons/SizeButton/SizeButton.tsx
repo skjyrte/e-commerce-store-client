@@ -3,11 +3,11 @@ import css from "./SizeButton.module.scss";
 import IconNarrowArrowNext from "../../icons/IconNarrowArrowNext";
 import classNames from "classnames";
 
-type Props = {
+interface Props {
   onClick: () => void;
   currentSize: string | null;
   avaiableItems?: number;
-};
+}
 
 const SizeButton: FC<Props> = ({onClick, currentSize, avaiableItems}) => {
   const displayStockInfo = (() => {

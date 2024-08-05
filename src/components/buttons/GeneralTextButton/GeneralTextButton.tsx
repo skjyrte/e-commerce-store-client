@@ -7,7 +7,7 @@ interface Props {
   displayedText: string;
   isDisabled?: boolean;
   dataTestId?: string;
-  classProp?: Array<string>;
+  classProp?: string[];
 }
 
 const GeneralTextButton: FC<Props> = ({

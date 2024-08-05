@@ -1,10 +1,10 @@
 import {FC} from "react";
 import css from "./CartFooter.module.scss";
 
-type Props = {
+interface Props {
   shippingTotal: number;
   subtotal: number;
-};
+}
 
 const CartFooter: FC<Props> = (props) => {
   const {shippingTotal, subtotal} = props;
@@ -17,11 +17,11 @@ const CartFooter: FC<Props> = (props) => {
     <div className={css.CartFooter}>
       <div className={css.shippingBox}>
         <div className={css.shipping}>Shipping</div>
-        <div className={css.shippingTotal}>${`${shippingTotalFormatted}`}</div>
+        <div className={css.shippingTotal}>${shippingTotalFormatted}</div>
       </div>
       <div className={css.priceBox}>
         <div className={css.price}>Total (incl. VAT)</div>
-        <div className={css.priceTotal}>${`${costTotalFormatted}`}</div>
+        <div className={css.priceTotal}>${costTotalFormatted}</div>
       </div>
     </div>
   );

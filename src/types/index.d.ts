@@ -1,11 +1,5 @@
 //SECTION - data transfer object types
 
-interface ResponseObject {
-  success: boolean;
-  message: string;
-  payload?: ProductBasicDataResponse[] | ProductExtraDataResponse[];
-}
-
 interface ProductBasicDataResponse {
   id: string;
   brand: string;
@@ -14,8 +8,8 @@ interface ProductBasicDataResponse {
   category: string;
   material: string;
   season: string;
-  price: Decimal;
-  initial_price: Decimal;
+  price: string;
+  initial_price: string;
   thumbnail: string;
   color: string;
   stock_array: StockResponse[];
@@ -31,6 +25,6 @@ interface ProductExtraDataResponse extends ProductBasicDataResponse {
   description: string;
   features: string[];
   rating_reviews: number;
-  rating_value: Decimal;
+  rating_value: string;
   image_url_array: string[];
 }

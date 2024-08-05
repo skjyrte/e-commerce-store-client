@@ -3,21 +3,28 @@ import css from "./SizeTableModal.module.scss";
 import AvailabilityBar from "../../AvailabilityBar";
 import classNames from "classnames";
 
-type sizeObject = {size: string; count: number};
+interface sizeObject {
+  size: string;
+  count: number;
+}
 
-type Props = {
+interface Props {
   sizesArray: sizeObject[];
   onClick: (size: string) => void;
-};
+}
 
 const SizeTableModal: FC<Props> = ({sizesArray, onClick}) => {
+  console.log("sizesarray");
+  console.log({sizesArray});
   const sizeTableArray = sizesArray.map((obj, index) => {
     const isBtnDisabled = obj.count === 0 ? true : false;
 
     return (
       <button
         className={classNames(css.sizeButton)}
-        onClick={() => onClick(obj.size)}
+        onClick={() => {
+          onClick(obj.size);
+        }}
         disabled={isBtnDisabled}
         key={index}
       >

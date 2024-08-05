@@ -1,4 +1,4 @@
-.thumbnailBox {
+.product-thumbnail {
   display: flex;
   border-radius: 5px;
   flex-direction: column;
@@ -8,101 +8,42 @@
   position: relative;
 }
 
-.content {
+.product-content {
   width: 100%;
   height: 100%;
-  border: 2px solid rgb(226, 226, 226);
+  border: 2px solid rgb(226 226 226);
   border-radius: 5px;
-  border-width: 2px 2px 2px 2px;
-  &.hovered {
-    border-width: 2px 2px 0 2px;
-    border-radius: 5px 5px 0px 0px;
+  border-width: 2px;
+
+  &.hovered-state {
+    border-width: 2px 2px 0;
+    border-radius: 5px 5px 0 0;
   }
 }
 
-.cardImageBox {
-  display: flex;
-  justify-content: center;
-  padding: 30px;
-  position: relative;
-  & > img {
-    width: 100%;
-    &.hovered {
-      transform: scale(1.05) translateY(-5px);
-      transition: all 300ms ease 0s;
-      cursor: pointer;
-    }
-  }
-}
-
-.rowContainer {
-  margin: auto;
-  width: 100%;
-  padding: 0 30px;
-  text-align: center;
-
-  &.brand {
-    margin: 5px auto;
-    font-size: 16px;
-    font-variation-settings:
-      "wght" 600,
-      "YOPQ" 300;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  &.priceBox {
-    display: flex;
-  }
-  &.model {
-    color: gray;
-    margin: 5px auto;
-    font-size: 14px;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-  &.price {
-    margin: 5px auto;
-    font-size: 18px;
-    font-variation-settings:
-      "wght" 600,
-      "YOPQ" 300;
-  }
-  &.initialPrice {
-    padding: 0 10px;
-    color: gray;
-    text-decoration: line-through;
-  }
-}
-
-.sizeBox {
+.size-container {
   padding: 5px;
   position: absolute;
   width: 100%;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
-  z-index: 3;
   top: calc(100%);
   left: 0;
-  height: auto;
   background-color: white;
   border-radius: 0 0 5px 5px;
   z-index: 2;
   transition: all 300ms ease 0s;
   cursor: pointer;
   margin-bottom: 50px;
-  border: 2px solid rgb(226, 226, 226);
-  border-width: 0px 2px 2px 2px;
-  :root {
-    --customHeight: calc(height);
-  }
+  border: 2px solid rgb(226 226 226);
+  border-width: 0 2px 2px;
+
   &.hide {
     display: none;
   }
 }
 
-.absoluteImageFrame {
+.image-overlay {
   position: absolute;
   background-color: transparent;
   width: 100%;
@@ -111,28 +52,18 @@
   border: none;
   height: calc(100%);
   z-index: 1;
-  &.hovered {
-    height: calc(100% + var(--getSizesHeight));
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.25);
+
+  &.hovered-state {
+    height: calc(100% + var(--get-sizes-height));
+    box-shadow: 0 0 10px rgb(0 0 0 / 25%);
     z-index: 2;
     border-radius: 5px;
     cursor: pointer;
   }
 }
 
-.sizeField {
-  font-size: 12px;
-  display: flex;
-  padding: 5px;
-  margin: 2px 0;
-  min-width: 30px;
-  flex-wrap: nowrap;
-  justify-content: center;
-  align-content: center;
-  height: 1.5rem;
-  border-right: 1px solid gray;
-}
-
-.outOfStock {
-  text-decoration: line-through;
+.loading-state-box {
+  width: 100%;
+  height: 115px;
+  margin-top: -20px;
 }

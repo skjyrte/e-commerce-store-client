@@ -4,11 +4,12 @@ import {selectCartItems} from "../../redux/selectors";
 import CartProductThumbnailLarge from "../../components/thumbnails/CartProductThumbnailLarge";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "../../redux/configureStore";
-import {changeItemsCount} from "../../redux/slices/responseSlice";
+/* import {changeItemsCount} from "../../redux/slices/responseSlice"; */
 import {addToCart} from "../../redux/slices/cartSlice";
 import CartFooter from "../../components/CartFooter";
 
 const CartView: FC = () => {
+  /* 
   const cartItems = useSelector(selectCartItems);
   const dispatch = useDispatch<AppDispatch>();
   const renderCartList = () => {
@@ -86,7 +87,7 @@ const CartView: FC = () => {
         <div className={css.emptyCart}>YOUR CART IS EMPTY</div>
       </div>
     );
-  }
+  } */
 };
 
 export default CartView;
