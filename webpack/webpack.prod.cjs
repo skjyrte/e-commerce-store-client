@@ -1,4 +1,5 @@
 const webpack = require("webpack");
+const Dotenv = require("dotenv-webpack");
 
 module.exports = {
   mode: "production",
@@ -9,5 +10,6 @@ module.exports = {
         process.env.REACT_APP_API_URL
       ),
     }),
+    new Dotenv({path: "./.env.prod"}),
   ],
 };
