@@ -100,6 +100,9 @@ const useMakeRequest = <
     };
 
     const createUrl = (baseUrl: unknown, toAppend: unknown) => {
+      console.log("logs to be deleted:");
+      console.log({baseUrl});
+      console.log({toAppend});
       if (typeof baseUrl !== "string" || typeof toAppend !== "string") {
         throw new Error("invalid url");
       } else {
