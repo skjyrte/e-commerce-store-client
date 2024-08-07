@@ -6,6 +6,7 @@ import CartLinkElement from "../LinkElements/CartLinkElement";
 import IconUserProfile from "../icons/IconUserProfile";
 import classNames from "classnames";
 import {useLocation} from "react-router-dom";
+import HeaderDrawer from "../drawers/HeaderDrawer";
 
 const Header: FC = () => {
   const location = useLocation();
@@ -13,6 +14,9 @@ const Header: FC = () => {
   return (
     <>
       <div className={classNames(css["main-header-container"])}>
+        <div className={css["drawer-wrapper"]}>
+          <HeaderDrawer />
+        </div>
         <ul className={classNames(css["choose-gender-list"])}>
           <li className={css["gender-button-wrapper"]}>
             <TextLinkElement
