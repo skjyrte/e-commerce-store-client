@@ -1,11 +1,10 @@
-.LinkElement {
+.link-element {
   display: flex;
   height: auto;
   justify-content: center;
   align-items: center;
-  color: var(--button-enabled);
+  color: black;
   border: none;
-  border-radius: 5px;
   padding: 10px;
   margin: 0 10px;
   letter-spacing: 0.2rem;
@@ -14,14 +13,21 @@
   font-variation-settings:
     "wght" 600,
     "YOPQ" 300;
+
   &:hover {
+    background-color: rgb(218 217 213);
   }
 }
 
-.medium {
+.link-element-active {
+  color: white;
+  background-color: black;
+}
+
+.link-element-size-medium {
   font-size: 16px;
 }
 
-.large {
+.link-element-size-large {
   font-size: 24px;
 }
