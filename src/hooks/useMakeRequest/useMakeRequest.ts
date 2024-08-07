@@ -61,7 +61,6 @@ interface GetConfig {
   gender?: string;
   category?: string;
   id?: string;
-  baseUrl?: string;
 }
 
 const useMakeRequest = <
@@ -74,15 +73,12 @@ const useMakeRequest = <
 
   const memoConfig = useMemo(
     () => config,
-    [config.gender, config.category, config.id, config.baseUrl]
+    [config.gender, config.category, config.id]
   );
 
   async function handleGetData(config: GetConfig) {
-    const {baseUrl} = config;
     const createFilterQuery = (config: GetConfig) => {
       const {gender, category, id} = config;
-      console.log("id passed to a hook");
-      console.log(id);
       try {
         if (id) {
           return `/product/${id}`;
@@ -99,22 +95,11 @@ const useMakeRequest = <
       }
     };
 
-    const createUrl = (baseUrl: unknown, toAppend: unknown) => {
-      console.log("logs to be deleted:");
-      console.log({baseUrl});
-      console.log({toAppend});
-      if (typeof baseUrl !== "string" || typeof toAppend !== "string") {
-        throw new Error("invalid url");
-      } else {
-        return baseUrl + toAppend;
-      }
-    };
-
     await handleRequest<T>(
       // eslint-disable-next-line @typescript-eslint/no-explicit-any
       getAxiosWrapper<any>,
       {
-        url: createUrl(baseUrl, createFilterQuery(config)),
+        url: createFilterQuery(config),
         data: {},
         config: {
           params: {},

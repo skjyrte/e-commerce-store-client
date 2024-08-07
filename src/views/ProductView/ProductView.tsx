@@ -27,7 +27,6 @@ const ProductView: FC = () => {
   const {id} = useParams();
   const products = useMakeRequest<ProductExtraDataResponse>(RequestType.GET, {
     id,
-    baseUrl: process.env.REACT_APP_API_URL,
   });
   const product = products ? products[0] : null;
   const defaultSize = product

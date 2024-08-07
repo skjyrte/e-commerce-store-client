@@ -18,7 +18,6 @@ const CategoryView: FC = () => {
 
   const products = useMakeRequest<ProductBasicDataResponse>(RequestType.GET, {
     gender,
-    baseUrl: process.env.REACT_APP_API_URL,
   });
 
   const onThumbnailHover = (id: null | string) => {
