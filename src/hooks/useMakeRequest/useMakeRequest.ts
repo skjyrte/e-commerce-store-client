@@ -2,25 +2,38 @@ import {useState, useEffect, useMemo} from "react";
 import {AxiosResponse, AxiosRequestConfig} from "axios";
 import createAxiosInstance from "../../api/createAxiosInstance";
 
-const axiosInstance = createAxiosInstance();
-
 interface ResponseObject<T> {
   success: boolean;
   message: string;
   payload?: T[];
 }
 
+enum RequestType {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+}
+
+interface GetConfig {
+  gender?: string;
+  category?: string;
+  id?: string;
+}
+
+const axiosInstance = createAxiosInstance();
+
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-function getAxiosWrapper<T, R = AxiosResponse<ResponseObject<T>>, D = any>(
+const getAxiosWrapper = <T, R = AxiosResponse<ResponseObject<T>>, D = any>(
   url: string,
   data: Record<string, never>,
   config: AxiosRequestConfig<D>
-) {
+) => {
   return axiosInstance.get<T, R, D>(url, config);
-}
+};
 
-// eslint-disable-next-line
-async function handleRequest<T, D = any>(
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const handleRequest = async <T, D = any>(
   requestPromise: (
     url: string,
     data: D,
@@ -29,7 +42,7 @@ async function handleRequest<T, D = any>(
   requestConfig: {url: string; data: D; config: AxiosRequestConfig<D>},
   successCallback?: (data: ResponseObject<T>) => void,
   failureCallback?: (error: unknown) => void
-): Promise<void> {
+): Promise<void> => {
   try {
     const response = await requestPromise(
       requestConfig.url,
@@ -48,27 +61,30 @@ async function handleRequest<T, D = any>(
       failureCallback(err);
     }
   }
-}
+};
 
-enum RequestType {
-  GET = "GET",
-  POST = "POST",
-  PUT = "PUT",
-  DELETE = "DELETE",
-}
+const createFilterQuery = (config: GetConfig) => {
+  const {gender, category, id} = config;
+  try {
+    if (id) {
+      return `/product/${id}`;
+    } else if (gender) {
+      if (category) {
+        return `/gender/${gender}/category/${category}`;
+      } else {
+        return `/gender/${gender}`;
+      }
+    } else return "";
+  } catch (e) {
+    console.error(e);
+    return "";
+  }
+};
 
-interface GetConfig {
-  gender?: string;
-  category?: string;
-  id?: string;
-}
-
-const useMakeRequest = <
+//ANCHOR - Hook
+function useMakeRequest<
   T extends ProductBasicDataResponse | ProductExtraDataResponse,
->(
-  requestType: RequestType,
-  config: GetConfig
-) => {
+>(requestType: RequestType, config: GetConfig) {
   const [responseData, setResponseData] = useState<null | T[]>(null);
 
   const memoConfig = useMemo(
@@ -76,28 +92,9 @@ const useMakeRequest = <
     [config.gender, config.category, config.id]
   );
 
-  async function handleGetData(config: GetConfig) {
-    const createFilterQuery = (config: GetConfig) => {
-      const {gender, category, id} = config;
-      try {
-        if (id) {
-          return `/product/${id}`;
-        } else if (gender) {
-          if (category) {
-            return `/gender/${gender}/category/${category}`;
-          } else {
-            return `/gender/${gender}`;
-          }
-        } else return "";
-      } catch (e) {
-        console.error(e);
-        return "";
-      }
-    };
-
+  const handleGetData = async (config: GetConfig) => {
     await handleRequest<T>(
-      // eslint-disable-next-line @typescript-eslint/no-explicit-any
-      getAxiosWrapper<any>,
+      getAxiosWrapper<T>,
       {
         url: createFilterQuery(config),
         data: {},
@@ -115,9 +112,12 @@ const useMakeRequest = <
         console.error(e);
       }
     );
-  }
+  };
 
-  async function handleRequestType(requestType: RequestType) {
+  const handleRequestType = async (
+    requestType: RequestType,
+    config: GetConfig
+  ) => {
     try {
       switch (requestType) {
         case RequestType.GET:
@@ -138,16 +138,16 @@ const useMakeRequest = <
     } catch (e) {
       console.error(e);
     }
-  }
+  };
 
   useEffect(() => {
     const asyncFunction = async () => {
-      await handleRequestType(requestType);
+      await handleRequestType(requestType, config);
     };
     void asyncFunction();
   }, [requestType, memoConfig]);
 
   return responseData;
-};
+}
 
 export default useMakeRequest;
