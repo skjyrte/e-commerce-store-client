@@ -1,6 +1,6 @@
 import {FC} from "react";
 import css from "./AppContainer.module.scss";
-import Header from "../Header";
+import MainHeader from "../MainHeader";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import ProductView from "../../views/ProductView";
 import CategoryView from "../../views/CategoryView";
@@ -11,7 +11,7 @@ const AppContainer: FC = () => {
   return (
     <BrowserRouter>
       <div className={css["app-container"]}>
-        <Header />
+        <MainHeader />
         <Routes>
           <Route path="/" element={<div>home</div>} />
           <Route path="/home" element={<div>home</div>} />

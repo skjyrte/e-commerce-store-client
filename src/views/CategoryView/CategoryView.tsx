@@ -16,8 +16,6 @@ const CategoryView: FC = () => {
   const [hoveredID, setHoveredID] = useState<null | string>(null);
   const {gender} = useParams();
 
-  console.log({gender});
-
   const products = useMakeRequest<ProductBasicDataResponse>(RequestType.GET, {
     gender,
   });

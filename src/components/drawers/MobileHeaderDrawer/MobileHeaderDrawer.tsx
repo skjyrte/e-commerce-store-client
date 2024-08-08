@@ -3,7 +3,7 @@ import Drawer from "rc-drawer";
 import "rc-drawer/assets/index.css";
 import IconButton from "../../buttons/IconButton";
 import IconHeader from "../../icons/IconHeader";
-import css from "./HeaderDrawer.module.scss";
+import css from "./MobileHeaderDrawer.module.scss";
 import classNames from "classnames";
 import TextLinkElement from "../../LinkElements/TextLinkElement";
 import IconCross from "../../icons/IconCross";
@@ -12,7 +12,7 @@ interface Props {
   classList?: string[];
 }
 
-const HeaderDrawer: FC<Props> = (props) => {
+const MobileHeaderDrawer: FC<Props> = (props) => {
   const {classList} = props;
 
   const [visible, setVisible] = useState(false);
@@ -75,4 +75,4 @@ const HeaderDrawer: FC<Props> = (props) => {
   );
 };
 
-export default HeaderDrawer;
+export default MobileHeaderDrawer;
