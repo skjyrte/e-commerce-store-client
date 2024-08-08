@@ -11,10 +11,6 @@ import CategoryHeader from "./CategoryHeader";
 
 const Header: FC = () => {
   const location = useLocation();
-  console.log(location.hash);
-  console.log(location.pathname);
-  console.log(location.search);
-
   return (
     <>
       <div className={classNames(css["main-header-container"])}>

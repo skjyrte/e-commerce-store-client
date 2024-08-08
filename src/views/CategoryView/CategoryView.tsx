@@ -16,6 +16,8 @@ const CategoryView: FC = () => {
   const [hoveredID, setHoveredID] = useState<null | string>(null);
   const {gender} = useParams();
 
+  console.log({gender});
+
   const products = useMakeRequest<ProductBasicDataResponse>(RequestType.GET, {
     gender,
   });
@@ -29,7 +31,11 @@ const CategoryView: FC = () => {
 
     if (products) {
       return products.map((obj: ProductBasicDataResponse) => (
-        <Link key={obj.id} className={css.linkWrapper} to={obj.id.toString()}>
+        <Link
+          key={obj.id}
+          className={css.linkWrapper}
+          to={`/product/${obj.id}`}
+        >
           <CategoryProductThumbnail
             key={obj.id}
             productData={obj}
