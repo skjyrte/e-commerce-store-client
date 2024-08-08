@@ -14,10 +14,14 @@ enum RequestType {
 
 const CategoryView: FC = () => {
   const [hoveredID, setHoveredID] = useState<null | string>(null);
-  const {gender} = useParams();
+  const {gender, category} = useParams();
+
+  console.log("gender", "category");
+  console.log(gender, category);
 
   const products = useMakeRequest<ProductBasicDataResponse>(RequestType.GET, {
     gender,
+    category,
   });
 
   const onThumbnailHover = (id: null | string) => {
@@ -27,6 +31,8 @@ const CategoryView: FC = () => {
   const categoryContent = () => {
     const placeholderArray = new Array(6).fill("placeholder");
 
+    console.log("check here, products length should be 0");
+    console.log(products);
     if (products) {
       return products.map((obj: ProductBasicDataResponse) => (
         <Link
