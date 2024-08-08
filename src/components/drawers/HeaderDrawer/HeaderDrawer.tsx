@@ -12,7 +12,7 @@ interface Props {
   classList?: string[];
 }
 
-const MyDrawer: FC<Props> = (props) => {
+const HeaderDrawer: FC<Props> = (props) => {
   const {classList} = props;
 
   const [visible, setVisible] = useState(false);
@@ -36,8 +36,14 @@ const MyDrawer: FC<Props> = (props) => {
         />
       </div>
 
-      <Drawer open={visible} onClose={toggleDrawer} placement="left">
-        <div style={{width: 250, padding: 20}}>
+      <Drawer
+        width={"min(100vw, 400px)"}
+        className={css["drawer-component"]}
+        open={visible}
+        onClose={toggleDrawer}
+        placement="left"
+      >
+        <div>
           <ul className={classNames(css["choose-gender-list"])}>
             <li onClick={toggleDrawer} className={css["gender-button-wrapper"]}>
               <TextLinkElement
@@ -69,4 +75,4 @@ const MyDrawer: FC<Props> = (props) => {
   );
 };
 
-export default MyDrawer;
+export default HeaderDrawer;

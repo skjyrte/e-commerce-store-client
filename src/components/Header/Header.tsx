@@ -7,9 +7,13 @@ import IconUserProfile from "../icons/IconUserProfile";
 import classNames from "classnames";
 import {useLocation} from "react-router-dom";
 import HeaderDrawer from "../drawers/HeaderDrawer";
+import CategoryHeader from "./CategoryHeader";
 
 const Header: FC = () => {
   const location = useLocation();
+  console.log(location.hash);
+  console.log(location.pathname);
+  console.log(location.search);
 
   return (
     <>
@@ -57,6 +61,9 @@ const Header: FC = () => {
           </div>
         </div>
       </div>
+      <CategoryHeader
+        categoryList={["sneakers", "running", "casual", "outdoor"]}
+      />
       <div className={classNames(css["main-header-border-element"])}></div>
     </>
   );
