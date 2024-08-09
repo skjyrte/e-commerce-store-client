@@ -19,10 +19,12 @@ const CategoryView: FC = () => {
   console.log("gender", "category");
   console.log(gender, category);
 
-  const products = useMakeRequest<ProductBasicDataResponse>(RequestType.GET, {
+  const request = useMakeRequest<ProductBasicDataResponse>(RequestType.GET, {
     gender,
     category,
   });
+
+  const products = request.responseData;
 
   const onThumbnailHover = (id: null | string) => {
     setHoveredID(id);
@@ -31,8 +33,6 @@ const CategoryView: FC = () => {
   const categoryContent = () => {
     const placeholderArray = new Array(6).fill("placeholder");
 
-    console.log("check here, products length should be 0");
-    console.log(products);
     if (products) {
       return products.map((obj: ProductBasicDataResponse) => (
         <Link
@@ -49,9 +49,15 @@ const CategoryView: FC = () => {
         </Link>
       ));
     } else {
-      return placeholderArray.map((obj: ProductBasicDataResponse, index) => (
-        <CategoryProductPlaceholder key={index} />
-      ));
+      if (request.loader) {
+        return placeholderArray.map((obj: ProductBasicDataResponse, index) => (
+          <CategoryProductPlaceholder key={index} />
+        ));
+      } else if (!request.loader) {
+        return (
+          <div className={css["no-products-found"]}> no products found </div>
+        );
+      }
     }
   };
   return <div className={css.gridWrapper}>{categoryContent()}</div>;

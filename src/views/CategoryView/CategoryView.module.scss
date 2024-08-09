@@ -11,6 +11,12 @@ a {
   text-decoration: inherit; /* no underline */
 }
 
+.no-products-found {
+  display: flex;
+  width: 100%;
+  justify-content: center;
+}
+
 /* @media (min-width: 600px) {
   .gridWrapper {
     grid-template-columns: repeat(auto-fit, minmax(calc(50% - 1rem), 1fr));

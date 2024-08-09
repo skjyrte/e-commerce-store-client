@@ -1,5 +1,5 @@
 import {useState, useEffect, useMemo} from "react";
-import {AxiosResponse, AxiosRequestConfig} from "axios";
+import axios, {AxiosResponse, AxiosRequestConfig} from "axios";
 import createAxiosInstance from "../../api/createAxiosInstance";
 
 interface ResponseObject<T> {
@@ -19,6 +19,11 @@ interface GetConfig {
   gender?: string;
   category?: string;
   id?: string;
+}
+
+interface ErrorObject {
+  status?: number;
+  statusText: string;
 }
 
 const axiosInstance = createAxiosInstance();
@@ -41,9 +46,15 @@ const handleRequest = async <T, D = any>(
   ) => Promise<AxiosResponse<ResponseObject<T>>>,
   requestConfig: {url: string; data: D; config: AxiosRequestConfig<D>},
   successCallback?: (data: ResponseObject<T>) => void,
-  failureCallback?: (error: unknown) => void
+  failureCallback?: (error: unknown) => void,
+  loaderCallback?: (loader: string | null) => void,
+  loaderType?: string
 ): Promise<void> => {
   try {
+    if (loaderCallback && loaderType) {
+      loaderCallback(loaderType);
+    }
+
     const response = await requestPromise(
       requestConfig.url,
       requestConfig.data,
@@ -55,10 +66,20 @@ const handleRequest = async <T, D = any>(
         successCallback(response.data);
       }
     }
-  } catch (err) {
-    console.log(err);
-    if (failureCallback) {
-      failureCallback(err);
+    if (loaderCallback) {
+      loaderCallback(null);
+    }
+  } catch (e) {
+    console.error(e);
+    if (axios.isCancel(e)) {
+      return;
+    } else {
+      if (failureCallback) {
+        failureCallback(e);
+      }
+      if (loaderCallback) {
+        loaderCallback(null);
+      }
     }
   }
 };
@@ -86,6 +107,11 @@ function useMakeRequest<
   T extends ProductBasicDataResponse | ProductExtraDataResponse,
 >(requestType: RequestType, config: GetConfig) {
   const [responseData, setResponseData] = useState<null | T[]>(null);
+  const [error, setError] = useState<ErrorObject | null>(null);
+  const [loader, setLoader] = useState<string | null>(null);
+
+  console.log({error});
+  console.log({loader});
 
   const memoConfig = useMemo(
     () => config,
@@ -108,9 +134,21 @@ function useMakeRequest<
         }
       },
       (e) => {
+        if (axios.isAxiosError(e) && e.response) {
+          setError({
+            status: e.response.status,
+            statusText: e.response.statusText,
+          });
+        } else {
+          setError({statusText: "unknown error"});
+        }
         setResponseData(null);
         console.error(e);
-      }
+      },
+      (loader) => {
+        setLoader(loader);
+      },
+      RequestType.GET
     );
   };
 
@@ -147,7 +185,7 @@ function useMakeRequest<
     void asyncFunction();
   }, [requestType, memoConfig]);
 
-  return responseData;
+  return {responseData, error, loader};
 }
 
 export default useMakeRequest;
