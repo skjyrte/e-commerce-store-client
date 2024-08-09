@@ -48,7 +48,7 @@ const CategoryProductThumbnail: FC<Props> = ({
   return (
     <article
       key={id}
-      className={css["product-thumbnail"]}
+      className={classNames(css["product-thumbnail"])}
       onMouseEnter={() => {
         onHover(id);
       }}
@@ -66,7 +66,8 @@ const CategoryProductThumbnail: FC<Props> = ({
       <div
         className={classNames(
           css["product-content"],
-          hovered ? css["hovered-state"] : ""
+          hovered ? css["hovered-state"] : "",
+          isLoading && css["loading-state"]
         )}
       >
         <Figure

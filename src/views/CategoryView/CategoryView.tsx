@@ -31,7 +31,7 @@ const CategoryView: FC = () => {
   };
 
   const categoryContent = () => {
-    const placeholderArray = new Array(6).fill("placeholder");
+    const placeholderArray = new Array(3).fill("placeholder");
 
     if (products) {
       return products.map((obj: ProductBasicDataResponse) => (

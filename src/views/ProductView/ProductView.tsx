@@ -25,9 +25,12 @@ const ProductView: FC = () => {
   const [selectedSize, setSelectedSize] = useState<null | string>(null);
 
   const {id} = useParams();
-  const products = useMakeRequest<ProductExtraDataResponse>(RequestType.GET, {
+  const response = useMakeRequest<ProductExtraDataResponse>(RequestType.GET, {
     id,
   });
+
+  const products = response.responseData;
+
   const product = products ? products[0] : null;
   const defaultSize = product
     ? product.stock_array.find((sizeObj) => sizeObj.count > 0)

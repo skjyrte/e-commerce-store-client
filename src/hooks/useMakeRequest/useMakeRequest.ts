@@ -146,6 +146,7 @@ function useMakeRequest<
         console.error(e);
       },
       (loader) => {
+        if (loader) setResponseData(null);
         setLoader(loader);
       },
       RequestType.GET
