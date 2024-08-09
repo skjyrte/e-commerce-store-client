@@ -48,7 +48,7 @@ const Header: FC = () => {
                     setActiveDrawer(null);
                     setTimeout(() => {
                       setActiveDrawer("men");
-                    }, 200);
+                    }, 100);
                   }
                 }}
                 className={css["gender-button-wrapper"]}
@@ -67,7 +67,7 @@ const Header: FC = () => {
                     setActiveDrawer(null);
                     setTimeout(() => {
                       setActiveDrawer("women");
-                    }, 200);
+                    }, 100);
                   }
                 }}
                 className={css["gender-button-wrapper"]}

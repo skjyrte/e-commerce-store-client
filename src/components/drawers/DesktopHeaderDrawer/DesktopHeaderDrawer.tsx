@@ -31,7 +31,12 @@ const DesktopHeaderDrawer: FC<Props> = (props) => {
         !activeGender && css["hidden-drawer"]
       )}
     >
-      <ul className={classNames(css["choose-category-list"])}>
+      <ul
+        className={classNames(
+          css["choose-category-list"],
+          !activeGender && css["hidden-list"]
+        )}
+      >
         {categoryLinks}
       </ul>
     </div>

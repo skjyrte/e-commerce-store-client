@@ -1,14 +1,13 @@
 .desktop-header-drawer-container {
   position: absolute;
   z-index: 1;
-  background-color: white;
   display: flex;
   height: 80px;
   padding: 0 20px;
   align-items: center;
   top: 80px;
   width: 100%;
-  transition: height 0.3s;
+  transition: height 0.1s;
 
   &.hidden-drawer {
     height: 0;
@@ -16,12 +15,20 @@
   }
 
   .choose-category-list {
-    padding: 10px;
     display: flex;
     justify-content: center;
     align-self: center;
     width: 100%;
-    height: 100%;
+    height: 50px;
+    transition: height 0.2s;
+    transition-delay: 300ms;
+    overflow: hidden;
+
+    &.hidden-list {
+      height: 0;
+      transition: height 0.1s;
+      transition-delay: 0;
+    }
 
     .category-button-wrapper {
       display: flex;
