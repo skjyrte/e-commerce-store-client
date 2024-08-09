@@ -15,9 +15,8 @@ const DesktopHeaderDrawer: FC<Props> = (props) => {
     return (
       <li className={css["category-button-wrapper"]}>
         <TextLinkElement
-          displayedText={category}
+          displayedText={category.toUpperCase()}
           path={activeGender ? `${activeGender}/${category}` : ""}
-          active={location.pathname.includes(`/${category}`)}
           size="medium"
           key={`cat-li-${index.toString()}`}
         />

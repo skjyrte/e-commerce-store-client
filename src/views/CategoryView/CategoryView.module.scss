@@ -14,14 +14,16 @@ a {
 .no-products-found {
   display: flex;
   width: 100%;
+  margin-top: 33vh;
   justify-content: center;
+  align-items: center;
 }
 
-/* @media (min-width: 600px) {
+@media (width >= 600px) {
   .gridWrapper {
     grid-template-columns: repeat(auto-fit, minmax(calc(50% - 1rem), 1fr));
   }
-} */
+}
 
 @media (width >= 766px) {
   .gridWrapper {

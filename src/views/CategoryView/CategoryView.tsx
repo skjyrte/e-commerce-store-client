@@ -55,7 +55,10 @@ const CategoryView: FC = () => {
         ));
       } else if (!request.loader) {
         return (
-          <div className={css["no-products-found"]}> no products found </div>
+          <div className={css["no-products-found"]}>
+            {" "}
+            No Products Match Criteria{" "}
+          </div>
         );
       }
     }

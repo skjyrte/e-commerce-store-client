@@ -5,7 +5,6 @@ import IconButton from "../buttons/IconButton";
 import CartLinkElement from "../LinkElements/CartLinkElement";
 import IconUserProfile from "../icons/IconUserProfile";
 import classNames from "classnames";
-import {useLocation} from "react-router-dom";
 import MobileHeaderDrawer from "../drawers/MobileHeaderDrawer";
 import DesktopHeaderDrawer from "../drawers/DesktopHeaderDrawer";
 
@@ -19,7 +18,7 @@ const Header: FC = () => {
   };
   console.log("activeDrawer");
   console.log(activeDrawer);
-  const location = useLocation();
+
   return (
     <>
       <div className={classNames(css["main-header-relative-container"])}>
@@ -45,28 +44,38 @@ const Header: FC = () => {
             <ul className={classNames(css["choose-gender-list"])}>
               <li
                 onMouseOver={() => {
-                  setActiveDrawer("men");
+                  if (activeDrawer !== "men") {
+                    setActiveDrawer(null);
+                    setTimeout(() => {
+                      setActiveDrawer("men");
+                    }, 200);
+                  }
                 }}
                 className={css["gender-button-wrapper"]}
               >
                 <TextLinkElement
                   displayedText="Men"
                   path={"/men"}
-                  active={location.pathname.includes("/men")}
+                  active={activeDrawer === "men"}
                   size="medium"
                   key={"li-1"}
                 />
               </li>
               <li
                 onMouseOver={() => {
-                  setActiveDrawer("women");
+                  if (activeDrawer !== "women") {
+                    setActiveDrawer(null);
+                    setTimeout(() => {
+                      setActiveDrawer("women");
+                    }, 200);
+                  }
                 }}
                 className={css["gender-button-wrapper"]}
               >
                 <TextLinkElement
                   displayedText="Women"
                   path={"/women"}
-                  active={location.pathname.includes("/women")}
+                  active={activeDrawer === "women"}
                   size="medium"
                   key={"li-2"}
                 />
