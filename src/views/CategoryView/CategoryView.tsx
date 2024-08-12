@@ -31,7 +31,7 @@ const CategoryView: FC = () => {
   };
 
   const categoryContent = () => {
-    const placeholderArray = new Array(3).fill("placeholder");
+    const placeholderArray = new Array(6).fill("placeholder");
 
     if (products) {
       return products.map((obj: ProductBasicDataResponse) => (
@@ -53,11 +53,10 @@ const CategoryView: FC = () => {
         return placeholderArray.map((obj: ProductBasicDataResponse, index) => (
           <CategoryProductPlaceholder key={index} />
         ));
-      } else if (!request.loader) {
+      } else {
         return (
           <div className={css["no-products-found"]}>
-            {" "}
-            No Products Match Criteria{" "}
+            No Products Match Criteria
           </div>
         );
       }

@@ -1,4 +1,4 @@
-.box {
+.product-description-container {
   display: flex;
   flex-direction: column;
   background-color: hsl(0deg 0% 100%);
@@ -6,77 +6,7 @@
   padding: 20px 60px;
 }
 
-.brand {
-  font-size: 14px;
-  padding: 10px 0;
-  letter-spacing: 0.2rem;
-}
-
-.model {
-  font-size: 36px;
-  padding: 10px 0;
-}
-
-.description {
-  padding: 10px 0;
-  display: flex;
-  flex-direction: row;
-}
-
-.currentPriceWrapper {
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: end;
-
-  & .currentPrice {
-    padding: 0 10px;
-    font-size: 36px;
-  }
-
-  & .sale {
-    color: red;
-  }
-
-  & .note {
-    color: gray;
-    font-size: 14px;
-  }
-}
-
-.pastPriceWrapper {
-  padding: 10px;
-  display: flex;
-  flex-direction: row;
-  align-items: end;
-  padding-left: 10px;
-
-  & .priceWas {
-    text-decoration: line-through;
-    font-size: 18px;
-  }
-
-  & .priceDrop {
-    color: red;
-    font-size: 18px;
-    border-radius: 5px;
-    padding: 0 10px;
-  }
-}
-
-.SizeHeader {
-  font-size: 16px;
-  text-shadow: rgb(255 254 252) 1px 0 10px;
-  margin: 20px 0 5px;
-  text-decoration: underline;
-  word-spacing: 0.1rem;
-  letter-spacing: 0.15rem;
-  font-variation-settings:
-    "wght" 400,
-    "YOPQ" 300;
-}
-
-.actionBox {
+.user-action-container {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -85,21 +15,7 @@
   border-radius: 10px;
 }
 
-.itemsCount {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 55px;
-  background-color: hsl(45deg 100% 95%);
-  border: 1px solid rgb(212 212 212);
-  font-variation-settings:
-    "wght" 600,
-    "YOPQ" 200;
-  font-size: 24px;
-}
-
-.short-description-box {
+.short-description-container {
   display: flex;
   width: 100%;
   justify-content: center;

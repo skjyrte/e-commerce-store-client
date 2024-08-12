@@ -36,7 +36,7 @@ const ProductDescription: FC<Props> = ({
   };
 
   return (
-    <div className={css.box}>
+    <div className={css["product-description-container"]}>
       <HeaderComponent
         brand={brand}
         model={model}
@@ -44,13 +44,15 @@ const ProductDescription: FC<Props> = ({
         category={category}
       />
       <DiscountComponent sellingPrice={price} listingPrice={initial_price} />
-      <div className={css["short-description-box"]}>{short_description}</div>
+      <div className={css["short-description-container"]}>
+        {short_description}
+      </div>
       <SizeDropdown
         onSelectSize={onSelectSize}
         stockArray={stock_array}
         selectedSize={selectedSize}
       />
-      <div className={css.actionBox}>
+      <div className={css["user-action-container"]}>
         <GeneralTextButton
           onClick={() => {
             setSelectedSize(null);

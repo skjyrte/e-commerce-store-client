@@ -7,7 +7,6 @@ import IconButton from "../../components/buttons/IconButton";
 import IconCross from "../../components/icons/IconCross";
 import {useParams} from "react-router-dom";
 import IconNoPhoto from "../../components/icons/IconNoPhoto";
-import SizeTableModal from "../../components/modals/SizeTableModal";
 import useMakeRequest from "../../hooks/useMakeRequest";
 import FeaturesAccordion from "../../components/FeaturesAccordion";
 
@@ -59,34 +58,22 @@ const ProductView: FC = () => {
     }
   };
 
-  const onSelectSize = (size: string) => {
-    setSelectedSize(size);
-    handleCloseModal();
-  };
-
-  const renderSizes = () => {
-    if (selectedSize !== null && product) {
-      return (
-        <SizeTableModal
-          sizesArray={product.stock_array}
-          onClick={onSelectSize}
-        />
-      );
-    }
-  };
-
   const renderDescription = () => {
-    if (product !== null) {
+    if (product) {
       return (
-        <ProductDescription
-          onClickSize={() => {
-            handleOpenModal("size");
-          }}
-          currentProduct={product}
-          currentSize={selectedSize}
-          //eslint-disable-next-line
-          onAddToBasket={() => {}}
-        />
+        <>
+          <ProductDescription
+            onClickSize={() => {
+              handleOpenModal("size");
+            }}
+            currentProduct={product}
+            currentSize={selectedSize}
+            onAddToBasket={() => {
+              console.log("add to basket");
+            }}
+          />
+          <FeaturesAccordion product={product} />
+        </>
       );
     }
   };
@@ -100,18 +87,19 @@ const ProductView: FC = () => {
   };
 
   return (
-    <div className={css.product}>
-      <PortalModal visible={modalVisible === "size"} lockBodyScroll={true}>
-        {renderSizes()}
-        <IconButton
-          onClick={handleCloseModal}
-          IconComponent={IconCross}
-          buttonClass={["closeModalButton", "size"]}
-        />
-      </PortalModal>
-      <div className={css.mainGalleryWrapper}>{renderGallery(false)}</div>
+    <>
+      <div className={css["product-container"]}>
+        <div className={css["inline-gallery-wrapper"]}>
+          {renderGallery(false)}
+        </div>
+        <div className={css["product-description-wrapper"]}>
+          {renderDescription()}
+        </div>
+      </div>
+      {/* portal is being created at html root. It does not matter
+       where exactly we place it here */}
       <PortalModal visible={modalVisible === "gallery"}>
-        <div className={css.portalGalleryWrapper}>
+        <div className={css["portal-galery-content"]}>
           <IconButton
             onClick={handleCloseModal}
             IconComponent={IconCross}
@@ -120,11 +108,7 @@ const ProductView: FC = () => {
           {renderGallery(true)}
         </div>
       </PortalModal>
-      <div className={css.descriptionWrapper}>
-        {renderDescription()}
-        {product ? <FeaturesAccordion product={product} /> : <></>}
-      </div>
-    </div>
+    </>
   );
 };
 
