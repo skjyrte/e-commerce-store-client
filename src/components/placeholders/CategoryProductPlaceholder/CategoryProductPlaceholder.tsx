@@ -1,7 +1,7 @@
 import {FC} from "react";
 import css from "./CategoryProductPlaceholder.module.scss";
 import FigurePlaceholder from "./FigurePlaceholder";
-import TextLoaderComponent from "./Loaders/TextLoaderComponent";
+import TextLoader from "../../loaders/TextLoader";
 
 const CategoryProductPlaceholder: FC = () => {
   return (
@@ -9,7 +9,7 @@ const CategoryProductPlaceholder: FC = () => {
       <div className={css["product-content"]}>
         <FigurePlaceholder />
         <div className={css["loading-state-box"]}>
-          <TextLoaderComponent />
+          <TextLoader />
         </div>
       </div>
     </article>

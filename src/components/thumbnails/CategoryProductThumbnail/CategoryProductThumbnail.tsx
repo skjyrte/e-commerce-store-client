@@ -4,8 +4,9 @@ import classNames from "classnames";
 import Header from "./Header";
 import Discount from "./Discount";
 import Size from "./Size";
-import Figure from "./Figure";
-import TextLoader from "./Loaders/TextLoader";
+import AccessibleFigure from "../../AccessibleFigure";
+
+import TextLoader from "../../loaders/TextLoader";
 
 interface Props {
   productData: ProductBasicDataResponse;
@@ -70,14 +71,17 @@ const CategoryProductThumbnail: FC<Props> = ({
           isLoading && css["loading-state"]
         )}
       >
-        <Figure
-          thumbnailUrl={thumbnail}
-          hovered={hovered}
-          brand={brand}
-          model={model}
-          isLoading={isLoading}
-          onLoad={onLoad}
-        />
+        <div className={css["figure-wrapper-container"]}>
+          <AccessibleFigure
+            thumbnailUrl={thumbnail}
+            hoverActions={hovered}
+            brand={brand}
+            model={model}
+            isLoading={isLoading}
+            onLoad={onLoad}
+            classDefinition="class-set-2"
+          />
+        </div>
         {isLoading ? (
           <div className={css["loading-state-box"]}>
             <TextLoader />

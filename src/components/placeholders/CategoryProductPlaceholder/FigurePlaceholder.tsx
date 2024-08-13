@@ -1,12 +1,12 @@
 import {FC} from "react";
 import css from "./FigurePlaceholder.module.scss";
-import FigureLoaderComponent from "./Loaders/FigureLoaderComponent";
+import FigureLoader from "../../loaders/FigureLoader";
 
 const FigurePlaceholder: FC = () => {
   return (
     <figure className={css["image-container"]}>
       <div className={css["loading-state-box"]}>
-        <FigureLoaderComponent />
+        <FigureLoader />
       </div>
     </figure>
   );

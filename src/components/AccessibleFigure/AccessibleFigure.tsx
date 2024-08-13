@@ -12,6 +12,7 @@ interface Props {
   model: string;
   isLoading: boolean;
   onLoad: (p: boolean) => void;
+  classDefinition: string;
 }
 
 const Figure: FC<Props> = (props) => {
@@ -23,14 +24,18 @@ const Figure: FC<Props> = (props) => {
     model,
     isLoading,
     onLoad,
-    modal,
+    classDefinition,
   } = props;
   const [hasError, setHasError] = useState(false);
 
   return (
     //NOTE - swiper-zoom-container class required by swiper
     <figure
-      className={classNames(css["image-container"], "swiper-zoom-container")}
+      className={classNames(
+        css["image-container"],
+        "swiper-zoom-container",
+        css[classDefinition]
+      )}
     >
       {isLoading && !hasError && (
         <div className={css["loading-state-box"]}>
