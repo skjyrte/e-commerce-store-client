@@ -1,6 +1,7 @@
 import {createPortal} from "react-dom";
 import css from "./PortalModal.module.scss";
 import {FC, useEffect} from "react";
+import {motion, AnimatePresence} from "framer-motion";
 
 interface Props {
   visible: boolean;
@@ -13,10 +14,6 @@ const PortalModal: FC<Props> = ({
   children,
   lockBodyScroll = false,
 }) => {
-  if (!visible) {
-    return null;
-  }
-
   useEffect(() => {
     if (lockBodyScroll) {
       document.body.style.overflow = "hidden";
@@ -26,10 +23,22 @@ const PortalModal: FC<Props> = ({
         document.body.style.overflow = "unset";
       }
     };
-  });
+  }, [lockBodyScroll]);
 
   return createPortal(
-    <div className={css.portal}>{children}</div>,
+    <AnimatePresence>
+      {visible && (
+        <motion.div
+          className={css.portal}
+          initial={{opacity: 0}}
+          animate={{opacity: 1}}
+          exit={{opacity: 0}}
+          transition={{duration: 0.2}}
+        >
+          {children}
+        </motion.div>
+      )}
+    </AnimatePresence>,
     document.getElementById("root") as HTMLDivElement
   );
 };

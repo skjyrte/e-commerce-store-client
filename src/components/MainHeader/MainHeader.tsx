@@ -3,7 +3,7 @@ import css from "./MainHeader.module.scss";
 import TextLinkElement from "../LinkElements/TextLinkElement";
 import IconButton from "../buttons/IconButton";
 import CartLinkElement from "../LinkElements/CartLinkElement";
-import IconUserProfile from "../icons/IconUserProfile";
+import IconUserProfile from "../inlineIcons/IconUserProfile";
 import classNames from "classnames";
 import MobileHeaderDrawer from "../drawers/MobileHeaderDrawer";
 import DesktopHeaderDrawer from "../drawers/DesktopHeaderDrawer";

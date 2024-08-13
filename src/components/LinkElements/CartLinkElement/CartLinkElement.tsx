@@ -1,7 +1,7 @@
 import {FC, useState, useEffect} from "react";
 import css from "./CartLinkElement.module.scss";
 import classNames from "classnames";
-import IconCart from "../../icons/IconCart";
+import IconCart from "../../inlineIcons/IconCart";
 import CartModal from "../../modals/CartModal";
 import {useSelector} from "react-redux";
 import {selectCartItems} from "../../../redux/selectors";

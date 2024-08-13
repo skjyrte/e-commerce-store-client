@@ -3,7 +3,7 @@ import SwiperTypes from "swiper";
 import {Swiper, SwiperSlide} from "swiper/react";
 import css from "./ProductGallery.module.scss";
 import classNames from "classnames";
-import Figure from "./Figure";
+import AccessibleFigure from "../AccessibleFigure/AccessibleFigure";
 
 // Import Swiper styles
 import "swiper/css";
@@ -23,22 +23,34 @@ interface Props {
 
 const ProductGallery: FC<Props> = ({imageArray, onClickZoom, modal}) => {
   const [swiper, setSwiper] = useState<SwiperTypes | null>(null);
+  const [hoveredImg, setHoveredImg] = useState<string | null>(null);
 
-  const swiperContents = imageArray.map((slide, index) => (
-    <SwiperSlide key={index}>
-      <Figure
-        thumbnailUrl={slide}
-        hovered={false}
-        brand={"brand"}
-        model={"model"}
-        isLoading={false}
-        onLoad={(para) => {
-          console.log(para);
-        }}
-        modal={modal}
-      />
-    </SwiperSlide>
-  ));
+  const swiperContents = (hoverActionsAllowed: boolean) => {
+    return imageArray.map((slide, index) => (
+      <SwiperSlide key={index}>
+        <div
+          onMouseEnter={() => {
+            hoverActionsAllowed && setHoveredImg(slide);
+          }}
+          onMouseLeave={() => {
+            hoverActionsAllowed && setHoveredImg(null);
+          }}
+          className={classNames(css["mouseover-figure-wrapper"])}
+        >
+          <AccessibleFigure
+            thumbnailUrl={slide}
+            hoverActions={hoverActionsAllowed ? slide === hoveredImg : false}
+            brand={"brand"}
+            model={"model"}
+            isLoading={false}
+            onLoad={(para) => {
+              console.log(para);
+            }}
+          />
+        </div>
+      </SwiperSlide>
+    ));
+  };
 
   return (
     <div className={classNames(css["component-box"])}>
@@ -58,7 +70,7 @@ const ProductGallery: FC<Props> = ({imageArray, onClickZoom, modal}) => {
           modules={[Pagination, Thumbs, Zoom]}
           className={css["main-gallery-swiper"]}
         >
-          {swiperContents}
+          {swiperContents(false)}
         </Swiper>
       </div>
       <div
@@ -77,7 +89,7 @@ const ProductGallery: FC<Props> = ({imageArray, onClickZoom, modal}) => {
           slidesPerView={5}
           className={css["thumbnail-gallery-swiper"]}
         >
-          {swiperContents}
+          {swiperContents(true)}
         </Swiper>
       </div>
     </div>

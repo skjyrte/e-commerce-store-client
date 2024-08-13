@@ -1,6 +1,6 @@
 import {FC, useState} from "react";
 import css from "./Figure.module.scss";
-import IconNoPhoto from "../../icons/IconNoPhoto";
+import IconNoPhoto from "../../inlineIcons/IconNoPhoto";
 import classNames from "classnames";
 import FigureLoader from "./Loaders/FigureLoader";
 

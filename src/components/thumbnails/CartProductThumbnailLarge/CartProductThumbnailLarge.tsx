@@ -1,7 +1,7 @@
 import {FC, useState} from "react";
 import css from "./CartProductThumbnailLarge.module.scss";
 import {Link} from "react-router-dom";
-import IconNoPhoto from "../../icons/IconNoPhoto";
+import IconNoPhoto from "../../inlineIcons/IconNoPhoto";
 import ChangeAmountButton from "../../buttons/ChangeAmountButton";
 import GeneralTextButton from "../../buttons/GeneralTextButton";
 import {useSelector} from "react-redux";

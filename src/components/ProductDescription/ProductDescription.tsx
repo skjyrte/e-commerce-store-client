@@ -7,17 +7,9 @@ import SizeDropdown from "../buttons/SizeDropdown";
 
 interface Props {
   currentProduct: ProductExtraDataResponse;
-  onClickSize: () => void;
-  currentSize: string | null;
-  onAddToBasket: (itemsCount: number) => void;
 }
 
-const ProductDescription: FC<Props> = ({
-  currentProduct,
-  onClickSize,
-  currentSize,
-  onAddToBasket,
-}) => {
+const ProductDescription: FC<Props> = ({currentProduct}) => {
   const {
     id,
     model,

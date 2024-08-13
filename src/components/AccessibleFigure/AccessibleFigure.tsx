@@ -1,28 +1,37 @@
 import {FC, useState} from "react";
-import css from "./Figure.module.scss";
-import IconNoPhoto from "../icons/IconNoPhoto";
+import css from "./AccessibleFigure.module.scss";
 import classNames from "classnames";
-import FigureLoader from "./Loaders/FigureLoader";
+import FigureLoader from "../loaders/FigureLoader/FigureLoader";
+import noPhotoIconUrl from "../../icons/IconNoPhoto.svg";
 
 interface Props {
   thumbnailUrl: string;
-  hovered: boolean;
+  hoverActions: boolean;
   alt?: string;
   brand: string;
   model: string;
   isLoading: boolean;
   onLoad: (p: boolean) => void;
-  modal?: boolean;
 }
 
 const Figure: FC<Props> = (props) => {
-  const {thumbnailUrl, hovered, alt, brand, model, isLoading, onLoad, modal} =
-    props;
+  const {
+    thumbnailUrl,
+    hoverActions,
+    alt,
+    brand,
+    model,
+    isLoading,
+    onLoad,
+    modal,
+  } = props;
   const [hasError, setHasError] = useState(false);
 
   return (
     //NOTE - swiper-zoom-container class required by swiper
-    <figure className={(css["image-container"], "swiper-zoom-container")}>
+    <figure
+      className={classNames(css["image-container"], "swiper-zoom-container")}
+    >
       {isLoading && !hasError && (
         <div className={css["loading-state-box"]}>
           <FigureLoader />
@@ -32,14 +41,12 @@ const Figure: FC<Props> = (props) => {
         <img
           className={classNames(
             css["product-image"],
-            hovered && css["hovered-state"],
-            isLoading && css["loading-content"],
-            modal && css["modal-figure"]
+            hoverActions && css["hover-actions-state"],
+            isLoading && css["loading-content"]
           )}
           src={thumbnailUrl}
           alt={alt ? alt : `${brand}'s ${model} product image`}
           onLoad={() => {
-            //TODO - to be removed
             setTimeout(() => {
               onLoad(false);
             }, Math.random() * 2000);
@@ -49,8 +56,17 @@ const Figure: FC<Props> = (props) => {
           }}
         />
       ) : (
-        <div className={css["thumbnail-placeholder-box"]}>
-          <IconNoPhoto />
+        <div
+          className={classNames(
+            css["thumbnail-placeholder-box"],
+            hoverActions && css["hover-actions-state"]
+          )}
+        >
+          <img
+            src={noPhotoIconUrl}
+            alt="No photo available"
+            className={classNames(css["no-photo-image"])}
+          />
         </div>
       )}
     </figure>

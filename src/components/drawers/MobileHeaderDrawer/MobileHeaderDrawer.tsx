@@ -2,11 +2,11 @@ import React, {useState, FC} from "react";
 import Drawer from "rc-drawer";
 import "rc-drawer/assets/index.css";
 import IconButton from "../../buttons/IconButton";
-import IconHeader from "../../icons/IconHeader";
+import IconHeader from "../../inlineIcons/IconHeader";
 import css from "./MobileHeaderDrawer.module.scss";
 import classNames from "classnames";
 import TextLinkElement from "../../LinkElements/TextLinkElement";
-import IconCross from "../../icons/IconCross";
+import IconCross from "../../inlineIcons/IconCross";
 
 interface Props {
   classList?: string[];
