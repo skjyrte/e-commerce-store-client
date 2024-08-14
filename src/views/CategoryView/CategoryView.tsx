@@ -3,7 +3,7 @@ import {useParams, Link} from "react-router-dom";
 import css from "./CategoryView.module.scss";
 import CategoryProductThumbnail from "../../components/thumbnails/CategoryProductThumbnail";
 import useMakeRequest from "../../hooks/useMakeRequest";
-import CategoryProductPlaceholder from "../../components/placeholders/CategoryProductPlaceholder/CategoryProductPlaceholder";
+import CategoryProductPlaceholder from "../../components/loaders/CategoryProductPlaceholder/CategoryProductPlaceholder";
 
 enum RequestType {
   GET = "GET",
@@ -16,15 +16,13 @@ const CategoryView: FC = () => {
   const [hoveredID, setHoveredID] = useState<null | string>(null);
   const {gender, category} = useParams();
 
-  console.log("gender", "category");
-  console.log(gender, category);
-
   const request = useMakeRequest<ProductBasicDataResponse>(RequestType.GET, {
     gender,
     category,
   });
 
   const products = request.responseData;
+  const error = request.error;
 
   const onThumbnailHover = (id: null | string) => {
     setHoveredID(id);
@@ -32,8 +30,25 @@ const CategoryView: FC = () => {
 
   const categoryContent = () => {
     const placeholderArray = new Array(6).fill("placeholder");
-
-    if (products) {
+    if (error) {
+      if (error.status === 404) {
+        return (
+          <div className={css["no-products-found"]}>
+            No Products Match Criteria
+          </div>
+        );
+      } else {
+        return (
+          <div className={css["no-products-found"]}>
+            We Have a Problem, Please Try Again Later.
+          </div>
+        );
+      }
+    } else if (request.loader) {
+      return placeholderArray.map((obj: ProductBasicDataResponse, index) => (
+        <CategoryProductPlaceholder key={index} />
+      ));
+    } else if (products) {
       return products.map((obj: ProductBasicDataResponse) => (
         <Link
           key={obj.id}
@@ -49,17 +64,7 @@ const CategoryView: FC = () => {
         </Link>
       ));
     } else {
-      if (request.loader) {
-        return placeholderArray.map((obj: ProductBasicDataResponse, index) => (
-          <CategoryProductPlaceholder key={index} />
-        ));
-      } else {
-        return (
-          <div className={css["no-products-found"]}>
-            No Products Match Criteria
-          </div>
-        );
-      }
+      <div className={css["no-products-found"]}>some different case</div>;
     }
   };
   return <div className={css.gridWrapper}>{categoryContent()}</div>;

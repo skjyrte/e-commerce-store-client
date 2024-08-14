@@ -1,6 +1,6 @@
 import {FC} from "react";
 import css from "./FigurePlaceholder.module.scss";
-import FigureLoader from "../../loaders/FigureLoader";
+import FigureLoader from "../FigureLoader";
 
 const FigurePlaceholder: FC = () => {
   return (

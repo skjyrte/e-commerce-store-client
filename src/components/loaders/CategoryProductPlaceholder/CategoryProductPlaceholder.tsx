@@ -1,7 +1,7 @@
 import {FC} from "react";
 import css from "./CategoryProductPlaceholder.module.scss";
 import FigurePlaceholder from "./FigurePlaceholder";
-import TextLoader from "../../loaders/TextLoader";
+import TextLoader from "../TextLoader";
 
 const CategoryProductPlaceholder: FC = () => {
   return (

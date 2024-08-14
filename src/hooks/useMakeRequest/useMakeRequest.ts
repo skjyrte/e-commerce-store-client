@@ -119,6 +119,7 @@ function useMakeRequest<
   );
 
   const handleGetData = async (config: GetConfig) => {
+    setError(null);
     await handleRequest<T>(
       getAxiosWrapper<T>,
       {
