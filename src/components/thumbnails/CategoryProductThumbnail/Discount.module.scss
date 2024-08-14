@@ -5,6 +5,7 @@
   align-items: center;
   padding: 5px;
   font-size: 14px;
+  text-align: center;
 }
 
 .price-and-discount-box {
@@ -15,6 +16,7 @@
 
 .discount-notice {
   color: rgb(75 75 75);
+  font-size: 11px;
 }
 
 .original-price {
@@ -28,4 +30,18 @@
   font-variation-settings:
     "wght" 600,
     "YOPQ" 300;
+}
+
+@media (width >= 600px) {
+  .discount-notice {
+    font-size: 14px;
+  }
+
+  .original-price {
+    font-size: 14px;
+  }
+
+  .discount-value {
+    font-size: 14px;
+  }
 }

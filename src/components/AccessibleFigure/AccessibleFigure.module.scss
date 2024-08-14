@@ -22,9 +22,13 @@
     }
 
     &.hover-actions-state {
-      transform: scale(1.05) translateY(-5px);
+      transform: scale(1.02) translateY(-2px);
       transition: all 300ms ease 0s;
       filter: drop-shadow(0 0 2px rgb(110 110 110));
+
+      @media (width >= 600px) {
+        transform: scale(1.05) translateY(-5px);
+      }
     }
   }
 
@@ -45,9 +49,11 @@
     }
 
     &.hover-actions-state {
-      transform: scale(1.05) translateY(-5px);
-      transition: all 300ms ease 0s;
-      filter: drop-shadow(0 0 2px rgb(110 110 110));
+      @media (width >= 600px) {
+        transform: scale(1.05) translateY(-5px);
+        transition: all 300ms ease 0s;
+        filter: drop-shadow(0 0 2px rgb(110 110 110));
+      }
     }
   }
 }
@@ -67,17 +73,21 @@
   .product-image {
     width: 100%;
 
-    &.loading-content {
-      display: none;
-    }
-
     &:hover {
       cursor: pointer;
     }
 
+    &.loading-content {
+      display: none;
+    }
+
     &.hover-actions-state {
-      transform: scale(1.05) translateY(-5px);
+      transform: scale(1.02) translateY(-2px);
       transition: all 300ms ease 0s;
+
+      @media (width >= 600px) {
+        transform: scale(1.05) translateY(-5px);
+      }
     }
   }
 
@@ -98,9 +108,11 @@
     }
 
     &.hover-actions-state {
-      transform: scale(1.05) translateY(-5px);
-      transition: all 300ms ease 0s;
-      filter: drop-shadow(0 0 2px rgb(110 110 110));
+      @media (width >= 600px) {
+        transform: scale(1.05) translateY(-5px);
+        transition: all 300ms ease 0s;
+        filter: drop-shadow(0 0 2px rgb(110 110 110));
+      }
     }
   }
 }

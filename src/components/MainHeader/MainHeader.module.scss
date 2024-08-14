@@ -16,7 +16,7 @@
   width: 100%;
   height: 80px;
   margin: 0;
-  padding: 0 20px;
+  padding: 0 10px;
 
   .main-header-absolute-container {
     top: 0;
@@ -28,7 +28,7 @@
     width: 100%;
     height: 80px;
     margin: 0;
-    padding: 0 20px;
+    padding: 0 10px;
     transition: height 0.2s;
 
     &.drawer-active {
@@ -45,7 +45,7 @@
       width: 100%;
       height: 80px;
       margin: 0;
-      padding: 0 20px;
+      padding: 0;
 
       .site-home-button-wrapper {
         display: flex;
@@ -130,6 +130,21 @@
 
         .drawer-wrapper {
           display: unset;
+        }
+      }
+    }
+  }
+}
+
+@media (width >= 600px) {
+  .main-header-relative-container {
+    padding: 0 30px;
+
+    .main-header-absolute-container {
+      padding: 0 30px;
+
+      .main-header-first-row {
+        .site-home-button-wrapper {
         }
       }
     }

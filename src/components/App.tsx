@@ -8,7 +8,7 @@ export const App: FC = () => {
   return (
     <StrictMode>
       <Provider store={store}>
-        <div className={css.backgroundWrapper}>
+        <div className={css["background-wrapper"]}>
           <AppContainer />
         </div>
       </Provider>

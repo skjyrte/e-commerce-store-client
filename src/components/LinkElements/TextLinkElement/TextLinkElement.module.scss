@@ -7,7 +7,7 @@
   border: none;
   padding: 10px;
   margin: 0 10px;
-  letter-spacing: 0.2rem;
+  letter-spacing: 0.1rem;
   font-family: inherit;
   text-decoration: none;
   font-variation-settings:
@@ -29,5 +29,12 @@
 }
 
 .link-element-size-large {
-  font-size: 24px;
+  font-size: 16px;
+}
+
+@media (width >= 600px) {
+  .link-element-size-large {
+    font-size: 24px;
+    letter-spacing: 0.2rem;
+  }
 }
