@@ -1,7 +1,12 @@
 .header-button {
   width: 60px;
   height: 60px;
-  padding: 5px;
+  padding: 2px;
+
+  :hover {
+    filter: invert(50%);
+    cursor: pointer;
+  }
 }
 
 .drawer-component {

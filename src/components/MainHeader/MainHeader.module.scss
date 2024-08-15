@@ -50,7 +50,7 @@
       .site-home-button-wrapper {
         display: flex;
         align-items: center;
-        justify-content: start;
+        justify-content: center;
         height: 60px;
         width: 33.3%;
       }
@@ -103,7 +103,7 @@
         display: none;
       }
 
-      @media (width <= 500px) {
+      @media (width <= 600px) {
         .main-header-container {
           padding: 0;
         }
@@ -113,11 +113,11 @@
         }
 
         .site-home-button-wrapper {
-          width: 50%;
+          width: 60%;
         }
 
         .user-action-container {
-          width: 50%;
+          width: auto;
 
           .user-profile-button-wrapper {
             width: 60px;

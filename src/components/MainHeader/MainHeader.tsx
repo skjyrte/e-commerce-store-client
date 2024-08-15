@@ -30,6 +30,10 @@ const Header: FC = () => {
           )}
         >
           <div className={css["main-header-first-row"]}>
+            <div className={css["drawer-wrapper"]}>
+              <MobileHeaderDrawer />
+            </div>
+
             <div className={css["site-home-button-wrapper"]}>
               <TextLinkElement
                 displayedText="SNEAKERS"
@@ -38,9 +42,6 @@ const Header: FC = () => {
               />
             </div>
 
-            <div className={css["drawer-wrapper"]}>
-              <MobileHeaderDrawer />
-            </div>
             <ul className={classNames(css["choose-gender-list"])}>
               <li
                 onMouseOver={() => {
