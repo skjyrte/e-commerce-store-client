@@ -4,9 +4,17 @@
   padding: 5px;
 }
 
-.header-drawer-container {
+.drawer-component {
+  width: 100%;
 }
 
-.drawer-component {
+.drawer-header {
+  display: flex;
+  font-size: 20px;
+  padding: 15px 20px;
+}
+
+.choose-gender-list-container {
+  padding-top: 30px;
   width: 100%;
 }

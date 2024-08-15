@@ -1,12 +1,12 @@
-import React, {useState, FC} from "react";
+import {useState, FC} from "react";
 import Drawer from "rc-drawer";
 import "rc-drawer/assets/index.css";
 import IconButton from "../../buttons/IconButton";
 import IconHeader from "../../inlineIcons/IconHeader";
 import css from "./MobileHeaderDrawer.module.scss";
 import classNames from "classnames";
-import TextLinkElement from "../../LinkElements/TextLinkElement";
 import IconCross from "../../inlineIcons/IconCross";
+import CategoryAccordion from "../../accordions/CategoryAccordion";
 
 interface Props {
   classList?: string[];
@@ -44,31 +44,30 @@ const MobileHeaderDrawer: FC<Props> = (props) => {
         placement="left"
       >
         <div>
-          <ul className={classNames(css["choose-gender-list"])}>
-            <li onClick={toggleDrawer} className={css["gender-button-wrapper"]}>
-              <TextLinkElement
-                displayedText="Men"
-                path={"/men"}
-                active={location.pathname.includes("/men")}
-                size="medium"
-                key={"li-1"}
-              />
-            </li>
-            <li onClick={toggleDrawer} className={css["gender-button-wrapper"]}>
-              <TextLinkElement
-                displayedText="Women"
-                path={"/women"}
-                active={location.pathname.includes("/women")}
-                size="medium"
-                key={"li-2"}
-              />
-            </li>
-          </ul>
-          <IconButton
-            onClick={toggleDrawer}
-            IconComponent={IconCross}
-            buttonClass={["closeModalButton", "size"]}
-          />
+          <header className={classNames(css["drawer-header"])}>
+            {" "}
+            Browse By Category
+            <IconButton
+              onClick={toggleDrawer}
+              IconComponent={IconCross}
+              buttonClass={["closeModalButton", "size"]}
+            />
+          </header>
+          <div className={classNames(css["choose-gender-list-container"])}>
+            <CategoryAccordion
+              categoryList={[
+                {
+                  gender: "men",
+                  categories: ["sneakers", "running", "casual", "outdoor"],
+                },
+                {
+                  gender: "women",
+                  categories: ["sneakers", "running", "casual", "outdoor"],
+                },
+              ]}
+              onCloseModal={toggleDrawer}
+            />
+          </div>
         </div>
       </Drawer>
     </div>

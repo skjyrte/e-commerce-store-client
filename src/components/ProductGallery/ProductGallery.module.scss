@@ -10,8 +10,6 @@
 .main-gallery-wrapper {
   height: 100%;
   width: auto;
-
-  /*   margin-left: 0; */
 }
 
 .main-gallery-swiper {
@@ -36,6 +34,10 @@
   :global(.swiper-slide-thumb-active) {
     opacity: 1;
   }
+}
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */ // necessary due to css modules
+:global(.swiper-pagination-bullets) {
+  padding: 10px 0;
 }
 
 .thumbnail-gallery-wrapper-modal {

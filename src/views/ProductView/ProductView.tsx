@@ -8,7 +8,7 @@ import IconCross from "../../components/inlineIcons/IconCross";
 import {useParams} from "react-router-dom";
 import IconNoPhoto from "../../components/inlineIcons/IconNoPhoto";
 import useMakeRequest from "../../hooks/useMakeRequest";
-import FeaturesAccordion from "../../components/FeaturesAccordion";
+import FeaturesAccordion from "../../components/accordions/FeaturesAccordion";
 
 enum RequestType {
   GET = "GET",

@@ -9,6 +9,7 @@ interface Props {
   path: string;
   active?: boolean;
   size?: string;
+  onClick: () => void;
 }
 
 const TextLinkElement: FC<Props> = ({
@@ -17,6 +18,7 @@ const TextLinkElement: FC<Props> = ({
   path,
   active,
   size,
+  onClick,
 }) => {
   const classTitle = classNames(
     css["link-element"],
@@ -25,7 +27,12 @@ const TextLinkElement: FC<Props> = ({
   );
 
   return (
-    <Link data-testid={dataTestId} className={classTitle} to={path}>
+    <Link
+      onClick={onClick}
+      data-testid={dataTestId}
+      className={classTitle}
+      to={path}
+    >
       {displayedText}
     </Link>
   );
