@@ -69,11 +69,23 @@ const MobileHeaderDrawer: FC<Props> = (props) => {
                   categoryList={[
                     {
                       gender: "men",
-                      categories: ["sneakers", "running", "casual", "outdoor"],
+                      categories: [
+                        "all",
+                        "sneakers",
+                        "running",
+                        "casual",
+                        "outdoor",
+                      ],
                     },
                     {
                       gender: "women",
-                      categories: ["sneakers", "running", "casual", "outdoor"],
+                      categories: [
+                        "all",
+                        "sneakers",
+                        "running",
+                        "casual",
+                        "outdoor",
+                      ],
                     },
                   ]}
                   onCloseModal={toggleDrawer}

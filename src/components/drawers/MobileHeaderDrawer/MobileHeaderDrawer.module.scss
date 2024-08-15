@@ -11,7 +11,11 @@
 .drawer-header {
   display: flex;
   font-size: 20px;
+  letter-spacing: 0.05rem;
   padding: 15px 20px;
+  font-variation-settings:
+    "wght" 700,
+    "YOPQ" 300;
 }
 
 .choose-gender-list-container {

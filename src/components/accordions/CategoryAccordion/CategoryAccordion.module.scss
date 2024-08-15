@@ -12,7 +12,7 @@ h3 {
 
 .AccordionItem {
   overflow: hidden;
-  margin-top: 1px;
+  margin-top: 0;
 }
 
 .AccordionItem:first-child {
@@ -34,7 +34,7 @@ h3 {
 .AccordionTrigger {
   font-family: inherit;
   padding: 0 20px;
-  height: 60px;
+  height: 50px;
   flex: 1;
   display: flex;
   align-items: center;
@@ -42,6 +42,7 @@ h3 {
   font-size: 20px;
   color: rgb(0 0 0);
   background-color: white;
+  box-shadow: 0 2px 10px rgb(207 207 207);
   font-variation-settings:
     "wght" 700,
     "YOPQ" 300;
@@ -74,7 +75,9 @@ h3 {
 }
 
 .AccordionChevron {
-  color: bisque;
+  color: rgb(59 59 59);
+  width: 30px;
+  height: 30px;
   transition: transform 100ms cubic-bezier(0.87, 0, 0.13, 1);
 }
 
