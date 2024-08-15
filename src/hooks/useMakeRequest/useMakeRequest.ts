@@ -89,13 +89,11 @@ const createFilterQuery = (config: GetConfig) => {
   try {
     if (id) {
       return `/product/${id}`;
-    } else if (gender) {
-      if (category) {
-        return `/gender/${gender}/category/${category}`;
-      } else {
-        return `/gender/${gender}`;
-      }
-    } else return "";
+    } else if (category) {
+      return `/gender/${gender ? gender : ""}/category/${category}`;
+    } else {
+      return `/gender/${gender ? gender : ""}`;
+    }
   } catch (e) {
     console.error(e);
     return "";
@@ -119,6 +117,7 @@ function useMakeRequest<
   );
 
   const handleGetData = async (config: GetConfig) => {
+    console.log(createFilterQuery(config));
     setError(null);
     await handleRequest<T>(
       getAxiosWrapper<T>,

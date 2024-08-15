@@ -13,8 +13,8 @@ const AppContainer: FC = () => {
       <div className={css["app-container"]}>
         <MainHeader />
         <Routes>
-          <Route path="/" element={<div>home</div>} />
-          <Route path="/home" element={<div>home</div>} />
+          <Route path="/" element={<CategoryView />} />
+          <Route path="/home" element={<CategoryView />} />
           <Route path="/cart" element={<CartView />} />
           <Route path="/product/:id" element={<ProductView />} />
           <Route path="/:gender" element={<CategoryView />} />
