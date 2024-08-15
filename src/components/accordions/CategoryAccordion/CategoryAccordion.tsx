@@ -43,7 +43,7 @@ const CategoryAccordion: FC<Props> = (props) => {
       <Accordion.Root
         className={css.AccordionRoot}
         type="multiple"
-        defaultValue={["item-0"]}
+        defaultValue={["item-0", "item-1"]}
       >
         {accordionContents()}
       </Accordion.Root>
