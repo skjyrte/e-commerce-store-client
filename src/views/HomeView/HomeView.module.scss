@@ -10,6 +10,17 @@
   width: 100%;
 }
 
+.general-header {
+  font-size: 24px;
+  padding: 20px;
+  justify-content: center;
+  display: flex;
+
+  @media (width >= 600px) {
+    padding: 10px;
+  }
+}
+
 a {
   color: inherit;
   text-decoration: inherit;

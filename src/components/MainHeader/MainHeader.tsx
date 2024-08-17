@@ -22,6 +22,7 @@ const Header: FC = () => {
   return (
     <>
       <div className={classNames(css["main-header-relative-container"])}>
+        <div className={css["absolute-active-background"]}></div>
         <div
           onMouseLeave={shutTheDrawer}
           className={classNames(

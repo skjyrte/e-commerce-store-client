@@ -12,13 +12,13 @@ import classNames from "classnames";
 
 // Import Swiper styles
 import "swiper/css";
-import "swiper/css/pagination";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/scrollbar";
+import "swiper/css/autoplay";
 
 // import required modules
-import {Pagination, Navigation, Thumbs, Scrollbar} from "swiper/modules";
+import {Navigation, Thumbs, Scrollbar, Autoplay} from "swiper/modules";
 
 enum RequestType {
   GET = "GET",
@@ -31,12 +31,13 @@ interface Props {
   category: string;
   gender: string;
   headerText: string;
+  index: number;
 }
 
 const ProductsSwiper: FC<Props> = (props) => {
   const [hoveredID, setHoveredID] = useState<null | string>(null);
 
-  const {category, gender, headerText} = props;
+  const {category, gender, headerText, index} = props;
 
   const request = useMakeRequest<ProductBasicDataResponse>(RequestType.GET, {
     gender,
@@ -92,59 +93,76 @@ const ProductsSwiper: FC<Props> = (props) => {
   };
 
   return (
-    <div className={css["component-container"]}>
-      <div className={css["products-swiper-header"]}>
-        <div className={css["products-swiper-title"]}> {headerText} </div>
-        <div className={css["swiper-buttons-group"]}>
-          <div
-            ref={prevRef}
-            className={classNames(
-              css["icon-button-wrapper"],
-              css["icon-button-wrapper-prev"]
-            )}
-          >
-            <IconButton IconComponent={IconNarrowArrowPrev} />
-          </div>
-          <div
-            ref={nextRef}
-            className={classNames(
-              css["icon-button-wrapper"],
-              css["icon-button-wrapper-next"]
-            )}
-          >
-            <IconButton IconComponent={IconNarrowArrowNext} />
+    <div
+      className={classNames(
+        css["component-container"],
+        css["swiper-background"]
+      )}
+      style={
+        {
+          "--swiper-color": `var(--swiper-color-${index.toString()})`,
+        } as React.CSSProperties
+      }
+    >
+      <div className={css["component-background-banner"]}></div>
+      <div className={css["swiper-content"]}>
+        <div className={css["products-swiper-header"]}>
+          <div className={css["products-swiper-title"]}> {headerText} </div>
+          <div className={css["swiper-buttons-group"]}>
+            <div
+              ref={prevRef}
+              className={classNames(
+                css["icon-button-wrapper"],
+                css["icon-button-wrapper-prev"]
+              )}
+            >
+              <IconButton IconComponent={IconNarrowArrowPrev} />
+            </div>
+            <div
+              ref={nextRef}
+              className={classNames(
+                css["icon-button-wrapper"],
+                css["icon-button-wrapper-next"]
+              )}
+            >
+              <IconButton IconComponent={IconNarrowArrowNext} />
+            </div>
           </div>
         </div>
+        <Swiper
+          navigation={{
+            enabled: true,
+            nextEl: nextRef.current,
+            prevEl: prevRef.current,
+          }}
+          modules={[Navigation, Thumbs, Scrollbar, Autoplay]}
+          autoplay={{
+            pauseOnMouseEnter: true,
+            delay: 2000 * Math.random() + 5000,
+          }}
+          scrollbar={{
+            enabled: true,
+            draggable: true,
+          }}
+          spaceBetween={20}
+          speed={300}
+          watchSlidesProgress={true}
+          slidesPerView={1}
+          breakpoints={{
+            600: {
+              slidesPerView: 2,
+              spaceBetween: 10,
+            },
+            900: {
+              slidesPerView: 3,
+              spaceBetween: 10,
+            },
+          }}
+          className={"thumbnail-gallery-swiper"}
+        >
+          {swiperContent()}
+        </Swiper>
       </div>
-      <Swiper
-        navigation={{
-          enabled: true,
-          nextEl: nextRef.current,
-          prevEl: prevRef.current,
-        }}
-        modules={[Navigation, Thumbs, Pagination, Scrollbar]}
-        scrollbar={{
-          enabled: true,
-          draggable: true,
-        }}
-        spaceBetween={20}
-        speed={300}
-        watchSlidesProgress={true}
-        slidesPerView={1}
-        breakpoints={{
-          600: {
-            slidesPerView: 2,
-            spaceBetween: 10,
-          },
-          900: {
-            slidesPerView: 3,
-            spaceBetween: 10,
-          },
-        }}
-        className={"thumbnail-gallery-swiper"}
-      >
-        {swiperContent()}
-      </Swiper>
     </div>
   );
 };

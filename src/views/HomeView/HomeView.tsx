@@ -11,25 +11,29 @@ const HomeView: FC = () => {
 
   return (
     <div className={css.gridWrapper}>
+      <div className={css["general-header"]}>CHECK OFFERS</div>
       <div className={css.productSwiperWrapper}>
         <ProductsSwiper
-          headerText={"Men's all products"}
-          gender={"men"}
-          category={""}
+          headerText={"Sneakers"}
+          gender={""}
+          category={"sneakers"}
+          index={0}
         />
       </div>
       <div className={css.productSwiperWrapper}>
         <ProductsSwiper
-          headerText={"Women's running"}
-          gender={"women"}
+          headerText={"Running"}
+          gender={""}
           category={"running"}
+          index={1}
         />
       </div>
       <div className={css.productSwiperWrapper}>
         <ProductsSwiper
-          headerText={"Men's running"}
-          gender={"men"}
-          category={"running"}
+          headerText={"Casual"}
+          gender={""}
+          category={"casual"}
+          index={2}
         />
       </div>
     </div>
