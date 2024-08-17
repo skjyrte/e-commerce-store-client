@@ -12,12 +12,14 @@ interface Props {
   productData: ProductBasicDataResponse;
   onHover: (id: null | string) => void;
   hovered: boolean;
+  showSizeTable: boolean;
 }
 
 const CategoryProductThumbnail: FC<Props> = ({
   productData: {id, brand, model, price, initial_price, thumbnail, stock_array},
   onHover,
   hovered,
+  showSizeTable,
 }) => {
   const [height, setHeight] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
@@ -93,15 +95,17 @@ const CategoryProductThumbnail: FC<Props> = ({
           </>
         )}
       </div>
-      <section
-        className={classNames(
-          css["size-container"],
-          hovered && !isLoading ? css["hovered-state"] : css.hide
-        )}
-        ref={elementRef}
-      >
-        <Size arrayOfSizes={stock_array} />
-      </section>
+      {showSizeTable ? (
+        <section
+          className={classNames(
+            css["size-container"],
+            hovered && !isLoading ? css["hovered-state"] : css.hide
+          )}
+          ref={elementRef}
+        >
+          <Size arrayOfSizes={stock_array} />
+        </section>
+      ) : null}
     </article>
   );
 };

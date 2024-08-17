@@ -1,0 +1,54 @@
+.gridWrapper {
+  /*   position: relative;
+  width: 100%;
+  padding: 5px 10px;
+  display: grid;
+  gap: 0.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(calc(50% - 1rem), 1fr)); */
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+a {
+  color: inherit;
+  text-decoration: inherit;
+}
+
+.no-products-found {
+  display: flex;
+  width: 100%;
+  margin-top: 33vh;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (width >= 600px) {
+  .gridWrapper {
+    padding: 20px 30px;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(calc(50% - 1rem), 1fr));
+  }
+}
+
+@media (width >= 766px) {
+  .gridWrapper {
+    grid-template-columns: repeat(auto-fit, minmax(calc(33.33% - 1rem), 1fr));
+  }
+}
+
+@media (width >= 900px) {
+  .gridWrapper {
+    grid-template-columns: repeat(auto-fit, minmax(calc(25% - 2rem), 1fr));
+  }
+}
+
+/* .categoryOverviewWrapper {
+  width: 1000px;
+  display: flex;
+}
+
+.productSwiperWrapper {
+  width: 1000px;
+  display: flex;
+} */

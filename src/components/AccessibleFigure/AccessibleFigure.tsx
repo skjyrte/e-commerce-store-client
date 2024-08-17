@@ -8,8 +8,8 @@ interface Props {
   thumbnailUrl: string;
   hoverActions: boolean;
   alt?: string;
-  brand: string;
-  model: string;
+  brand?: string;
+  model?: string;
   isLoading: boolean;
   onLoad: (p: boolean) => void;
   classDefinition: string;
@@ -50,7 +50,13 @@ const Figure: FC<Props> = (props) => {
             isLoading && css["loading-content"]
           )}
           src={thumbnailUrl}
-          alt={alt ? alt : `${brand}'s ${model} product image`}
+          alt={
+            alt
+              ? alt
+              : brand && model
+                ? `${brand}'s ${model} product image`
+                : ""
+          }
           onLoad={() => {
             setTimeout(() => {
               onLoad(false);

@@ -60,6 +60,7 @@ const CategoryView: FC = () => {
             productData={obj}
             onHover={onThumbnailHover}
             hovered={hoveredID === obj.id}
+            showSizeTable={true}
           />
         </Link>
       ));
