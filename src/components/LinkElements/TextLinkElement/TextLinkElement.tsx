@@ -9,7 +9,7 @@ interface Props {
   path: string;
   active?: boolean;
   size?: string;
-  onClick: () => void;
+  onClick?: () => void;
 }
 
 const TextLinkElement: FC<Props> = ({

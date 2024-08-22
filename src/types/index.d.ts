@@ -28,3 +28,5 @@ interface ProductExtraDataResponse extends ProductBasicDataResponse {
   rating_value: string;
   image_url_array: string[];
 }
+
+type Nullable<T> = T | null;

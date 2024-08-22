@@ -3,7 +3,7 @@ import {FC} from "react";
 import classNames from "classnames";
 
 interface Props {
-  onClick?: () => void;
+  onClick?: (e: any) => void;
   displayedText: string;
   isDisabled?: boolean;
   dataTestId?: string;
