@@ -6,6 +6,8 @@ import {UseFormRegister, FieldErrors, Path} from "react-hook-form";
 interface FormData {
   email: string;
   password: string;
+  name: string;
+  address: string;
 }
 
 interface Props {
@@ -25,14 +27,15 @@ interface Props {
     };
     validate?: Record<string, (value: string) => boolean | string>;
   };
+  currentValue: string;
 }
 
 const InputForm: FC<Props> = ({
   field,
   register,
   errors,
-  dirtyFields,
   validateOptions,
+  currentValue,
 }) => {
   const [inputFocus, setInputFocus] = useState(false);
 
@@ -44,7 +47,7 @@ const InputForm: FC<Props> = ({
           className={classNames(
             css["input-label"],
             errors[field] && css["input-error"],
-            (inputFocus || dirtyFields[field]) && css["input-top-label"]
+            (inputFocus || currentValue) && css["input-top-label"]
           )}
         >
           {field}

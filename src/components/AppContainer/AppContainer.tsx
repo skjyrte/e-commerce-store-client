@@ -8,6 +8,7 @@ import InvalidPageView from "../../views/InvalidPageView";
 import CartView from "../../views/CartView";
 import HomeView from "../../views/HomeView";
 import LoginView from "../../views/LoginView";
+import RegisterView from "../../views/RegisterView";
 
 const AppContainer: FC = () => {
   return (
@@ -19,6 +20,7 @@ const AppContainer: FC = () => {
           <Route path="/home" element={<CategoryView />} />
           <Route path="/cart" element={<CartView />} />
           <Route path="/login" element={<LoginView />} />
+          <Route path="/register" element={<RegisterView />} />
           <Route path="/product/:id" element={<ProductView />} />
           <Route path="/:gender" element={<CategoryView />} />
           <Route path="/:gender/:category" element={<CategoryView />} />
