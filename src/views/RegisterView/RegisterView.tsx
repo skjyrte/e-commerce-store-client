@@ -42,18 +42,19 @@ const RegisterView: FC = () => {
   return (
     <div className={classNames(css["view-container"])}>
       <div className={classNames([css["form-container"]])}>
-        <div className={classNames(css["login-header"])}>
+        <div className={classNames(css["register-header"])}>
           Please fill in your data to register
         </div>
-        <div className={classNames(css["login-header"])}>
-          {registerUserData?.message}
-        </div>
-        <div className={classNames(css["login-header"])}>
-          {registerUserData?.success.toString()}
-        </div>
-        <div className={classNames(css["login-header"])}>
-          {registerUserData?.payload?.email}
-        </div>
+        {error && (
+          <div className={classNames(css["register-error-message"])}>
+            {error.clientMessage}
+          </div>
+        )}
+        {registerUserData && (
+          <div className={classNames(css["register-success-message"])}>
+            Successfully logged in as: {registerUserData.payload?.email}
+          </div>
+        )}
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -67,6 +68,7 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             currentValue={emailValue}
+            disabled={loading}
             validateOptions={{
               required: "Email is required",
               maxLength: {
@@ -84,6 +86,7 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             currentValue={passwordValue}
+            disabled={loading}
             validateOptions={{
               required: "Password is required",
               minLength: {value: 1, message: "Password cannot be empty"},
@@ -94,15 +97,12 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             currentValue={nameValue}
+            disabled={loading}
             validateOptions={{
-              required: "Email is required",
+              required: "Name is required",
               maxLength: {
-                value: 320,
-                message: "Email cannot exceed 320 characters",
-              },
-              validate: {
-                validator: (v) =>
-                  validator.isEmail(v) || "Invalid email format",
+                value: 100,
+                message: "Name cannot exceed 100 characters",
               },
             }}
           />
@@ -111,15 +111,12 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             currentValue={addressValue}
+            disabled={loading}
             validateOptions={{
-              required: "Email is required",
+              required: "Address is required",
               maxLength: {
-                value: 320,
-                message: "Email cannot exceed 320 characters",
-              },
-              validate: {
-                validator: (v) =>
-                  validator.isEmail(v) || "Invalid email format",
+                value: 100,
+                message: "Address cannot exceed 100 characters",
               },
             }}
           />
@@ -127,6 +124,7 @@ const RegisterView: FC = () => {
             <GeneralTextButton
               displayedText="Continue"
               classProp={["input-button"]}
+              isLoading={loading}
             />
           </div>
         </form>

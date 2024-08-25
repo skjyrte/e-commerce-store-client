@@ -25,7 +25,8 @@ const Header: FC = () => {
     <div
       className={classNames(
         css["main-header-relative-container"],
-        location.pathname === "/login" && css["header-not-visible"]
+        (location.pathname === "/login" || location.pathname === "/register") &&
+          css["header-not-visible"]
       )}
     >
       <div className={css["absolute-active-background"]}></div>

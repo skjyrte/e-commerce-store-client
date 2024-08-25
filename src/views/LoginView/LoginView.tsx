@@ -6,6 +6,7 @@ import GeneralTextButton from "../../components/buttons/GeneralTextButton";
 import validator from "validator";
 import InputForm from "../../components/InputForm/InputForm";
 import useLogin from "../../hooks/useLogin";
+import {Link} from "react-router-dom";
 
 type LoginFormData = Record<string, string>;
 
@@ -60,6 +61,7 @@ const LoginView: FC = () => {
             register={register}
             errors={errors}
             currentValue={emailValue}
+            disabled={loading}
             validateOptions={{
               required: "Email is required",
               maxLength: {
@@ -77,6 +79,7 @@ const LoginView: FC = () => {
             register={register}
             errors={errors}
             currentValue={passwordValue}
+            disabled={loading}
             validateOptions={{
               required: "Password is required",
               minLength: {value: 1, message: "Password cannot be empty"},
@@ -86,9 +89,16 @@ const LoginView: FC = () => {
             <GeneralTextButton
               displayedText="Continue"
               classProp={["input-button"]}
+              isLoading={loading}
             />
           </div>
         </form>
+        <div className={css["register-redirection-container"]}>
+          Don't have an account? You can register{" "}
+          <Link className={css["register-link"]} to="/register">
+            here
+          </Link>
+        </div>
       </div>
     </div>
   );

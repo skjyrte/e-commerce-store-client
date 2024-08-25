@@ -11,6 +11,7 @@ interface Props {
   errors: FieldErrors<FormObject>;
   validateOptions: RegisterOptions<FormObject, keyof FormObject>;
   currentValue: string;
+  disabled?: boolean; // Add disabled prop here
 }
 
 const InputForm = ({
@@ -19,6 +20,7 @@ const InputForm = ({
   errors,
   validateOptions,
   currentValue,
+  disabled = false, // Default value set to false
 }: Props) => {
   const [inputFocus, setInputFocus] = useState(false);
 
@@ -49,6 +51,7 @@ const InputForm = ({
             css["input-field"],
             errors[field] && css["input-error"]
           )}
+          disabled={disabled} // Add disabled prop here
         />
         <div className={css["error-message"]}>{errors[field]?.message}</div>
       </div>

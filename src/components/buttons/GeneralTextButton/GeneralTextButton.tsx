@@ -1,11 +1,13 @@
 import css from "./GeneralTextButton.module.scss";
 import {FC} from "react";
 import classNames from "classnames";
+import {ClipLoader} from "react-spinners";
 
 interface Props {
   onClick?: (e: any) => void;
   displayedText: string;
   isDisabled?: boolean;
+  isLoading?: boolean;
   dataTestId?: string;
   classProp?: string[];
 }
@@ -15,6 +17,7 @@ const GeneralTextButton: FC<Props> = ({
   displayedText,
   isDisabled = false,
   dataTestId,
+  isLoading,
   classProp = [],
 }) => {
   const buttonClassName = classNames(
@@ -29,7 +32,16 @@ const GeneralTextButton: FC<Props> = ({
       onClick={onClick}
       disabled={isDisabled}
     >
-      {displayedText}
+      {isLoading ? (
+        <ClipLoader
+          size={25}
+          cssOverride={{
+            animation: `1s infinite linear ${css["custom-clip-spin"]}`,
+          }}
+        />
+      ) : (
+        <>{displayedText}</>
+      )}
     </button>
   );
 };
