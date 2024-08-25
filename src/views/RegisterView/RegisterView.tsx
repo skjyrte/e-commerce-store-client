@@ -6,6 +6,7 @@ import GeneralTextButton from "../../components/buttons/GeneralTextButton";
 import validator from "validator";
 import InputForm from "../../components/InputForm/InputForm";
 import useRegisterUser from "../../hooks/useRegisterUser";
+import {Link} from "react-router-dom";
 
 type RegisterFormData = Record<string, string>;
 
@@ -52,7 +53,12 @@ const RegisterView: FC = () => {
         )}
         {registerUserData && (
           <div className={classNames(css["register-success-message"])}>
-            Successfully logged in as: {registerUserData.payload?.email}
+            <div className={css["register-redirection-container"]}>
+              Register complete! You can login
+              <Link className={css["register-link"]} to="/login">
+                here
+              </Link>
+            </div>
           </div>
         )}
         <form
