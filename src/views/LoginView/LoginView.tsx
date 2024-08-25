@@ -10,6 +10,8 @@ import useLogin from "../../hooks/useLogin";
 interface LoginFormData {
   email: string;
   password: string;
+  name: string;
+  address: string;
 }
 
 const LoginView: FC = () => {

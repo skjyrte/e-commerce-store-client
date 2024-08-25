@@ -18,6 +18,7 @@ const RegisterView: FC = () => {
   const {
     handleSubmit,
     register,
+    watch,
     formState: {errors, dirtyFields},
   } = useForm<RegisterFormData>({
     defaultValues: {email: ""},
@@ -27,6 +28,11 @@ const RegisterView: FC = () => {
   const registerUserInstance = useRegisterUser();
 
   const {registerUser, registerUserData, loading, error} = registerUserInstance;
+
+  const emailValue = watch("email");
+  const passwordValue = watch("password");
+  const addressValue = watch("address");
+  const nameValue = watch("name");
 
   const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
     const formData = {
@@ -66,6 +72,7 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             dirtyFields={dirtyFields}
+            currentValue={emailValue}
             validateOptions={{
               required: "Email is required",
               maxLength: {
@@ -83,6 +90,7 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             dirtyFields={dirtyFields}
+            currentValue={passwordValue}
             validateOptions={{
               required: "Password is required",
               minLength: {value: 1, message: "Password cannot be empty"},
@@ -93,6 +101,7 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             dirtyFields={dirtyFields}
+            currentValue={nameValue}
             validateOptions={{
               required: "Email is required",
               maxLength: {
@@ -110,6 +119,7 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             dirtyFields={dirtyFields}
+            currentValue={addressValue}
             validateOptions={{
               required: "Email is required",
               maxLength: {

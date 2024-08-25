@@ -3,7 +3,7 @@ import classNames from "classnames";
 import css from "./InputForm.module.scss";
 import {UseFormRegister, FieldErrors, Path} from "react-hook-form";
 
-interface FormData {
+interface FieldValues {
   email: string;
   password: string;
   name: string;
@@ -11,10 +11,10 @@ interface FormData {
 }
 
 interface Props {
-  field: Path<FormData>;
-  register: UseFormRegister<FormData>;
-  errors: FieldErrors<FormData>;
-  dirtyFields: Partial<Record<Path<FormData>, boolean>>;
+  field: Path<FieldValues>;
+  register: UseFormRegister<FieldValues>;
+  errors: FieldErrors<FieldValues>;
+  dirtyFields: Partial<Record<Path<FieldValues>, boolean>>;
   validateOptions: {
     required?: string;
     minLength?: {
