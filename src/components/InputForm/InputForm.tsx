@@ -1,42 +1,25 @@
-import {FC, useState} from "react";
+import {useState} from "react";
 import classNames from "classnames";
 import css from "./InputForm.module.scss";
-import {UseFormRegister, FieldErrors, Path} from "react-hook-form";
+import {UseFormRegister, FieldErrors, RegisterOptions} from "react-hook-form";
 
-interface FieldValues {
-  email: string;
-  password: string;
-  name: string;
-  address: string;
-}
+type FormObject = Record<string, string>;
 
 interface Props {
-  field: Path<FieldValues>;
-  register: UseFormRegister<FieldValues>;
-  errors: FieldErrors<FieldValues>;
-  dirtyFields: Partial<Record<Path<FieldValues>, boolean>>;
-  validateOptions: {
-    required?: string;
-    minLength?: {
-      value: number;
-      message: string;
-    };
-    maxLength?: {
-      value: number;
-      message: string;
-    };
-    validate?: Record<string, (value: string) => boolean | string>;
-  };
+  field: keyof FormObject;
+  register: UseFormRegister<FormObject>;
+  errors: FieldErrors<FormObject>;
+  validateOptions: RegisterOptions<FormObject, keyof FormObject>;
   currentValue: string;
 }
 
-const InputForm: FC<Props> = ({
+const InputForm = ({
   field,
   register,
   errors,
   validateOptions,
   currentValue,
-}) => {
+}: Props) => {
   const [inputFocus, setInputFocus] = useState(false);
 
   return (
@@ -67,7 +50,6 @@ const InputForm: FC<Props> = ({
             errors[field] && css["input-error"]
           )}
         />
-
         <div className={css["error-message"]}>{errors[field]?.message}</div>
       </div>
     </div>

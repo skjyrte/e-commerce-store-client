@@ -7,19 +7,14 @@ import validator from "validator";
 import InputForm from "../../components/InputForm/InputForm";
 import useRegisterUser from "../../hooks/useRegisterUser";
 
-interface RegisterFormData {
-  email: string;
-  password: string;
-  name: string;
-  address: string;
-}
+type RegisterFormData = Record<string, string>;
 
 const RegisterView: FC = () => {
   const {
     handleSubmit,
     register,
     watch,
-    formState: {errors, dirtyFields},
+    formState: {errors},
   } = useForm<RegisterFormData>({
     defaultValues: {email: ""},
     shouldFocusError: false,
@@ -71,7 +66,6 @@ const RegisterView: FC = () => {
             field={"email"}
             register={register}
             errors={errors}
-            dirtyFields={dirtyFields}
             currentValue={emailValue}
             validateOptions={{
               required: "Email is required",
@@ -89,7 +83,6 @@ const RegisterView: FC = () => {
             field={"password"}
             register={register}
             errors={errors}
-            dirtyFields={dirtyFields}
             currentValue={passwordValue}
             validateOptions={{
               required: "Password is required",
@@ -100,7 +93,6 @@ const RegisterView: FC = () => {
             field={"name"}
             register={register}
             errors={errors}
-            dirtyFields={dirtyFields}
             currentValue={nameValue}
             validateOptions={{
               required: "Email is required",
@@ -118,7 +110,6 @@ const RegisterView: FC = () => {
             field={"address"}
             register={register}
             errors={errors}
-            dirtyFields={dirtyFields}
             currentValue={addressValue}
             validateOptions={{
               required: "Email is required",

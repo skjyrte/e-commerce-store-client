@@ -7,26 +7,20 @@ import validator from "validator";
 import InputForm from "../../components/InputForm/InputForm";
 import useLogin from "../../hooks/useLogin";
 
-interface LoginFormData {
-  email: string;
-  password: string;
-  name: string;
-  address: string;
-}
+type LoginFormData = Record<string, string>;
 
 const LoginView: FC = () => {
   const {
     handleSubmit,
     register,
-    formState: {errors, dirtyFields},
+    formState: {errors},
     watch,
   } = useForm<LoginFormData>({
     defaultValues: {email: "", password: ""},
     shouldFocusError: false,
   });
 
-  const login = useLogin();
-  const {loginRequest, loginData, loading, error} = login;
+  const {loginRequest, loginData, loading, error} = useLogin();
 
   const emailValue = watch("email");
   const passwordValue = watch("password");
@@ -48,13 +42,11 @@ const LoginView: FC = () => {
             {error.clientMessage}
           </div>
         )}
-
         {loginData && (
           <div className={classNames(css["login-success-message"])}>
             Successfully logged in as: {loginData.payload?.email}
           </div>
         )}
-
         <form
           onSubmit={(e) => {
             e.preventDefault();
@@ -64,10 +56,9 @@ const LoginView: FC = () => {
           className={css["email-entry-form"]}
         >
           <InputForm
-            field={"email"}
+            field="email"
             register={register}
             errors={errors}
-            dirtyFields={dirtyFields}
             currentValue={emailValue}
             validateOptions={{
               required: "Email is required",
@@ -82,10 +73,9 @@ const LoginView: FC = () => {
             }}
           />
           <InputForm
-            field={"password"}
+            field="password"
             register={register}
             errors={errors}
-            dirtyFields={dirtyFields}
             currentValue={passwordValue}
             validateOptions={{
               required: "Password is required",
