@@ -11,6 +11,7 @@ import LoginView from "../../views/LoginView";
 import RegisterView from "../../views/RegisterView";
 import PageTransition from "../PageTransition";
 import css from "./AppContainer.module.scss";
+import MiniHeader from "../MiniHeader";
 
 const AppContainer: FC = () => {
   return (
@@ -47,6 +48,7 @@ const AppContainer: FC = () => {
               path="/login"
               element={
                 <PageTransition>
+                  <MiniHeader />
                   <LoginView />
                 </PageTransition>
               }
@@ -55,6 +57,7 @@ const AppContainer: FC = () => {
               path="/register"
               element={
                 <PageTransition>
+                  <MiniHeader />
                   <RegisterView />
                 </PageTransition>
               }
