@@ -9,16 +9,13 @@ import IconButton from "../buttons/IconButton";
 import IconNarrowArrowNext from "../inlineIcons/IconNarrowArrowNext";
 import IconNarrowArrowPrev from "../inlineIcons/IconNarrowArrowPrev";
 import classNames from "classnames";
+import {Navigation, Thumbs, Scrollbar, Autoplay} from "swiper/modules";
 
-// Import Swiper styles
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/thumbs";
 import "swiper/css/scrollbar";
 import "swiper/css/autoplay";
-
-// import required modules
-import {Navigation, Thumbs, Scrollbar, Autoplay} from "swiper/modules";
 
 enum RequestType {
   GET = "GET",
@@ -47,7 +44,9 @@ const ProductsSwiper: FC<Props> = (props) => {
   const products = request.responseData;
   const error = request.error;
 
-  // Refs for navigation buttons
+  if (products && !error) {
+  }
+
   const prevRef = useRef<HTMLDivElement | null>(null);
   const nextRef = useRef<HTMLDivElement | null>(null);
 
@@ -104,65 +103,77 @@ const ProductsSwiper: FC<Props> = (props) => {
         } as React.CSSProperties
       }
     >
-      <div className={css["component-background-banner"]}></div>
-      <div className={css["swiper-content"]}>
-        <div className={css["products-swiper-header"]}>
-          <div className={css["products-swiper-title"]}> {headerText} </div>
-          <div className={css["swiper-buttons-group"]}>
-            <div
-              ref={prevRef}
-              className={classNames(
-                css["icon-button-wrapper"],
-                css["icon-button-wrapper-prev"]
-              )}
-            >
-              <IconButton IconComponent={IconNarrowArrowPrev} />
+      {!products && !request.loader ? (
+        <div className={css["no-products-avaiable"]}></div>
+      ) : (
+        <>
+          <div className={css["component-background-banner"]}></div>
+          <div className={css["swiper-content"]}>
+            <div className={css["products-swiper-header"]}>
+              <div className={css["products-swiper-title"]}> {headerText} </div>
+              <div className={css["swiper-buttons-group"]}>
+                <div
+                  ref={prevRef}
+                  className={classNames(
+                    css["icon-button-wrapper"],
+                    css["icon-button-wrapper-prev"]
+                  )}
+                >
+                  <IconButton IconComponent={IconNarrowArrowPrev} />
+                </div>
+                <div
+                  ref={nextRef}
+                  className={classNames(
+                    css["icon-button-wrapper"],
+                    css["icon-button-wrapper-next"]
+                  )}
+                >
+                  <IconButton IconComponent={IconNarrowArrowNext} />
+                </div>
+              </div>
             </div>
-            <div
-              ref={nextRef}
-              className={classNames(
-                css["icon-button-wrapper"],
-                css["icon-button-wrapper-next"]
-              )}
+            <Swiper
+              navigation={{
+                enabled: true,
+                nextEl: nextRef.current,
+                prevEl: prevRef.current,
+              }}
+              modules={[Navigation, Thumbs, Scrollbar, Autoplay]}
+              autoplay={{
+                pauseOnMouseEnter: true,
+                delay: 2000 * Math.random() + 5000,
+              }}
+              scrollbar={{
+                enabled: true,
+                draggable: true,
+              }}
+              spaceBetween={20}
+              speed={300}
+              watchSlidesProgress={true}
+              slidesPerView={1}
+              breakpoints={{
+                600: {
+                  slidesPerView: 2,
+                  spaceBetween: 10,
+                },
+                900: {
+                  slidesPerView: 3,
+                  spaceBetween: 10,
+                },
+              }}
+              className={"thumbnail-gallery-swiper"}
             >
-              <IconButton IconComponent={IconNarrowArrowNext} />
-            </div>
+              {swiperContent() ? (
+                swiperContent()
+              ) : (
+                <div className={css["no-products-box"]}>
+                  No products avaiable
+                </div>
+              )}
+            </Swiper>
           </div>
-        </div>
-        <Swiper
-          navigation={{
-            enabled: true,
-            nextEl: nextRef.current,
-            prevEl: prevRef.current,
-          }}
-          modules={[Navigation, Thumbs, Scrollbar, Autoplay]}
-          autoplay={{
-            pauseOnMouseEnter: true,
-            delay: 2000 * Math.random() + 5000,
-          }}
-          scrollbar={{
-            enabled: true,
-            draggable: true,
-          }}
-          spaceBetween={20}
-          speed={300}
-          watchSlidesProgress={true}
-          slidesPerView={1}
-          breakpoints={{
-            600: {
-              slidesPerView: 2,
-              spaceBetween: 10,
-            },
-            900: {
-              slidesPerView: 3,
-              spaceBetween: 10,
-            },
-          }}
-          className={"thumbnail-gallery-swiper"}
-        >
-          {swiperContent()}
-        </Swiper>
-      </div>
+        </>
+      )}
     </div>
   );
 };
