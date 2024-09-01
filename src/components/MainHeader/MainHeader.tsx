@@ -1,7 +1,6 @@
 import {FC, useState} from "react";
 import css from "./MainHeader.module.scss";
 import TextLinkElement from "../LinkElements/TextLinkElement";
-import IconButton from "../buttons/IconButton";
 import CartLinkElement from "../LinkElements/CartLinkElement";
 import IconUserProfile from "../inlineIcons/IconUserProfile";
 import classNames from "classnames";
@@ -9,6 +8,8 @@ import MobileHeaderDrawer from "../drawers/MobileHeaderDrawer";
 import DesktopHeaderDrawer from "../drawers/DesktopHeaderDrawer";
 import {useLocation} from "react-router-dom";
 import IconLinkElement from "../LinkElements/IconLinkElement";
+import AuthStatus from "../AuthStatus";
+import {Link} from "react-router-dom";
 
 const Header: FC = () => {
   const [activeDrawer, setActiveDrawer] = useState<null | "men" | "women">(
@@ -92,14 +93,10 @@ const Header: FC = () => {
               <CartLinkElement />
             </div>
             <div className={css["user-profile-button-wrapper"]}>
-              <IconLinkElement IconComponent={IconUserProfile} path="/login" />
-              {/*              <IconButton
-                IconComponent={IconUserProfile}
-                onClick={() => {
-                  console.log("user profile");
-                }}
-                buttonClass={["profileButton"]}
-              /> */}
+              <Link to="/login" className={css["user-profile-button-wrapper"]}>
+                <IconUserProfile />
+                <AuthStatus />
+              </Link>
             </div>
           </div>
           <DesktopHeaderDrawer

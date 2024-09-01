@@ -1,0 +1,18 @@
+.login-container {
+  color: rgb(124 101 24);
+  font-variation-settings:
+    "wght" 900,
+    "YOPQ" 300;
+  max-width: 200px;
+  text-align: center;
+  font-size: 14px;
+
+  @media (width >= 600px) {
+    font-size: 16px;
+  }
+
+  .user-name {
+    letter-spacing: 0.1rem;
+    color: black;
+  }
+}

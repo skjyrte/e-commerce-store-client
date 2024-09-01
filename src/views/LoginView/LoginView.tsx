@@ -20,8 +20,7 @@ const LoginView: FC = () => {
     defaultValues: {email: "", password: ""},
     shouldFocusError: false,
   });
-
-  const {loginRequest, loginData, loading, error} = useLogin();
+  const {loginRequest, user, status, error} = useLogin();
 
   const emailValue = watch("email");
   const passwordValue = watch("password");
@@ -33,19 +32,19 @@ const LoginView: FC = () => {
   return (
     <div className={classNames(css["view-container"])}>
       <div className={classNames([css["form-container"]])}>
-        {!loginData && (
+        {!user?.email && (
           <div className={classNames(css["login-header"])}>
             Please fill in below to login
           </div>
         )}
         {error && (
           <div className={classNames(css["login-error-message"])}>
-            {error.clientMessage}
+            We have an error, please try again later.
           </div>
         )}
-        {loginData && (
+        {user && (
           <div className={classNames(css["login-success-message"])}>
-            Successfully logged in as: {loginData.payload?.email}
+            Successfully logged in as: {user.email}
           </div>
         )}
         <form
@@ -61,7 +60,7 @@ const LoginView: FC = () => {
             register={register}
             errors={errors}
             currentValue={emailValue}
-            disabled={loading}
+            disabled={status === "loading"}
             validateOptions={{
               required: "Email is required",
               maxLength: {
@@ -79,7 +78,7 @@ const LoginView: FC = () => {
             register={register}
             errors={errors}
             currentValue={passwordValue}
-            disabled={loading}
+            disabled={status === "loading"}
             validateOptions={{
               required: "Password is required",
               minLength: {value: 1, message: "Password cannot be empty"},
@@ -89,7 +88,7 @@ const LoginView: FC = () => {
             <GeneralTextButton
               displayedText="Continue"
               classProp={["input-button"]}
-              isLoading={loading}
+              isLoading={status === "loading"}
             />
           </div>
         </form>

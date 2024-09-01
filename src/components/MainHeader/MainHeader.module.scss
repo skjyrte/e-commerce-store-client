@@ -6,7 +6,7 @@
   justify-content: center;
   background-color: white;
   width: 100%;
-  height: 80px;
+  height: 100px;
   margin: 0;
   padding: 0 10px;
 
@@ -29,7 +29,7 @@
     justify-content: center;
     background-color: white;
     width: 100%;
-    height: 80px;
+    height: 100px;
     margin: 0;
     padding: 0 10px;
     transition: height 0.2s;
@@ -46,30 +46,30 @@
       justify-content: center;
       background-color: white;
       width: 100%;
-      height: 80px;
+      height: 100px;
       margin: 0;
       padding: 0;
 
       .site-home-button-wrapper {
         display: flex;
         align-items: center;
-        justify-content: center;
-        height: 60px;
-        width: 33.3%;
+        justify-content: start;
+        height: 80px;
+        width: 33%;
       }
 
       .choose-gender-list {
         display: flex;
         align-items: center;
         justify-content: center;
-        height: 60px;
-        width: 33.3%;
+        height: 80px;
+        width: 33%;
 
         .gender-button-wrapper {
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 60px;
+          height: 80px;
           width: 100px;
         }
       }
@@ -78,25 +78,27 @@
         display: flex;
         align-items: center;
         justify-content: end;
-        width: 33.3%;
+        width: 33%;
 
         .user-profile-button-wrapper {
           display: flex;
+          flex-direction: column;
           align-items: center;
           justify-content: center;
           padding: 10px;
-          height: 60px;
-          width: 80px;
+          height: 100px;
+          min-width: 100px;
+          max-width: 120px;
         }
 
         .cart-button-wrapper {
           display: flex;
           align-items: center;
           justify-content: center;
-          height: 60px;
+          height: 80px;
           width: 80px;
           position: relative;
-          background-color: white;
+          background-color: transparent;
           z-index: 3;
           border: 2px solid transparent;
           border-bottom: none;
@@ -124,7 +126,7 @@
           width: auto;
 
           .user-profile-button-wrapper {
-            width: 60px;
+            width: 80px;
           }
 
           .cart-button-wrapper {
@@ -145,7 +147,7 @@
     padding: 0 30px;
 
     .main-header-absolute-container {
-      padding: 0 30px;
+      padding: 0;
 
       .main-header-first-row {
         .site-home-button-wrapper {
