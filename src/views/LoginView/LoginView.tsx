@@ -57,6 +57,7 @@ const LoginView: FC = () => {
         >
           <InputForm
             field="email"
+            placeholder="email"
             register={register}
             errors={errors}
             currentValue={emailValue}
@@ -75,6 +76,7 @@ const LoginView: FC = () => {
           />
           <InputForm
             field="password"
+            placeholder="password"
             register={register}
             errors={errors}
             currentValue={passwordValue}
