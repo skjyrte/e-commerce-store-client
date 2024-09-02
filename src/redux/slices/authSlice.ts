@@ -20,6 +20,7 @@ interface BasicUserData {
   email: string;
   first_name: string;
   second_name: string;
+  address: string;
 }
 
 type SuccessPayload = BasicUserData;
@@ -55,7 +56,9 @@ function isSuccessPayload(obj: unknown): obj is SuccessPayload {
     "first_name" in obj &&
     typeof obj.first_name === "string" &&
     "second_name" in obj &&
-    typeof obj.second_name === "string"
+    typeof obj.second_name === "string" &&
+    "address" in obj &&
+    typeof obj.address === "string"
   );
 }
 

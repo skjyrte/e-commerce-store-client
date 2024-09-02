@@ -17,6 +17,7 @@ import {checkAuthStatus} from "../../redux/slices/authSlice";
 import {store} from "../../redux/configureStore";
 import {Provider} from "react-redux";
 import {AppDispatch} from "../../redux/configureStore";
+import UserView from "../../views/UserView";
 
 const AppContainer: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -62,6 +63,15 @@ const AppContainer: FC = () => {
                   <PageTransition>
                     <MiniHeader />
                     <LoginView />
+                  </PageTransition>
+                }
+              />
+              <Route
+                path="/user"
+                element={
+                  <PageTransition>
+                    <MiniHeader />
+                    <UserView />
                   </PageTransition>
                 }
               />

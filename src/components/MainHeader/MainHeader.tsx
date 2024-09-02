@@ -7,14 +7,17 @@ import classNames from "classnames";
 import MobileHeaderDrawer from "../drawers/MobileHeaderDrawer";
 import DesktopHeaderDrawer from "../drawers/DesktopHeaderDrawer";
 import {useLocation} from "react-router-dom";
-import IconLinkElement from "../LinkElements/IconLinkElement";
 import AuthStatus from "../AuthStatus";
 import {Link} from "react-router-dom";
+import {selectAuth} from "../../redux/slices/authSlice";
+import {useSelector} from "react-redux";
 
 const Header: FC = () => {
   const [activeDrawer, setActiveDrawer] = useState<null | "men" | "women">(
     null
   );
+  const auth = useSelector(selectAuth);
+  const {user, status, error} = auth;
 
   const location = useLocation();
 
@@ -93,7 +96,10 @@ const Header: FC = () => {
               <CartLinkElement />
             </div>
             <div className={css["user-profile-button-wrapper"]}>
-              <Link to="/login" className={css["user-profile-button-wrapper"]}>
+              <Link
+                to={status === "success" ? "/user" : "/login"}
+                className={css["user-profile-button-wrapper"]}
+              >
                 <IconUserProfile />
                 <AuthStatus />
               </Link>
