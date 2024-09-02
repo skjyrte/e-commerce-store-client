@@ -75,7 +75,10 @@ const InputForm = ({
               onClick={() => {
                 setOverrided(!overrided);
               }}
-              buttonClass={[overrided ? "hidden-button" : ""]}
+              buttonClass={[
+                "toggle-password-button",
+                overrided ? "hidden-button" : "",
+              ]}
             />
           </div>
         </div>

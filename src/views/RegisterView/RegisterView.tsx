@@ -17,7 +17,6 @@ const RegisterView: FC = () => {
     watch,
     formState: {errors},
   } = useForm<RegisterFormData>({
-    defaultValues: {email: ""},
     shouldFocusError: false,
   });
 
