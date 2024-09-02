@@ -14,8 +14,8 @@ const AuthStatus: FC = () => {
       if (status === "idle") {
         try {
           await dispatch(checkAuthStatus()).unwrap();
-        } catch (error) {
-          console.error("Failed to check auth status:", error);
+        } catch (err) {
+          console.error("Failed to check auth status:", err);
         }
       }
     };

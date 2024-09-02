@@ -87,7 +87,6 @@ export const checkAuthStatus = createAsyncThunk<
         console.error("Unable to connect with server");
       }
     }
-    console.error(err);
     return thunkAPI.rejectWithValue("Unable to log in");
   }
 });
