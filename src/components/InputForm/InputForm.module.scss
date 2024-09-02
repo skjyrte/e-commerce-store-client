@@ -56,13 +56,36 @@
       }
     }
 
-    .error-message {
-      width: 100%;
-      height: 30px;
-      font-size: 14px;
+    .component-footer-section {
       display: flex;
-      align-items: center;
-      color: rgb(223 0 0);
+      width: 100%;
+
+      .error-message {
+        width: 100%;
+        height: 30px;
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        color: rgb(223 0 0);
+      }
+
+      .icon-button-wrapper {
+        width: 30px;
+        height: 30px;
+        margin: 0 5px;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        &.hide-button {
+          display: none;
+        }
+
+        &:hover {
+          color: rgb(95 95 95);
+          cursor: pointer;
+        }
+      }
     }
   }
 }

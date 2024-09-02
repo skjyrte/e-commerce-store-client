@@ -22,7 +22,8 @@ const useRegisterUser = () => {
   const registerUser = async (formData: {
     email: string;
     password: string;
-    name: string;
+    first_name: string;
+    second_name: string;
     address: string;
   }) => {
     setLoading(true);

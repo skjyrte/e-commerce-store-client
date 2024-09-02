@@ -26,15 +26,18 @@ const RegisterView: FC = () => {
   const {registerUser, registerUserData, loading, error} = registerUserInstance;
 
   const emailValue = watch("email");
+  const setPasswordValue = watch("setPassword");
   const passwordValue = watch("password");
   const addressValue = watch("address");
-  const nameValue = watch("name");
+  const firstNameValue = watch("firstName");
+  const secondNameValue = watch("secondName");
 
   const onSubmit: SubmitHandler<RegisterFormData> = async (data) => {
     const formData = {
       email: data.email,
       password: data.password,
-      name: data.name,
+      first_name: data.firstName,
+      second_name: data.secondName,
       address: data.address,
     };
     await registerUser({...formData});
@@ -71,6 +74,8 @@ const RegisterView: FC = () => {
         >
           <InputForm
             field={"email"}
+            placeholder={"Email"}
+            type={"text"}
             register={register}
             errors={errors}
             currentValue={emailValue}
@@ -89,6 +94,9 @@ const RegisterView: FC = () => {
           />
           <InputForm
             field={"password"}
+            placeholder={"Password"}
+            type={"password"}
+            overrideType={true}
             register={register}
             errors={errors}
             currentValue={passwordValue}
@@ -99,13 +107,49 @@ const RegisterView: FC = () => {
             }}
           />
           <InputForm
-            field={"name"}
+            field={"setPassword"}
+            placeholder={"Confirm Password"}
+            type={"password"}
+            overrideType={true}
             register={register}
             errors={errors}
-            currentValue={nameValue}
+            currentValue={setPasswordValue}
             disabled={loading}
             validateOptions={{
-              required: "Name is required",
+              required: "Password is required",
+              minLength: {value: 1, message: "Password cannot be empty"},
+              validate: {
+                validator: (v) =>
+                  v === passwordValue || "Passwords do not match",
+              },
+            }}
+          />
+          <InputForm
+            field={"firstName"}
+            placeholder={"First Name"}
+            type={"text"}
+            register={register}
+            errors={errors}
+            currentValue={firstNameValue}
+            disabled={loading}
+            validateOptions={{
+              required: "First name is required",
+              maxLength: {
+                value: 100,
+                message: "Name cannot exceed 100 characters",
+              },
+            }}
+          />
+          <InputForm
+            field={"secondName"}
+            placeholder={"Second Name"}
+            type={"text"}
+            register={register}
+            errors={errors}
+            currentValue={secondNameValue}
+            disabled={loading}
+            validateOptions={{
+              required: "Second name is required",
               maxLength: {
                 value: 100,
                 message: "Name cannot exceed 100 characters",
@@ -114,6 +158,8 @@ const RegisterView: FC = () => {
           />
           <InputForm
             field={"address"}
+            placeholder={"Address"}
+            type={"text"}
             register={register}
             errors={errors}
             currentValue={addressValue}

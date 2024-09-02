@@ -2,27 +2,36 @@ import {useState} from "react";
 import classNames from "classnames";
 import css from "./InputForm.module.scss";
 import {UseFormRegister, FieldErrors, RegisterOptions} from "react-hook-form";
+import IconButton from "../buttons/IconButton";
+import IconShow from "../inlineIcons/IconShow";
 
 type FormObject = Record<string, string>;
 
 interface Props {
   field: keyof FormObject;
+  placeholder: string;
+  type: "password" | "text";
+  overrideType?: boolean;
   register: UseFormRegister<FormObject>;
   errors: FieldErrors<FormObject>;
   validateOptions: RegisterOptions<FormObject, keyof FormObject>;
   currentValue: string;
-  disabled?: boolean; // Add disabled prop here
+  disabled?: boolean;
 }
 
 const InputForm = ({
   field,
+  placeholder,
+  type,
+  overrideType = false,
   register,
   errors,
   validateOptions,
   currentValue,
-  disabled = false, // Default value set to false
+  disabled = false,
 }: Props) => {
   const [inputFocus, setInputFocus] = useState(false);
+  const [overrided, setOverrided] = useState(false);
 
   return (
     <div className={classNames(css["form-container"])}>
@@ -35,7 +44,7 @@ const InputForm = ({
             (inputFocus || currentValue) && css["input-top-label"]
           )}
         >
-          {field}
+          {placeholder}
         </label>
         <input
           {...register(field, validateOptions)}
@@ -45,15 +54,31 @@ const InputForm = ({
           onBlur={() => {
             setInputFocus(false);
           }}
-          type={field === "password" ? "password" : "text"}
+          type={overrided ? "text" : type}
           id={field}
           className={classNames(
             css["input-field"],
             errors[field] && css["input-error"]
           )}
-          disabled={disabled} // Add disabled prop here
+          disabled={disabled}
         />
-        <div className={css["error-message"]}>{errors[field]?.message}</div>
+        <div className={css["component-footer-section"]}>
+          <div className={css["error-message"]}>{errors[field]?.message}</div>
+          <div
+            className={classNames(
+              [css["icon-button-wrapper"]],
+              !overrideType && css["hide-button"]
+            )}
+          >
+            <IconButton
+              IconComponent={IconShow}
+              onClick={() => {
+                setOverrided(!overrided);
+              }}
+              buttonClass={[overrided ? "hidden-button" : ""]}
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
