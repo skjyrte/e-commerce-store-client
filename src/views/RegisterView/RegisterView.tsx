@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import {useForm, SubmitHandler} from "react-hook-form";
 import classNames from "classnames";
 import css from "./RegisterView.module.scss";
@@ -7,6 +7,7 @@ import validator from "validator";
 import InputForm from "../../components/InputForm/InputForm";
 import useRegisterUser from "../../hooks/useRegisterUser";
 import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 type RegisterFormData = Record<string, string>;
 
@@ -41,6 +42,16 @@ const RegisterView: FC = () => {
     };
     await registerUser({...formData});
   };
+
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (registerUserData) {
+      setTimeout(() => {
+        navigate("/login");
+      }, 500);
+    }
+  }, [registerUserData]);
 
   return (
     <div className={classNames(css["view-container"])}>

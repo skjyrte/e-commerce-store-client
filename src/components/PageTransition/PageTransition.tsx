@@ -2,8 +2,9 @@ import React from "react";
 import {motion} from "framer-motion";
 import {useLocation} from "react-router-dom";
 
-interface PageTransitionProps {
+interface Props {
   children: React.ReactNode;
+  duration?: number;
 }
 
 const pageVariants = {
@@ -12,14 +13,15 @@ const pageVariants = {
   out: {opacity: 0, x: 0},
 };
 
-const pageTransition = {
-  type: "tween",
-  ease: "anticipate",
-  duration: 0.5,
-};
-
-const PageTransition: React.FC<PageTransitionProps> = ({children}) => {
+const PageTransition: React.FC<Props> = (props) => {
+  const {children, duration = 0.5} = props;
   const thisLocation = useLocation();
+
+  const pageTransition = {
+    type: "tween",
+    ease: "anticipate",
+    duration: duration,
+  };
 
   return (
     <motion.div

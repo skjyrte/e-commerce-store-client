@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import css from "./UserView.module.scss";
 import UserDataBox from "../../components/UserDataBox";
 import IconCross from "../../components/inlineIcons/IconCross";
@@ -10,11 +10,14 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "../../redux/configureStore";
 import GeneralTextButton from "../../components/buttons/GeneralTextButton";
 import {logout} from "../../redux/slices/authSlice";
+import {useNavigate} from "react-router-dom";
 
 const UserView: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const auth = useSelector(selectAuth);
   const {user, status, error} = auth;
+
+  const navigate = useNavigate();
 
   const handleLogout = () => {
     void dispatch(logout());
@@ -77,6 +80,14 @@ const UserView: FC = () => {
     if (auth.status === "loggedOut") return userLoggedOut();
     else return userNotLogIn();
   };
+
+  useEffect(() => {
+    if (auth.status === "loggedOut") {
+      setTimeout(() => {
+        navigate("/home");
+      }, 500);
+    }
+  }, [auth.status]);
 
   return (
     <div className={css["user-view-container"]}>

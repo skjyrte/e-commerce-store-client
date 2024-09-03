@@ -12,20 +12,11 @@ import RegisterView from "../../views/RegisterView";
 import PageTransition from "../PageTransition";
 import css from "./AppContainer.module.scss";
 import MiniHeader from "../MiniHeader";
-/* import {useDispatch} from "react-redux"; */
-/* import {checkAuthStatus} from "../../redux/slices/authSlice"; */
 import {store} from "../../redux/configureStore";
 import {Provider} from "react-redux";
-/* import {AppDispatch} from "../../redux/configureStore"; */
 import UserView from "../../views/UserView";
 
 const AppContainer: FC = () => {
-  /*   const dispatch = useDispatch<AppDispatch>(); */
-
-  /*  useEffect(() => {
-    void dispatch(checkAuthStatus());
-  }, []); */
-
   return (
     <BrowserRouter>
       <Provider store={store}>
@@ -69,7 +60,7 @@ const AppContainer: FC = () => {
               <Route
                 path="/user"
                 element={
-                  <PageTransition>
+                  <PageTransition duration={1.5}>
                     <MiniHeader />
                     <UserView />
                   </PageTransition>

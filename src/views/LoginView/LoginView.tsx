@@ -7,6 +7,7 @@ import validator from "validator";
 import InputForm from "../../components/InputForm/InputForm";
 import useLogin from "../../hooks/useLogin";
 import {Link} from "react-router-dom";
+import {useNavigate} from "react-router-dom";
 
 type LoginFormData = Record<string, string>;
 
@@ -21,6 +22,7 @@ const LoginView: FC = () => {
     shouldFocusError: false,
   });
   const {loginRequest, user, status, error, clearErrorRequest} = useLogin();
+  const navigate = useNavigate();
 
   const emailValue = watch("email");
   const passwordValue = watch("password");
@@ -32,6 +34,14 @@ const LoginView: FC = () => {
   useEffect(() => {
     clearErrorRequest();
   }, []);
+
+  useEffect(() => {
+    if (status === "loggedIn") {
+      setTimeout(() => {
+        navigate("/home");
+      }, 500);
+    }
+  }, [status]);
 
   return (
     <div className={classNames(css["view-container"])}>
