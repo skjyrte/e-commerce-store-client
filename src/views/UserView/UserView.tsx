@@ -9,15 +9,28 @@ import {selectAuth} from "../../redux/slices/authSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "../../redux/configureStore";
 import GeneralTextButton from "../../components/buttons/GeneralTextButton";
+import {logout} from "../../redux/slices/authSlice";
 
 const UserView: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const auth = useSelector(selectAuth);
   const {user, status, error} = auth;
 
+  const handleLogout = () => {
+    void dispatch(logout());
+  };
+
   const userNotLogIn = () => {
     return (
-      <div className={css["user-panel-body"]}>Please login to see details</div>
+      <div className={css["user-panel-body"]}>Please login to see details.</div>
+    );
+  };
+
+  const userLoggedOut = () => {
+    return (
+      <div className={css["user-panel-body"]}>
+        You had been successfully log out, please login to see details.
+      </div>
     );
   };
 
@@ -50,6 +63,7 @@ const UserView: FC = () => {
               <GeneralTextButton
                 classProp={["logout-button"]}
                 displayedText="Log out"
+                onClick={handleLogout}
               />
             }
           </div>
@@ -58,11 +72,17 @@ const UserView: FC = () => {
     );
   };
 
+  const pageContent = () => {
+    if (auth.status === "loggedIn") return userLogIn();
+    if (auth.status === "loggedOut") return userLoggedOut();
+    else return userNotLogIn();
+  };
+
   return (
     <div className={css["user-view-container"]}>
       <div className={css["user-panel"]}>
         <div className={css["user-panel-header"]}>Your Account</div>
-        {auth.status === "success" ? userLogIn() : userNotLogIn()}
+        {pageContent()}
       </div>
     </div>
   );

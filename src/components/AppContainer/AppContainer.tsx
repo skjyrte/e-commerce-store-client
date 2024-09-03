@@ -1,4 +1,4 @@
-import {FC, useEffect} from "react";
+import {FC /* useEffect */} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {AnimatePresence} from "framer-motion";
 import MainHeader from "../MainHeader";
@@ -12,19 +12,19 @@ import RegisterView from "../../views/RegisterView";
 import PageTransition from "../PageTransition";
 import css from "./AppContainer.module.scss";
 import MiniHeader from "../MiniHeader";
-import {useDispatch} from "react-redux";
-import {checkAuthStatus} from "../../redux/slices/authSlice";
+/* import {useDispatch} from "react-redux"; */
+/* import {checkAuthStatus} from "../../redux/slices/authSlice"; */
 import {store} from "../../redux/configureStore";
 import {Provider} from "react-redux";
-import {AppDispatch} from "../../redux/configureStore";
+/* import {AppDispatch} from "../../redux/configureStore"; */
 import UserView from "../../views/UserView";
 
 const AppContainer: FC = () => {
-  const dispatch = useDispatch<AppDispatch>();
+  /*   const dispatch = useDispatch<AppDispatch>(); */
 
-  useEffect(() => {
+  /*  useEffect(() => {
     void dispatch(checkAuthStatus());
-  }, []);
+  }, []); */
 
   return (
     <BrowserRouter>

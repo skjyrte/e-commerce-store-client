@@ -3,7 +3,7 @@ import css from "./IconButton.module.scss";
 import classNames from "classnames";
 
 interface Props {
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
   isLoading?: boolean;
   isDisabled?: boolean;
   IconComponent: ElementType;

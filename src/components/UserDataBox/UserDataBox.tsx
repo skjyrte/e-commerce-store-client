@@ -12,12 +12,14 @@ const UserDataBox: FC<Props> = (props) => {
   const {IconComponent, title, data} = props;
   return (
     <div className={css["component-box"]}>
-      <div className={css["icon-wrapper"]}>
-        <IconComponent />
-      </div>
-      <div className={css["data-wrapper"]}>
-        <div className={css["prop-title-container"]}>{title}</div>
-        <div className={css["user-data-container"]}>{data}</div>
+      <div className={css["major-content-warpper"]}>
+        <div className={css["icon-wrapper"]}>
+          <IconComponent />
+        </div>
+        <div className={css["data-wrapper"]}>
+          <div className={css["prop-title-container"]}>{title}</div>
+          <div className={css["user-data-container"]}>{data}</div>
+        </div>
       </div>
       <div className={css["edit-button-wrapper"]}>
         <GeneralTextButton

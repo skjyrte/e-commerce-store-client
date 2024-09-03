@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import {useForm, SubmitHandler} from "react-hook-form";
 import classNames from "classnames";
 import css from "./LoginView.module.scss";
@@ -20,7 +20,7 @@ const LoginView: FC = () => {
     defaultValues: {email: "", password: ""},
     shouldFocusError: false,
   });
-  const {loginRequest, user, status, error} = useLogin();
+  const {loginRequest, user, status, error, clearErrorRequest} = useLogin();
 
   const emailValue = watch("email");
   const passwordValue = watch("password");
@@ -28,6 +28,10 @@ const LoginView: FC = () => {
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     await loginRequest(data.email, data.password);
   };
+
+  useEffect(() => {
+    clearErrorRequest();
+  }, []);
 
   return (
     <div className={classNames(css["view-container"])}>
@@ -37,7 +41,7 @@ const LoginView: FC = () => {
             Please fill in below to login
           </div>
         )}
-        {error && (
+        {error === "login" && (
           <div className={classNames(css["login-error-message"])}>
             We have an error, please try again later.
           </div>

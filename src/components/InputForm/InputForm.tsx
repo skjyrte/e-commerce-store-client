@@ -72,7 +72,8 @@ const InputForm = ({
           >
             <IconButton
               IconComponent={IconShow}
-              onClick={() => {
+              onClick={(event: React.MouseEvent<HTMLElement>) => {
+                event.preventDefault();
                 setOverrided(!overrided);
               }}
               buttonClass={[

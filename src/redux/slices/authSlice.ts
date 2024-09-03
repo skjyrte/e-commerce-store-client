@@ -5,14 +5,14 @@ import createAxiosInstance from "../../api/createAxiosInstance";
 
 interface AuthState {
   user: BasicUserData | null;
-  status: "idle" | "loading" | "success" | "failed";
-  error: boolean;
+  status: "verifyToken" | "loading" | "loggedIn" | "loggedOut" | "failed";
+  error: "checkAuth" | "login" | "logout" | null;
 }
 
 const initialState: AuthState = {
   user: null,
-  status: "idle",
-  error: false,
+  status: "verifyToken",
+  error: null,
 };
 
 interface BasicUserData {
@@ -131,6 +131,24 @@ export const login = createAsyncThunk<
   }
 });
 
+export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
+  const axiosInstance = createAxiosInstance();
+  try {
+    await axiosInstance.post("/auth/logout", {}, {withCredentials: true});
+    return thunkAPI.fulfillWithValue(null);
+  } catch (err: unknown) {
+    let errorMessage = "Unexpected error occurred.";
+    if (axios.isAxiosError(err)) {
+      if (err.response?.status === 401) {
+        errorMessage = "Invalid email or password. Please try again.";
+      } else {
+        errorMessage = "Unable to log in. Please try again later.";
+      }
+    }
+    return thunkAPI.rejectWithValue(errorMessage);
+  }
+});
+
 export const authSlice = createSlice({
   name: "auth",
   initialState,
@@ -141,42 +159,53 @@ export const authSlice = createSlice({
     logoutSuccess: (state) => {
       state.user = null;
     },
+    clearError: (state) => {
+      state.error = null;
+    },
   },
   extraReducers: (builder) => {
     builder
 
       .addCase(checkAuthStatus.pending, (state) => {
         state.status = "loading";
+        state.error = null;
       })
       .addCase(checkAuthStatus.fulfilled, (state, action) => {
-        state.status = "success";
-        state.error = false;
+        state.status = "loggedIn";
+        state.error = null;
         state.user = action.payload;
       })
       .addCase(checkAuthStatus.rejected, (state) => {
         state.status = "failed";
-        //NOTE for now silent authentication wont produce errors
-        state.error = false;
+        state.error = "checkAuth";
         state.user = null;
       })
       .addCase(login.pending, (state) => {
         state.status = "loading";
-        state.error = false;
+        state.error = null;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.status = "success";
+        state.status = "loggedIn";
         state.user = action.payload;
-        state.error = false;
+        state.error = null;
       })
       .addCase(login.rejected, (state) => {
         state.status = "failed";
         state.user = null;
-        state.error = true;
+        state.error = "login";
+      })
+      .addCase(logout.fulfilled, (state) => {
+        state.user = null;
+        state.status = "loggedOut";
+        state.error = null;
+      })
+      .addCase(logout.rejected, (state) => {
+        state.error = "logout";
       });
   },
 });
 
-export const {loginSuccess, logoutSuccess} = authSlice.actions;
+export const {loginSuccess, logoutSuccess, clearError} = authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth;
 

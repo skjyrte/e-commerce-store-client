@@ -97,10 +97,9 @@ const Header: FC = () => {
             </div>
             <div className={css["user-profile-button-wrapper"]}>
               <Link
-                to={status === "success" ? "/user" : "/login"}
+                to={status === "loggedIn" ? "/user" : "/login"}
                 className={css["user-profile-button-wrapper"]}
               >
-                <IconUserProfile />
                 <AuthStatus />
               </Link>
             </div>
