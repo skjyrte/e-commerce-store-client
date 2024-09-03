@@ -14,10 +14,7 @@ const useRegisterUser = () => {
   const [registerUserData, setRegisterUserData] =
     useState<Nullable<RegisterUserResponse>>(null);
   const [loading, setLoading] = useState(false);
-  const [error, setError] = useState<{
-    clientMessage: string;
-    serverMessage: string;
-  } | null>(null);
+  const [error, setError] = useState<string | null>(null);
 
   const registerUser = async (formData: {
     email: string;
@@ -43,26 +40,20 @@ const useRegisterUser = () => {
         const serverError = err as AxiosError<RegisterUserResponse>;
 
         setRegisterUserData(null);
-        if (!serverError.response) {
-          setError({
-            clientMessage:
-              "We have an error. Please check your network connection and try again later.",
-            serverMessage: "No response received from the server.",
-          });
+        if (err.response?.status === 400) {
+          setError("User with this email already exists.");
+        } else if (!serverError.response) {
+          setError(
+            "We have an error. Please check your network connection and try again later."
+          );
         } else {
-          setError({
-            clientMessage: "We have an error. Please check your credentials.",
-            serverMessage: error?.serverMessage ?? "Unexpected error occurred.",
-          });
+          setError("We have an error. Please try again later.");
         }
       } else {
         console.error("Unexpected error:", err);
-        setError({
-          clientMessage:
-            "We have an error. Please check your network connection and try again later.",
-          serverMessage:
-            error?.serverMessage ?? "Failed to communicate with the server.",
-        });
+        setError(
+          "We have an error. Please check your network connection and try again later."
+        );
       }
     } finally {
       setLoading(false);

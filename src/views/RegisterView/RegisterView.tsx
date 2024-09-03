@@ -50,7 +50,7 @@ const RegisterView: FC = () => {
         </div>
         {error && (
           <div className={classNames(css["register-error-message"])}>
-            {error.clientMessage}
+            {error}
           </div>
         )}
         {registerUserData && (
