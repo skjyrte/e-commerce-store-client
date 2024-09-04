@@ -9,10 +9,6 @@
   height: 1.5rem;
   border-right: 1px solid rgb(75 75 75);
 
-  &:nth-child(5n) {
-    border-right: 1px solid transparent;
-  }
-
   &:last-child {
     border-right: 1px solid transparent;
   }
