@@ -6,10 +6,11 @@ interface Props {
   IconComponent: ElementType;
   title: string;
   data: string;
+  onClick: () => void;
 }
 
 const UserDataBox: FC<Props> = (props) => {
-  const {IconComponent, title, data} = props;
+  const {IconComponent, title, data, onClick} = props;
   return (
     <div className={css["component-box"]}>
       <div className={css["major-content-warpper"]}>
@@ -25,9 +26,7 @@ const UserDataBox: FC<Props> = (props) => {
         <GeneralTextButton
           displayedText="Edit"
           classProp={["edit-button"]}
-          onClick={() => {
-            console.log("EDIT");
-          }}
+          onClick={onClick}
         />
       </div>
     </div>

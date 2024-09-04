@@ -24,7 +24,7 @@ const AppContainer: FC = () => {
       <Provider store={store}>
         <div className={css["app-container"]}>
           <ToastContainer
-            position="bottom-left"
+            position="top-right"
             hideProgressBar={false}
             newestOnTop={false}
             autoClose={2000}

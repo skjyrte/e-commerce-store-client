@@ -4,6 +4,7 @@ import GeneralTextButton from "../buttons/GeneralTextButton";
 import HeaderComponent from "./HeaderComponent";
 import DiscountComponent from "./DiscountComponent";
 import SizeDropdown from "../buttons/SizeDropdown";
+import NotReadyYet from "../../helper/NotReadyYet";
 
 interface Props {
   currentProduct: ProductExtraDataResponse;
@@ -47,6 +48,7 @@ const ProductDescription: FC<Props> = ({currentProduct}) => {
       <div className={css["user-action-container"]}>
         <GeneralTextButton
           onClick={() => {
+            NotReadyYet();
             setSelectedSize(null);
             console.log(
               "add to cart, ",

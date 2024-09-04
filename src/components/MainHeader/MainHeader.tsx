@@ -2,7 +2,6 @@ import {FC, useState} from "react";
 import css from "./MainHeader.module.scss";
 import TextLinkElement from "../LinkElements/TextLinkElement";
 import CartLinkElement from "../LinkElements/CartLinkElement";
-import IconUserProfile from "../inlineIcons/IconUserProfile";
 import classNames from "classnames";
 import MobileHeaderDrawer from "../drawers/MobileHeaderDrawer";
 import DesktopHeaderDrawer from "../drawers/DesktopHeaderDrawer";
@@ -11,13 +10,14 @@ import AuthStatus from "../AuthStatus";
 import {Link} from "react-router-dom";
 import {selectAuth} from "../../redux/slices/authSlice";
 import {useSelector} from "react-redux";
+import NotReadyYet from "../../helper/NotReadyYet";
 
 const Header: FC = () => {
   const [activeDrawer, setActiveDrawer] = useState<null | "men" | "women">(
     null
   );
   const auth = useSelector(selectAuth);
-  const {user, status, error} = auth;
+  const {status} = auth;
 
   const location = useLocation();
 
@@ -92,7 +92,7 @@ const Header: FC = () => {
           </ul>
 
           <div className={css["user-action-container"]}>
-            <div className={css["cart-button-wrapper"]}>
+            <div onClick={NotReadyYet} className={css["cart-button-wrapper"]}>
               <CartLinkElement />
             </div>
             <div className={css["user-profile-button-wrapper"]}>

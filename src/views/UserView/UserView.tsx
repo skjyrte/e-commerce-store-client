@@ -13,11 +13,12 @@ import {logout} from "../../redux/slices/authSlice";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NotReadyYet from "../../helper/NotReadyYet";
 
 const UserView: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const auth = useSelector(selectAuth);
-  const {user, status, error} = auth;
+  const {user, status} = auth;
 
   const navigate = useNavigate();
 
@@ -48,21 +49,25 @@ const UserView: FC = () => {
           IconComponent={IconCross}
           title={"Your first name"}
           data={user?.first_name ? user.first_name : ""}
+          onClick={NotReadyYet}
         />
         <UserDataBox
           IconComponent={IconPictureLandscape}
           title={"Your second name"}
           data={user?.second_name ? user.second_name : ""}
+          onClick={NotReadyYet}
         />
         <UserDataBox
           IconComponent={IconShow}
           title={"Your email"}
           data={user?.email ? user.email : ""}
+          onClick={NotReadyYet}
         />
         <UserDataBox
           IconComponent={IconUserProfile}
           title={"Your address"}
           data={user?.address ? user.address : ""}
+          onClick={NotReadyYet}
         />
         <div className={css["logout-container"]}>
           <div className={css["logout-button-wrapper"]}>
