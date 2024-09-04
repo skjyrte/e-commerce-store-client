@@ -17,8 +17,11 @@ import {Provider} from "react-redux";
 import UserView from "../../views/UserView";
 import {Bounce, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import SpinUpNotify from "../../helper/SpinUpNotify";
 
 const AppContainer: FC = () => {
+  process.env.SPINUP_NOTIFY ? SpinUpNotify() : null;
+
   return (
     <BrowserRouter>
       <Provider store={store}>
@@ -36,6 +39,7 @@ const AppContainer: FC = () => {
             theme="light"
             transition={Bounce}
           />
+
           <MainHeader />
           <AnimatePresence mode="wait">
             <Routes>

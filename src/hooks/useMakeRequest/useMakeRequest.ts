@@ -48,40 +48,62 @@ const handleRequest = async <T, D = any>(
   successCallback?: (data: ResponseObject<T>) => void,
   failureCallback?: (error: unknown) => void,
   loaderCallback?: (loader: string | null) => void,
-  loaderType?: string
+  loaderType?: string,
+  retries = process.env.REQUEST_RETRIES
+    ? parseInt(process.env.REQUEST_RETRIES)
+    : 0,
+  delay = process.env.RETRIES_DELAY ? parseInt(process.env.RETRIES_DELAY) : 3000
 ): Promise<void> => {
-  try {
-    if (loaderCallback && loaderType) {
-      loaderCallback(loaderType);
-    }
-
-    const response = await requestPromise(
-      requestConfig.url,
-      requestConfig.data,
-      requestConfig.config
-    );
-
-    if (successCallback) {
-      if (typeof response === "object" && "data" in response) {
-        successCallback(response.data);
+  const executeRequest = async (attempt: number) => {
+    try {
+      if (loaderCallback && loaderType) {
+        loaderCallback(loaderType);
       }
-    }
-    if (loaderCallback) {
-      loaderCallback(null);
-    }
-  } catch (e) {
-    console.error(e);
-    if (axios.isCancel(e)) {
-      return;
-    } else {
-      if (failureCallback) {
-        failureCallback(e);
+
+      const response = await requestPromise(
+        requestConfig.url,
+        requestConfig.data,
+        requestConfig.config
+      );
+
+      if (successCallback) {
+        if (typeof response === "object" && "data" in response) {
+          successCallback(response.data);
+        }
       }
       if (loaderCallback) {
         loaderCallback(null);
       }
+    } catch (e) {
+      console.error(e);
+
+      if (axios.isCancel(e)) {
+        return;
+      }
+
+      //NOTE -  Retry only if the error is due to a timeout (ECONNABORTED or ERR_NETWORK)
+      if (
+        axios.isAxiosError(e) &&
+        (e.code === "ECONNABORTED" || e.code === "ERR_NETWORK") &&
+        attempt < retries
+      ) {
+        console.log(
+          `Retrying request... (Attempt ${attempt.toString()}/${retries.toString()})`
+        );
+        await new Promise((res) => setTimeout(res, delay));
+        await executeRequest(attempt + 1);
+      } else {
+        if (failureCallback) {
+          failureCallback(e);
+        }
+        if (loaderCallback) {
+          loaderCallback(null);
+        }
+      }
     }
-  }
+  };
+
+  await executeRequest(0);
 };
 
 const createFilterQuery = (config: GetConfig) => {
