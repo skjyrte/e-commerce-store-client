@@ -60,7 +60,7 @@ const Figure: FC<Props> = (props) => {
           onLoad={() => {
             setTimeout(() => {
               onLoad(false);
-            }, Math.random() * 2000);
+            }, Math.random() * 1000);
           }}
           onError={() => {
             setHasError(true);

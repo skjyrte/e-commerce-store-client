@@ -11,6 +11,8 @@ import {AppDispatch} from "../../redux/configureStore";
 import GeneralTextButton from "../../components/buttons/GeneralTextButton";
 import {logout} from "../../redux/slices/authSlice";
 import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const UserView: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -31,8 +33,10 @@ const UserView: FC = () => {
 
   const userLoggedOut = () => {
     return (
-      <div className={css["user-panel-body"]}>
-        You had been successfully log out, please login to see details.
+      <div className={css["logout-container"]}>
+        <div className={css["logout-body"]}>
+          You had been successfully log out, please login to see details.
+        </div>
       </div>
     );
   };
@@ -82,10 +86,11 @@ const UserView: FC = () => {
   };
 
   useEffect(() => {
-    if (auth.status === "loggedOut") {
+    if (status === "loggedOut") {
+      toast.success("Log out successful!");
       setTimeout(() => {
         navigate("/home");
-      }, 500);
+      }, 1000);
     }
   }, [auth.status]);
 

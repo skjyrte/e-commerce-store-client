@@ -1,4 +1,4 @@
-import {FC /* useEffect */} from "react";
+import {FC} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {AnimatePresence} from "framer-motion";
 import MainHeader from "../MainHeader";
@@ -15,12 +15,27 @@ import MiniHeader from "../MiniHeader";
 import {store} from "../../redux/configureStore";
 import {Provider} from "react-redux";
 import UserView from "../../views/UserView";
+import {Bounce, ToastContainer} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 const AppContainer: FC = () => {
   return (
     <BrowserRouter>
       <Provider store={store}>
         <div className={css["app-container"]}>
+          <ToastContainer
+            position="bottom-left"
+            hideProgressBar={false}
+            newestOnTop={false}
+            autoClose={2000}
+            closeOnClick
+            rtl={false}
+            pauseOnFocusLoss
+            draggable
+            pauseOnHover
+            theme="light"
+            transition={Bounce}
+          />
           <MainHeader />
           <AnimatePresence mode="wait">
             <Routes>

@@ -8,6 +8,8 @@ import InputForm from "../../components/InputForm/InputForm";
 import useLogin from "../../hooks/useLogin";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type LoginFormData = Record<string, string>;
 
@@ -37,9 +39,10 @@ const LoginView: FC = () => {
 
   useEffect(() => {
     if (status === "loggedIn") {
+      toast.success("Login successful!");
       setTimeout(() => {
         navigate("/home");
-      }, 500);
+      }, 1000);
     }
   }, [status]);
 

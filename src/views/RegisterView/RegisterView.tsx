@@ -8,6 +8,8 @@ import InputForm from "../../components/InputForm/InputForm";
 import useRegisterUser from "../../hooks/useRegisterUser";
 import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
+import {toast} from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 type RegisterFormData = Record<string, string>;
 
@@ -47,9 +49,10 @@ const RegisterView: FC = () => {
 
   useEffect(() => {
     if (registerUserData) {
+      toast.success("User registration successful!");
       setTimeout(() => {
         navigate("/login");
-      }, 500);
+      }, 1000);
     }
   }, [registerUserData]);
 
