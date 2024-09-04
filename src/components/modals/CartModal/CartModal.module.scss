@@ -1,15 +1,19 @@
 .cartModalWrapper {
-  width: 330px;
-  display: flex;
-  flex-direction: column;
-  background-color: white;
-  position: absolute;
-  top: 56px; //override parent border 4px
-  right: -4px; //override parent border 4px
-  z-index: 1;
-  border: 4px solid rgb(226 226 226);
-  padding: 10px;
-  max-height: 400px;
+  display: none;
+
+  @media (width >= 600px) {
+    width: 330px;
+    display: flex;
+    flex-direction: column;
+    background-color: white;
+    position: absolute;
+    top: 56px; //override parent border 4px
+    right: -4px; //override parent border 4px
+    z-index: 1;
+    border: 4px solid rgb(226 226 226);
+    padding: 10px;
+    max-height: 400px;
+  }
 }
 
 .cartOverflowContainer {

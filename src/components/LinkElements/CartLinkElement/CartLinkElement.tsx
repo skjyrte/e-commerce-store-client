@@ -10,7 +10,7 @@ import IconLinkElement from "../IconLinkElement";
 
 const CartLinkElement: FC = () => {
   const [cartModalVisible, setCartModalVisible] = useState(false);
-  let location = useLocation();
+  const location = useLocation();
 
   const cartItems = useSelector(selectCartItems);
 
@@ -36,7 +36,7 @@ const CartLinkElement: FC = () => {
     <div
       className={classNames(
         css.cartLinkElementWrapper,
-        cartModalVisible === true ? css.cartOpened : ""
+        cartModalVisible ? css.cartOpened : ""
       )}
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
@@ -47,7 +47,7 @@ const CartLinkElement: FC = () => {
         path="/cart"
         linkClass={["cart"]}
       />
-      {cartModalVisible === true ? (
+      {cartModalVisible ? (
         <>
           <div className={css.hideBorderBox}></div>
           <CartModal cartItems={cartItems} />
