@@ -3,11 +3,19 @@ import css from "./HomeView.module.scss";
 import ProductsSwiper from "../../components/ProductsSwiper";
 
 const HomeView: FC = () => {
-  const [hoveredID, setHoveredID] = useState<null | string>(null);
+  const [error, setError] = useState(false);
 
-  const onThumbnailHover = (id: null | string) => {
-    setHoveredID(id);
+  const onError = (err: boolean) => {
+    setError(err);
   };
+
+  if (error) {
+    return (
+      <div className={css["no-products-found"]}>
+        We Have a Problem, Please Try Again Later.
+      </div>
+    );
+  }
 
   return (
     <div className={css.gridWrapper}>
@@ -18,6 +26,7 @@ const HomeView: FC = () => {
           gender={""}
           category={"sneakers"}
           index={0}
+          onError={onError}
         />
       </div>
       <div className={css.productSwiperWrapper}>
@@ -26,6 +35,7 @@ const HomeView: FC = () => {
           gender={""}
           category={"running"}
           index={1}
+          onError={onError}
         />
       </div>
       <div className={css.productSwiperWrapper}>
@@ -34,6 +44,7 @@ const HomeView: FC = () => {
           gender={""}
           category={"casual"}
           index={2}
+          onError={onError}
         />
       </div>
     </div>

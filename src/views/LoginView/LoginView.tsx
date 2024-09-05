@@ -117,6 +117,7 @@ const LoginView: FC = () => {
         <div className={css["register-redirection-container"]}>
           Don't have an account? You can register{" "}
           <Link className={css["register-link"]} to="/register">
+            {" "}
             here
           </Link>
         </div>

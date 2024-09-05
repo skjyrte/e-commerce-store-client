@@ -1,6 +1,12 @@
 import {useState, useEffect, useMemo} from "react";
 import axios, {AxiosResponse, AxiosRequestConfig} from "axios";
 import createAxiosInstance from "../../api/createAxiosInstance";
+import {
+  setSpinupError,
+  clearSpinupError,
+} from "../../redux/slices/spinupErrorSlice";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../redux/configureStore";
 
 interface ResponseObject<T> {
   success: boolean;
@@ -49,6 +55,7 @@ const handleRequest = async <T, D = any>(
   failureCallback?: (error: unknown) => void,
   loaderCallback?: (loader: string | null) => void,
   loaderType?: string,
+  dispatch?: AppDispatch,
   retries = process.env.REQUEST_RETRIES
     ? parseInt(process.env.REQUEST_RETRIES)
     : 0,
@@ -74,6 +81,9 @@ const handleRequest = async <T, D = any>(
       if (loaderCallback) {
         loaderCallback(null);
       }
+      if (dispatch) {
+        dispatch(clearSpinupError());
+      }
     } catch (e) {
       console.error(e);
 
@@ -87,6 +97,9 @@ const handleRequest = async <T, D = any>(
         (e.code === "ECONNABORTED" || e.code === "ERR_NETWORK") &&
         attempt < retries
       ) {
+        if (dispatch) {
+          dispatch(setSpinupError());
+        }
         console.log(
           `Retrying request... (Attempt ${attempt.toString()}/${retries.toString()})`
         );
@@ -129,7 +142,7 @@ function useMakeRequest<
   const [responseData, setResponseData] = useState<null | T[]>(null);
   const [error, setError] = useState<ErrorObject | null>(null);
   const [loader, setLoader] = useState<string | null>(null);
-
+  const dispatch = useDispatch<AppDispatch>();
   console.log({error});
   console.log({loader});
 
@@ -171,7 +184,8 @@ function useMakeRequest<
         if (loader) setResponseData(null);
         setLoader(loader);
       },
-      RequestType.GET
+      RequestType.GET,
+      dispatch
     );
   };
 

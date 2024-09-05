@@ -5,6 +5,7 @@ import selectedProductReducer from "./slices/selectedProductSlice";
 import selectedSizeReducer from "./slices/selectedSizeSlice";
 import cartReducer from "./slices/cartSlice";
 import authReducer from "./slices/authSlice";
+import spinupErrorSlice from "./slices/spinupErrorSlice";
 
 export const store = configureStore({
   reducer: {
@@ -14,6 +15,7 @@ export const store = configureStore({
     size: selectedSizeReducer,
     cart: cartReducer,
     auth: authReducer,
+    spinupError: spinupErrorSlice,
   },
 });
 

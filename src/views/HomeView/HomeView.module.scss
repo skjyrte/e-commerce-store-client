@@ -1,10 +1,4 @@
 .gridWrapper {
-  /*   position: relative;
-  width: 100%;
-  padding: 5px 10px;
-  display: grid;
-  gap: 0.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(calc(50% - 1rem), 1fr)); */
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -53,13 +47,3 @@ a {
     grid-template-columns: repeat(auto-fit, minmax(calc(25% - 2rem), 1fr));
   }
 }
-
-/* .categoryOverviewWrapper {
-  width: 1000px;
-  display: flex;
-}
-
-.productSwiperWrapper {
-  width: 1000px;
-  display: flex;
-} */

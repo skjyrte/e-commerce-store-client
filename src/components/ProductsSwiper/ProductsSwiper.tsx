@@ -29,12 +29,13 @@ interface Props {
   gender: string;
   headerText: string;
   index: number;
+  onError: (err: boolean) => void;
 }
 
 const ProductsSwiper: FC<Props> = (props) => {
   const [hoveredID, setHoveredID] = useState<null | string>(null);
 
-  const {category, gender, headerText, index} = props;
+  const {category, gender, headerText, index, onError} = props;
 
   const request = useMakeRequest<ProductBasicDataResponse>(RequestType.GET, {
     gender,
@@ -43,9 +44,6 @@ const ProductsSwiper: FC<Props> = (props) => {
 
   const products = request.responseData;
   const error = request.error;
-
-  if (products && !error) {
-  }
 
   const prevRef = useRef<HTMLDivElement | null>(null);
   const nextRef = useRef<HTMLDivElement | null>(null);
@@ -90,6 +88,10 @@ const ProductsSwiper: FC<Props> = (props) => {
       return null;
     }
   };
+
+  if (error) {
+    onError(true);
+  }
 
   return (
     <div
