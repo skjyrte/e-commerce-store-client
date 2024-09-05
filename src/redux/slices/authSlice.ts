@@ -199,7 +199,12 @@ export const authSlice = createSlice({
         state.status = "loggedOut";
         state.error = null;
       })
+      .addCase(logout.pending, (state) => {
+        state.status = "loading";
+        state.error = null;
+      })
       .addCase(logout.rejected, (state) => {
+        state.status = "failed";
         state.error = "logout";
       });
   },

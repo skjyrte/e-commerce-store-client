@@ -30,7 +30,7 @@ const GeneralTextButton: FC<Props> = ({
       data-testid={dataTestId}
       className={buttonClassName}
       onClick={onClick}
-      disabled={isDisabled}
+      disabled={isDisabled || isLoading}
     >
       {isLoading ? (
         <ClipLoader

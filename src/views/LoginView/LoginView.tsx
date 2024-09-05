@@ -49,7 +49,7 @@ const LoginView: FC = () => {
   return (
     <div className={classNames(css["view-container"])}>
       <div className={classNames([css["form-container"]])}>
-        {!user?.email && (
+        {!user?.email && status !== "loggedIn" && (
           <div className={classNames(css["login-header"])}>
             Please fill in below to login
           </div>
@@ -59,7 +59,7 @@ const LoginView: FC = () => {
             We have an error, please try again later.
           </div>
         )}
-        {user && (
+        {user && !error && (
           <div className={classNames(css["login-success-message"])}>
             Successfully logged in as: {user.email}
           </div>

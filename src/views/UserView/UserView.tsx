@@ -42,6 +42,14 @@ const UserView: FC = () => {
     );
   };
 
+  const errorPresent = () => {
+    return (
+      <div className={css["logout-container"]}>
+        We have an error, please try again later.
+      </div>
+    );
+  };
+
   const userLogIn = () => {
     return (
       <div className={css["user-panel-body"]}>
@@ -76,6 +84,7 @@ const UserView: FC = () => {
                 classProp={["logout-button"]}
                 displayedText="Log out"
                 onClick={handleLogout}
+                isLoading={status === "loading"}
               />
             }
           </div>
@@ -85,7 +94,9 @@ const UserView: FC = () => {
   };
 
   const pageContent = () => {
-    if (auth.status === "loggedIn") return userLogIn();
+    if (auth.error) return errorPresent();
+    if (auth.status === "loggedIn" || auth.status === "loading")
+      return userLogIn();
     if (auth.status === "loggedOut") return userLoggedOut();
     else return userNotLogIn();
   };
