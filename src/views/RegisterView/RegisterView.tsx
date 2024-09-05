@@ -10,6 +10,9 @@ import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import {useDispatch} from "react-redux";
+import {AppDispatch} from "../../redux/configureStore";
+import {logout} from "../../redux/slices/authSlice";
 
 type RegisterFormData = Record<string, string>;
 
@@ -23,9 +26,9 @@ const RegisterView: FC = () => {
     shouldFocusError: false,
   });
 
-  const registerUserInstance = useRegisterUser();
+  const {registerUser, registerUserData, loading, error} = useRegisterUser();
 
-  const {registerUser, registerUserData, loading, error} = registerUserInstance;
+  const dispatch = useDispatch<AppDispatch>();
 
   const emailValue = watch("email");
   const setPasswordValue = watch("setPassword");
@@ -42,6 +45,7 @@ const RegisterView: FC = () => {
       second_name: data.secondName,
       address: data.address,
     };
+    await dispatch(logout());
     await registerUser({...formData});
   };
 
