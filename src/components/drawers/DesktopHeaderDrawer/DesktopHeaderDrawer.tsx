@@ -13,7 +13,7 @@ const DesktopHeaderDrawer: FC<Props> = (props) => {
 
   const categoryLinks = categoryList.map((category, index) => {
     return (
-      <li className={css["category-button-wrapper"]}>
+      <li key={category} className={css["category-button-wrapper"]}>
         <TextLinkElement
           displayedText={category.toUpperCase()}
           path={activeGender ? `${activeGender}/${category}` : ""}

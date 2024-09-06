@@ -56,7 +56,6 @@ const CategoryView: FC = () => {
           to={`/product/${obj.id}`}
         >
           <CategoryProductThumbnail
-            key={obj.id}
             productData={obj}
             onHover={onThumbnailHover}
             hovered={hoveredID === obj.id}

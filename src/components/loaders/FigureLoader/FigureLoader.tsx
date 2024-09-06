@@ -5,7 +5,7 @@ const FigureLoader: FC = () => (
   <ContentLoader
     speed={2}
     width={"100%"}
-    height={"auto"}
+    height={"100%"}
     viewBox="0 0 1024 1024"
     backgroundColor="#beb641"
     foregroundColor="#800080"
