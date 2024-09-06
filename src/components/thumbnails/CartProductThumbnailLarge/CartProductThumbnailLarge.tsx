@@ -7,21 +7,21 @@ import GeneralTextButton from "../../buttons/GeneralTextButton";
 import {useSelector} from "react-redux";
 import {RootState} from "../../../redux/configureStore";
 
-type CartProductEntryWithData = {
+interface CartProductEntryWithData {
   id: string;
   size: string;
   count: number;
   additionalData: Product | null;
-};
+}
 
-type Props = {
+interface Props {
   saveCartHandler: (
     productId: string,
     selectedSize: string,
     changeBy: number
   ) => void;
   cartProductEntryWithData: CartProductEntryWithData;
-};
+}
 
 const CartProductThumbnailLarge: FC<Props> = (props) => {
   const {saveCartHandler, cartProductEntryWithData} = props;
@@ -39,8 +39,6 @@ const CartProductThumbnailLarge: FC<Props> = (props) => {
   });
 
   const onChangeQuantity = (action: "increase" | "decrease") => {
-    console.log("avaiableItems");
-    console.log(avaiableItems);
     if (avaiableItems !== undefined) {
       const itemInStock = avaiableItems.stock.find((size) => {
         return size.size === cartProductEntryWithData.size;
@@ -130,7 +128,7 @@ const CartProductThumbnailLarge: FC<Props> = (props) => {
               onClick={onClickDelete}
             />
           </div>
-          {editMode === true ? (
+          {editMode ? (
             <div className={css.buttonGroupWrapper}>
               <GeneralTextButton
                 displayedText="SAVE"
@@ -139,14 +137,18 @@ const CartProductThumbnailLarge: FC<Props> = (props) => {
               />
               <ChangeAmountButton
                 displayedText="-"
-                onClick={() => onChangeQuantity("decrease")}
+                onClick={() => {
+                  onChangeQuantity("decrease");
+                }}
                 classProp={["left", "cart"]}
                 isDisabled={false}
               />
               <div className={css.itemsCount}>{newQuantity}</div>
               <ChangeAmountButton
                 displayedText="+"
-                onClick={() => onChangeQuantity("increase")}
+                onClick={() => {
+                  onChangeQuantity("increase");
+                }}
                 classProp={["right", "cart"]}
                 isDisabled={false}
               />

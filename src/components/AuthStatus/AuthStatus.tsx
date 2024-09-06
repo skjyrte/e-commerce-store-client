@@ -17,7 +17,7 @@ const AuthStatus: FC = () => {
         try {
           await dispatch(checkAuthStatus()).unwrap();
         } catch (err) {
-          console.error("Failed to check auth status:", err);
+          console.warn("Failed to log with token: ", err);
         }
       }
     };

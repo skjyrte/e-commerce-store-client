@@ -143,8 +143,6 @@ function useMakeRequest<
   const [error, setError] = useState<ErrorObject | null>(null);
   const [loader, setLoader] = useState<string | null>(null);
   const dispatch = useDispatch<AppDispatch>();
-  console.log({error});
-  console.log({loader});
 
   const memoConfig = useMemo(
     () => config,
@@ -152,7 +150,6 @@ function useMakeRequest<
   );
 
   const handleGetData = async (config: GetConfig) => {
-    console.log(createFilterQuery(config));
     setError(null);
     await handleRequest<T>(
       getAxiosWrapper<T>,

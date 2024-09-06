@@ -78,7 +78,6 @@ export const checkAuthStatus = createAsyncThunk<
     if (!isSuccessLoginResponse(response.data))
       throw new Error("Invalid response");
     const payload = response.data.payload;
-    console.log(payload);
     if (!isSuccessPayload(payload)) {
       throw new Error("Invalid response");
     }
@@ -113,7 +112,6 @@ export const login = createAsyncThunk<
     if (!isSuccessLoginResponse(response.data))
       throw new Error("Invalid response");
     const payload = response.data.payload;
-    console.log(payload);
     if (!isSuccessPayload(payload)) {
       throw new Error("Invalid response");
     }

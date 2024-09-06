@@ -43,9 +43,7 @@ const ProductGallery: FC<Props> = ({imageArray, onClickZoom, modal}) => {
             brand={"brand"}
             model={"model"}
             isLoading={false}
-            onLoad={(para) => {
-              console.log(para);
-            }}
+            onLoad={(para) => {}}
             classDefinition="class-set-1"
           />
         </div>

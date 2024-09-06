@@ -14,8 +14,6 @@ interface Props {
 }
 
 const SizeTableModal: FC<Props> = ({sizesArray, onClick}) => {
-  console.log("sizesarray");
-  console.log({sizesArray});
   const sizeTableArray = sizesArray.map((obj, index) => {
     const isBtnDisabled = obj.count === 0 ? true : false;
 
