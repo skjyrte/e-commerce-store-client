@@ -109,7 +109,7 @@
         display: none;
       }
 
-      @media (width <= 600px) {
+      @media (width <= 600px), (hover: none) {
         .main-header-container {
           padding: 0;
         }

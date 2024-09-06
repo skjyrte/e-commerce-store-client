@@ -1,7 +1,7 @@
 .desktop-header-drawer-container {
   position: absolute;
   z-index: 3;
-  display: flex;
+  display: none;
   height: 80px;
   padding: 0 20px;
   align-items: center;
@@ -39,5 +39,11 @@
       width: 120px;
       padding: 5px 0;
     }
+  }
+}
+
+@media (hover: hover) {
+  .desktop-header-drawer-container {
+    display: flex;
   }
 }
