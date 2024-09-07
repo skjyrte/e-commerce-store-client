@@ -10,7 +10,7 @@ Client for e-commerce shop, built using typescript, webpack and react. It is int
 - User login using http-only cookies.
 - User account registration.
 
-Other features are in progress.
+**Other features are in progress.**
 
 ### Steps
 
