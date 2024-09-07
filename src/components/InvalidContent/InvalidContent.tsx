@@ -2,7 +2,7 @@ import {FC} from "react";
 import {Link} from "react-router-dom";
 import css from "./InvalidContext.module.scss";
 
-const InvalidContent: FC = ({}) => {
+const InvalidContent: FC = () => {
   return (
     <div className={css.contentWrapper}>
       <div className={css.header}>There is no such page</div>

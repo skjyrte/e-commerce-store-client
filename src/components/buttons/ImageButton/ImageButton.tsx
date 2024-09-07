@@ -1,4 +1,4 @@
-import {FC, ElementType} from "react";
+import {FC} from "react";
 import css from "./ImageButton.module.scss";
 import classNames from "classnames";
 
@@ -6,7 +6,7 @@ interface Props {
   onClick?: () => void;
   isLoading?: boolean;
   isDisabled?: boolean;
-  image: any;
+  image: string;
   dataTestId?: string;
 }
 

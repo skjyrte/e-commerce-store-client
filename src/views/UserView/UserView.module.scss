@@ -1,0 +1,73 @@
+.user-view-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  .user-panel {
+    width: 1000px;
+
+    .login-error-message {
+      margin: 0 50px;
+      background-color: black;
+      color: white;
+      border: 2px solid black;
+      text-align: center;
+      padding: 10px;
+      margin-bottom: 20px;
+      width: min(300px, 100%);
+    }
+
+    .user-panel-header {
+      font-size: 24px;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .user-panel-body {
+      font-size: 20px;
+      text-align: center;
+
+      .success-logout-container {
+        font-size: 16px;
+        margin: 0 50px;
+        border: 2px solid black;
+        text-align: center;
+        padding: 10px;
+        margin-bottom: 20px;
+        max-width: 250px;
+      }
+    }
+
+    .logout-container {
+      font-size: 20px;
+      text-align: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+
+      .logout-body {
+        font-size: 16px;
+        margin: 0 50px;
+        border: 2px solid black;
+        text-align: center;
+        padding: 10px;
+        margin-bottom: 20px;
+        max-width: 250px;
+      }
+    }
+  }
+
+  .logout-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100px;
+  }
+
+  .logout-button-wrapper {
+    width: 200px;
+    height: 50px;
+  }
+}

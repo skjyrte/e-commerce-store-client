@@ -1,0 +1,49 @@
+.desktop-header-drawer-container {
+  position: absolute;
+  z-index: 3;
+  display: none;
+  height: 80px;
+  padding: 0 20px;
+  align-items: center;
+  top: 80px;
+  width: 100vw;
+  transition: height 0.1s;
+
+  &.hidden-drawer {
+    height: 0;
+    overflow: hidden;
+  }
+
+  .choose-category-list {
+    display: flex;
+    justify-content: center;
+    align-self: center;
+    width: 100%;
+    max-width: 100%;
+    flex-wrap: wrap;
+    min-height: 50px;
+    transition: height 0.2s;
+    transition-delay: 300ms;
+
+    &.hidden-list {
+      height: 0;
+      transition: height 0.2s;
+      transition-delay: 0;
+    }
+
+    .category-button-wrapper {
+      display: flex;
+      align-self: center;
+      justify-content: center;
+      height: 100%;
+      width: 120px;
+      padding: 5px 0;
+    }
+  }
+}
+
+@media (hover: hover) {
+  .desktop-header-drawer-container {
+    display: flex;
+  }
+}

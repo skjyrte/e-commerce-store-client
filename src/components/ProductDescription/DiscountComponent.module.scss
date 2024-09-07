@@ -1,0 +1,31 @@
+.component-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  font-size: 14px;
+}
+
+.price-and-discount-box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.discount-notice {
+  color: rgb(75 75 75);
+}
+
+.original-price {
+  color: rgb(75 75 75);
+  text-decoration: line-through;
+  padding: 0 5px;
+}
+
+.discount-value {
+  padding: 0 5px;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
+}

@@ -1,39 +1,73 @@
-import {FC, useEffect} from "react";
+import {FC, /* useEffect, */ useState} from "react";
+import {useParams, Link} from "react-router-dom";
 import css from "./CategoryView.module.scss";
 import CategoryProductThumbnail from "../../components/thumbnails/CategoryProductThumbnail";
-import {Link} from "react-router-dom";
-import {useLocation} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch} from "../../redux/configureStore";
-import {selectProductsByCategory} from "../../redux/selectors";
-import {switchGender} from "../../redux/slices/selectedGenderSlice";
+import useMakeRequest from "../../hooks/useMakeRequest";
+import CategoryProductPlaceholder from "../../components/loaders/CategoryProductPlaceholder/CategoryProductPlaceholder";
+
+enum RequestType {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+}
 
 const CategoryView: FC = () => {
-  const location = useLocation();
-  const dispatch = useDispatch<AppDispatch>();
+  const [hoveredID, setHoveredID] = useState<null | string>(null);
+  const {gender, category} = useParams();
 
-  const products = useSelector(selectProductsByCategory);
+  const request = useMakeRequest<ProductBasicDataResponse>(RequestType.GET, {
+    gender,
+    category,
+  });
 
-  const categoryContent = products.map((obj: Product) => (
-    <Link key={obj.id} className={css.linkWrapper} to={obj.id.toString()}>
-      <CategoryProductThumbnail product={obj} />
-    </Link>
-  ));
+  const products = request.responseData;
+  const error = request.error;
 
-  useEffect(() => {
-    if (location.pathname === "/men") {
-      dispatch(switchGender("men"));
+  const onThumbnailHover = (id: null | string) => {
+    setHoveredID(id);
+  };
+
+  const categoryContent = () => {
+    const placeholderArray = new Array(6).fill("placeholder");
+    if (error) {
+      if (error.status === 404) {
+        return (
+          <div className={css["no-products-found"]}>
+            No Products Match Criteria
+          </div>
+        );
+      } else {
+        return (
+          <div className={css["no-products-found"]}>
+            We Have a Problem, Please Try Again Later.
+          </div>
+        );
+      }
+    } else if (request.loader) {
+      return placeholderArray.map((obj: ProductBasicDataResponse, index) => (
+        <CategoryProductPlaceholder key={index} />
+      ));
+    } else if (products) {
+      return products.map((obj: ProductBasicDataResponse) => (
+        <Link
+          key={obj.id}
+          className={css.linkWrapper}
+          to={`/product/${obj.id}`}
+        >
+          <CategoryProductThumbnail
+            productData={obj}
+            onHover={onThumbnailHover}
+            hovered={hoveredID === obj.id}
+            showSizeTable={true}
+          />
+        </Link>
+      ));
+    } else {
+      <div className={css["no-products-found"]}>some different case</div>;
     }
-    if (location.pathname === "/women") {
-      dispatch(switchGender("women"));
-    }
-  }, [location]);
-
-  return (
-    <div className={css.gridWrapper}>
-      {categoryContent.length > 0 ? categoryContent : "no products or loading"}
-    </div>
-  );
+  };
+  return <div className={css.gridWrapper}>{categoryContent()}</div>;
 };
 
 export default CategoryView;

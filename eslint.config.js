@@ -2,26 +2,17 @@ import eslint from "@eslint/js";
 import tseslint from "typescript-eslint";
 
 export default tseslint.config(
+  {files: ["src/**/*.{js,jsx}"]},
   eslint.configs.recommended,
-  ...tseslint.configs.strict,
-  ...tseslint.configs.stylistic,
+  {files: ["src/**/*.{ts,tsx}"]},
+  ...tseslint.configs.strictTypeChecked,
+  ...tseslint.configs.stylisticTypeChecked,
+  ...tseslint.configs.recommendedTypeChecked,
   {
-    files: ["src/**/*.{js,jsx,ts,tsx,json,css,scss,md}"],
     languageOptions: {
-      parser: tseslint.parser,
       parserOptions: {
-        project: true,
+        project: "./tsconfig.eslint.json",
       },
-    },
-    rules: {
-      indent: ["error", 2],
-      "linebreak-style": ["error", "windows"],
-      quotes: ["error", "double"],
-      semi: ["error", "always"],
-      "no-unused-vars": [
-        "error",
-        {vars: "all", args: "after-used", ignoreRestSiblings: false},
-      ],
     },
   }
 );

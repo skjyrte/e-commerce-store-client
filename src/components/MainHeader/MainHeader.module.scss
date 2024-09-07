@@ -1,0 +1,153 @@
+.main-header-relative-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  width: 100%;
+  height: 120px;
+  margin: 0;
+  padding: 0 10px;
+
+  &.header-not-visible {
+    display: none;
+  }
+
+  .absolute-active-background {
+    top: 0;
+    position: absolute;
+    z-index: 1;
+    width: 100vw;
+  }
+
+  .main-header-absolute-container {
+    top: 0;
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    justify-content: center;
+    background-color: white;
+    width: 100%;
+    height: 120px;
+    margin: 0;
+    padding: 0 10px;
+    transition: height 0.2s;
+
+    &.drawer-active {
+      height: 160px;
+      transition: height 0.2s;
+    }
+
+    .main-header-first-row {
+      position: unset;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: white;
+      width: 100%;
+      height: 120px;
+      margin: 0;
+      padding: 0;
+
+      .site-home-button-wrapper {
+        display: flex;
+        align-items: center;
+        justify-content: start;
+        height: 100px;
+        width: 33%;
+      }
+
+      .choose-gender-list {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100px;
+        width: 33%;
+
+        .gender-button-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100px;
+          width: 100px;
+        }
+      }
+
+      .user-action-container {
+        display: flex;
+        align-items: center;
+        justify-content: end;
+        width: 33%;
+
+        .user-profile-button-wrapper {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          padding: 10px;
+          height: 120px;
+          min-width: 100px;
+          max-width: 120px;
+        }
+
+        .cart-button-wrapper {
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          height: 100px;
+          width: 80px;
+          position: relative;
+          background-color: transparent;
+          z-index: 4;
+          border: 2px solid transparent;
+          border-bottom: none;
+        }
+      }
+
+      .drawer-wrapper {
+        display: none;
+      }
+
+      @media (width <= 600px), (hover: none) {
+        .main-header-container {
+          padding: 0;
+        }
+
+        .choose-gender-list {
+          display: none;
+        }
+
+        .site-home-button-wrapper {
+          width: 60%;
+        }
+
+        .user-action-container {
+          width: auto;
+
+          .user-profile-button-wrapper {
+            width: 80px;
+          }
+
+          .cart-button-wrapper {
+            width: 60px;
+          }
+        }
+
+        .drawer-wrapper {
+          display: unset;
+        }
+      }
+    }
+  }
+}
+
+@media (width >= 600px) {
+  .main-header-relative-container {
+    padding: 0 30px;
+
+    .main-header-absolute-container {
+      padding: 0;
+    }
+  }
+}

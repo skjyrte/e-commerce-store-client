@@ -1,44 +1,47 @@
 import {FC, useState, useRef, useEffect} from "react";
 import css from "./CategoryProductThumbnail.module.scss";
 import classNames from "classnames";
-import IconNoPhoto from "../../icons/IconNoPhoto";
+import Header from "./Header";
+import Discount from "./Discount";
+import Size from "./Size";
+import AccessibleFigure from "../../AccessibleFigure";
 
-type Props = {product: Product};
+import TextLoader from "../../loaders/TextLoader";
+
+interface Props {
+  productData: ProductBasicDataResponse;
+  onHover: (id: null | string) => void;
+  hovered: boolean;
+  showSizeTable: boolean;
+}
 
 const CategoryProductThumbnail: FC<Props> = ({
-  product: {id, model, price, brand, thumbnail, initialPrice, stock},
+  productData: {id, brand, model, price, initial_price, thumbnail, stock_array},
+  onHover,
+  hovered,
+  showSizeTable,
 }) => {
-  const [hovered, setHovered] = useState(false);
   const [height, setHeight] = useState(0);
-
-  const toggleHover = () => setHovered(!hovered);
+  const [isLoading, setIsLoading] = useState(true);
 
   const sizesStyle = {
-    "--getSizesHeight": `${height}px`,
+    "--get-sizes-height": `${height.toString()}px`,
   } as React.CSSProperties;
 
   const elementRef = useRef<HTMLDivElement>(null);
 
-  const sizeArray = stock.map((el) => (
-    <div
-      key={el.size}
-      className={classNames(css.sizeField, el.count > 0 ? "" : css.outOfStock)}
-    >
-      {el.size}
-    </div>
-  ));
+  const onLoad = (p: boolean) => {
+    setIsLoading(p);
+  };
 
   useEffect(() => {
-    const element = elementRef?.current;
-
+    const element = elementRef.current;
     if (!element) return;
-
     const observer = new ResizeObserver(() => {
       if (elementRef.current !== null) {
         setHeight(elementRef.current.offsetHeight);
       }
     });
-
     observer.observe(element);
     return () => {
       observer.disconnect();
@@ -46,51 +49,64 @@ const CategoryProductThumbnail: FC<Props> = ({
   }, []);
 
   return (
-    <div
+    <article
       key={id}
-      className={css.thumbnailBox}
-      onMouseEnter={toggleHover}
-      onMouseLeave={toggleHover}
+      className={classNames(css["product-thumbnail"])}
+      onMouseEnter={() => {
+        onHover(id);
+      }}
+      onMouseLeave={() => {
+        onHover(null);
+      }}
     >
       <div
         className={classNames(
-          css.absoluteImageFrame,
-          hovered ? css.hovered : ""
+          css["image-overlay"],
+          hovered ? css["hovered-state"] : ""
         )}
         style={sizesStyle}
       ></div>
-      <div className={classNames(css.content, hovered ? css.hovered : "")}>
-        <div className={css.cardImageBox}>
-          {thumbnail ? (
-            <img
-              className={classNames(
-                css.thumbnailImageImg,
-                hovered ? css.hovered : ""
-              )}
-              src={thumbnail}
-            />
-          ) : (
-            <IconNoPhoto />
-          )}
-        </div>
-        <div className={classNames(css.brand, css.rowContainer)}>{brand}</div>
-        <div className={classNames(css.model, css.rowContainer)}>{model}</div>
-        <div className={classNames(css.priceBox, css.rowContainer)}>
-          <div className={classNames(css.price, css.rowContainer)}>
-            ${price.toFixed(2)}
-          </div>
-          <div className={classNames(css.initialPrice, css.rowContainer)}>
-            ${initialPrice.toFixed(2)}
-          </div>
-        </div>
-      </div>
       <div
-        className={classNames(css.sizeBox, hovered ? css.hovered : css.hide)}
-        ref={elementRef}
+        className={classNames(
+          css["product-content"],
+          hovered ? css["hovered-state"] : "",
+          isLoading && css["loading-state"]
+        )}
       >
-        {sizeArray}
+        <div className={css["figure-wrapper-container"]}>
+          <AccessibleFigure
+            thumbnailUrl={thumbnail}
+            hoverActions={hovered}
+            brand={brand}
+            model={model}
+            isLoading={isLoading}
+            onLoad={onLoad}
+            classDefinition="class-set-2"
+          />
+        </div>
+        {isLoading ? (
+          <div className={css["loading-state-box"]}>
+            <TextLoader />
+          </div>
+        ) : (
+          <>
+            <Header sellingPrice={price} brand={brand} model={model} />
+            <Discount sellingPrice={price} listingPrice={initial_price} />
+          </>
+        )}
       </div>
-    </div>
+      {showSizeTable ? (
+        <section
+          className={classNames(
+            css["size-container"],
+            hovered && !isLoading ? css["hovered-state"] : css.hide
+          )}
+          ref={elementRef}
+        >
+          <Size arrayOfSizes={stock_array} />
+        </section>
+      ) : null}
+    </article>
   );
 };
 

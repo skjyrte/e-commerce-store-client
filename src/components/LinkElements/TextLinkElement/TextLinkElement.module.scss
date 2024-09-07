@@ -1,27 +1,59 @@
-.LinkElement {
+.link-element {
   display: flex;
   height: auto;
   justify-content: center;
   align-items: center;
-  color: var(--button-enabled);
-  border: none;
-  border-radius: 5px;
-  padding: 10px;
-  margin: 0 10px;
-  letter-spacing: 0.2rem;
+  color: black;
+  padding: 10px 0;
+  margin: 5px;
+  letter-spacing: 0.1rem;
   font-family: inherit;
   text-decoration: none;
   font-variation-settings:
     "wght" 600,
     "YOPQ" 300;
-  &:hover {
-  }
+  border: 4px solid transparent;
 }
 
-.medium {
+.link-element-active {
+  color: white;
+  background-color: black;
+}
+
+.link-element-size-medium {
   font-size: 16px;
 }
 
-.large {
+.link-element-size-large {
+  font-size: 16px;
+
+  &:hover {
+    border: 4px solid rgb(226 226 226);
+  }
+}
+
+.link-element-size-large-no-media {
   font-size: 24px;
+  padding: 10px;
+
+  &:hover {
+    border: 4px solid rgb(226 226 226);
+  }
+}
+
+@media (width >= 400px) {
+  .link-element-size-large {
+    padding: 10px;
+    font-size: 20px;
+    margin: 10px;
+    letter-spacing: 0.2rem;
+  }
+}
+
+@media (width >= 600px) {
+  .link-element-size-large {
+    font-size: 24px;
+    letter-spacing: 0.2rem;
+    padding: 20px;
+  }
 }

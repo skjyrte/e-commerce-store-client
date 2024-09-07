@@ -1,7 +1,7 @@
 import {FC} from "react";
 import css from "./CartProductThumbnailModal.module.scss";
 import {Link} from "react-router-dom";
-import IconNoPhoto from "../../icons/IconNoPhoto";
+import IconNoPhoto from "../../inlineIcons/IconNoPhoto";
 
 type CartProductEntryWithData = {
   id: string;

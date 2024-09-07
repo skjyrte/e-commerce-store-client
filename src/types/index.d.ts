@@ -1,20 +1,32 @@
-type ResponseObject = {
-  products: Product[];
-};
+//SECTION - data transfer object types
 
-type Product = {
+interface ProductBasicDataResponse {
   id: string;
-  gender: string;
-  category: string;
   brand: string;
   model: string;
-  shortDescription: string;
+  gender: string;
+  category: string;
+  material: string;
+  season: string;
+  price: string;
+  initial_price: string;
+  thumbnail: string;
+  color: string;
+  stock_array: StockResponse[];
+}
+
+interface StockResponse {
+  size: string;
+  count: number;
+}
+
+interface ProductExtraDataResponse extends ProductBasicDataResponse {
+  short_description: string;
   description: string;
   features: string[];
-  price: number;
-  initialPrice: number;
-  rating: {reviews: number; value: number};
-  stock: {size: string; count: number}[];
-  thumbnail: string;
-  images: string[];
-};
+  rating_reviews: number;
+  rating_value: string;
+  image_url_array: string[];
+}
+
+type Nullable<T> = T | null;

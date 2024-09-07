@@ -1,0 +1,47 @@
+.component-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5px;
+  font-size: 14px;
+  text-align: center;
+}
+
+.price-and-discount-box {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+.discount-notice {
+  color: rgb(75 75 75);
+  font-size: 11px;
+}
+
+.original-price {
+  color: rgb(75 75 75);
+  text-decoration: line-through;
+  padding: 0 5px;
+}
+
+.discount-value {
+  padding: 0 5px;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
+}
+
+@media (width >= 600px) {
+  .discount-notice {
+    font-size: 14px;
+  }
+
+  .original-price {
+    font-size: 14px;
+  }
+
+  .discount-value {
+    font-size: 14px;
+  }
+}

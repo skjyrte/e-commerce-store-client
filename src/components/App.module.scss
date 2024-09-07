@@ -1,18 +1,18 @@
 body {
   margin: 0;
+  box-sizing: border-box;
   font-family: "Kumbh Sans";
   font-variation-settings:
-  /* Weight */
     "wght" 300,
-    /* Thin Stroke */ "YOPQ" 300;
+    "YOPQ" 300;
 }
 
-.backgroundWrapper {
+.background-wrapper {
   height: auto;
   min-height: 100vh;
   width: 100vw;
-  background-color: hsl(0, 0%, 100%);
+  background-color: hsl(0deg 0% 100%);
   display: flex;
-  align-items: center;
+  align-items: left;
   justify-content: center;
 }

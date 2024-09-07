@@ -1,0 +1,69 @@
+.view-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  align-items: center;
+  width: 100%;
+  height: 100%;
+
+  .form-container {
+    margin-top: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: calc(min(100%, 400px));
+    padding: 10px;
+
+    @media (width > 600px) {
+      width: 400px;
+      padding: 0;
+    }
+
+    .register-header {
+      padding: 40px 0;
+      font-size: 24px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .register-error-message {
+      margin: 0 50px;
+      background-color: black;
+      color: white;
+      border: 2px solid black;
+      text-align: center;
+      padding: 10px;
+      margin-bottom: 20px;
+    }
+
+    .email-entry-form {
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .submit-container {
+      height: 50px;
+      display: flex;
+      justify-content: end;
+    }
+  }
+}
+
+.register-redirection-container {
+  margin-top: 20px;
+  border: 2px solid black;
+  text-align: center;
+  padding: 10px;
+  margin-bottom: 20px;
+
+  .register-link {
+    text-decoration: underline;
+    padding: 5px;
+    font-variation-settings:
+      "wght" 600,
+      "YOPQ" 300;
+  }
+}

@@ -6,11 +6,11 @@ interface ResponseState {
   value: ResponseObject;
 }
 
-type Payload = {
+interface Payload {
   id: string | null;
   size: string;
   changeBy: number;
-};
+}
 
 const initialState: ResponseState = {value: {...databaseProducts}};
 

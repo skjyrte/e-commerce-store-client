@@ -1,0 +1,19 @@
+.size-option {
+  font-size: 12px;
+  display: flex;
+  padding: 5px;
+  margin: 2px 0;
+  min-width: 30px;
+  flex-wrap: nowrap;
+  place-content: center center;
+  height: 1.5rem;
+  border-right: 1px solid rgb(75 75 75);
+
+  &:last-child {
+    border-right: 1px solid transparent;
+  }
+}
+
+.out-of-stock-label {
+  text-decoration: line-through;
+}

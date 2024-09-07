@@ -1,8 +1,8 @@
-.iconButton {
+.icon-button {
   display: flex;
   justify-content: center;
   align-items: center;
-  padding: 0 0;
+  padding: 0;
   border: none;
   background-color: transparent;
 }
@@ -14,20 +14,20 @@
 }
 
 .carouselButton {
-  height: 45px;
-  width: 45px;
   opacity: 0.7;
   border: 1px solid gray;
-  background-color: rgba(255, 255, 255, 0.3);
+  background-color: rgb(255 255 255 / 30%);
   margin: 0 -30px;
   border-radius: 50%;
   position: absolute;
   z-index: 2;
   top: 50%;
   transform: translateY(-50%);
+
   &:disabled {
     opacity: 0.1;
     filter: grayscale(0.6);
+
     &:hover {
       opacity: 0.1;
       cursor: unset;
@@ -42,21 +42,17 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  background-color: rgba(255, 255, 255, 0.3);
-  border: 1px solid gray;
-  border-radius: 5px;
   padding: 5px;
   z-index: 2;
+
   &.size {
     top: 0.5rem;
   }
-  &:disabled {
+
+  &:hover {
+    background-color: rgb(255 187 187 / 57.5%);
     opacity: 0.1;
-    filter: grayscale(0.6);
-    &:hover {
-      opacity: 0.1;
-      cursor: unset;
-    }
+    cursor: unset;
   }
 }
 
@@ -67,12 +63,14 @@
       cursor: pointer;
     }
   }
+
   .closeModalButton {
     &:hover {
       opacity: 0.9;
       cursor: pointer;
     }
   }
+
   .cartButton {
     &:hover {
       opacity: 1;
@@ -92,4 +90,20 @@
 .profileButton {
   width: 45px;
   height: 45px;
+}
+
+.header-button {
+  height: 100%;
+  width: 100%;
+}
+
+.toggle-password-button {
+  height: 100%;
+  width: 100%;
+}
+
+.hidden-button {
+  filter: grayscale(100%);
+  background-color: rgb(219 219 219);
+  border-radius: 50%;
 }

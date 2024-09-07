@@ -1,21 +1,21 @@
 import {createSlice} from "@reduxjs/toolkit";
 import type {PayloadAction} from "@reduxjs/toolkit";
 
-type CartProductEntry = {
+interface CartProductEntry {
   id: string;
   size: string;
   count: number;
-};
+}
 
-type cartState = {
+interface cartState {
   value: CartProductEntry[] | null;
-};
+}
 
-type Payload = {
+interface Payload {
   id: string;
   size: string;
   changeBy: number;
-};
+}
 
 const initialState: cartState = {value: null};
 
@@ -24,8 +24,6 @@ const cartSlice = createSlice({
   initialState,
   reducers: {
     addToCart: (state, action: PayloadAction<Payload>) => {
-      console.log("action");
-      console.log(action);
       if (state.value !== null) {
         const existingProduct = state.value.find(
           (product) =>

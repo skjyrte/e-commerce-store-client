@@ -3,12 +3,12 @@ import css from "./IconButton.module.scss";
 import classNames from "classnames";
 
 interface Props {
-  onClick?: () => void;
+  onClick?: (event: React.MouseEvent<HTMLElement>) => void;
   isLoading?: boolean;
   isDisabled?: boolean;
   IconComponent: ElementType;
   dataTestId?: string;
-  buttonClass: Array<string>;
+  buttonClass?: string[];
 }
 
 const IconButton: FC<Props> = ({
@@ -17,10 +17,10 @@ const IconButton: FC<Props> = ({
   isDisabled = false,
   IconComponent,
   dataTestId,
-  buttonClass,
+  buttonClass = [],
 }) => {
   const buttonClassName = classNames(
-    css.iconButton,
+    css["icon-button"],
     ...buttonClass.map((el) => css[el]),
     isDisabled && css.disabled
   );

@@ -1,161 +1,118 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useState, useRef, useEffect} from "react";
 import css from "./ProductView.module.scss";
 import PortalModal from "../../components/modals/PortalModal";
 import ProductGallery from "../../components/ProductGallery";
 import ProductDescription from "../../components/ProductDescription";
 import IconButton from "../../components/buttons/IconButton";
-import IconCross from "../../components/icons/IconCross";
+import IconCross from "../../components/inlineIcons/IconCross";
 import {useParams} from "react-router-dom";
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch} from "../../redux/configureStore";
-import {
-  productUpdater,
-  productCleanup,
-} from "../../redux/slices/selectedProductSlice";
-import {selectCurrentProduct} from "../../redux/selectors";
-import IconNoPhoto from "../../components/icons/IconNoPhoto";
-import InvalidContent from "../../components/InvalidContent";
-import SizeTableModal from "../../components/modals/SizeTableModal";
-import {sizeUpdater, sizeCleanup} from "../../redux/slices/selectedSizeSlice";
-import {RootState} from "../../redux/configureStore";
-import {changeItemsCount} from "../../redux/slices/responseSlice";
-import {addToCart} from "../../redux/slices/cartSlice";
+import IconNoPhoto from "../../components/inlineIcons/IconNoPhoto";
+import useMakeRequest from "../../hooks/useMakeRequest";
+import FeaturesAccordion from "../../components/accordions/FeaturesAccordion";
 
-interface Props {}
+enum RequestType {
+  GET = "GET",
+  POST = "POST",
+  PUT = "PUT",
+  DELETE = "DELETE",
+}
 
-const ProductView: FC<Props> = ({}) => {
+const ProductView: FC = () => {
   const [modalVisible, setModalVisible] = useState<null | "size" | "gallery">(
     null
   );
-  const {productId} = useParams();
+  const [selectedSize, setSelectedSize] = useState<null | string>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
-  const dispatch = useDispatch<AppDispatch>();
-  if (productId !== undefined) {
-    dispatch(productUpdater(productId));
+  const {id} = useParams();
+  const response = useMakeRequest<ProductExtraDataResponse>(RequestType.GET, {
+    id,
+  });
+
+  const products = response.responseData;
+
+  const product = products ? products[0] : null;
+  const defaultSize = product
+    ? product.stock_array.find((sizeObj) => sizeObj.count > 0)
+    : null;
+  if (!selectedSize && defaultSize) {
+    setSelectedSize(defaultSize.size);
   }
 
-  const selectedProduct = useSelector(selectCurrentProduct);
-  const selectedSize = useSelector((state: RootState) => state.size.value);
-
-  if (selectedProduct.result !== null && selectedProduct.error === null) {
-    const defaultSizeObject = selectedProduct.result.stock.find(
-      (product) => product.count > 0
-    );
-    {
-      dispatch(
-        sizeUpdater({size: selectedSize, defaultSizeObject: defaultSizeObject})
-      );
-    }
-  }
-
-  const renderGallery = () => {
-    if (selectedProduct.result !== null && selectedProduct.error === null) {
-      if (selectedProduct.result.images.length !== 0) {
+  const renderGallery = (modal: boolean) => {
+    if (product !== null) {
+      if (product.image_url_array.length > 0) {
         return (
           <ProductGallery
-            imagesList={selectedProduct.result.images}
-            onClickZoom={() => handleOpenModal("gallery")}
+            imageArray={product.image_url_array}
+            onClickZoom={handleOpenModal}
+            modal={modal}
           />
         );
       } else {
         return <IconNoPhoto />;
       }
-    } else {
-      throw new Error("invalid object");
-    }
-  };
-
-  const onSelectSize = (size: string) => {
-    handleCloseModal();
-    dispatch(sizeUpdater({size: size, defaultSizeObject: undefined}));
-  };
-
-  const onAddToBasket = (changeBy: number) => {
-    if (productId !== undefined && selectedSize !== null) {
-      dispatch(
-        changeItemsCount({
-          id: productId,
-          size: selectedSize,
-          changeBy: changeBy,
-        })
-      );
-      dispatch(
-        addToCart({
-          id: productId,
-          size: selectedSize,
-          changeBy: changeBy,
-        })
-      );
-    }
-  };
-
-  const renderSizes = () => {
-    if (selectedProduct.result !== null && selectedProduct.error === null) {
-      return (
-        <SizeTableModal
-          sizesArray={selectedProduct.result.stock}
-          onClick={onSelectSize}
-        />
-      );
-    } else {
-      throw new Error("invalid object");
     }
   };
 
   const renderDescription = () => {
-    if (selectedProduct.result !== null && selectedProduct.error === null) {
+    if (product) {
       return (
-        <ProductDescription
-          onClickSize={() => handleOpenModal("size")}
-          currentProduct={selectedProduct.result}
-          currentSize={selectedSize}
-          onAddToBasket={onAddToBasket}
-        />
+        <>
+          <ProductDescription currentProduct={product} />
+          <FeaturesAccordion product={product} />
+        </>
       );
-    } else {
-      throw new Error("invalid object");
     }
   };
 
-  const handleOpenModal = (modalType: "size" | "gallery") => {
-    setModalVisible(modalType);
+  const handleOpenModal = () => {
+    if (modalVisible !== "gallery") setModalVisible("gallery");
   };
   const handleCloseModal = () => {
     setModalVisible(null);
   };
 
   useEffect(() => {
-    return () => {
-      dispatch(productCleanup());
-      dispatch(sizeCleanup());
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") {
+        handleCloseModal();
+      }
     };
-  }, []);
 
-  return selectedProduct.error !== null ? (
-    <InvalidContent />
-  ) : (
-    <div className={css.product}>
-      <PortalModal visible={modalVisible === "size"} lockBodyScroll={true}>
-        {renderSizes()}
-        <IconButton
-          onClick={handleCloseModal}
-          IconComponent={IconCross}
-          buttonClass={["closeModalButton", "size"]}
-        />
-      </PortalModal>
-      <div className={css.mainGalleryWrapper}>{renderGallery()}</div>
+    const container = containerRef.current;
+    if (container) {
+      document.addEventListener("keydown", handleKeyDown);
+    }
+
+    return () => {
+      document.removeEventListener("keydown", handleKeyDown);
+    };
+  }, [modalVisible]);
+
+  return (
+    <>
+      <div className={css["product-container"]}>
+        <div className={css["inline-gallery-wrapper"]}>
+          {renderGallery(false)}
+        </div>
+        <div className={css["product-description-wrapper"]}>
+          {renderDescription()}
+        </div>
+      </div>
+      {/* portal is being created at html root. It does not matter
+       where exactly we place it here */}
       <PortalModal visible={modalVisible === "gallery"}>
-        <div className={css.portalGalleryWrapper}>
+        <div ref={containerRef} className={css["portal-galery-content"]}>
           <IconButton
             onClick={handleCloseModal}
             IconComponent={IconCross}
             buttonClass={["closeModalButton"]}
           />
-          {renderGallery()}
+          {renderGallery(true)}
         </div>
       </PortalModal>
-      {renderDescription()}
-    </div>
+    </>
   );
 };
 

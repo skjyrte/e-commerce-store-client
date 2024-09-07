@@ -1,0 +1,11 @@
+.image-container {
+  display: flex;
+  justify-content: center;
+  padding: 30px 30px 20px;
+  position: relative;
+
+  .loading-state-box {
+    width: 100%;
+    padding: 40px;
+  }
+}

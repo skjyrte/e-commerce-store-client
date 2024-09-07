@@ -2,11 +2,11 @@ import {FC} from "react";
 import css from "./AvailabilityBar.module.scss";
 import classNames from "classnames";
 
-type Props = {
+interface Props {
   thresholds: number[];
   items: number;
   showNotInStock?: boolean;
-};
+}
 
 const AvailabilityBar: FC<Props> = (Props) => {
   const {thresholds, items, showNotInStock = true} = Props;
@@ -18,7 +18,7 @@ const AvailabilityBar: FC<Props> = (Props) => {
     return <div className={computedClass} key={index}></div>;
   });
 
-  if (showNotInStock === false) {
+  if (!showNotInStock) {
     return <div className={css.barWrapper}>{displayBar}</div>;
   } else {
     return items === 0 ? (

@@ -1,6 +1,18 @@
-0_untracked/
-build/
-node_modules
+# Ignore node modules directory
+node_modules/
 
-.env.prod
+# Ignore build directories
+dist/
+build/
+
+# Ignore temporary supplementary files
+temp/
+
+# Temporary files
+*.tmp
+*.log
+*.swp
+
+# Environment variable files
 .env
+.env.prod

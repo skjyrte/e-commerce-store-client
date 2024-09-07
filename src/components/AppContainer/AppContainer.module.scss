@@ -1,13 +1,22 @@
-.appContainer {
-  background-color: hsl(0, 0%, 100%);
+.app-container {
+  background-color: hsl(0deg 0% 100%);
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: left;
-  margin-left: auto;
-  margin-right: auto;
-  width: 1200px;
-  min-height: 100vh;
+  width: 100vw;
+}
+
+@media (width >= 1200px) {
+  .app-container {
+    background-color: hsl(0deg 0% 100%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: left;
+    margin-left: auto;
+    margin-right: auto;
+    width: 1200px;
+    min-height: 100vh;
+  }
 }
 
 *,

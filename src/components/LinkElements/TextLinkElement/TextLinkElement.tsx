@@ -7,19 +7,32 @@ interface Props {
   displayedText: string;
   dataTestId?: string;
   path: string;
+  active?: boolean;
   size?: string;
+  onClick?: () => void;
 }
 
 const TextLinkElement: FC<Props> = ({
   displayedText,
   dataTestId,
   path,
+  active,
   size,
+  onClick,
 }) => {
-  const classTitle = classNames(css.LinkElement, size && css[size]);
+  const classTitle = classNames(
+    css["link-element"],
+    active && css["link-element-active"],
+    size && css[`link-element-size-${size}`]
+  );
 
   return (
-    <Link data-testid={dataTestId} className={classTitle} to={path}>
+    <Link
+      onClick={onClick}
+      data-testid={dataTestId}
+      className={classTitle}
+      to={path}
+    >
       {displayedText}
     </Link>
   );
