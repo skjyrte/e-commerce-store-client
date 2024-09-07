@@ -1,11 +1,80 @@
-## Install dependencies
+# e-commerce-store-client
 
-npm install
+Client for e-commerce shop, built using typescript, webpack and react. It is integrated with server application - e-commerce-store-api.
 
-## Run dev server
+- Responsive design.
+- Product thumbnails with hover effects and dynamic loading states.
+- Integrated notifications using react toastify.
+- API error handling.
+- Custom build process with Webpack.
+- User login using http-only cookies.
+- User account registration.
 
-npm run start
+Other features are in progress.
 
-## Build
+### Steps
 
-npm run build
+1. Clone the repository:
+
+   ```bash
+   git clone https://github.com/skjyrte/todo-app-client.git
+   ```
+
+2. Navigate into the project directory:
+
+   ```bash
+   cd e-commerce-store-client
+   ```
+
+3. Install dependencies:
+
+   ```bash
+   npm install
+   ```
+
+4. Set up environment variables (explained below).
+
+5. Running the app:
+
+   5.1) If you want to run dev server:
+
+   ```bash
+   npm run start
+   ```
+
+   5.2) If you want to build the app for production:
+
+   ```bash
+   npm run build
+   ```
+
+## Environment Variables
+
+The app requires some environment variables to function. You can define them in the root directory. A sample `.env.dev` file is provided inside repository, compatible with "dev" mode of api app. For production builds`.env.prod`shall be created.
+
+```bash
+REACT_APP_API_URL = http://localhost:4000
+REQUEST_RETRIES = 30
+RETRIES_DELAY = 3000
+SPINUP_NOTIFY = TRUE
+```
+
+### Below env variables are implemented to face issues with API hosting using free tier on render.com
+
+Number of retries, for every failed request due to no connection with API:
+
+```bash
+REQUEST_RETRIES = 30
+```
+
+Delays between each retry:
+
+```bash
+RETRIES_DELAY = 3000
+```
+
+True if you want to display user notification about API spinup:
+
+```bash
+SPINUP_NOTIFY = TRUE
+```
