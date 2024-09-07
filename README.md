@@ -10,6 +10,9 @@ Client for e-commerce shop, built using typescript, webpack and react. It is int
 - User login using http-only cookies.
 - User account registration.
 
+Demo is currently being hosted below.
+https://e-commerce-store-client.onrender.com/
+
 **Other features are in progress.**
 
 ### Steps
