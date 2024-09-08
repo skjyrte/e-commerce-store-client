@@ -16,7 +16,7 @@ const initialState: AuthState = {
 };
 
 interface BasicUserData {
-  id: string;
+  user_id: string;
   email: string;
   first_name: string;
   second_name: string;
@@ -50,7 +50,7 @@ function isSuccessPayload(obj: unknown): obj is SuccessPayload {
     obj !== null &&
     typeof obj === "object" &&
     "id" in obj &&
-    typeof obj.id === "string" &&
+    typeof obj.user_id === "string" &&
     "email" in obj &&
     typeof obj.email === "string" &&
     "first_name" in obj &&

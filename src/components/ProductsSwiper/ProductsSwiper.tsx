@@ -66,18 +66,18 @@ const ProductsSwiper: FC<Props> = (props) => {
       ));
     } else if (products) {
       return products.map((obj: ProductBasicDataResponse) => (
-        <SwiperSlide key={obj.id}>
+        <SwiperSlide key={obj.product_id}>
           <div className={css["products-slider-thumbnail-wrapper"]}>
             <Link
-              key={obj.id}
+              key={obj.product_id}
               className={css.linkWrapper}
-              to={`/product/${obj.id}`}
+              to={`/product/${obj.product_id}`}
             >
               <CategoryProductThumbnail
-                key={obj.id}
+                key={obj.product_id}
                 productData={obj}
                 onHover={onThumbnailHover}
-                hovered={hoveredID === obj.id}
+                hovered={hoveredID === obj.product_id}
                 showSizeTable={false}
               />
             </Link>

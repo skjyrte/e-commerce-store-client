@@ -1,7 +1,7 @@
 //SECTION - data transfer object types
 
 interface ProductBasicDataResponse {
-  id: string;
+  product_id: string;
   brand: string;
   model: string;
   gender: string;

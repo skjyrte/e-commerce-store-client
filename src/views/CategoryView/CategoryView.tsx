@@ -51,14 +51,14 @@ const CategoryView: FC = () => {
     } else if (products) {
       return products.map((obj: ProductBasicDataResponse) => (
         <Link
-          key={obj.id}
+          key={obj.product_id}
           className={css.linkWrapper}
-          to={`/product/${obj.id}`}
+          to={`/product/${obj.product_id}`}
         >
           <CategoryProductThumbnail
             productData={obj}
             onHover={onThumbnailHover}
-            hovered={hoveredID === obj.id}
+            hovered={hoveredID === obj.product_id}
             showSizeTable={true}
           />
         </Link>
