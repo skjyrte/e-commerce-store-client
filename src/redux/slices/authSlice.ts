@@ -49,7 +49,7 @@ function isSuccessPayload(obj: unknown): obj is SuccessPayload {
   return (
     obj !== null &&
     typeof obj === "object" &&
-    "id" in obj &&
+    "user_id" in obj &&
     typeof obj.user_id === "string" &&
     "email" in obj &&
     typeof obj.email === "string" &&
