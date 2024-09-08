@@ -10,13 +10,21 @@ import TextLoader from "../../loaders/TextLoader";
 
 interface Props {
   productData: ProductBasicDataResponse;
-  onHover: (id: null | string) => void;
+  onHover: (product_id: null | string) => void;
   hovered: boolean;
   showSizeTable: boolean;
 }
 
 const CategoryProductThumbnail: FC<Props> = ({
-  productData: {id, brand, model, price, initial_price, thumbnail, stock_array},
+  productData: {
+    product_id,
+    brand,
+    model,
+    price,
+    initial_price,
+    thumbnail,
+    stock_array,
+  },
   onHover,
   hovered,
   showSizeTable,
@@ -50,10 +58,10 @@ const CategoryProductThumbnail: FC<Props> = ({
 
   return (
     <article
-      key={id}
+      key={product_id}
       className={classNames(css["product-thumbnail"])}
       onMouseEnter={() => {
-        onHover(id);
+        onHover(product_id);
       }}
       onMouseLeave={() => {
         onHover(null);
