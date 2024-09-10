@@ -1,5 +1,5 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
-import axios, {AxiosError} from "axios";
+import axios from "axios";
 import {RootState} from "../configureStore";
 import createAxiosInstance from "../../api/createAxiosInstance";
 
@@ -8,6 +8,14 @@ interface AuthState {
   status: "verifyToken" | "loading" | "loggedIn" | "loggedOut" | "failed";
   error: "checkAuth" | "login" | "logout" | null;
 }
+
+/* interface NewAuthState {
+  user: BasicUserData | null;
+  loader: "login" | "logout" | "checkauth" | null;
+  verifyToken: "success" | "error" | null;
+  login: "success" | "error" | null;
+  logout: "success" | "error" | null;
+} */
 
 const initialState: AuthState = {
   user: null,
@@ -63,33 +71,40 @@ function isSuccessPayload(obj: unknown): obj is SuccessPayload {
 }
 
 export const checkAuthStatus = createAsyncThunk<
-  SuccessPayload,
+  SuccessPayload | null,
   //eslint-disable-next-line
   void,
   {rejectValue: string}
 >("auth/checkSession", async (_, thunkAPI) => {
   const axiosInstance = createAxiosInstance();
+
   try {
     const response = await axiosInstance.get("/auth/check-session", {
       withCredentials: true,
     });
-    //eslint-disable-next-line
 
-    if (!isSuccessLoginResponse(response.data))
-      throw new Error("Invalid response");
-    const payload = response.data.payload;
-    if (!isSuccessPayload(payload)) {
-      throw new Error("Invalid response");
-    }
-    return thunkAPI.fulfillWithValue(payload);
+    if (isSuccessLoginResponse(response.data)) {
+      const payload = response.data.payload;
+      if (isSuccessPayload(payload)) {
+        return thunkAPI.fulfillWithValue(payload);
+      } else throw new Error("Invalid login payload");
+    } else throw new Error("Invalid login response");
   } catch (err: unknown) {
-    if (axios.isAxiosError(err)) {
-      const axiosError = err as AxiosError;
-      if (!axiosError.response) {
-        console.error("Unable to connect with server");
+    if (axios.isAxiosError(err) && err.response?.status === 401) {
+      try {
+        await axiosInstance.get("/auth/issue-init-token", {
+          withCredentials: true,
+        });
+
+        return thunkAPI.fulfillWithValue(null);
+      } catch (issueTokenError) {
+        console.error("Failed to issue guest token", issueTokenError);
+        return thunkAPI.rejectWithValue("Unable to issue guest token");
       }
+    } else {
+      console.error("Error checking authentication", err);
+      return thunkAPI.rejectWithValue("Unable to check authentication status");
     }
-    return thunkAPI.rejectWithValue("Unable to log in");
   }
 });
 
@@ -102,25 +117,22 @@ export const login = createAsyncThunk<
   try {
     const response = await axiosInstance.post(
       "/auth/login",
-      {
-        email,
-        password,
-      },
+      {email, password},
       {withCredentials: true}
     );
 
-    if (!isSuccessLoginResponse(response.data))
-      throw new Error("Invalid response");
-    const payload = response.data.payload;
-    if (!isSuccessPayload(payload)) {
-      throw new Error("Invalid response");
+    if (isSuccessLoginResponse(response.data)) {
+      const payload = response.data.payload;
+      if (isSuccessPayload(payload)) {
+        return thunkAPI.fulfillWithValue(payload);
+      }
     }
-    return thunkAPI.fulfillWithValue(payload);
+    throw new Error("Invalid response");
   } catch (err: unknown) {
     let errorMessage = "Unexpected error occurred.";
     if (axios.isAxiosError(err)) {
       if (err.response?.status === 401) {
-        errorMessage = "Invalid email or password. Please try again.";
+        errorMessage = "Invalid email or password.";
       } else {
         errorMessage = "Unable to log in. Please try again later.";
       }
@@ -135,15 +147,7 @@ export const logout = createAsyncThunk("auth/logout", async (_, thunkAPI) => {
     await axiosInstance.post("/auth/logout", {}, {withCredentials: true});
     return thunkAPI.fulfillWithValue(null);
   } catch (err: unknown) {
-    let errorMessage = "Unexpected error occurred.";
-    if (axios.isAxiosError(err)) {
-      if (err.response?.status === 401) {
-        errorMessage = "Invalid email or password. Please try again.";
-      } else {
-        errorMessage = "Unable to log in. Please try again later.";
-      }
-    }
-    return thunkAPI.rejectWithValue(errorMessage);
+    return thunkAPI.rejectWithValue("Unexpected error");
   }
 });
 
@@ -163,7 +167,6 @@ export const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-
       .addCase(checkAuthStatus.pending, (state) => {
         state.status = "loading";
         state.error = null;
