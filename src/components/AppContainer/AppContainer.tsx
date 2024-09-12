@@ -17,7 +17,6 @@ import UserView from "../../views/UserView";
 import {Bounce, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useSpinUpNotify from "../../helper/useSpinUpNotify/useSpinUpNotify";
-
 import {selectSpinupError} from "../../redux/slices/spinupErrorSlice";
 
 const AppContainer: FC = () => {
@@ -42,7 +41,6 @@ const AppContainer: FC = () => {
           theme="light"
           transition={Bounce}
         />
-
         <MainHeader />
         <AnimatePresence mode="wait">
           <Routes>

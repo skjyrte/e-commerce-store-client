@@ -1,31 +1,53 @@
 import {useEffect, FC} from "react";
 import {useSelector, useDispatch} from "react-redux";
-import {RootState} from "../../redux/configureStore";
-import {checkAuthStatus} from "../../redux/slices/authSlice";
+import {selectAuth} from "../../redux/slices/authSlice";
 import {AppDispatch} from "../../redux/configureStore";
 import css from "./AuthStatus.module.scss";
 import IconUserProfile from "../inlineIcons/IconUserProfile";
 import {BarLoader} from "react-spinners";
+import {
+  validateUserToken,
+  validateGuestToken,
+} from "../../redux/slices/authSlice";
 
 const AuthStatus: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
-  const {user, status} = useSelector((state: RootState) => state.auth);
+  const auth = useSelector(selectAuth);
+  const {
+    user,
+    loaderState,
+    loginState,
+    validateGuestTokenState,
+    validateUserTokenState,
+  } = auth;
+
+  const userLoggedIn =
+    (loginState === "success" || validateUserTokenState === "success") &&
+    user?.guest === false;
 
   useEffect(() => {
     const fetchAuthStatus = async () => {
-      if (status === "verifyToken") {
+      if (
+        loginState !== "success" &&
+        validateUserTokenState !== "success" &&
+        !loaderState
+      ) {
         try {
-          await dispatch(checkAuthStatus()).unwrap();
+          await dispatch(validateUserToken()).unwrap();
         } catch (err) {
-          console.warn("Failed to log with token: ", err);
+          try {
+            await dispatch(validateGuestToken()).unwrap();
+          } catch (err) {
+            return;
+          }
         }
       }
     };
     void fetchAuthStatus();
-  }, [status]);
+  }, [loginState]);
 
   const displayText = () => {
-    if (status === "loading") {
+    if (loaderState) {
       return (
         <div className={css["loader-wrapper"]}>
           <BarLoader />
@@ -33,15 +55,13 @@ const AuthStatus: FC = () => {
       );
     }
 
-    if (status === "loggedIn" && user) {
+    if (userLoggedIn) {
       return (
         <div className={css["welcome-message"]}>
           Hello, <span className={css["user-name"]}>{user.first_name}!</span>
         </div>
       );
-    }
-
-    if (status === "failed" || status === "loggedOut" || !user) {
+    } else {
       return <div>Hi, try logging in here!</div>;
     }
   };

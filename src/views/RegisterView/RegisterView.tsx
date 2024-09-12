@@ -10,9 +10,10 @@ import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "../../redux/configureStore";
 import {logout} from "../../redux/slices/authSlice";
+import {selectAuth} from "../../redux/slices/authSlice";
 
 type RegisterFormData = Record<string, string>;
 
@@ -29,6 +30,9 @@ const RegisterView: FC = () => {
   const {registerUser, registerUserData, loading, error} = useRegisterUser();
 
   const dispatch = useDispatch<AppDispatch>();
+  const auth = useSelector(selectAuth);
+
+  const {loaderState} = auth;
 
   const emailValue = watch("email");
   const setPasswordValue = watch("setPassword");
@@ -96,7 +100,7 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             currentValue={emailValue}
-            disabled={loading}
+            disabled={loading || Boolean(loaderState)}
             validateOptions={{
               required: "Email is required",
               maxLength: {
@@ -117,7 +121,7 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             currentValue={passwordValue}
-            disabled={loading}
+            disabled={loading || Boolean(loaderState)}
             validateOptions={{
               required: "Password is required",
               minLength: {value: 1, message: "Password cannot be empty"},
@@ -131,7 +135,7 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             currentValue={setPasswordValue}
-            disabled={loading}
+            disabled={loading || Boolean(loaderState)}
             validateOptions={{
               required: "Password is required",
               minLength: {value: 1, message: "Password cannot be empty"},
@@ -148,7 +152,7 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             currentValue={firstNameValue}
-            disabled={loading}
+            disabled={loading || Boolean(loaderState)}
             validateOptions={{
               required: "First name is required",
               maxLength: {
@@ -164,7 +168,7 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             currentValue={secondNameValue}
-            disabled={loading}
+            disabled={loading || Boolean(loaderState)}
             validateOptions={{
               required: "Second name is required",
               maxLength: {
@@ -180,7 +184,7 @@ const RegisterView: FC = () => {
             register={register}
             errors={errors}
             currentValue={addressValue}
-            disabled={loading}
+            disabled={loading || Boolean(loaderState)}
             validateOptions={{
               required: "Address is required",
               maxLength: {
@@ -193,7 +197,7 @@ const RegisterView: FC = () => {
             <GeneralTextButton
               displayedText="Continue"
               classProp={["input-button"]}
-              isLoading={loading}
+              isLoading={loading || Boolean(loaderState)}
             />
           </div>
         </form>

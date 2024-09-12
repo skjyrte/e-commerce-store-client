@@ -3,43 +3,52 @@ import axios from "axios";
 import {RootState} from "../configureStore";
 import createAxiosInstance from "../../api/createAxiosInstance";
 
-interface AuthState {
+interface NewAuthState {
   user: BasicUserData | null;
-  status: "verifyToken" | "loading" | "loggedIn" | "loggedOut" | "failed";
-  error: "checkAuth" | "login" | "logout" | null;
+  guestUser: GuestUserData | null;
+  loaderState:
+    | "login"
+    | "logout"
+    | "validateUserToken"
+    | "validateGuestToken"
+    | null;
+  validateUserTokenState: "success" | "error" | null;
+  validateGuestTokenState: "success" | "error" | null;
+  loginState: "success" | "error" | null;
+  logoutState: "success" | "error" | null;
 }
 
-/* interface NewAuthState {
-  user: BasicUserData | null;
-  loader: "login" | "logout" | "checkauth" | null;
-  verifyToken: "success" | "error" | null;
-  login: "success" | "error" | null;
-  logout: "success" | "error" | null;
-} */
-
-const initialState: AuthState = {
+const initialState: NewAuthState = {
   user: null,
-  status: "verifyToken",
-  error: null,
+  guestUser: null,
+  loaderState: null,
+  validateUserTokenState: null,
+  validateGuestTokenState: null,
+  loginState: null,
+  logoutState: null,
 };
 
 interface BasicUserData {
   user_id: string;
+  guest: false;
   email: string;
   first_name: string;
   second_name: string;
   address: string;
 }
 
-type SuccessPayload = BasicUserData;
-
-interface SuccessLoginResponse {
-  success: boolean;
-  message: string;
-  payload: SuccessPayload;
+interface GuestUserData {
+  user_id: string;
+  guest: true;
 }
 
-function isSuccessLoginResponse(obj: unknown): obj is SuccessLoginResponse {
+interface SuccessDataResponse {
+  success: boolean;
+  message: string;
+  payload: BasicUserData;
+}
+
+function isSuccessDataResponse(obj: unknown): obj is SuccessDataResponse {
   return (
     obj !== null &&
     typeof obj === "object" &&
@@ -53,12 +62,14 @@ function isSuccessLoginResponse(obj: unknown): obj is SuccessLoginResponse {
   );
 }
 
-function isSuccessPayload(obj: unknown): obj is SuccessPayload {
+function isBasicUserData(obj: unknown): obj is BasicUserData {
   return (
     obj !== null &&
     typeof obj === "object" &&
     "user_id" in obj &&
     typeof obj.user_id === "string" &&
+    "guest" in obj &&
+    obj.guest === false &&
     "email" in obj &&
     typeof obj.email === "string" &&
     "first_name" in obj &&
@@ -70,41 +81,92 @@ function isSuccessPayload(obj: unknown): obj is SuccessPayload {
   );
 }
 
-export const checkAuthStatus = createAsyncThunk<
-  SuccessPayload | null,
+function isGuestUserData(obj: unknown): obj is GuestUserData {
+  return (
+    obj !== null &&
+    typeof obj === "object" &&
+    "user_id" in obj &&
+    typeof obj.user_id === "string" &&
+    "guest" in obj &&
+    obj.guest === true
+  );
+}
+
+export const validateUserToken = createAsyncThunk<
+  BasicUserData | null,
   //eslint-disable-next-line
   void,
   {rejectValue: string}
->("auth/checkSession", async (_, thunkAPI) => {
+>("auth/validateUserToken", async (_, thunkAPI) => {
   const axiosInstance = createAxiosInstance();
 
   try {
-    const response = await axiosInstance.get("/auth/check-session", {
+    const response = await axiosInstance.get("/auth/validate-user-token", {
       withCredentials: true,
     });
 
-    if (isSuccessLoginResponse(response.data)) {
+    if (isSuccessDataResponse(response.data)) {
       const payload = response.data.payload;
-      if (isSuccessPayload(payload)) {
+      if (isBasicUserData(payload)) {
         return thunkAPI.fulfillWithValue(payload);
       } else throw new Error("Invalid login payload");
     } else throw new Error("Invalid login response");
   } catch (err: unknown) {
     if (axios.isAxiosError(err) && err.response?.status === 401) {
-      try {
-        await axiosInstance.get("/auth/issue-init-token", {
-          withCredentials: true,
-        });
+      return thunkAPI.rejectWithValue("User not authorized");
+    }
+    console.error("Error checking authentication", err);
+    return thunkAPI.rejectWithValue("Unable to check authentication status");
+  }
+});
 
-        return thunkAPI.fulfillWithValue(null);
+export const validateGuestToken = createAsyncThunk<
+  GuestUserData | null,
+  //eslint-disable-next-line
+  void,
+  {rejectValue: string}
+>("auth/validateGuestToken", async (_, thunkAPI) => {
+  const axiosInstance = createAxiosInstance();
+
+  try {
+    const response = await axiosInstance.get("/auth/validate-guest-token", {
+      withCredentials: true,
+    });
+
+    if (isSuccessDataResponse(response.data)) {
+      const payload = response.data.payload;
+      if (isGuestUserData(payload)) {
+        return thunkAPI.fulfillWithValue(payload);
+      } else throw new Error("Invalid login payload");
+    } else throw new Error("Invalid login response");
+  } catch (err: unknown) {
+    if (
+      axios.isAxiosError(err) &&
+      (err.response?.status === 401 ||
+        err.response?.status === 400 ||
+        err.response?.status === 403)
+    ) {
+      try {
+        const response = await axiosInstance.post(
+          "/auth/register-guest-token",
+          {
+            withCredentials: true,
+          }
+        );
+        if (isSuccessDataResponse(response.data)) {
+          const payload = response.data.payload;
+          if (isGuestUserData(payload)) {
+            return thunkAPI.fulfillWithValue(payload);
+          } else throw new Error("Invalid login payload");
+        } else throw new Error("Invalid login response");
       } catch (issueTokenError) {
         console.error("Failed to issue guest token", issueTokenError);
-        return thunkAPI.rejectWithValue("Unable to issue guest token");
+        return thunkAPI.rejectWithValue("Unable to register guest token");
       }
-    } else {
-      console.error("Error checking authentication", err);
-      return thunkAPI.rejectWithValue("Unable to check authentication status");
     }
+
+    console.error("Failed to validate guest token", err);
+    return thunkAPI.rejectWithValue("Unable to validate guest token");
   }
 });
 
@@ -121,9 +183,9 @@ export const login = createAsyncThunk<
       {withCredentials: true}
     );
 
-    if (isSuccessLoginResponse(response.data)) {
+    if (isSuccessDataResponse(response.data)) {
       const payload = response.data.payload;
-      if (isSuccessPayload(payload)) {
+      if (isBasicUserData(payload)) {
         return thunkAPI.fulfillWithValue(payload);
       }
     }
@@ -155,63 +217,89 @@ export const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    loginSuccess: (state: AuthState, action) => {
-      state.user = action.payload as BasicUserData | null;
+    loginSuccess: (state: NewAuthState, action) => {
+      state.user = action.payload as BasicUserData;
     },
     logoutSuccess: (state) => {
       state.user = null;
     },
-    clearError: (state) => {
-      state.error = null;
+    clearState: (state, action) => {
+      const keyState = action.payload as
+        | "user"
+        | "guestUser"
+        | "loaderState"
+        | "validateUserTokenState"
+        | "validateGuestTokenState"
+        | "loginState"
+        | "logoutState";
+      state[keyState] = null;
     },
   },
   extraReducers: (builder) => {
     builder
-      .addCase(checkAuthStatus.pending, (state) => {
-        state.status = "loading";
-        state.error = null;
+      .addCase(validateUserToken.pending, (state) => {
+        state.loaderState = "validateUserToken";
+        state.validateUserTokenState = null;
       })
-      .addCase(checkAuthStatus.fulfilled, (state, action) => {
-        state.status = "loggedIn";
-        state.error = null;
+      .addCase(validateUserToken.fulfilled, (state, action) => {
+        state.loaderState = null;
+        state.validateUserTokenState = "success";
         state.user = action.payload;
+        state.logoutState = null;
       })
-      .addCase(checkAuthStatus.rejected, (state) => {
-        state.status = "failed";
-        state.error = "checkAuth";
-        state.user = null;
+      .addCase(validateUserToken.rejected, (state) => {
+        state.loaderState = null;
+        state.validateUserTokenState = "error";
+      })
+      .addCase(validateGuestToken.pending, (state) => {
+        state.loaderState = "validateGuestToken";
+        state.validateGuestTokenState = null;
+      })
+      .addCase(validateGuestToken.fulfilled, (state, action) => {
+        state.loaderState = null;
+        state.validateGuestTokenState = "success";
+        state.guestUser = action.payload;
+      })
+      .addCase(validateGuestToken.rejected, (state) => {
+        state.loaderState = null;
+        state.validateGuestTokenState = "error";
       })
       .addCase(login.pending, (state) => {
-        state.status = "loading";
-        state.error = null;
+        state.loaderState = "login";
+        state.loginState = null;
       })
       .addCase(login.fulfilled, (state, action) => {
-        state.status = "loggedIn";
+        state.loaderState = null;
+        state.loginState = "success";
         state.user = action.payload;
-        state.error = null;
+        state.validateUserTokenState = "success";
+        state.logoutState = null;
       })
       .addCase(login.rejected, (state) => {
-        state.status = "failed";
-        state.user = null;
-        state.error = "login";
+        state.loaderState = null;
+        state.loginState = "error";
+      })
+      .addCase(logout.pending, (state) => {
+        state.loaderState = "logout";
+        state.logoutState = null;
       })
       .addCase(logout.fulfilled, (state) => {
         state.user = null;
-        state.status = "loggedOut";
-        state.error = null;
-      })
-      .addCase(logout.pending, (state) => {
-        state.status = "loading";
-        state.error = null;
+        state.guestUser = null;
+        state.loaderState = null;
+        state.validateUserTokenState = null;
+        state.validateGuestTokenState = null;
+        state.loginState = null;
+        state.logoutState = "success";
       })
       .addCase(logout.rejected, (state) => {
-        state.status = "failed";
-        state.error = "logout";
+        state.loaderState = null;
+        state.logoutState = "error";
       });
   },
 });
 
-export const {loginSuccess, logoutSuccess, clearError} = authSlice.actions;
+export const {loginSuccess, logoutSuccess, clearState} = authSlice.actions;
 
 export const selectAuth = (state: RootState) => state.auth;
 

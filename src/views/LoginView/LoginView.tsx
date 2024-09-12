@@ -23,7 +23,8 @@ const LoginView: FC = () => {
     defaultValues: {email: "", password: ""},
     shouldFocusError: false,
   });
-  const {loginRequest, user, status, error, clearErrorRequest} = useLogin();
+  const {loginRequest, user, loginState, clearStateRequest, loaderState} =
+    useLogin();
   const navigate = useNavigate();
 
   const emailValue = watch("email");
@@ -34,32 +35,32 @@ const LoginView: FC = () => {
   };
 
   useEffect(() => {
-    clearErrorRequest();
+    if (loginState === "error") clearStateRequest();
   }, []);
 
   useEffect(() => {
-    if (status === "loggedIn") {
+    if (loginState === "success") {
       toast.success("Login successful!");
       setTimeout(() => {
         navigate("/home");
       }, 1000);
     }
-  }, [status]);
+  }, [loginState]);
 
   return (
     <div className={classNames(css["view-container"])}>
       <div className={classNames([css["form-container"]])}>
-        {!user?.email && status !== "loggedIn" && (
+        {!user && loginState !== "success" && (
           <div className={classNames(css["login-header"])}>
             Please fill in below to login
           </div>
         )}
-        {error === "login" && (
+        {loginState === "error" && (
           <div className={classNames(css["login-error-message"])}>
             We have an error, please try again later.
           </div>
         )}
-        {user && !error && (
+        {user && loginState !== "error" && (
           <div className={classNames(css["login-success-message"])}>
             Successfully logged in as: {user.email}
           </div>
@@ -110,7 +111,7 @@ const LoginView: FC = () => {
             <GeneralTextButton
               displayedText="Continue"
               classProp={["input-button"]}
-              isLoading={status === "loading"}
+              isLoading={Boolean(loaderState)}
             />
           </div>
         </form>

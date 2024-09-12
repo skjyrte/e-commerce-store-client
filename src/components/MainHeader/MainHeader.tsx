@@ -17,7 +17,11 @@ const Header: FC = () => {
     null
   );
   const auth = useSelector(selectAuth);
-  const {status} = auth;
+  const {user, loginState, validateUserTokenState} = auth;
+
+  const userLoggedIn =
+    (loginState === "success" || validateUserTokenState === "success") &&
+    user?.guest === false;
 
   const location = useLocation();
 
@@ -97,7 +101,7 @@ const Header: FC = () => {
             </div>
             <div className={css["user-profile-button-wrapper"]}>
               <Link
-                to={status === "loggedIn" ? "/user" : "/login"}
+                to={userLoggedIn ? "/user" : "/login"}
                 className={css["user-profile-button-wrapper"]}
               >
                 <AuthStatus />

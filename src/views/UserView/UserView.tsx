@@ -18,7 +18,13 @@ import NotReadyYet from "../../helper/NotReadyYet";
 const UserView: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
   const auth = useSelector(selectAuth);
-  const {user, status} = auth;
+
+  const {user, loaderState, loginState, logoutState, validateUserTokenState} =
+    auth;
+
+  const userLoggedIn =
+    (loginState === "success" || validateUserTokenState === "success") &&
+    user?.guest === false;
 
   const navigate = useNavigate();
 
@@ -84,7 +90,7 @@ const UserView: FC = () => {
                 classProp={["logout-button"]}
                 displayedText="Log out"
                 onClick={handleLogout}
-                isLoading={status === "loading"}
+                isLoading={Boolean(loaderState)}
               />
             }
           </div>
@@ -94,21 +100,21 @@ const UserView: FC = () => {
   };
 
   const pageContent = () => {
-    if (auth.error) return errorPresent();
-    if (auth.status === "loggedIn" || auth.status === "loading")
+    if (userLoggedIn) {
       return userLogIn();
-    if (auth.status === "loggedOut") return userLoggedOut();
-    else return userNotLogIn();
+    } else if (logoutState === "success") {
+      return userLoggedOut();
+    } else return userNotLogIn();
   };
 
   useEffect(() => {
-    if (status === "loggedOut") {
+    if (logoutState === "success") {
       toast.success("Log out successful!");
       setTimeout(() => {
         navigate("/home");
       }, 1000);
     }
-  }, [auth.status]);
+  }, [auth.loginState]);
 
   return (
     <div className={css["user-view-container"]}>
