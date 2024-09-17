@@ -3,10 +3,10 @@ import Drawer from "rc-drawer";
 import "rc-drawer/assets/index.css";
 import {motion, AnimatePresence} from "framer-motion";
 import IconButton from "../../buttons/IconButton";
-import IconHeader from "../../inlineIcons/IconHeader";
+import IconHeader from "../../reactIcons/IconHeader";
 import css from "./MobileHeaderDrawer.module.scss";
 import classNames from "classnames";
-import IconCross from "../../inlineIcons/IconCross";
+import IconCross from "../../reactIcons/IconCross";
 import CategoryAccordion from "../../accordions/CategoryAccordion";
 
 interface Props {
@@ -61,7 +61,7 @@ const MobileHeaderDrawer: FC<Props> = (props) => {
                 <IconButton
                   onClick={toggleDrawer}
                   IconComponent={IconCross}
-                  buttonClass={["closeModalButton", "size"]}
+                  buttonClass={["close-modal"]}
                 />
               </header>
               <div className={classNames(css["choose-gender-list-container"])}>

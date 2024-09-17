@@ -1,4 +1,4 @@
-.cartLinkElementWrapper {
+.component-container {
   align-items: center;
   background-color: white;
   border: 4px solid transparent;
@@ -10,40 +10,39 @@
   position: relative;
   width: 60px;
   z-index: 3;
-}
 
-.cartOpened {
-  @media (width >= 600px) {
-    border: 4px solid rgb(226 226 226);
-    border-bottom: none;
+  &.cart-modal-active {
+    @media (width >= 600px) {
+      border: 4px solid rgb(226 226 226);
+      border-bottom: none;
+    }
   }
-}
 
-.itemCountSticker {
-  align-items: center;
-  background-color: white;
-  border: 3px solid rgb(226 226 226);
-  border-radius: 50%;
-  color: rgb(109 109 109);
-  display: flex;
-  font-variation-settings:
-    "wght" 600,
-    "YOPQ" 300;
-  height: 2rem;
-  justify-content: center;
-  padding: 0.2rem;
-  position: absolute;
-  right: -0.8rem;
-  top: -0.8rem;
-  width: 2rem;
-  z-index: 2;
-}
+  .total-items-quantity-sticker {
+    align-items: center;
+    background-color: rgb(0 0 0);
+    border-radius: 50%;
+    color: rgb(255 255 255);
+    display: flex;
+    font-variation-settings:
+      "wght" 600,
+      "YOPQ" 300;
+    height: 30px;
+    justify-content: center;
+    padding: 5px;
+    position: absolute;
+    right: -10px;
+    top: -10px;
+    width: 30px;
+    z-index: 2;
+  }
 
-.hideBorderBox {
-  background-color: white;
-  bottom: -4px;
-  height: 6px;
-  position: absolute;
-  width: 52px;
-  z-index: 2;
+  .hide-border-on-modal-active {
+    background-color: white;
+    bottom: -4px;
+    height: 6px;
+    position: absolute;
+    width: 52px;
+    z-index: 2;
+  }
 }

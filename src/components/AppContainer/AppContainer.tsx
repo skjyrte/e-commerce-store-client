@@ -41,7 +41,7 @@ const AppContainer: FC = () => {
 
   return (
     <BrowserRouter>
-      <div className={css["app-container"]}>
+      <div className={css["global-app-container"]}>
         <ToastContainer
           position="bottom-left"
           hideProgressBar={false}

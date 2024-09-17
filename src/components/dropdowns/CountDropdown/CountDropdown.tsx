@@ -1,7 +1,7 @@
 import {FC} from "react";
 import css from "./CountDropdown.module.scss";
 import classNames from "classnames";
-import SizeTextfield from "./SizeTextfield";
+import CountTextfield from "./CountTextfield";
 import {BeatLoader} from "react-spinners";
 
 interface Props {
@@ -55,7 +55,7 @@ const CountDropdown: FC<Props> = (props) => {
           className={classNames(css["ul-label"])}
         >
           <div className={classNames(css["ul-content"])}>
-            <SizeTextfield quantity={quantity} />
+            <CountTextfield quantity={quantity} />
           </div>
         </label>
       </li>
@@ -96,7 +96,7 @@ const CountDropdown: FC<Props> = (props) => {
             {isLoading ? (
               <BeatLoader size={10} />
             ) : (
-              <SizeTextfield quantity={selectedQuantity} />
+              <CountTextfield quantity={selectedQuantity} />
             )}
           </p>
         ) : (

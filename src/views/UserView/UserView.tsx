@@ -1,10 +1,10 @@
 import {FC, useEffect} from "react";
 import css from "./UserView.module.scss";
-import UserDataBox from "../../components/UserDataBox";
-import IconCross from "../../components/inlineIcons/IconCross";
-import IconPictureLandscape from "../../components/inlineIcons/IconPictureLandscape";
-import IconShow from "../../components/inlineIcons/IconShow";
-import IconUserProfile from "../../components/inlineIcons/IconUserProfile";
+import UserDataField from "../../components/UserDataField";
+import IconCross from "../../components/reactIcons/IconCross";
+import IconPictureLandscape from "../../components/reactIcons/IconPictureLandscape";
+import IconShow from "../../components/reactIcons/IconShow";
+import IconUserProfile from "../../components/reactIcons/IconUserProfile";
 import {selectAuth} from "../../redux/slices/authSlice";
 import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "../../redux/configureStore";
@@ -59,25 +59,25 @@ const UserView: FC = () => {
   const userLogIn = () => {
     return (
       <div className={css["user-panel-body"]}>
-        <UserDataBox
+        <UserDataField
           IconComponent={IconCross}
           title={"Your first name"}
           data={user?.first_name ? user.first_name : ""}
           onClick={NotReadyYet}
         />
-        <UserDataBox
+        <UserDataField
           IconComponent={IconPictureLandscape}
           title={"Your second name"}
           data={user?.second_name ? user.second_name : ""}
           onClick={NotReadyYet}
         />
-        <UserDataBox
+        <UserDataField
           IconComponent={IconShow}
           title={"Your email"}
           data={user?.email ? user.email : ""}
           onClick={NotReadyYet}
         />
-        <UserDataBox
+        <UserDataField
           IconComponent={IconUserProfile}
           title={"Your address"}
           data={user?.address ? user.address : ""}

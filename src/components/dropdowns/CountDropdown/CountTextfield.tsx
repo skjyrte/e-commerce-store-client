@@ -1,12 +1,12 @@
 import {FC} from "react";
 import classNames from "classnames";
-import css from "./SizeTextfield.module.scss";
+import css from "./CountTextfield.module.scss";
 
 interface Props {
   quantity: number;
 }
 
-const SizeTextfield: FC<Props> = (props) => {
+const CountTextfield: FC<Props> = (props) => {
   const {quantity} = props;
 
   return (
@@ -14,4 +14,4 @@ const SizeTextfield: FC<Props> = (props) => {
   );
 };
 
-export default SizeTextfield;
+export default CountTextfield;

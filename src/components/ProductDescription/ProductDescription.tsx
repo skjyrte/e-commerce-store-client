@@ -3,7 +3,7 @@ import css from "./ProductDescription.module.scss";
 import GeneralTextButton from "../buttons/GeneralTextButton";
 import HeaderComponent from "./HeaderComponent";
 import DiscountComponent from "./DiscountComponent";
-import SizeDropdown from "../buttons/SizeDropdown";
+import SizeDropdown from "../dropdowns/SizeDropdown";
 import useCart from "../../hooks/useCart";
 
 interface Props {
@@ -104,7 +104,7 @@ const ProductDescription: FC<Props> = ({currentProduct}) => {
         <GeneralTextButton
           onClick={onAddToCart}
           displayedText="Add to cart"
-          classProp={["addToCart"]}
+          classProp={["add-to-cart"]}
           isLoading={Boolean(loaderState === "addToCart")}
           isDisabled={Boolean(
             currentSizeCartQuantity() >= currentSizeMaxQuantity()

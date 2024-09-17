@@ -14,14 +14,16 @@ const CartFooter: FC<Props> = (props) => {
 
   const costTotalFormatted = (Math.round(subtotal * 100) / 100).toFixed(2);
   return (
-    <div className={css.CartFooter}>
-      <div className={css.shippingBox}>
-        <div className={css.shipping}>Shipping</div>
-        <div className={css.shippingTotal}>${shippingTotalFormatted}</div>
+    <div className={css["component-container"]}>
+      <div className={css["shipping-data-container"]}>
+        <div className={css["shipping-data"]}>Shipping</div>
+        <div className={css["shipping-total-value"]}>
+          ${shippingTotalFormatted}
+        </div>
       </div>
-      <div className={css.priceBox}>
-        <div className={css.price}>Total</div>
-        <div className={css.priceTotal}>${costTotalFormatted}</div>
+      <div className={css["price-container"]}>
+        <div className={css["price-header"]}>Total</div>
+        <div className={css["total-cost-data"]}>${costTotalFormatted}</div>
       </div>
     </div>
   );

@@ -112,6 +112,9 @@ const LoginView: FC = () => {
               displayedText="Continue"
               classProp={["input-button"]}
               isLoading={Boolean(loaderState)}
+              onClick={() => {
+                return;
+              }}
             />
           </div>
         </form>

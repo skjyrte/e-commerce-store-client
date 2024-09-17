@@ -1,4 +1,4 @@
-import css from "./UserDataBox.module.scss";
+import css from "./UserDataField.module.scss";
 import {FC, ElementType} from "react";
 import GeneralTextButton from "../buttons/GeneralTextButton";
 
@@ -9,7 +9,7 @@ interface Props {
   onClick: () => void;
 }
 
-const UserDataBox: FC<Props> = (props) => {
+const UserDataField: FC<Props> = (props) => {
   const {IconComponent, title, data, onClick} = props;
   return (
     <div className={css["component-box"]}>
@@ -33,4 +33,4 @@ const UserDataBox: FC<Props> = (props) => {
   );
 };
 
-export default UserDataBox;
+export default UserDataField;

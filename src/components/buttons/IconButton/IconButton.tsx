@@ -1,6 +1,7 @@
 import {FC, ElementType} from "react";
 import css from "./IconButton.module.scss";
 import classNames from "classnames";
+import {ClipLoader} from "react-spinners";
 
 interface Props {
   onClick?: (event: React.MouseEvent<HTMLElement>) => void;
@@ -21,17 +22,25 @@ const IconButton: FC<Props> = ({
 }) => {
   const buttonClassName = classNames(
     css["icon-button"],
-    ...buttonClass.map((el) => css[el]),
-    isDisabled && css.disabled
+    ...buttonClass.map((el) => css[el])
   );
   return (
     <button
       data-testid={dataTestId}
-      className={classNames(buttonClassName)}
+      className={buttonClassName}
       onClick={onClick}
-      disabled={isDisabled}
+      disabled={isDisabled || isLoading}
     >
-      <IconComponent />
+      {isLoading ? (
+        <ClipLoader
+          size={25}
+          cssOverride={{
+            animation: `1s infinite linear ${css["custom-clip-spin"]}`,
+          }}
+        />
+      ) : (
+        <IconComponent />
+      )}
     </button>
   );
 };

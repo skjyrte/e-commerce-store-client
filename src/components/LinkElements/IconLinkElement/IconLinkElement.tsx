@@ -19,7 +19,7 @@ const IconLinkElement: FC<Props> = ({
   linkClass = [""],
 }) => {
   const buttonClassName = classNames(
-    css.LinkElement,
+    css["link-element-component"],
     ...linkClass.map((el) => css[el]),
     isDisabled && css.disabled
   );

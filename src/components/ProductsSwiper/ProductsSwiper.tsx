@@ -6,8 +6,8 @@ import CategoryProductThumbnail from "../../components/thumbnails/CategoryProduc
 import CategoryProductPlaceholder from "../../components/loaders/CategoryProductPlaceholder/CategoryProductPlaceholder";
 import {Swiper, SwiperSlide} from "swiper/react";
 import IconButton from "../buttons/IconButton";
-import IconNarrowArrowNext from "../inlineIcons/IconNarrowArrowNext";
-import IconNarrowArrowPrev from "../inlineIcons/IconNarrowArrowPrev";
+import IconNarrowArrowNext from "../reactIcons/IconNarrowArrowNext";
+import IconNarrowArrowPrev from "../reactIcons/IconNarrowArrowPrev";
 import classNames from "classnames";
 import {Navigation, Thumbs, Scrollbar, Autoplay} from "swiper/modules";
 

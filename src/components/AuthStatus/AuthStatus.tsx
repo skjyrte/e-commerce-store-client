@@ -3,7 +3,7 @@ import {useSelector, useDispatch} from "react-redux";
 import {selectAuth} from "../../redux/slices/authSlice";
 import {AppDispatch} from "../../redux/configureStore";
 import css from "./AuthStatus.module.scss";
-import IconUserProfile from "../inlineIcons/IconUserProfile";
+import IconUserProfile from "../reactIcons/IconUserProfile";
 import {BarLoader} from "react-spinners";
 import {
   validateUserToken,

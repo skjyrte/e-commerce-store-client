@@ -4,12 +4,12 @@ import classNames from "classnames";
 import {ClipLoader} from "react-spinners";
 
 interface Props {
-  onClick?: (e: any) => void;
+  onClick: (e: unknown) => void;
   displayedText: string;
   isDisabled?: boolean;
   isLoading?: boolean;
   dataTestId?: string;
-  classProp?: string[];
+  classProp: string[];
 }
 
 const GeneralTextButton: FC<Props> = ({
@@ -17,14 +17,10 @@ const GeneralTextButton: FC<Props> = ({
   displayedText,
   isDisabled = false,
   dataTestId,
-  isLoading,
+  isLoading = false,
   classProp = [],
 }) => {
-  const buttonClassName = classNames(
-    css.GeneralTextButton,
-    ...classProp.map((el) => css[el]),
-    isDisabled ? css.disabled : ""
-  );
+  const buttonClassName = classNames(...classProp.map((el) => css[el]));
   return (
     <button
       data-testid={dataTestId}

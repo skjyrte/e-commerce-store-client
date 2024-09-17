@@ -3,7 +3,7 @@ import css from "./CartProductThumbnailLarge.module.scss";
 import {Link} from "react-router-dom";
 import GeneralTextButton from "../../buttons/GeneralTextButton";
 import AccessibleFigure from "../../AccessibleFigure";
-import CountDropdown from "../../buttons/CountDropdown";
+import CountDropdown from "../../dropdowns/CountDropdown";
 
 interface CartProductItem {
   id: string;
@@ -113,7 +113,7 @@ const CartProductThumbnailLarge: FC<Props> = (props) => {
           <div className={css["delete-item-wrapper"]}>
             <GeneralTextButton
               displayedText="DELETE ITEM"
-              classProp={["deleteItems"]}
+              classProp={["delete-item"]}
               onClick={() => {
                 onDeleteItem(id, size);
               }}

@@ -1,46 +1,46 @@
-.CartFooter {
+.component-container {
   height: 100px;
   width: 100%;
-}
 
-.shippingBox {
-  display: flex;
-  font-variation-settings:
-    "wght" 500,
-    "YOPQ" 300;
-  height: 24px;
-  justify-content: space-between;
-  margin: 10px 0;
-  width: 100%;
-}
+  .shipping-data-container {
+    display: flex;
+    font-variation-settings:
+      "wght" 500,
+      "YOPQ" 300;
+    height: 24px;
+    justify-content: space-between;
+    margin: 10px 0;
+    width: 100%;
 
-.shipping {
-  font-size: 16px;
-  letter-spacing: 0.1rem;
-}
+    .shipping-data {
+      font-size: 16px;
+      letter-spacing: 0.1rem;
+    }
 
-.shippingTotal {
-  font-size: 18px;
-  letter-spacing: 0.2rem;
-}
+    .shipping-total-value {
+      font-size: 18px;
+      letter-spacing: 0.2rem;
+    }
+  }
 
-.priceBox {
-  display: flex;
-  font-variation-settings:
-    "wght" 700,
-    "YOPQ" 300;
-  height: 24px;
-  justify-content: space-between;
-  margin: 10px 0;
-  width: 100%;
-}
+  .price-container {
+    display: flex;
+    font-variation-settings:
+      "wght" 700,
+      "YOPQ" 300;
+    height: 24px;
+    justify-content: space-between;
+    margin: 10px 0;
+    width: 100%;
 
-.price {
-  font-size: 14px;
-  letter-spacing: 0.1rem;
-}
+    .price-header {
+      font-size: 14px;
+      letter-spacing: 0.1rem;
+    }
 
-.priceTotal {
-  font-size: 18px;
-  letter-spacing: 0.2rem;
+    .total-cost-data {
+      font-size: 18px;
+      letter-spacing: 0.2rem;
+    }
+  }
 }

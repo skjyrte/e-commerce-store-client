@@ -1,4 +1,4 @@
-.app-container {
+.global-app-container {
   background-color: hsl(0deg 0% 100%);
   display: flex;
   flex-direction: column;
@@ -6,7 +6,7 @@
 }
 
 @media (width >= 1200px) {
-  .app-container {
+  .global-app-container {
     align-items: center;
     background-color: hsl(0deg 0% 100%);
     display: flex;

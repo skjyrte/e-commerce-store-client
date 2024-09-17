@@ -4,9 +4,9 @@ import PortalModal from "../../components/modals/PortalModal";
 import ProductGallery from "../../components/ProductGallery";
 import ProductDescription from "../../components/ProductDescription";
 import IconButton from "../../components/buttons/IconButton";
-import IconCross from "../../components/inlineIcons/IconCross";
+import IconCross from "../../components/reactIcons/IconCross";
 import {useParams} from "react-router-dom";
-import IconNoPhoto from "../../components/inlineIcons/IconNoPhoto";
+import IconNoPhoto from "../../components/reactIcons/IconNoPhoto";
 import useMakeRequest from "../../hooks/useMakeRequest";
 import FeaturesAccordion from "../../components/accordions/FeaturesAccordion";
 
@@ -107,7 +107,7 @@ const ProductView: FC = () => {
           <IconButton
             onClick={handleCloseModal}
             IconComponent={IconCross}
-            buttonClass={["closeModalButton"]}
+            buttonClass={["close-modal"]}
           />
           {renderGallery(true)}
         </div>

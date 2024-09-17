@@ -3,7 +3,7 @@ import classNames from "classnames";
 import css from "./InputForm.module.scss";
 import {UseFormRegister, FieldErrors, RegisterOptions} from "react-hook-form";
 import IconButton from "../buttons/IconButton";
-import IconShow from "../inlineIcons/IconShow";
+import IconShow from "../reactIcons/IconShow";
 
 type FormObject = Record<string, string>;
 

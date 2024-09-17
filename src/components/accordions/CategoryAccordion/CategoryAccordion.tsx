@@ -18,7 +18,7 @@ const CategoryAccordion: FC<Props> = (props) => {
       const {gender, categories} = categoryObject;
       return (
         <Accordion.Item
-          className={css.AccordionItem}
+          className={css["accordion-item"]}
           value={`item-${index.toString()}`}
         >
           <AccordionTrigger>{gender}</AccordionTrigger>
@@ -41,7 +41,7 @@ const CategoryAccordion: FC<Props> = (props) => {
   return (
     <>
       <Accordion.Root
-        className={css.AccordionRoot}
+        className={css["accordion-root"]}
         type="multiple"
         defaultValue={["item-0", "item-1"]}
       >
@@ -59,14 +59,14 @@ type AccordionTriggerProps = React.ComponentPropsWithoutRef<
 
 const AccordionTrigger = forwardRef<HTMLButtonElement, AccordionTriggerProps>(
   ({children, className, ...props}, ref) => (
-    <Accordion.Header className={css.AccordionHeader}>
+    <Accordion.Header className={css["accordion-header"]}>
       <Accordion.Trigger
-        className={classNames(css.AccordionTrigger, className)}
+        className={classNames(css["accordion-trigger"], className)}
         {...props}
         ref={ref}
       >
         {children}
-        <ChevronDownIcon className={css.AccordionChevron} aria-hidden />
+        <ChevronDownIcon className={css["accordion-chevron"]} aria-hidden />
       </Accordion.Trigger>
     </Accordion.Header>
   )
@@ -81,11 +81,11 @@ type AccordionContentProps = React.ComponentPropsWithoutRef<
 const AccordionContent = forwardRef<HTMLDivElement, AccordionContentProps>(
   ({children, className, ...props}, ref) => (
     <Accordion.Content
-      className={classNames(css.AccordionContent, className)}
+      className={classNames(css["accordion-content"], className)}
       {...props}
       ref={ref}
     >
-      <div className={css.AccordionContentText}>{children}</div>
+      <div className={css["accordion-content-text"]}>{children}</div>
     </Accordion.Content>
   )
 );
