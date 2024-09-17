@@ -90,6 +90,7 @@ const CategoryProductThumbnail: FC<Props> = ({
             isLoading={isLoading}
             onLoad={onLoad}
             classDefinition="class-set-2"
+            swiperComponent={false}
           />
         </div>
         {isLoading ? (

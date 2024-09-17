@@ -1,10 +1,10 @@
 /* ProductGallery.module.scss */
 
 .component-box {
-  width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
+  width: 100%;
 }
 
 .main-gallery-wrapper {
@@ -53,6 +53,6 @@
 }
 
 .mouseover-figure-wrapper {
-  width: 100%;
   height: 100%;
+  width: 100%;
 }

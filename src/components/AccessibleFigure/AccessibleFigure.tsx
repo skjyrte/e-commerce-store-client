@@ -13,6 +13,7 @@ interface Props {
   isLoading: boolean;
   onLoad: (p: boolean) => void;
   classDefinition: string;
+  swiperComponent: boolean;
 }
 
 const Figure: FC<Props> = (props) => {
@@ -25,6 +26,7 @@ const Figure: FC<Props> = (props) => {
     isLoading,
     onLoad,
     classDefinition,
+    swiperComponent,
   } = props;
   const [hasError, setHasError] = useState(false);
 
@@ -33,7 +35,7 @@ const Figure: FC<Props> = (props) => {
     <figure
       className={classNames(
         css["image-container"],
-        "swiper-zoom-container",
+        swiperComponent && "swiper-zoom-container",
         css[classDefinition]
       )}
     >

@@ -4,7 +4,7 @@ import GeneralTextButton from "../buttons/GeneralTextButton";
 import HeaderComponent from "./HeaderComponent";
 import DiscountComponent from "./DiscountComponent";
 import SizeDropdown from "../buttons/SizeDropdown";
-import NotReadyYet from "../../helper/NotReadyYet";
+import useCart from "../../hooks/useCart";
 
 interface Props {
   currentProduct: ProductExtraDataResponse;
@@ -12,7 +12,7 @@ interface Props {
 
 const ProductDescription: FC<Props> = ({currentProduct}) => {
   const {
-    id,
+    product_id,
     model,
     brand,
     price,
@@ -24,8 +24,63 @@ const ProductDescription: FC<Props> = ({currentProduct}) => {
 
   const [selectedSize, setSelectedSize] = useState<null | string>(null);
 
+  const cart = useCart();
+  const {updateCart, items, loaderState} = cart;
+
   const onSelectSize = (size: string) => {
     setSelectedSize(size);
+  };
+
+  const currentSizeMaxQuantity = () => {
+    const currentSizeObject = stock_array.find((obj) => {
+      return obj.size === selectedSize;
+    });
+    if (currentSizeObject) {
+      return currentSizeObject.count;
+    } else return 0;
+  };
+
+  const currentSizeCartQuantity = () => {
+    if (items) {
+      const currentSizeObject = items.find((obj) => {
+        return obj.id === product_id && obj.size === selectedSize;
+      });
+
+      if (currentSizeObject) {
+        return currentSizeObject.quantity;
+      } else return 0;
+    } else return 0;
+  };
+
+  const onAddToCart = () => {
+    if (selectedSize) {
+      if (items) {
+        const currentObject = items.find((obj) => {
+          return obj.id === product_id && obj.size === selectedSize;
+        });
+        if (currentObject) {
+          if (currentObject.quantity < currentObject.itemData.max_order) {
+            void updateCart(
+              product_id,
+              selectedSize,
+              currentObject.quantity + 1,
+              "update"
+            );
+          } else {
+            void updateCart(
+              product_id,
+              selectedSize,
+              currentObject.quantity + 1,
+              "unavaiable"
+            );
+          }
+        } else {
+          void updateCart(product_id, selectedSize, 1, "add");
+        }
+      } else {
+        void updateCart(product_id, selectedSize, 1, "add");
+      }
+    }
   };
 
   return (
@@ -47,19 +102,13 @@ const ProductDescription: FC<Props> = ({currentProduct}) => {
       />
       <div className={css["user-action-container"]}>
         <GeneralTextButton
-          onClick={() => {
-            NotReadyYet();
-            setSelectedSize(null);
-            console.log(
-              "add to cart, ",
-              "product id: ",
-              id,
-              "selected size: ",
-              selectedSize
-            );
-          }}
+          onClick={onAddToCart}
           displayedText="Add to cart"
           classProp={["addToCart"]}
+          isLoading={Boolean(loaderState === "addToCart")}
+          isDisabled={Boolean(
+            currentSizeCartQuantity() >= currentSizeMaxQuantity()
+          )}
         />
       </div>
     </div>

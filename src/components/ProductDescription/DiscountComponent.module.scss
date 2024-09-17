@@ -1,10 +1,10 @@
 .component-box {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  padding: 5px;
   font-size: 14px;
+  justify-content: center;
+  padding: 5px;
 }
 
 .price-and-discount-box {
@@ -19,13 +19,13 @@
 
 .original-price {
   color: rgb(75 75 75);
-  text-decoration: line-through;
   padding: 0 5px;
+  text-decoration: line-through;
 }
 
 .discount-value {
-  padding: 0 5px;
   font-variation-settings:
     "wght" 600,
     "YOPQ" 300;
+  padding: 0 5px;
 }

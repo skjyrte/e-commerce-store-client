@@ -1,93 +1,75 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import css from "./CartView.module.scss";
-import {selectCartItems} from "../../redux/selectors";
 import CartProductThumbnailLarge from "../../components/thumbnails/CartProductThumbnailLarge";
-import {useDispatch, useSelector} from "react-redux";
-import {AppDispatch} from "../../redux/configureStore";
-/* import {changeItemsCount} from "../../redux/slices/responseSlice"; */
-import {addToCart} from "../../redux/slices/cartSlice";
-import CartFooter from "../../components/CartFooter";
+import useCart from "../../hooks/useCart";
 
 const CartView: FC = () => {
-  /* 
-  const cartItems = useSelector(selectCartItems);
-  const dispatch = useDispatch<AppDispatch>();
-  const renderCartList = () => {
-    if (cartItems.value !== null) {
-      return (
-        <div className={css.cartOverflowContainer}>
-          {cartItems.value.map((productInCart) => (
-            <CartProductThumbnailLarge
-              saveCartHandler={handleOnModifyItemCount}
-              cartProductEntryWithData={productInCart}
-              key={`${productInCart.id}__${productInCart.size}`}
-            />
-          ))}
-        </div>
-      );
-    } else {
-      return <div></div>;
-    }
+  const cart = useCart();
+
+  const {items, loaderState, updateCart, deleteItem, loaderId} = cart;
+
+  const [activeDropdown, setActiveDropdown] = useState<string | null>(null);
+
+  const onClickDropdown = (id: string | null) => {
+    setActiveDropdown(id);
   };
 
-  const handleOnModifyItemCount = (
-    productId: string,
-    selectedSize: string,
-    changeBy: number
-  ) => {
-    console.log("ready to dispatch");
-    if (productId !== undefined && selectedSize !== null) {
-      dispatch(
-        changeItemsCount({
-          id: productId,
-          size: selectedSize,
-          changeBy: changeBy,
-        })
-      );
-      dispatch(
-        addToCart({
-          id: productId,
-          size: selectedSize,
-          changeBy: changeBy,
-        })
-      );
-    }
-  };
+  const itemsCount = !items
+    ? null
+    : items.reduce((prev, curr) => prev + curr.quantity, 0);
 
-  const renderCartFooter = () => {
-    if (cartItems.value !== null && cartItems.value) {
-      const total = cartItems.value.reduce((accumulator, product) => {
-        if (product.additionalData !== null) {
-          return product.additionalData.price * product.count + accumulator;
-        } else {
-          throw new Error("subtotal error");
-        }
-      }, 0);
-      return <CartFooter shippingTotal={0} subtotal={total} />;
-    } else {
-      return <div></div>;
-    }
-  };
-
-  if (cartItems.itemCount > 0) {
+  if (items && itemsCount) {
     return (
-      <div className={css.CartView}>
-        <div className={css.productBox}>
-          <div className={css.header}>Cart {`(${cartItems.itemCount}pcs)`}</div>
-          <div className={css.largeCartThumbnailWrapper}>
-            {renderCartList()}
+      <div className={css["cart-view-container"]}>
+        <div className={css["cart-contents-container"]}>
+          <div className={css["main-cart-header"]}>
+            Cart {`(${itemsCount.toString()}pcs)`}
+          </div>
+          <div className={css["cart-list-container"]}>
+            <div className={css.cartOverflowContainer}>
+              {items.map((obj) => {
+                return (
+                  <CartProductThumbnailLarge
+                    onDeleteItem={(product_id, product_size) => {
+                      void deleteItem(product_id, product_size);
+                    }}
+                    onUpdateQuantity={(product_id, product_size, quantity) => {
+                      void updateCart(
+                        product_id,
+                        product_size,
+                        quantity,
+                        "update"
+                      );
+                    }}
+                    cartProductEntryWithData={obj}
+                    key={`${obj.id}__${obj.size}`}
+                    onClickDropdown={onClickDropdown}
+                    activeDropdown={activeDropdown}
+                    isDropdownLoading={
+                      Boolean(loaderState === "addToCart") &&
+                      `${obj.id}__${obj.size}` === loaderId
+                    }
+                    isDeleteButtonLoading={
+                      Boolean(loaderState === "deleteCartItem") &&
+                      `${obj.id}__${obj.size}` === loaderId
+                    }
+                  />
+                );
+              })}
+            </div>
           </div>
         </div>
-        <div className={css.summaryBox}>{renderCartFooter()}</div>
       </div>
     );
   } else {
     return (
-      <div className={css.emptyCartView}>
-        <div className={css.emptyCart}>YOUR CART IS EMPTY</div>
+      <div className={css["cart-view-container"]}>
+        <div className={css.emptyCartView}>
+          <div className={css.emptyCart}>YOUR CART IS EMPTY</div>
+        </div>
       </div>
     );
-  } */
+  }
 };
 
 export default CartView;

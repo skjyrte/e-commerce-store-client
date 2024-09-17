@@ -1,13 +1,13 @@
 .portal {
-  z-index: 9;
-  display: flex;
-  justify-content: center;
   align-items: center;
-  background-color: white;
   backdrop-filter: blur(10px);
-  position: fixed;
-  width: 100vw;
+  background-color: white;
+  display: flex;
   height: 100vh;
   inset: 0;
+  justify-content: center;
+  position: fixed;
   transition: margin-right 4s ease-in-out 1s;
+  width: 100vw;
+  z-index: 9;
 }

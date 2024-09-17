@@ -1,19 +1,19 @@
 .product-thumbnail {
-  display: flex;
-  border-radius: 5px;
-  flex-direction: column;
-  width: 100%;
-  height: 100%;
   background-color: white;
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  height: 100%;
   position: relative;
+  width: 100%;
 }
 
 .figure-wrapper-container {
-  width: 100%;
   display: flex;
   justify-content: center;
   padding: 0;
   position: relative;
+  width: 100%;
 
   @media (width >= 600px) {
     padding: 15px 15px 10px;
@@ -21,34 +21,34 @@
 }
 
 .product-content {
-  width: 100%;
-  height: 100%;
   border: 2px solid rgb(226 226 226);
   border-radius: 5px;
   border-width: 2px;
+  height: 100%;
+  width: 100%;
 
   &.hovered-state {
-    border-width: 2px 2px 0;
     border-radius: 5px 5px 0 0;
+    border-width: 2px 2px 0;
   }
 }
 
 .size-container {
-  padding: 5px;
-  position: absolute;
-  width: 100%;
+  background-color: white;
+  border: 2px solid rgb(226 226 226);
+  border-radius: 0 0 5px 5px;
+  border-width: 0 2px 2px;
+  cursor: pointer;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(30px, 1fr));
-  top: calc(100%);
   left: 0;
-  background-color: white;
-  border-radius: 0 0 5px 5px;
-  z-index: 2;
-  transition: all 300ms ease 0s;
-  cursor: pointer;
   margin-bottom: 50px;
-  border: 2px solid rgb(226 226 226);
-  border-width: 0 2px 2px;
+  padding: 5px;
+  position: absolute;
+  top: calc(100%);
+  transition: all 300ms ease 0s;
+  width: 100%;
+  z-index: 2;
 
   &.hide {
     display: none;
@@ -56,28 +56,28 @@
 }
 
 .image-overlay {
-  position: absolute;
   background-color: transparent;
-  width: 100%;
-  left: 0;
-  top: 0;
   border: none;
   height: calc(100%);
+  left: 0;
+  position: absolute;
+  top: 0;
+  width: 100%;
   z-index: 1;
 
   &.hovered-state {
-    height: calc(100% + var(--get-sizes-height));
-    box-shadow: 0 0 10px rgb(0 0 0 / 25%);
-    z-index: 2;
     border-radius: 5px;
+    box-shadow: 0 0 10px rgb(0 0 0 / 25%);
     cursor: pointer;
+    height: calc(100% + var(--get-sizes-height));
+    z-index: 2;
   }
 }
 
 .loading-state-box {
-  width: 100%;
   height: 115px;
   margin-top: -20px;
+  width: 100%;
 }
 
 .loading-state {

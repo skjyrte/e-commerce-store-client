@@ -5,6 +5,11 @@
   height: 40px;
   position: relative;
   width: 100%;
+  z-index: 1;
+
+  &.dropdown-being-visible {
+    z-index: 2;
+  }
 }
 
 .hide-dropdown {

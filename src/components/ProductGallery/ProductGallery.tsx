@@ -45,6 +45,7 @@ const ProductGallery: FC<Props> = ({imageArray, onClickZoom, modal}) => {
             isLoading={false}
             onLoad={(para) => {}}
             classDefinition="class-set-1"
+            swiperComponent={true}
           />
         </div>
       </SwiperSlide>

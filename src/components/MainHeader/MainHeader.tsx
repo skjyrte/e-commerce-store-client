@@ -10,7 +10,6 @@ import AuthStatus from "../AuthStatus";
 import {Link} from "react-router-dom";
 import {selectAuth} from "../../redux/slices/authSlice";
 import {useSelector} from "react-redux";
-import NotReadyYet from "../../helper/NotReadyYet";
 
 const Header: FC = () => {
   const [activeDrawer, setActiveDrawer] = useState<null | "men" | "women">(
@@ -96,7 +95,7 @@ const Header: FC = () => {
           </ul>
 
           <div className={css["user-action-container"]}>
-            <div onClick={NotReadyYet} className={css["cart-button-wrapper"]}>
+            <div className={css["cart-button-wrapper"]}>
               <CartLinkElement />
             </div>
             <div className={css["user-profile-button-wrapper"]}>

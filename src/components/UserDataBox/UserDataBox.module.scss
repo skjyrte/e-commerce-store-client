@@ -1,10 +1,10 @@
 .component-box {
-  display: flex;
-  height: 150px;
-  padding: 10px;
-  flex-direction: row;
   align-items: center;
   border-bottom: 2px solid rgb(235 235 235);
+  display: flex;
+  flex-direction: row;
+  height: 150px;
+  padding: 10px;
 
   .major-content-warpper {
     display: flex;
@@ -13,18 +13,18 @@
 
   @media (width <= 600px) {
     .major-content-warpper {
-      flex: unset;
-      width: 100%;
-      justify-content: center;
       align-items: right;
+      flex: unset;
       height: 70px;
+      justify-content: center;
+      width: 100%;
     }
   }
 
   .icon-wrapper {
-    width: 50px;
     height: 50px;
     margin: 0 50px;
+    width: 50px;
   }
 
   @media (width <= 600px) {
@@ -34,32 +34,32 @@
   }
 
   .data-wrapper {
-    font-size: 16px;
-    flex: 1;
     color: black;
+    flex: 1;
+    font-size: 16px;
 
     .prop-title-container {
-      letter-spacing: 0.1rem;
-      height: 25px;
-      text-overflow: ellipsis;
-      max-width: 250px;
-      text-align: start;
       font-variation-settings:
         "wght" 600,
         "YOPQ" 300;
+      height: 25px;
+      letter-spacing: 0.1rem;
+      max-width: 250px;
+      text-align: start;
+      text-overflow: ellipsis;
     }
 
     .user-data-container {
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      max-width: 250px;
-      height: 25px;
-      text-align: start;
-      word-break: break-all;
       font-variation-settings:
         "wght" 400,
         "YOPQ" 300;
+      height: 25px;
+      max-width: 250px;
+      overflow: hidden;
+      text-align: start;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      word-break: break-all;
     }
   }
 
@@ -71,8 +71,8 @@
   }
 
   .edit-button-wrapper {
-    width: 300px;
     height: 50px;
+    width: 300px;
   }
 
   @media (width <= 600px) {
@@ -85,8 +85,8 @@
 @media (width <= 600px) {
   .component-box {
     display: flex;
-    justify-content: center;
     flex-direction: column;
     height: 180px;
+    justify-content: center;
   }
 }

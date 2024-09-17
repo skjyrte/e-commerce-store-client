@@ -28,6 +28,7 @@ const ChangeAmountButton: FC<Props> = ({
       className={buttonClassName}
       onClick={onClick}
       disabled={isDisabled}
+      draggable="false"
     >
       {displayedText}
     </button>

@@ -1,11 +1,11 @@
 .header-button {
-  width: 60px;
   height: 60px;
   padding: 2px;
+  width: 60px;
 
   :hover {
-    filter: invert(50%);
     cursor: pointer;
+    filter: invert(50%);
   }
 }
 
@@ -16,11 +16,11 @@
 .drawer-header {
   display: flex;
   font-size: 20px;
-  letter-spacing: 0.05rem;
-  padding: 15px 20px;
   font-variation-settings:
     "wght" 700,
     "YOPQ" 300;
+  letter-spacing: 0.05rem;
+  padding: 15px 20px;
 }
 
 .choose-gender-list-container {

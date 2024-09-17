@@ -1,29 +1,29 @@
 .component-box {
+  align-items: center;
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: center;
-  text-align: center;
   padding: 0;
+  text-align: center;
 }
 
 .price-box {
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
-  text-align: center;
   padding: 10px;
+  text-align: center;
 }
 
 .price-note {
-  padding: 5px;
   font-size: 14px;
+  padding: 5px;
 }
 
 .textfield-wrap {
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
 .product-brand {
@@ -32,11 +32,11 @@
 
 .product-model {
   color: rgb(75 75 75);
-  margin: 5px auto;
   font-size: 24px;
   font-variation-settings:
     "wght" 600,
     "YOPQ" 300;
+  margin: 5px auto;
 }
 
 .current-price {
@@ -44,7 +44,7 @@
 }
 
 .is-loading {
-  width: 50%;
   background-color: gray;
   visibility: hidden;
+  width: 50%;
 }

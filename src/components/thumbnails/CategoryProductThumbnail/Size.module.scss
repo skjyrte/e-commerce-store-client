@@ -1,13 +1,13 @@
 .size-option {
-  font-size: 12px;
+  border-right: 1px solid rgb(75 75 75);
   display: flex;
-  padding: 5px;
+  flex-wrap: nowrap;
+  font-size: 12px;
+  height: 1.5rem;
   margin: 2px 0;
   min-width: 30px;
-  flex-wrap: nowrap;
+  padding: 5px;
   place-content: center center;
-  height: 1.5rem;
-  border-right: 1px solid rgb(75 75 75);
 
   &:last-child {
     border-right: 1px solid transparent;

@@ -8,8 +8,6 @@ const useLogin = () => {
   const auth = useSelector(selectAuth);
   const {user, loaderState, loginState} = auth;
 
-  console.log({loaderState});
-
   const loginRequest = async (email: string, password: string) => {
     if (loaderState) {
       return;

@@ -1,27 +1,27 @@
 .user-view-container {
-  width: 100%;
+  align-items: center;
   display: flex;
   justify-content: center;
-  align-items: center;
+  width: 100%;
 
   .user-panel {
     width: 1000px;
 
     .login-error-message {
-      margin: 0 50px;
       background-color: black;
-      color: white;
       border: 2px solid black;
-      text-align: center;
-      padding: 10px;
+      color: white;
+      margin: 0 50px;
       margin-bottom: 20px;
+      padding: 10px;
+      text-align: center;
       width: min(300px, 100%);
     }
 
     .user-panel-header {
       font-size: 24px;
-      text-align: center;
       padding: 30px;
+      text-align: center;
     }
 
     .user-panel-body {
@@ -29,45 +29,45 @@
       text-align: center;
 
       .success-logout-container {
+        border: 2px solid black;
         font-size: 16px;
         margin: 0 50px;
-        border: 2px solid black;
-        text-align: center;
-        padding: 10px;
         margin-bottom: 20px;
         max-width: 250px;
+        padding: 10px;
+        text-align: center;
       }
     }
 
     .logout-container {
-      font-size: 20px;
-      text-align: center;
-      display: flex;
       align-items: center;
+      display: flex;
+      font-size: 20px;
       justify-content: center;
+      text-align: center;
 
       .logout-body {
+        border: 2px solid black;
         font-size: 16px;
         margin: 0 50px;
-        border: 2px solid black;
-        text-align: center;
-        padding: 10px;
         margin-bottom: 20px;
         max-width: 250px;
+        padding: 10px;
+        text-align: center;
       }
     }
   }
 
   .logout-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
     align-items: center;
+    display: flex;
     height: 100px;
+    justify-content: center;
+    width: 100%;
   }
 
   .logout-button-wrapper {
-    width: 200px;
     height: 50px;
+    width: 200px;
   }
 }

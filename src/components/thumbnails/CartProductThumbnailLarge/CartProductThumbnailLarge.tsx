@@ -1,175 +1,129 @@
 import {FC, useState} from "react";
 import css from "./CartProductThumbnailLarge.module.scss";
 import {Link} from "react-router-dom";
-import IconNoPhoto from "../../inlineIcons/IconNoPhoto";
-import ChangeAmountButton from "../../buttons/ChangeAmountButton";
 import GeneralTextButton from "../../buttons/GeneralTextButton";
-import {useSelector} from "react-redux";
-import {RootState} from "../../../redux/configureStore";
+import AccessibleFigure from "../../AccessibleFigure";
+import CountDropdown from "../../buttons/CountDropdown";
 
-interface CartProductEntryWithData {
+interface CartProductItem {
   id: string;
   size: string;
-  count: number;
-  additionalData: Product | null;
+  quantity: number;
+  itemData: ItemData;
+}
+
+interface ItemData {
+  brand: string;
+  model: string;
+  gender: string;
+  price: number;
+  thumbnail: string;
+  max_order: number;
 }
 
 interface Props {
-  saveCartHandler: (
-    productId: string,
-    selectedSize: string,
-    changeBy: number
+  onDeleteItem: (product_id: string, product_size: string) => void;
+  onUpdateQuantity: (
+    product_id: string,
+    product_size: string,
+    quantity: number
   ) => void;
-  cartProductEntryWithData: CartProductEntryWithData;
+  cartProductEntryWithData: CartProductItem;
+  activeDropdown: string | null;
+  onClickDropdown: (id: string | null) => void;
+  isDropdownLoading: boolean;
+  isDeleteButtonLoading: boolean;
 }
 
 const CartProductThumbnailLarge: FC<Props> = (props) => {
-  const {saveCartHandler, cartProductEntryWithData} = props;
-  const [editMode, setEditMode] = useState(false);
-  const [newQuantity, setNewQuantity] = useState(
-    cartProductEntryWithData.count
-  );
+  const {
+    onDeleteItem,
+    onUpdateQuantity,
+    cartProductEntryWithData,
+    onClickDropdown,
+    activeDropdown,
+    isDropdownLoading,
+    isDeleteButtonLoading,
+  } = props;
+  const {id, size, quantity} = cartProductEntryWithData;
+  const {brand, model, gender, price, thumbnail, max_order} =
+    cartProductEntryWithData.itemData;
+  const [isLoading, setIsLoading] = useState(true);
 
-  const data = cartProductEntryWithData.additionalData;
-
-  const avaiableItems = useSelector((state: RootState) => {
-    return state.response.value.products.find((product) => {
-      return product.id === cartProductEntryWithData.id;
-    });
-  });
-
-  const onChangeQuantity = (action: "increase" | "decrease") => {
-    if (avaiableItems !== undefined) {
-      const itemInStock = avaiableItems.stock.find((size) => {
-        return size.size === cartProductEntryWithData.size;
-      })?.count;
-      if (itemInStock !== undefined) {
-        const changeBy = newQuantity - cartProductEntryWithData.count;
-        if (action === "increase" && changeBy < itemInStock) {
-          setNewQuantity((prev) => prev + 1);
-        }
-        if (action === "decrease" && newQuantity > 0) {
-          setNewQuantity((prev) => prev - 1);
-        }
-      }
-    } else {
-      throw new Error("no such product in database");
-    }
+  const onChooseNewQuantity = (newQuantity: number) => {
+    onUpdateQuantity(id, size, newQuantity);
   };
 
-  const onClickEdit = () => {
-    setEditMode(true);
-    setNewQuantity(cartProductEntryWithData.count);
+  const subtotal = (
+    Math.round(price * cartProductEntryWithData.quantity * 100) / 100
+  ).toFixed(2);
+
+  const onLoad = (p: boolean) => {
+    setIsLoading(p);
   };
 
-  const onClickSave = () => {
-    const changeBy = newQuantity - cartProductEntryWithData.count;
-    saveCartHandler(
-      cartProductEntryWithData.id,
-      cartProductEntryWithData.size,
-      changeBy
-    );
-    setEditMode(false);
-  };
-
-  const onClickDelete = () => {
-    saveCartHandler(
-      cartProductEntryWithData.id,
-      cartProductEntryWithData.size,
-      -1
-    );
-  };
-
-  if (data === null) {
-    return (
-      <div className="isError">
-        Unable to get the product data. Please reload the page or contact us.
+  return (
+    <div className={css["component-container"]}>
+      <div className={css["product-thumbnail-container"]}>
+        <AccessibleFigure
+          thumbnailUrl={thumbnail}
+          hoverActions={false}
+          isLoading={isLoading}
+          onLoad={onLoad}
+          classDefinition="class-set-3"
+          swiperComponent={false}
+        />
       </div>
-    );
-  } else {
-    const subtotal = (
-      Math.round(data.price * cartProductEntryWithData.count * 100) / 100
-    ).toFixed(2);
-    return (
-      <div className={css.CartThumbnailLarge}>
-        <div className={css.cartProductThumbnail}>
-          {data.thumbnail ? <img src={data.thumbnail} /> : <IconNoPhoto />}
-        </div>
-        <div className={css.textBox}>
-          <div className={css.boldChildBox}>
-            <Link className={css.cartProduct} to={`/${data.gender}/${data.id}`}>
-              <div className={css.companyProdNameBox}>
-                <div className={css.company}>{data.brand}</div>
-                <div className={css.productName}>{data.model}</div>
-              </div>
+      <div className={css["major-container"]}>
+        <div className={css["description-container"]}>
+          <div className={css["top-text-container"]}>
+            <Link className={css["link-to-product"]} to={`/product/${id}`}>
+              <div className={css["bold-product-data-top"]}>{brand}</div>
+              <div className={css["bold-product-data-top"]}>{model}</div>
             </Link>
           </div>
-          <div className={css.shadedChildBox}>
-            <div className={css.additionalInfo}>
-              <div className={css.gender}>Gender: {data.gender}</div>
-              <div className={css.prodNo}>Article No: {data.id}</div>
+          <div className={css["bottom-text-container"]}>
+            <div className={css["light-product-data-bottom"]}>
+              Gender: {gender}
             </div>
-            <div className={css.productSize}>
+            <div className={css["light-product-data-bottom"]}>
+              Article No: {id}
+            </div>
+            <div className={css["bold-product-data-bottom"]}>
               SIZE {cartProductEntryWithData.size}
             </div>
           </div>
         </div>
-        <div className={css.actionBox}>
-          <div className={css.priceBox}>
-            <div className={css.subtotalPrice}>${subtotal}</div>
+        <div className={css["user-action-container"]}>
+          <div className={css["price-container"]}>
+            <div className={css["product-total-price"]}>${subtotal}</div>
             <div
-              className={css.itemPrice}
-            >{`Single item price: $${Math.round(data.price * 100) / 100}`}</div>
+              className={css["single-item-price"]}
+            >{`Single item price: $${(Math.round(price * 100) / 100).toString()}`}</div>
           </div>
-          <div className={css.deleteBox}>
+          <CountDropdown
+            onSelectQuantity={onChooseNewQuantity}
+            selectedQuantity={quantity}
+            maxOrder={max_order}
+            onClickDropdown={onClickDropdown}
+            activeDropdown={activeDropdown}
+            dropdownId={`${id}__${size}`}
+            isLoading={isDropdownLoading}
+          />
+          <div className={css["delete-item-wrapper"]}>
             <GeneralTextButton
               displayedText="DELETE ITEM"
               classProp={["deleteItems"]}
-              onClick={onClickDelete}
+              onClick={() => {
+                onDeleteItem(id, size);
+              }}
+              isLoading={isDeleteButtonLoading}
             />
           </div>
-          {editMode ? (
-            <div className={css.buttonGroupWrapper}>
-              <GeneralTextButton
-                displayedText="SAVE"
-                classProp={["editItems"]}
-                onClick={onClickSave}
-              />
-              <ChangeAmountButton
-                displayedText="-"
-                onClick={() => {
-                  onChangeQuantity("decrease");
-                }}
-                classProp={["left", "cart"]}
-                isDisabled={false}
-              />
-              <div className={css.itemsCount}>{newQuantity}</div>
-              <ChangeAmountButton
-                displayedText="+"
-                onClick={() => {
-                  onChangeQuantity("increase");
-                }}
-                classProp={["right", "cart"]}
-                isDisabled={false}
-              />
-            </div>
-          ) : (
-            <div className={css.buttonGroupWrapper}>
-              <div className={css.itemsCountTitle}>Count: </div>
-              <div className={css.itemsCount}>
-                {cartProductEntryWithData.count}
-              </div>
-              <GeneralTextButton
-                displayedText="EDIT"
-                classProp={["editItems"]}
-                onClick={onClickEdit}
-              />
-            </div>
-          )}
         </div>
       </div>
-    );
-  }
+    </div>
+  );
 };
 
 export default CartProductThumbnailLarge;

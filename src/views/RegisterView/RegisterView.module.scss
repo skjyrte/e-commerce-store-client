@@ -1,69 +1,69 @@
 .view-container {
+  align-items: center;
   display: flex;
   flex-direction: column;
-  justify-content: start;
-  align-items: center;
-  width: 100%;
   height: 100%;
+  justify-content: start;
+  width: 100%;
 
   .form-container {
-    margin-top: 0;
+    align-items: center;
     display: flex;
     flex-direction: column;
-    align-items: center;
-    width: calc(min(100%, 400px));
+    margin-top: 0;
     padding: 10px;
+    width: calc(min(100%, 400px));
 
     @media (width > 600px) {
-      width: 400px;
       padding: 0;
+      width: 400px;
     }
 
     .register-header {
-      padding: 40px 0;
       font-size: 24px;
-      width: 100%;
+      padding: 40px 0;
       text-align: center;
+      width: 100%;
     }
 
     .register-error-message {
-      margin: 0 50px;
       background-color: black;
-      color: white;
       border: 2px solid black;
-      text-align: center;
-      padding: 10px;
+      color: white;
+      margin: 0 50px;
       margin-bottom: 20px;
+      padding: 10px;
+      text-align: center;
     }
 
     .email-entry-form {
-      width: 100%;
+      align-items: center;
       display: flex;
       flex-direction: column;
-      align-items: center;
       justify-content: center;
+      width: 100%;
     }
 
     .submit-container {
-      height: 50px;
       display: flex;
+      height: 50px;
       justify-content: end;
     }
   }
 }
 
 .register-redirection-container {
-  margin-top: 20px;
   border: 2px solid black;
-  text-align: center;
-  padding: 10px;
   margin-bottom: 20px;
+  margin-top: 20px;
+  padding: 10px;
+  text-align: center;
 
   .register-link {
-    text-decoration: underline;
-    padding: 5px;
     font-variation-settings:
       "wght" 600,
       "YOPQ" 300;
+    padding: 5px;
+    text-decoration: underline;
   }
 }

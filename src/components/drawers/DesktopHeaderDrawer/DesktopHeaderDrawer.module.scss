@@ -1,13 +1,13 @@
 .desktop-header-drawer-container {
-  position: absolute;
-  z-index: 3;
+  align-items: center;
   display: none;
   height: 80px;
   padding: 0 20px;
-  align-items: center;
+  position: absolute;
   top: 80px;
-  width: 100vw;
   transition: height 0.1s;
+  width: 100vw;
+  z-index: 3;
 
   &.hidden-drawer {
     height: 0;
@@ -15,15 +15,15 @@
   }
 
   .choose-category-list {
-    display: flex;
-    justify-content: center;
     align-self: center;
-    width: 100%;
-    max-width: 100%;
+    display: flex;
     flex-wrap: wrap;
+    justify-content: center;
+    max-width: 100%;
     min-height: 50px;
     transition: height 0.2s;
     transition-delay: 300ms;
+    width: 100%;
 
     &.hidden-list {
       height: 0;
@@ -32,12 +32,12 @@
     }
 
     .category-button-wrapper {
-      display: flex;
       align-self: center;
-      justify-content: center;
+      display: flex;
       height: 100%;
-      width: 120px;
+      justify-content: center;
       padding: 5px 0;
+      width: 120px;
     }
   }
 }

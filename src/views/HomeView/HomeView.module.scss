@@ -5,10 +5,10 @@
 }
 
 .general-header {
-  font-size: 24px;
-  padding: 20px;
-  justify-content: center;
   display: flex;
+  font-size: 24px;
+  justify-content: center;
+  padding: 20px;
 
   @media (width >= 600px) {
     padding: 10px;
@@ -21,18 +21,18 @@ a {
 }
 
 .no-products-found {
-  display: flex;
-  width: 100%;
-  margin-top: 33vh;
-  justify-content: center;
   align-items: center;
+  display: flex;
+  justify-content: center;
+  margin-top: 33vh;
+  width: 100%;
 }
 
 @media (width >= 600px) {
   .gridWrapper {
-    padding: 20px 30px;
     gap: 1rem;
     grid-template-columns: repeat(auto-fit, minmax(calc(50% - 1rem), 1fr));
+    padding: 20px 30px;
   }
 }
 

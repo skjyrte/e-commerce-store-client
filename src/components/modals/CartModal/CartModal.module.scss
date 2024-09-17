@@ -2,23 +2,23 @@
   display: none;
 
   @media (width >= 600px) {
-    width: 330px;
+    background-color: white;
+    border: 4px solid rgb(226 226 226);
     display: flex;
     flex-direction: column;
-    background-color: white;
-    position: absolute;
-    top: 56px; //override parent border 4px
-    right: -4px; //override parent border 4px
-    z-index: 1;
-    border: 4px solid rgb(226 226 226);
-    padding: 10px;
     max-height: 400px;
+    padding: 10px;
+    position: absolute;
+    right: -4px; //override parent border 4px
+    top: 56px; //override parent border 4px
+    width: 330px;
+    z-index: 1;
   }
 }
 
 .cartOverflowContainer {
-  width: 100%;
   overflow-y: scroll;
+  width: 100%;
 }
 
 .cartOverflowContainer::-webkit-scrollbar {
@@ -31,42 +31,41 @@
 }
 
 .emptyCart {
-  padding-bottom: 10px;
   font-size: 18px;
   font-variation-settings:
     "wght" 600,
     "YOPQ" 300;
+  padding-bottom: 10px;
 }
 
 .redirectToOther {
-  padding-bottom: 5px;
   font-size: 14px;
+  padding-bottom: 5px;
 }
 
 .linkElement {
-  color: white;
+  align-items: center;
   background-color: black;
   border: 2px solid whitesmoke;
-  height: auto;
-  justify-content: center;
-  align-items: center;
-  border-radius: 5px;
-  padding: 10px;
-  letter-spacing: 0.2rem;
+  color: white;
   font-family: inherit;
-  text-decoration: none;
   font-variation-settings:
     "wght" 600,
     "YOPQ" 300;
+  height: auto;
+  justify-content: center;
+  letter-spacing: 0.2rem;
+  padding: 10px;
+  text-decoration: none;
 
   &:hover {
-    transition: filter 0.2s;
     filter: invert(75%);
+    transition: filter 0.2s;
   }
 
   &.cart {
-    width: 100%;
     text-align: center;
+    width: 100%;
   }
 
   &:active {

@@ -1,16 +1,17 @@
 .imageButton {
-  display: flex;
-  justify-content: center;
   align-items: center;
-  height: 50px;
-  width: 50px;
-  border-radius: 50%;
-  transition: filter 0.3s;
   background-color: var(--pale-orange);
-  padding: 3px;
   border: 0;
+  border-radius: 50%;
+  display: flex;
   fill: var(--button-enabled);
+  height: 50px;
+  justify-content: center;
+  padding: 3px;
+  transition: filter 0.3s;
+  width: 50px;
 }
+
 .imageButton:active {
   background-color: var(--basic-orange);
 }

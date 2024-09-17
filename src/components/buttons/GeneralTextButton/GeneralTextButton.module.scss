@@ -4,117 +4,143 @@
 }
 
 .input-button {
-  font-family: inherit;
-  font-size: 16px;
+  align-items: center;
+  background-color: rgb(250 250 250);
+  border: 2px solid rgb(46 46 46);
   color: black;
   display: flex;
-  justify-content: center;
-  align-items: center;
-  border: 2px solid rgb(46 46 46);
-  background-color: rgb(250 250 250);
-  padding: 10px;
-  margin: 0;
-  transition: all 100ms;
-  width: 80px;
+  font-family: inherit;
+  font-size: 16px;
   font-variation-settings:
     "wght" 600,
     "YOPQ" 300;
+  justify-content: center;
+  margin: 0;
+  padding: 10px;
+  transition: all 100ms;
+  user-select: none;
+  width: 80px;
 
   &:hover {
-    cursor: pointer;
-    filter: drop-shadow(0 0 2px rgb(66 66 66));
     border: 2px solid rgb(0 0 0);
     color: rgb(0 0 0);
+    cursor: pointer;
+    filter: drop-shadow(0 0 2px rgb(66 66 66));
   }
 }
 
 .addToCart {
+  align-items: center;
+  background-color: black;
+  border: 2px solid whitesmoke;
+  color: white;
+  display: flex;
+  flex: 1;
   font-family: inherit;
   font-size: 24px;
-  color: var(--general-text-button-enabled);
-  display: flex;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
   height: 55px;
   justify-content: center;
-  align-items: center;
-  border: none;
-  background-color: rgb(255 209 109);
-  padding: 0;
   margin: 0;
-  max-width: 270px;
-  flex: 1;
-  min-width: 110px;
   margin-left: 20px;
+  max-width: 270px;
+  min-width: 110px;
+  padding: 0;
+  user-select: none;
 
   &:disabled {
     background-color: wheat;
+  }
+
+  &:active {
+    background-color: rgb(48 48 48);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+      filter: invert(75%);
+      transition: filter 0.2s;
+
+      &:disabled {
+        background-color: wheat;
+        filter: unset;
+      }
+    }
   }
 }
 
 .editItems {
-  font-family: inherit;
-  font-size: 12px;
-  color: black;
-  display: flex;
-  height: auto;
-  width: auto;
-  justify-content: center;
   align-items: center;
+  background-color: transparent;
   border: 1px solid transparent;
   border-radius: 5px;
-  background-color: transparent;
-  padding: 5px;
+  color: black;
+  display: flex;
+  font-family: inherit;
+  font-size: 12px;
+  height: auto;
+  justify-content: center;
   margin: 0;
+  padding: 5px;
+  user-select: none;
+  width: auto;
 
   &:disabled {
     background-color: wheat;
+  }
+
+  &:hover {
+    cursor: pointer;
+  }
+
+  &:active {
+    box-shadow: 0 0 5px red;
   }
 }
 
 .deleteItems {
+  align-items: center;
+  background-color: black;
+  border: 2px solid whitesmoke;
+  color: white;
+  display: flex;
   font-family: inherit;
   font-size: 12px;
-  color: black;
-  display: flex;
-  height: auto;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
+  height: 30px;
   justify-content: center;
-  align-items: center;
-  border: 1px solid transparent;
-  border-radius: 5px;
-  background-color: transparent;
-  padding: 5px;
-  margin: 0;
   letter-spacing: 0.1rem;
+  margin: 0;
+  padding: 5px;
+  text-align: center;
+  user-select: none;
+  width: 70px;
 
   &:disabled {
     background-color: wheat;
   }
+
+  &:hover {
+    cursor: pointer;
+    filter: invert(75%);
+    transition: filter 0.2s;
+  }
+
+  &:active {
+    background-color: rgb(245 245 245);
+  }
 }
 
 @media (hover: hover) {
-  .addToCart:hover {
-    background-color: orange;
-    filter: hue-rotate(-30deg);
-
-    &:disabled {
-      background-color: wheat;
-      filter: unset;
-    }
-  }
-
   .editItems:hover {
     border: 1px solid gray;
-    transition: border 0.2s;
     text-decoration-line: underline;
-
-    &:disabled {
-      filter: unset;
-    }
-  }
-
-  .deleteItems:hover {
-    border: 1px solid gray;
     transition: border 0.2s;
-    text-decoration-line: underline;
 
     &:disabled {
       filter: unset;
@@ -137,45 +163,63 @@
 }
 
 .edit-button {
+  background-color: black;
+  border: 2px solid whitesmoke;
   box-sizing: border-box;
-  width: 100%;
-  height: 100%;
-  border: 2px solid #000;
+  color: white;
+  font-size: 24px;
   font-variation-settings:
     "wght" 400,
     "YOPQ" 300;
-  font-size: 24px;
+  height: 100%;
   letter-spacing: 0.1rem;
   margin: 0;
-
-  &:hover {
-    background-color: #f0f0f0;
-    cursor: pointer;
-  }
+  width: 100%;
 
   &:active {
     background-color: #b1b1b1;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+      filter: invert(75%);
+      transition: filter 0.2s;
+
+      &:disabled {
+        background-color: wheat;
+        filter: unset;
+      }
+    }
   }
 }
 
 .logout-button {
-  box-sizing: border-box;
-  width: 100%;
-  height: 100%;
   border: 2px solid #000;
+  box-sizing: border-box;
+  font-size: 24px;
   font-variation-settings:
     "wght" 400,
     "YOPQ" 300;
-  font-size: 24px;
+  height: 100%;
   letter-spacing: 0.1rem;
   margin: 0;
-
-  &:hover {
-    background-color: #f0f0f0;
-    cursor: pointer;
-  }
+  width: 100%;
 
   &:active {
     background-color: #b1b1b1;
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+      filter: invert(55%);
+      transition: filter 0.2s;
+
+      &:disabled {
+        background-color: rgb(226 226 226);
+        filter: unset;
+      }
+    }
   }
 }

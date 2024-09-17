@@ -1,18 +1,20 @@
 .cartProduct {
+  align-items: center;
   background-color: white;
-  display: flex;
   border: 2px solid whitesmoke;
+  border-radius: 5px;
+  display: flex;
+  font-family: inherit;
   height: 120px;
   justify-content: start;
-  align-items: center;
-  border-radius: 5px;
   padding: 10px;
-  font-family: inherit;
   text-decoration: none;
+
   &:hover {
+    filter: invert(10%);
     transition: filter 0.2s;
-    filter: invert(75%);
   }
+
   &:active {
     filter: invert(25%);
   }
@@ -21,56 +23,65 @@
 .cartProductThumbnail {
   display: flex;
   height: 100%;
-  width: auto;
   margin: 10px;
+  width: auto;
+
   & > img {
-    width: auto;
     height: 100%;
+    width: auto;
   }
 }
+
 .textBox {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   height: 100%;
+  justify-content: space-between;
   width: 100%;
 }
+
 .boldChildBox {
-  font-size: 12px;
-  display: flex;
   color: black;
-  justify-content: space-between;
-  letter-spacing: 0.2rem;
+  display: flex;
+  font-size: 12px;
   font-variation-settings:
     "wght" 600,
     "YOPQ" 300;
+  justify-content: space-between;
+  letter-spacing: 0.2rem;
 }
+
 .companyProdNameBox {
   width: 110px;
 }
+
 .company {
-  width: 100%;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
+
 .productName {
-  width: 100%;
-  white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 100%;
 }
+
 .price {
   font-size: 16px;
 }
+
 .shadedChildBox {
-  font-size: 12px;
   color: gray;
-  letter-spacing: unset;
+  font-size: 12px;
   font-variation-settings:
     "wght" 400,
     "YOPQ" 200;
+  letter-spacing: unset;
 }
+
 .productSize {
   padding: 5px 0;
 }

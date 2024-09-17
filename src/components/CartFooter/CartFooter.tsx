@@ -20,7 +20,7 @@ const CartFooter: FC<Props> = (props) => {
         <div className={css.shippingTotal}>${shippingTotalFormatted}</div>
       </div>
       <div className={css.priceBox}>
-        <div className={css.price}>Total (incl. VAT)</div>
+        <div className={css.price}>Total</div>
         <div className={css.priceTotal}>${costTotalFormatted}</div>
       </div>
     </div>

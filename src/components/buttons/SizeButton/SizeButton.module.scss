@@ -1,12 +1,13 @@
 .SizeButton {
-  display: flex;
-  width: 100%;
-  height: 40px;
-  border: 1px solid black;
-  background-color: white;
-  justify-content: space-between;
   align-items: center;
+  background-color: white;
+  border: 1px solid black;
+  display: flex;
   font-family: inherit;
+  height: 40px;
+  justify-content: space-between;
+  width: 100%;
+
   &:hover {
     cursor: pointer;
   }
@@ -27,12 +28,12 @@
 }
 
 .noMoreInStock {
-  color: rgb(100, 100, 100);
+  color: rgb(100 100 100);
 }
 
 .AdditionalInfo {
   &.lowStock {
-    color: rgb(61, 61, 61);
+    color: rgb(61 61 61);
     font-size: 14px;
     margin-right: -150px;
   }

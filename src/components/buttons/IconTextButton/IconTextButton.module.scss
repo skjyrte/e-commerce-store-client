@@ -1,48 +1,50 @@
 .iconTextButton {
-  font-family: inherit;
+  align-items: center;
+  background-color: transparent;
+  border: none;
+  color: navy;
   display: flex;
   flex-direction: column;
+  font-family: inherit;
   justify-content: center;
-  align-items: center;
-  padding: 0 0;
-  border: none;
-  background-color: transparent;
-  color: navy;
+  padding: 0;
 }
 
 .displayedText {
-  margin-top: -8px;
   font-size: 14px;
   font-variation-settings:
     "wght" 700,
     "YOPQ" 300;
+  margin-top: -8px;
 }
 
 .carouselButton {
   border-radius: 5px;
   height: 45px;
+  opacity: 0.9;
   width: 45px;
   z-index: 2;
-  opacity: 0.9;
+
   &:disabled {
-    opacity: 0.1;
     filter: grayscale(0.6);
+    opacity: 0.1;
+
     &:hover {
-      opacity: 0.1;
       cursor: unset;
+      opacity: 0.1;
     }
   }
 }
 
 @media (hover: hover) {
   .carouselButton:hover {
-    opacity: 1;
+    background-color: hsl(26deg 87% 80%);
     cursor: pointer;
-    background-color: hsl(26, 87%, 80%);
+    opacity: 1;
   }
 }
 
 .iconBox {
-  width: 30px;
   height: 30px;
+  width: 30px;
 }

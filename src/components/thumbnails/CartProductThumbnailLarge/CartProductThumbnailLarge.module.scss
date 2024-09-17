@@ -1,144 +1,145 @@
-.CartThumbnailLarge {
-  color: red;
+.component-container {
+  align-items: center;
   background-color: white;
-  display: flex;
   border: 2px solid whitesmoke;
-  height: 120px;
-  justify-content: start;
-  align-items: center;
   border-radius: 5px;
-  padding: 10px;
+  display: flex;
   font-family: inherit;
+  height: 180px;
+  justify-content: start;
+  padding: 10px;
   text-decoration: none;
-}
 
-.cartProductThumbnail {
-  display: flex;
-  height: 100%;
-  width: auto;
-  margin: 10px;
-  & > img {
-    width: auto;
+  @media (width <= 600px) {
+    padding: 2px;
+  }
+
+  .product-thumbnail-container {
+    display: flex;
     height: 100%;
+    margin: 10px;
+    width: auto;
+
+    @media (width <= 600px) {
+      height: auto;
+      margin-left: 0;
+      max-width: 50%;
+    }
   }
-}
-.cartProduct {
-  &:hover {
-    text-decoration-line: underline;
+
+  .major-container {
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+
+    .description-container {
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+      width: 100%;
+
+      .top-text-container {
+        color: black;
+        display: flex;
+        font-size: 16px;
+        justify-content: space-between;
+        letter-spacing: 0.05rem;
+
+        .link-to-product {
+          max-width: 400px;
+
+          &:hover {
+            text-decoration-line: underline;
+          }
+
+          .bold-product-data-top {
+            font-variation-settings:
+              "wght" 600,
+              "YOPQ" 300;
+            overflow: hidden;
+            padding: 2px;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            width: 100%;
+          }
+        }
+      }
+
+      .bottom-text-container {
+        font-size: 13px;
+        letter-spacing: unset;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: auto;
+
+        .light-product-data-bottom {
+          color: gray;
+          font-variation-settings:
+            "wght" 400,
+            "YOPQ" 200;
+          overflow: hidden;
+          padding: 5px;
+          text-transform: uppercase;
+          width: 100%;
+        }
+
+        .bold-product-data-bottom {
+          font-variation-settings:
+            "wght" 600,
+            "YOPQ" 300;
+          overflow: hidden;
+          padding: 5px;
+          width: 100%;
+        }
+
+        @media (width <= 900px) {
+          width: 280px;
+        }
+
+        @media (width <= 600px) {
+          width: 160px;
+        }
+      }
+    }
+
+    .user-action-container {
+      align-items: end;
+      color: black;
+      display: flex;
+      flex-direction: column;
+      height: 100%;
+      justify-content: space-between;
+      min-width: 160px;
+
+      .price-container {
+        text-align: end;
+      }
+
+      .product-total-price {
+        font-size: 20px;
+        font-variation-settings:
+          "wght" 600,
+          "YOPQ" 200;
+      }
+
+      .single-item-price {
+        font-size: 13px;
+        padding-top: 5px;
+      }
+
+      .delete-item-wrapper {
+        padding: 20px 0;
+        width: auto;
+      }
+    }
+
+    @media (width <= 600px) {
+      flex-direction: column;
+    }
   }
-  &:active {
-    filter: invert(25%);
+
+  @media (width <= 600px) {
+    height: 300px;
   }
-}
-.textBox {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  height: 100%;
-  width: 100%;
-}
-.boldChildBox {
-  font-size: 14px;
-  display: flex;
-  color: black;
-  justify-content: space-between;
-  letter-spacing: 0.05rem;
-  font-variation-settings:
-    "wght" 600,
-    "YOPQ" 300;
-}
-.companyProdNameBox {
-  max-width: 400px;
-}
-.company {
-  width: 100%;
-  padding: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.productName {
-  width: 100%;
-  padding: 2px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-.shadedChildBox {
-  font-size: 12px;
-  color: gray;
-  letter-spacing: unset;
-  font-variation-settings:
-    "wght" 400,
-    "YOPQ" 200;
-}
-.productSize {
-  font-size: 13px;
-  letter-spacing: 0.05rem;
-  padding: 5px 2px;
-  color: black;
-
-  font-variation-settings:
-    "wght" 700,
-    "YOPQ" 250;
-}
-
-.prodNo {
-  text-transform: uppercase;
-  font-size: 11px;
-  padding: 2px;
-}
-
-.gender {
-  text-transform: capitalize;
-  padding: 2px;
-}
-
-.actionBox {
-  color: black;
-  display: flex;
-  flex-direction: column;
-  min-width: 160px;
-  justify-content: space-between;
-  height: 100%;
-  align-items: end;
-}
-
-.priceBox {
-  text-align: end;
-}
-
-.subtotalPrice {
-  font-size: 22px;
-  font-variation-settings:
-    "wght" 600,
-    "YOPQ" 200;
-}
-.itemPrice {
-  font-size: 11px;
-
-  padding-top: 5px;
-}
-
-.buttonGroupWrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-
-.itemsCount {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 40px;
-  height: 35px;
-  font-variation-settings:
-    "wght" 600,
-    "YOPQ" 200;
-  font-size: 20px;
-}
-
-.itemsCountTitle {
-  font-size: 12px;
 }

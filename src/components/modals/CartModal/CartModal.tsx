@@ -4,32 +4,28 @@ import {Link} from "react-router-dom";
 import CartProductThumbnailModal from "../../thumbnails/CartProductThumbnailModal";
 import CartFooter from "../../CartFooter";
 import classNames from "classnames";
+import useCart from "../../../hooks/useCart";
+import {useSelector} from "react-redux";
+import {
+  selectCountCartItems,
+  selectTotalItemsValue,
+} from "../../../redux/selectors";
 
-type CartProductEntryWithData = {
-  id: string;
-  size: string;
-  count: number;
-  additionalData: Product | null;
-};
+const CartModal: FC = () => {
+  const cart = useCart();
+  const {items} = cart;
+  const sumOfCartItems = useSelector(selectCountCartItems);
 
-type Props = {
-  cartItems: {
-    value: CartProductEntryWithData[] | null;
-    itemCount: number;
-  };
-};
-
-const CartModal: FC<Props> = (props) => {
-  const {cartItems} = props;
+  const totalItemsValue = useSelector(selectTotalItemsValue);
 
   const renderCartList = () => {
-    if (cartItems.value !== null) {
+    if (items) {
       return (
         <div className={css.cartOverflowContainer}>
-          {cartItems.value.map((productInCart) => (
+          {items.map((product) => (
             <CartProductThumbnailModal
-              cartProductEntryWithData={productInCart}
-              key={`${productInCart.id}__${productInCart.size}`}
+              product={product}
+              key={`${product.id}__${product.size}`}
             />
           ))}
         </div>
@@ -40,15 +36,8 @@ const CartModal: FC<Props> = (props) => {
   };
 
   const renderCartFooter = () => {
-    if (cartItems.value !== null && cartItems.value) {
-      const total = cartItems.value.reduce((accumulator, product) => {
-        if (product.additionalData !== null) {
-          return product.additionalData.price * product.count + accumulator;
-        } else {
-          throw new Error("subtotal error");
-        }
-      }, 0);
-      return <CartFooter shippingTotal={0} subtotal={total} />;
+    if (items && totalItemsValue) {
+      return <CartFooter shippingTotal={0} subtotal={totalItemsValue} />;
     } else {
       return <div></div>;
     }
@@ -66,7 +55,7 @@ const CartModal: FC<Props> = (props) => {
     );
   };
 
-  if (cartItems.itemCount > 0) {
+  if (sumOfCartItems) {
     return (
       <>
         <div className={css.cartModalWrapper}>

@@ -5,15 +5,15 @@ h3 {
 }
 
 .AccordionRoot {
-  width: 350px;
   background-color: rgb(155 155 37);
-  box-shadow: 0 2px 10px rgb(207 207 207);
   border: 1px solid black;
+  box-shadow: 0 2px 10px rgb(207 207 207);
+  width: 350px;
 }
 
 .AccordionItem {
-  overflow: hidden;
   margin-top: 1px;
+  overflow: hidden;
 }
 
 .AccordionItem:first-child {
@@ -24,9 +24,9 @@ h3 {
 }
 
 .AccordionItem:focus-within {
+  box-shadow: 0 0 0 2px black;
   position: relative;
   z-index: 1;
-  box-shadow: 0 0 0 2px black;
 }
 
 .AccordionHeader {
@@ -34,21 +34,21 @@ h3 {
 }
 
 .AccordionTrigger {
-  font-family: inherit;
-  padding: 0 20px;
-  height: 45px;
-  flex: 1;
-  display: flex;
   align-items: center;
-  justify-content: space-between;
-  font-size: 16px;
-  line-height: 1;
-  color: rgb(87 87 87);
-  box-shadow: 0 1px 0 rgb(199 179 179);
   background-color: white;
+  box-shadow: 0 1px 0 rgb(199 179 179);
+  color: rgb(87 87 87);
+  display: flex;
+  flex: 1;
+  font-family: inherit;
+  font-size: 16px;
   font-variation-settings:
     "wght" 600,
     "YOPQ" 300;
+  height: 45px;
+  justify-content: space-between;
+  line-height: 1;
+  padding: 0 20px;
 }
 
 .AccordionTrigger:hover {
@@ -57,10 +57,10 @@ h3 {
 }
 
 .AccordionContent {
-  overflow: hidden;
-  font-size: 14px;
-  color: rgb(26 26 26);
   background-color: rgb(255 255 255);
+  color: rgb(26 26 26);
+  font-size: 14px;
+  overflow: hidden;
 }
 
 .AccordionContent[data-state="open"] {

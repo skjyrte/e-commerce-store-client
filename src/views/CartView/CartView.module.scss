@@ -1,48 +1,41 @@
-.CartView {
-  width: 1000px;
-  /*   border: 1px solid gray; */
+.cart-view-container {
   display: flex;
-}
-
-.productBox {
-  background-color: white;
-  min-width: 500px;
-  flex: 1;
-  min-height: 50px;
-  border: 1px solid rgb(216, 216, 216);
-  margin: 10px;
-}
-.header {
-  font-size: 24px;
-  font-variation-settings:
-    "wght" 600,
-    "YOPQ" 300;
-  padding: 15px;
-}
-
-.largeCartThumbnailWrapper {
+  justify-content: center;
   width: 100%;
-}
 
-.summaryBox {
-  background-color: white;
-  min-width: 250px;
-  min-height: 50px;
-  border: 1px solid gray;
-  margin: 10px;
+  .cart-contents-container {
+    background-color: white;
+    flex: 1;
+    margin: 10px;
+    margin-top: 30px;
+    min-height: 50px;
+    width: 100%;
+  }
+
+  .main-cart-header {
+    font-size: 24px;
+    font-variation-settings:
+      "wght" 600,
+      "YOPQ" 300;
+    padding: 15px;
+  }
+
+  .cart-list-container {
+    width: 100%;
+  }
 }
 
 .emptyCartView {
+  align-items: center;
   display: flex;
-  width: 300px;
   height: 300px;
   justify-content: center;
-  align-items: center;
-}
+  width: 300px;
 
-.emptyCart {
-  font-size: 18px;
-  font-variation-settings:
-    "wght" 600,
-    "YOPQ" 300;
+  .emptyCart {
+    font-size: 18px;
+    font-variation-settings:
+      "wght" 600,
+      "YOPQ" 300;
+  }
 }

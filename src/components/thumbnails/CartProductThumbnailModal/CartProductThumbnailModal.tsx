@@ -1,59 +1,66 @@
-import {FC} from "react";
+import {FC, useState} from "react";
 import css from "./CartProductThumbnailModal.module.scss";
 import {Link} from "react-router-dom";
-import IconNoPhoto from "../../inlineIcons/IconNoPhoto";
+import AccessibleFigure from "../../AccessibleFigure";
 
-type CartProductEntryWithData = {
+interface CartProductItem {
   id: string;
   size: string;
-  count: number;
-  additionalData: Product | null;
-};
+  quantity: number;
+  itemData: ItemData;
+}
 
-type Props = {
-  cartProductEntryWithData: CartProductEntryWithData;
-};
+interface ItemData {
+  brand: string;
+  model: string;
+  gender: string;
+  price: number;
+  thumbnail: string;
+  max_order: number;
+}
+
+interface Props {
+  product: CartProductItem;
+}
 
 const CartProductThumbnailModal: FC<Props> = (props) => {
-  const {cartProductEntryWithData} = props;
+  const {product} = props;
+  const [isLoading, setIsLoading] = useState(true);
+  const {id, size, quantity} = product;
+  const {brand, model, gender, price, thumbnail, max_order} = product.itemData;
 
-  const data = cartProductEntryWithData.additionalData;
+  const onLoad = (p: boolean) => {
+    setIsLoading(p);
+  };
 
-  if (data === null) {
-    return (
-      <div className="isError">
-        Unable to get the product data. Please reload the page or contact us.
+  const subtotal = (Math.round(price * quantity * 100) / 100).toFixed(2);
+  return (
+    <Link className={css.cartProduct} to={`/product/${id}`}>
+      <div className={css.cartProductThumbnail}>
+        <AccessibleFigure
+          thumbnailUrl={thumbnail}
+          hoverActions={false}
+          isLoading={isLoading}
+          onLoad={onLoad}
+          classDefinition="class-set-4"
+          swiperComponent={false}
+        />
       </div>
-    );
-  } else {
-    const subtotal = (
-      Math.round(data.price * cartProductEntryWithData.count * 100) / 100
-    ).toFixed(2);
-    return (
-      <Link className={css.cartProduct} to={`/${data.gender}/${data.id}`}>
-        <div className={css.cartProductThumbnail}>
-          {data.thumbnail ? <img src={data.thumbnail} /> : <IconNoPhoto />}
-        </div>
-        <div className={css.textBox}>
-          <div className={css.boldChildBox}>
-            <div className={css.companyProdNameBox}>
-              <div className={css.company}>{data.brand}</div>
-              <div className={css.productName}>{data.model}</div>
-            </div>
-            <div className={css.price}>${subtotal}</div>
+      <div className={css.textBox}>
+        <div className={css.boldChildBox}>
+          <div className={css.companyProdNameBox}>
+            <div className={css.company}>{brand}</div>
+            <div className={css.productName}>{model}</div>
           </div>
-          <div className={css.shadedChildBox}>
-            <div className={css.productSize}>
-              SIZE {cartProductEntryWithData.size}
-            </div>
-            <div className={css.productCount}>
-              COUNT: {cartProductEntryWithData.count}
-            </div>
-          </div>
+          <div className={css.price}>${subtotal}</div>
         </div>
-      </Link>
-    );
-  }
+        <div className={css.shadedChildBox}>
+          <div className={css.productSize}>SIZE {size}</div>
+          <div className={css.productCount}>COUNT: {quantity}</div>
+        </div>
+      </div>
+    </Link>
+  );
 };
 
 export default CartProductThumbnailModal;

@@ -1,18 +1,16 @@
-import {FC, useState, useEffect} from "react";
+import {FC, useState} from "react";
 import css from "./CartLinkElement.module.scss";
 import classNames from "classnames";
 import IconCart from "../../inlineIcons/IconCart";
 import CartModal from "../../modals/CartModal";
-import {useSelector} from "react-redux";
-import {selectCartItems} from "../../../redux/selectors";
-import {useLocation} from "react-router-dom";
 import IconLinkElement from "../IconLinkElement";
+import {useSelector} from "react-redux";
+import {selectCountCartItems} from "../../../redux/selectors";
 
 const CartLinkElement: FC = () => {
   const [cartModalVisible, setCartModalVisible] = useState(false);
-  const location = useLocation();
 
-  const cartItems = useSelector(selectCartItems);
+  const sumOfCartItems = useSelector(selectCountCartItems);
 
   const onMouseOver = () => {
     setCartModalVisible(true);
@@ -26,12 +24,6 @@ const CartLinkElement: FC = () => {
     return <div className={css.itemCountSticker}>{itemsCount}</div>;
   };
 
-  useEffect(() => {
-    if (location.pathname !== "/cart" && cartItems.itemCount !== 0) {
-      setCartModalVisible(true);
-    }
-  }, [cartItems]);
-
   return (
     <div
       className={classNames(
@@ -41,7 +33,7 @@ const CartLinkElement: FC = () => {
       onMouseOver={onMouseOver}
       onMouseOut={onMouseOut}
     >
-      {renderItemsCountSticker(cartItems.itemCount)}
+      {renderItemsCountSticker(sumOfCartItems ? sumOfCartItems : 0)}
       <IconLinkElement
         IconComponent={IconCart}
         path="/cart"
@@ -50,7 +42,7 @@ const CartLinkElement: FC = () => {
       {cartModalVisible ? (
         <>
           <div className={css.hideBorderBox}></div>
-          <CartModal cartItems={cartItems} />
+          <CartModal />
         </>
       ) : (
         <></>

@@ -1,17 +1,17 @@
 .CartFooter {
-  width: 100%;
   height: 100px;
+  width: 100%;
 }
 
 .shippingBox {
-  width: 100%;
-  height: 24px;
-  margin: 10px 0;
   display: flex;
-  justify-content: space-between;
   font-variation-settings:
     "wght" 500,
     "YOPQ" 300;
+  height: 24px;
+  justify-content: space-between;
+  margin: 10px 0;
+  width: 100%;
 }
 
 .shipping {
@@ -25,14 +25,14 @@
 }
 
 .priceBox {
-  width: 100%;
-  height: 24px;
-  margin: 10px 0;
   display: flex;
-  justify-content: space-between;
   font-variation-settings:
     "wght" 700,
     "YOPQ" 300;
+  height: 24px;
+  justify-content: space-between;
+  margin: 10px 0;
+  width: 100%;
 }
 
 .price {

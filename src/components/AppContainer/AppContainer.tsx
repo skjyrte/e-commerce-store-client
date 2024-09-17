@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {AnimatePresence} from "framer-motion";
 import MainHeader from "../MainHeader";
@@ -18,6 +18,8 @@ import {Bounce, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useSpinUpNotify from "../../helper/useSpinUpNotify/useSpinUpNotify";
 import {selectSpinupError} from "../../redux/slices/spinupErrorSlice";
+import useCart from "../../hooks/useCart";
+import {selectUsers} from "../../redux/selectors";
 
 const AppContainer: FC = () => {
   const spinup = useSelector(selectSpinupError);
@@ -25,11 +27,23 @@ const AppContainer: FC = () => {
 
   useSpinUpNotify(error);
 
+  const {user, guestUser} = useSelector(selectUsers);
+
+  const cart = useCart();
+  const {getCart} = cart;
+
+  useEffect(() => {
+    const fetchData = () => {
+      void getCart();
+    };
+    fetchData();
+  }, [user?.user_id, guestUser?.user_id]);
+
   return (
     <BrowserRouter>
       <div className={css["app-container"]}>
         <ToastContainer
-          position="top-right"
+          position="bottom-left"
           hideProgressBar={false}
           newestOnTop={false}
           autoClose={2000}
