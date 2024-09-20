@@ -1,6 +1,7 @@
 import {FC, useEffect} from "react";
 import {BrowserRouter, Route, Routes} from "react-router-dom";
 import {AnimatePresence} from "framer-motion";
+import {useDispatch, useSelector} from "react-redux";
 import MainHeader from "../MainHeader";
 import ProductView from "../../views/ProductView";
 import CategoryView from "../../views/CategoryView";
@@ -12,32 +13,40 @@ import RegisterView from "../../views/RegisterView";
 import PageTransition from "../PageTransition";
 import css from "./AppContainer.module.scss";
 import MiniHeader from "../MiniHeader";
-import {useSelector} from "react-redux";
 import UserView from "../../views/UserView";
 import {Bounce, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import useSpinUpNotify from "../../helper/useSpinUpNotify/useSpinUpNotify";
 import {selectSpinupError} from "../../redux/slices/spinupErrorSlice";
-import useCart from "../../hooks/useCart";
-import {selectUsers} from "../../redux/selectors";
+import LoadingView from "../../views/LoadingView";
+import {
+  preflightConnection,
+  selectApiConnection,
+} from "../../redux/slices/apiConnectionSlice";
+import {AppDispatch} from "../../redux/configureStore";
 
 const AppContainer: FC = () => {
+  const dispatch = useDispatch<AppDispatch>();
+
+  const {loaderState} = useSelector(selectApiConnection);
+
   const spinup = useSelector(selectSpinupError);
   const {error} = spinup;
-
   useSpinUpNotify(error);
 
-  const {user, guestUser} = useSelector(selectUsers);
-
-  const cart = useCart();
-  const {getCart} = cart;
-
   useEffect(() => {
-    const fetchData = () => {
-      void getCart();
+    const checkApiConnection = async () => {
+      try {
+        await dispatch(preflightConnection()).unwrap();
+      } catch (error) {
+        console.error;
+      }
     };
-    fetchData();
-  }, [user?.user_id, guestUser?.user_id]);
+
+    if (loaderState !== "success") {
+      void checkApiConnection();
+    }
+  }, []);
 
   return (
     <BrowserRouter>
@@ -55,90 +64,129 @@ const AppContainer: FC = () => {
           theme="light"
           transition={Bounce}
         />
-        <MainHeader />
         <AnimatePresence mode="wait">
           <Routes>
             <Route
-              path="/"
+              path={loaderState !== "success" ? "/*" : undefined}
               element={
-                <PageTransition>
-                  <HomeView />
+                <PageTransition duration={1}>
+                  <LoadingView />
                 </PageTransition>
               }
             />
             <Route
-              path="/home"
+              path={loaderState === "success" ? "/" : undefined}
               element={
-                <PageTransition>
-                  <CategoryView />
-                </PageTransition>
+                <>
+                  <MainHeader />
+                  <PageTransition>
+                    <HomeView />
+                  </PageTransition>
+                </>
               }
             />
             <Route
-              path="/cart"
+              path={loaderState === "success" ? "/home" : undefined}
               element={
-                <PageTransition>
-                  <CartView />
-                </PageTransition>
+                <>
+                  <MainHeader />
+                  <PageTransition>
+                    <CategoryView />
+                  </PageTransition>
+                </>
               }
             />
             <Route
-              path="/login"
+              path={loaderState === "success" ? "/cart" : undefined}
               element={
-                <PageTransition>
-                  <MiniHeader />
-                  <LoginView />
-                </PageTransition>
+                <>
+                  <MainHeader />
+                  <PageTransition>
+                    <CartView />
+                  </PageTransition>
+                </>
               }
             />
             <Route
-              path="/user"
+              path={loaderState === "success" ? "/login" : undefined}
               element={
-                <PageTransition duration={1.5}>
-                  <MiniHeader />
-                  <UserView />
-                </PageTransition>
+                <>
+                  <MainHeader />
+                  <PageTransition>
+                    <MiniHeader />
+                    <LoginView />
+                  </PageTransition>
+                </>
               }
             />
             <Route
-              path="/register"
+              path={loaderState === "success" ? "/user" : undefined}
               element={
-                <PageTransition>
-                  <MiniHeader />
-                  <RegisterView />
-                </PageTransition>
+                <>
+                  <MainHeader />
+                  <PageTransition duration={1.5}>
+                    <MiniHeader />
+                    <UserView />
+                  </PageTransition>
+                </>
               }
             />
             <Route
-              path="/product/:id"
+              path={loaderState === "success" ? "/register" : undefined}
               element={
-                <PageTransition>
-                  <ProductView />
-                </PageTransition>
+                <>
+                  <MainHeader />
+                  <PageTransition>
+                    <MiniHeader />
+                    <RegisterView />
+                  </PageTransition>
+                </>
               }
             />
             <Route
-              path="/:gender"
+              path={loaderState === "success" ? "/product/:id" : undefined}
               element={
-                <PageTransition>
-                  <CategoryView />
-                </PageTransition>
+                <>
+                  <MainHeader />
+                  <PageTransition>
+                    <ProductView />
+                  </PageTransition>
+                </>
               }
             />
             <Route
-              path="/:gender/:category"
+              path={loaderState === "success" ? "/:gender" : undefined}
               element={
-                <PageTransition>
-                  <CategoryView />
-                </PageTransition>
+                <>
+                  <MainHeader />
+                  <PageTransition>
+                    <CategoryView />
+                  </PageTransition>
+                </>
               }
             />
             <Route
-              path="/*"
+              path={
+                loaderState === "success" ? "/:gender/:category" : undefined
+              }
               element={
-                <PageTransition>
-                  <InvalidPageView />
-                </PageTransition>
+                <>
+                  <MainHeader />
+                  <PageTransition>
+                    <CategoryView />
+                  </PageTransition>
+                </>
+              }
+            />
+            <Route
+              path={loaderState === "success" ? "/*" : undefined}
+              element={
+                <>
+                  <MainHeader />
+                  <PageTransition>
+                    <InvalidPageView />
+                  </PageTransition>
+                </>
               }
             />
           </Routes>
