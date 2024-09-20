@@ -27,7 +27,7 @@ const CategoryAccordion: FC<Props> = (props) => {
               return (
                 <TextLinkElement
                   displayedText={categoryString}
-                  path={`${gender}${categoryString === "all" ? "" : `/${categoryString}`}`}
+                  path={`/${gender}${categoryString === "all" ? "" : `/${categoryString}`}`}
                   onClick={onCloseModal}
                 />
               );
