@@ -1,4 +1,4 @@
-import {FC, useEffect} from "react";
+import {FC, useEffect, useState} from "react";
 import {useForm, SubmitHandler} from "react-hook-form";
 import classNames from "classnames";
 import css from "./LoginView.module.scss";
@@ -10,6 +10,7 @@ import {Link} from "react-router-dom";
 import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import ControlledInputForm from "../../components/ControlledInputForm";
 
 type LoginFormData = Record<string, string>;
 
@@ -26,12 +27,17 @@ const LoginView: FC = () => {
   const {loginRequest, user, loginState, clearStateRequest, loaderState} =
     useLogin();
   const navigate = useNavigate();
+  const [overrided, setOverrided] = useState(false);
 
   const emailValue = watch("email");
   const passwordValue = watch("password");
 
   const onSubmit: SubmitHandler<LoginFormData> = async (data) => {
     await loginRequest(data.email, data.password);
+  };
+
+  const onClickOverride = () => {
+    setOverrided(!overrided);
   };
 
   useEffect(() => {
@@ -79,7 +85,7 @@ const LoginView: FC = () => {
             register={register}
             errors={errors}
             currentValue={emailValue}
-            disabled={status === "loading"}
+            disabled={Boolean(loaderState)}
             validateOptions={{
               required: "Email is required",
               maxLength: {
@@ -92,17 +98,20 @@ const LoginView: FC = () => {
               },
             }}
           />
-          <InputForm
+          <ControlledInputForm
             field="password"
             placeholder="password"
             register={register}
+            type={"password"}
             errors={errors}
             currentValue={passwordValue}
-            disabled={status === "loading"}
+            disabled={Boolean(loaderState)}
             validateOptions={{
               required: "Password is required",
               minLength: {value: 1, message: "Password cannot be empty"},
             }}
+            overrided={overrided}
+            onClickOverride={onClickOverride}
           />
           <div className={css["submit-container"]}>
             <GeneralTextButton
