@@ -32,50 +32,44 @@ function isSuccessDatalessResponse(
   );
 }
 
-export const preflightConnection = createAsyncThunk<
-  boolean,
-  void,
-  {rejectValue: boolean}
->("ping/pingApiConnection", async (_, thunkAPI) => {
-  const axiosInstance = createAxiosInstance();
-  const maxRetries = 15;
-  let retries = 0;
-  let isSuccessful = false;
+export const preflightConnection = createAsyncThunk(
+  "ping/pingApiConnection",
+  async (_, thunkAPI) => {
+    const axiosInstance = createAxiosInstance();
+    const maxRetries = 15;
 
-  const makeRequest = async (): Promise<boolean> => {
-    try {
-      const response = await axiosInstance.get("/ping");
-      console.log("PINGING");
-      console.log("success", response.data);
+    const makeRequest = async (retries = 0): Promise<void> => {
+      try {
+        console.log("ping request");
+        const response = await axiosInstance.get("/ping");
 
-      if (isSuccessDatalessResponse(response.data)) {
-        const responseObject = response.data;
-        if (
-          responseObject.success &&
-          responseObject.message === "Connection OK"
-        ) {
-          isSuccessful = true;
-          return true;
+        if (isSuccessDatalessResponse(response.data)) {
+          const responseObject = response.data;
+          if (
+            responseObject.success &&
+            responseObject.message === "Connection OK"
+          ) {
+            thunkAPI.fulfillWithValue(true);
+          } else {
+            throw new Error("Invalid response");
+          }
         } else {
           throw new Error("Invalid response");
         }
-      } else {
-        throw new Error("Invalid response");
-      }
-    } catch (err) {
-      retries++;
-      if (retries < maxRetries && !isSuccessful) {
-        await new Promise((resolve) => setTimeout(resolve, 5000));
-        return makeRequest();
-      }
+      } catch (err) {
+        retries++;
+        if (retries < maxRetries) {
+          await new Promise((resolve) => setTimeout(resolve, 5000));
+          return makeRequest(retries++);
+        }
 
-      thunkAPI.rejectWithValue(false);
-      return false;
-    }
-  };
+        thunkAPI.rejectWithValue(false);
+      }
+    };
 
-  return await makeRequest();
-});
+    return makeRequest();
+  }
+);
 
 export const apiConnectionSlice = createSlice({
   name: "apiConnection",

@@ -16,8 +16,6 @@ import MiniHeader from "../MiniHeader";
 import UserView from "../../views/UserView";
 import {Bounce, ToastContainer} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import useSpinUpNotify from "../../helper/useSpinUpNotify/useSpinUpNotify";
-import {selectSpinupError} from "../../redux/slices/spinupErrorSlice";
 import LoadingView from "../../views/LoadingView";
 import {
   preflightConnection,
@@ -30,17 +28,9 @@ const AppContainer: FC = () => {
 
   const {loaderState} = useSelector(selectApiConnection);
 
-  const spinup = useSelector(selectSpinupError);
-  const {error} = spinup;
-  useSpinUpNotify(error);
-
   useEffect(() => {
     const checkApiConnection = async () => {
-      try {
-        await dispatch(preflightConnection()).unwrap();
-      } catch (error) {
-        console.error;
-      }
+      await dispatch(preflightConnection()).unwrap();
     };
 
     if (loaderState !== "success") {

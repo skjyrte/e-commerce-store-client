@@ -10,6 +10,7 @@ interface Props {
   active?: boolean;
   size?: string;
   onClick?: () => void;
+  classProp?: string[];
 }
 
 const TextLinkElement: FC<Props> = ({
@@ -19,11 +20,15 @@ const TextLinkElement: FC<Props> = ({
   active,
   size,
   onClick,
+  classProp = [],
 }) => {
+  const buttonClassName = classProp.map((el) => css[el]);
+  console.log(buttonClassName);
   const classTitle = classNames(
     css["link-element"],
     active && css["link-element-active"],
-    size && css[`link-element-size-${size}`]
+    size && css[`link-element-size-${size}`],
+    ...buttonClassName
   );
 
   return (

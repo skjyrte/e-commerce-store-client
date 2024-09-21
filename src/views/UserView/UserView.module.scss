@@ -38,36 +38,39 @@
         text-align: center;
       }
     }
+  }
+}
 
-    .logout-container {
-      align-items: center;
-      display: flex;
-      font-size: 20px;
-      justify-content: center;
-      text-align: center;
+.logout-container {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  height: 100px;
+  justify-content: center;
+  width: 100%;
 
-      .logout-body {
-        border: 2px solid black;
-        font-size: 16px;
-        margin: 0 50px;
-        margin-bottom: 20px;
-        max-width: 250px;
-        padding: 10px;
-        text-align: center;
-      }
-    }
+  .logout-body {
+    border: 2px solid black;
+    font-size: 16px;
+    margin: 0 50px;
+    margin-bottom: 20px;
+    max-width: 250px;
+    padding: 10px;
+    text-align: center;
   }
 
-  .logout-container {
-    align-items: center;
+  .logout-action-container {
     display: flex;
-    height: 100px;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .logout-button-wrapper {
+    flex-direction: row;
     height: 50px;
-    width: 200px;
+
+    .logout-button-wrapper {
+      align-items: center;
+      border: 2px solid black;
+      display: flex;
+      justify-content: center;
+      margin: 0 20px;
+      width: 120px;
+    }
   }
 }

@@ -1,12 +1,6 @@
 import {useState, useEffect, useMemo} from "react";
 import axios, {AxiosResponse, AxiosRequestConfig} from "axios";
 import createAxiosInstance from "../../api/createAxiosInstance";
-import {
-  setSpinupError,
-  clearSpinupError,
-} from "../../redux/slices/spinupErrorSlice";
-import {useDispatch} from "react-redux";
-import {AppDispatch} from "../../redux/configureStore";
 
 interface ResponseObject<T> {
   success: boolean;
@@ -54,69 +48,41 @@ const handleRequest = async <T, D = any>(
   successCallback?: (data: ResponseObject<T>) => void,
   failureCallback?: (error: unknown) => void,
   loaderCallback?: (loader: string | null) => void,
-  loaderType?: string,
-  dispatch?: AppDispatch,
-  retries = process.env.REQUEST_RETRIES
-    ? parseInt(process.env.REQUEST_RETRIES)
-    : 0,
-  delay = process.env.RETRIES_DELAY ? parseInt(process.env.RETRIES_DELAY) : 3000
+  loaderType?: string
 ): Promise<void> => {
-  const executeRequest = async (attempt: number) => {
-    try {
-      if (loaderCallback && loaderType) {
-        loaderCallback(loaderType);
-      }
+  try {
+    if (loaderCallback && loaderType) {
+      loaderCallback(loaderType);
+    }
 
-      const response = await requestPromise(
-        requestConfig.url,
-        requestConfig.data,
-        requestConfig.config
-      );
+    const response = await requestPromise(
+      requestConfig.url,
+      requestConfig.data,
+      requestConfig.config
+    );
 
-      if (successCallback) {
-        if (typeof response === "object" && "data" in response) {
-          successCallback(response.data);
-        }
-      }
-      if (loaderCallback) {
-        loaderCallback(null);
-      }
-      if (dispatch) {
-        dispatch(clearSpinupError());
-      }
-    } catch (e) {
-      console.error(e);
-
-      if (axios.isCancel(e)) {
-        return;
-      }
-
-      //NOTE -  Retry only if the error is due to a timeout (ECONNABORTED or ERR_NETWORK)
-      if (
-        axios.isAxiosError(e) &&
-        (e.code === "ECONNABORTED" || e.code === "ERR_NETWORK") &&
-        attempt < retries
-      ) {
-        if (dispatch) {
-          dispatch(setSpinupError());
-        }
-        console.log(
-          `Retrying request... (Attempt ${attempt.toString()}/${retries.toString()})`
-        );
-        await new Promise((res) => setTimeout(res, delay));
-        await executeRequest(attempt + 1);
-      } else {
-        if (failureCallback) {
-          failureCallback(e);
-        }
-        if (loaderCallback) {
-          loaderCallback(null);
-        }
+    if (successCallback) {
+      if (typeof response === "object" && "data" in response) {
+        successCallback(response.data);
       }
     }
-  };
+    if (loaderCallback) {
+      loaderCallback(null);
+    }
+  } catch (e) {
+    console.error(e);
 
-  await executeRequest(0);
+    if (axios.isCancel(e)) {
+      return;
+    }
+
+    if (failureCallback) {
+      failureCallback(e);
+    }
+    if (loaderCallback) {
+      loaderCallback(null);
+    }
+  }
 };
 
 const createFilterQuery = (config: GetConfig) => {
@@ -142,7 +108,6 @@ function useMakeRequest<
   const [responseData, setResponseData] = useState<null | T[]>(null);
   const [error, setError] = useState<ErrorObject | null>(null);
   const [loader, setLoader] = useState<string | null>(null);
-  const dispatch = useDispatch<AppDispatch>();
 
   const memoConfig = useMemo(
     () => config,
@@ -181,8 +146,7 @@ function useMakeRequest<
         if (loader) setResponseData(null);
         setLoader(loader);
       },
-      RequestType.GET,
-      dispatch
+      RequestType.GET
     );
   };
 

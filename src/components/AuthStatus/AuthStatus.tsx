@@ -4,12 +4,12 @@ import {selectAuth} from "../../redux/slices/authSlice";
 import {AppDispatch} from "../../redux/configureStore";
 import css from "./AuthStatus.module.scss";
 import IconUserProfile from "../reactIcons/IconUserProfile";
-import {BarLoader} from "react-spinners";
 import {
   validateUserToken,
   validateGuestToken,
 } from "../../redux/slices/authSlice";
 import {selectUsers} from "../../redux/selectors";
+import {BeatLoader} from "react-spinners";
 
 const AuthStatus: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -64,7 +64,7 @@ const AuthStatus: FC = () => {
     if (loaderState) {
       return (
         <div className={css["loader-wrapper"]}>
-          <BarLoader />
+          <BeatLoader size={8} />
         </div>
       );
     }
@@ -76,7 +76,7 @@ const AuthStatus: FC = () => {
         </div>
       );
     } else {
-      return <div>Hi, try logging in here!</div>;
+      return <div>Log in</div>;
     }
   };
 

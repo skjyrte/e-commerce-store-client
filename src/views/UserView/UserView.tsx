@@ -3,7 +3,7 @@ import css from "./UserView.module.scss";
 import UserDataField from "../../components/UserDataField";
 import IconCross from "../../components/reactIcons/IconCross";
 import IconPictureLandscape from "../../components/reactIcons/IconPictureLandscape";
-import IconShow from "../../components/reactIcons/IconShow";
+import IconVisible from "../../components/reactIcons/IconVisible";
 import IconUserProfile from "../../components/reactIcons/IconUserProfile";
 import {selectAuth} from "../../redux/slices/authSlice";
 import {useDispatch, useSelector} from "react-redux";
@@ -14,6 +14,7 @@ import {useNavigate} from "react-router-dom";
 import {toast} from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import NotReadyYet from "../../helper/NotReadyYet";
+import TextLinkElement from "../../components/LinkElements/TextLinkElement";
 
 const UserView: FC = () => {
   const dispatch = useDispatch<AppDispatch>();
@@ -48,14 +49,6 @@ const UserView: FC = () => {
     );
   };
 
-  const errorPresent = () => {
-    return (
-      <div className={css["logout-container"]}>
-        We have an error, please try again later.
-      </div>
-    );
-  };
-
   const userLogIn = () => {
     return (
       <div className={css["user-panel-body"]}>
@@ -72,7 +65,7 @@ const UserView: FC = () => {
           onClick={NotReadyYet}
         />
         <UserDataField
-          IconComponent={IconShow}
+          IconComponent={IconVisible}
           title={"Your email"}
           data={user?.email ? user.email : ""}
           onClick={NotReadyYet}
@@ -85,14 +78,24 @@ const UserView: FC = () => {
         />
         <div className={css["logout-container"]}>
           <div className={css["logout-button-wrapper"]}>
-            {
-              <GeneralTextButton
-                classProp={["logout-button"]}
-                displayedText="Log out"
-                onClick={handleLogout}
-                isLoading={Boolean(loaderState)}
-              />
-            }
+            <div className={css["logout-action-container"]}>
+              <div className={css["logout-button-wrapper"]}>
+                {" "}
+                <GeneralTextButton
+                  classProp={["logout-button"]}
+                  displayedText="Log out"
+                  onClick={handleLogout}
+                  isLoading={Boolean(loaderState)}
+                />
+              </div>
+              <div className={css["logout-button-wrapper"]}>
+                <TextLinkElement
+                  classProp={["logout-button"]}
+                  displayedText={"Register"}
+                  path="/register"
+                />
+              </div>
+            </div>
           </div>
         </div>
       </div>

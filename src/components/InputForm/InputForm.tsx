@@ -3,7 +3,8 @@ import classNames from "classnames";
 import css from "./InputForm.module.scss";
 import {UseFormRegister, FieldErrors, RegisterOptions} from "react-hook-form";
 import IconButton from "../buttons/IconButton";
-import IconShow from "../reactIcons/IconShow";
+import IconVisible from "../reactIcons/IconVisible";
+import IconNotVisible from "../reactIcons/IconNotVisible";
 
 type FormObject = Record<string, string>;
 
@@ -71,15 +72,12 @@ const InputForm = ({
             )}
           >
             <IconButton
-              IconComponent={IconShow}
+              IconComponent={overrided ? IconNotVisible : IconVisible}
               onClick={(event: React.MouseEvent<HTMLElement>) => {
                 event.preventDefault();
                 setOverrided(!overrided);
               }}
-              buttonClass={[
-                "toggle-password-button",
-                overrided ? "hidden-button" : "",
-              ]}
+              buttonClass={["toggle-password-button"]}
             />
           </div>
         </div>

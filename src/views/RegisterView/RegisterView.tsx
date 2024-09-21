@@ -198,6 +198,9 @@ const RegisterView: FC = () => {
               displayedText="Continue"
               classProp={["input-button"]}
               isLoading={loading || Boolean(loaderState)}
+              onClick={() => {
+                return;
+              }}
             />
           </div>
         </form>
