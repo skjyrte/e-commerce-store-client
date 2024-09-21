@@ -1,27 +1,36 @@
 import {useState} from "react";
 import classNames from "classnames";
-import css from "./InputForm.module.scss";
+import css from "./ControlledInputForm.module.scss";
 import {UseFormRegister, FieldErrors, RegisterOptions} from "react-hook-form";
+import IconButton from "../buttons/IconButton";
+import IconVisible from "../reactIcons/IconVisible";
+import IconNotVisible from "../reactIcons/IconNotVisible";
 
 type FormObject = Record<string, string>;
 
 interface Props {
   field: keyof FormObject;
   placeholder: string;
+  type: "password" | "text";
   register: UseFormRegister<FormObject>;
   errors: FieldErrors<FormObject>;
   validateOptions: RegisterOptions<FormObject, keyof FormObject>;
   currentValue: string;
+  overrided: boolean;
+  onClickOverride: () => void;
   disabled?: boolean;
 }
 
-const InputForm = ({
+const ControlledInputForm = ({
   field,
   placeholder,
+  type,
   register,
   errors,
   validateOptions,
   currentValue,
+  overrided,
+  onClickOverride,
   disabled = false,
 }: Props) => {
   const [inputFocus, setInputFocus] = useState(false);
@@ -47,7 +56,7 @@ const InputForm = ({
           onBlur={() => {
             setInputFocus(false);
           }}
-          type={"text"}
+          type={overrided ? "text" : type}
           id={field}
           className={classNames(
             css["input-field"],
@@ -57,10 +66,20 @@ const InputForm = ({
         />
         <div className={css["component-footer-section"]}>
           <div className={css["error-message"]}>{errors[field]?.message}</div>
+          <div className={classNames([css["icon-button-wrapper"]])}>
+            <IconButton
+              IconComponent={overrided ? IconNotVisible : IconVisible}
+              onClick={(event: React.MouseEvent<HTMLElement>) => {
+                event.preventDefault();
+                onClickOverride();
+              }}
+              buttonClass={["toggle-password-button"]}
+            />
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default InputForm;
+export default ControlledInputForm;

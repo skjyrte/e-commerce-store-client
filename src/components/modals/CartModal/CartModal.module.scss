@@ -6,12 +6,12 @@
     border: 4px solid rgb(226 226 226);
     display: flex;
     flex-direction: column;
-    max-height: 400px;
+    max-height: 530px;
     padding: 10px;
     position: absolute;
     right: -4px; //override parent border 4px
     top: 56px; //override parent border 4px
-    width: 330px;
+    width: 430px;
     z-index: 1;
   }
 }

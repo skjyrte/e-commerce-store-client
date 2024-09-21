@@ -1,4 +1,4 @@
-import {FC, useEffect} from "react";
+import {FC, useState, useEffect} from "react";
 import {useForm, SubmitHandler} from "react-hook-form";
 import classNames from "classnames";
 import css from "./RegisterView.module.scss";
@@ -14,6 +14,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {AppDispatch} from "../../redux/configureStore";
 import {logout} from "../../redux/slices/authSlice";
 import {selectAuth} from "../../redux/slices/authSlice";
+import ControlledInputForm from "../../components/ControlledInputForm";
 
 type RegisterFormData = Record<string, string>;
 
@@ -28,6 +29,7 @@ const RegisterView: FC = () => {
   });
 
   const {registerUser, registerUserData, loading, error} = useRegisterUser();
+  const [overrided, setOverrided] = useState(false);
 
   const dispatch = useDispatch<AppDispatch>();
   const auth = useSelector(selectAuth);
@@ -51,6 +53,10 @@ const RegisterView: FC = () => {
     };
     await dispatch(logout());
     await registerUser({...formData});
+  };
+
+  const onClickOverride = () => {
+    setOverrided(!overrided);
   };
 
   const navigate = useNavigate();
@@ -96,7 +102,6 @@ const RegisterView: FC = () => {
           <InputForm
             field={"email"}
             placeholder={"Email"}
-            type={"text"}
             register={register}
             errors={errors}
             currentValue={emailValue}
@@ -113,11 +118,10 @@ const RegisterView: FC = () => {
               },
             }}
           />
-          <InputForm
+          <ControlledInputForm
             field={"password"}
             placeholder={"Password"}
             type={"password"}
-            overrideType={true}
             register={register}
             errors={errors}
             currentValue={passwordValue}
@@ -126,12 +130,13 @@ const RegisterView: FC = () => {
               required: "Password is required",
               minLength: {value: 1, message: "Password cannot be empty"},
             }}
+            overrided={overrided}
+            onClickOverride={onClickOverride}
           />
-          <InputForm
+          <ControlledInputForm
             field={"setPassword"}
             placeholder={"Confirm Password"}
             type={"password"}
-            overrideType={true}
             register={register}
             errors={errors}
             currentValue={setPasswordValue}
@@ -144,11 +149,12 @@ const RegisterView: FC = () => {
                   v === passwordValue || "Passwords do not match",
               },
             }}
+            overrided={overrided}
+            onClickOverride={onClickOverride}
           />
           <InputForm
             field={"firstName"}
             placeholder={"First Name"}
-            type={"text"}
             register={register}
             errors={errors}
             currentValue={firstNameValue}
@@ -164,7 +170,6 @@ const RegisterView: FC = () => {
           <InputForm
             field={"secondName"}
             placeholder={"Second Name"}
-            type={"text"}
             register={register}
             errors={errors}
             currentValue={secondNameValue}
@@ -180,7 +185,6 @@ const RegisterView: FC = () => {
           <InputForm
             field={"address"}
             placeholder={"Address"}
-            type={"text"}
             register={register}
             errors={errors}
             currentValue={addressValue}

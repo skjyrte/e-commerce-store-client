@@ -75,7 +75,6 @@ const LoginView: FC = () => {
         >
           <InputForm
             field="email"
-            type="text"
             placeholder="email"
             register={register}
             errors={errors}
@@ -95,8 +94,6 @@ const LoginView: FC = () => {
           />
           <InputForm
             field="password"
-            type="password"
-            overrideType={true}
             placeholder="password"
             register={register}
             errors={errors}
