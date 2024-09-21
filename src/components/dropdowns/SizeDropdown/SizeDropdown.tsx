@@ -7,11 +7,12 @@ interface Props {
   onSelectSize: (selectedSize: string) => void;
   stockArray: StockResponse[];
   selectedSize: null | string;
+  disabled: boolean;
 }
 
 const SizeDropdown: FC<Props> = (props) => {
   const [isActive, setIsActive] = useState(false);
-  const {onSelectSize, stockArray, selectedSize} = props;
+  const {onSelectSize, stockArray, selectedSize, disabled = false} = props;
 
   const selectedSizeObject = stockArray.find(
     (stockObject) => stockObject.size === selectedSize
@@ -27,12 +28,14 @@ const SizeDropdown: FC<Props> = (props) => {
           name={"selected-size"}
           checked={selectedSize === sizeField.size}
           onChange={() => {
+            if (disabled) return;
             onSelectSize(sizeField.size);
             setIsActive(!isActive);
           }}
         />
         <label
           onClick={() => {
+            if (disabled) return;
             onSelectSize(sizeField.size);
             setIsActive(!isActive);
           }}
@@ -68,6 +71,7 @@ const SizeDropdown: FC<Props> = (props) => {
       <div className={classNames(css["main-component-box"])}>
         <button
           onClick={() => {
+            if (disabled) return;
             setIsActive(!isActive);
           }}
           className={classNames(css["dropdown-main-button"])}

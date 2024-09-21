@@ -99,6 +99,7 @@ const ProductDescription: FC<Props> = ({currentProduct}) => {
         onSelectSize={onSelectSize}
         stockArray={stock_array}
         selectedSize={selectedSize}
+        disabled={Boolean(loaderState === "addToCart")}
       />
       <div className={css["user-action-container"]}>
         <GeneralTextButton
