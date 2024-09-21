@@ -8,7 +8,11 @@ h3 {
   background-color: rgb(155 155 37);
   border: 1px solid black;
   box-shadow: 0 2px 10px rgb(207 207 207);
-  width: 350px;
+  width: 400px;
+
+  @media (width <= 900px) {
+    width: max(300px, 70vw);
+  }
 }
 
 .accordion-item {

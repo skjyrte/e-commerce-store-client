@@ -8,7 +8,7 @@
     "wght" 600,
     "YOPQ" 300;
   height: 80px;
-  justify-content: start;
+  justify-content: center;
   max-width: 200px;
   text-align: center;
 
@@ -22,7 +22,7 @@
   }
 
   .user-avatar-wrapper {
-    max-width: 45px;
+    width: 35px;
   }
 
   .loader-wrapper {
