@@ -3,12 +3,10 @@ import {RootState} from "../configureStore";
 import createAxiosInstance from "../../api/createAxiosInstance";
 
 interface ApiConnectionState {
-  isApiOkState: null | boolean;
   loaderState: null | "success" | "error";
 }
 
 const initialState: ApiConnectionState = {
-  isApiOkState: false,
   loaderState: null,
 };
 
@@ -79,15 +77,12 @@ export const apiConnectionSlice = createSlice({
     builder
       .addCase(preflightConnection.pending, (state) => {
         state.loaderState = null;
-        state.isApiOkState = null;
       })
       .addCase(preflightConnection.fulfilled, (state) => {
         state.loaderState = "success";
-        state.isApiOkState = true;
       })
       .addCase(preflightConnection.rejected, (state) => {
         state.loaderState = "error";
-        state.isApiOkState = false;
       });
   },
 });
