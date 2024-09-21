@@ -76,7 +76,7 @@ const AuthStatus: FC = () => {
         </div>
       );
     } else {
-      return <div>Log in</div>;
+      return <div>{/* Log in */}</div>;
     }
   };
 
