@@ -1,13 +1,14 @@
 import {FC, useEffect, useState} from "react";
 import css from "./LoadingView.module.scss";
 import {PuffLoader} from "react-spinners";
+import classNames from "classnames";
 
 const InvalidPageView: FC = () => {
-  const [isActive, setIsActive] = useState(false);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
-      setIsActive(true);
+      setIsVisible(true);
     }, 1000);
 
     return () => {
@@ -16,16 +17,27 @@ const InvalidPageView: FC = () => {
   }, []);
 
   return (
-    <div className={css.contentWrapper}>
-      <div className={css.header}>Loading, please wait</div>
-      <div className={css["loader-container"]}>
+    <div className={css["view-container"]}>
+      <div
+        className={classNames(css.header, isVisible && css["element-visible"])}
+      >
+        Loading, please wait
+      </div>
+      <div
+        className={classNames(
+          css["loader-container"],
+          isVisible && css["element-visible"]
+        )}
+      >
         <PuffLoader />
       </div>
       <div
-        className={`${css["description-container"]} ${isActive ? css.active : ""}`}
+        className={classNames(
+          css["description-container"],
+          isVisible && css["element-visible"]
+        )}
       >
-        API is being hosted on a free instance of render.com. Because of that,
-        the server spins down after inactivity and needs around 60 seconds to
+        API spins down after period of inactivity and needs around 60 seconds to
         spin up again.
       </div>
     </div>
