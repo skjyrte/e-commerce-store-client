@@ -11,7 +11,7 @@ Client for e-commerce shop, built using typescript, webpack and react. It is int
 - User account registration.
 
 Demo is currently being hosted below.
-https://e-commerce-store-client.onrender.com/
+https://e-commerce-store-client.vercel.app
 
 **Other features are in progress.**
 
@@ -57,27 +57,4 @@ The app requires some environment variables to function. You can define them in 
 
 ```bash
 REACT_APP_API_URL = http://localhost:4000
-REQUEST_RETRIES = 30
-RETRIES_DELAY = 3000
-SPINUP_NOTIFY = TRUE
-```
-
-### Below env variables are implemented to face issues with API hosting using free tier on render.com
-
-Number of retries, for every failed request due to no connection with API:
-
-```bash
-REQUEST_RETRIES = 30
-```
-
-Delays between each retry:
-
-```bash
-RETRIES_DELAY = 3000
-```
-
-True if you want to display user notification about API spinup:
-
-```bash
-SPINUP_NOTIFY = TRUE
 ```

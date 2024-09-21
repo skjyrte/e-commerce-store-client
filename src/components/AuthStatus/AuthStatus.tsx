@@ -82,7 +82,7 @@ const AuthStatus: FC = () => {
 
   return (
     <div className={css["login-container"]}>
-      <div className={css["user-avatar-warpper"]}>
+      <div className={css["user-avatar-wrapper"]}>
         <IconUserProfile />
       </div>
       {displayText()}
