@@ -1,13 +1,15 @@
 import {createSlice, createAsyncThunk} from "@reduxjs/toolkit";
 import {RootState} from "../configureStore";
-import createAxiosInstance from "../../api/createAxiosInstance";
+import {createShortTimeoutAxiosInstance} from "../../api/createAxiosInstance";
 
 interface ApiConnectionState {
   loaderState: null | "success" | "error";
+  pingState: null | "success" | "error";
 }
 
 const initialState: ApiConnectionState = {
   loaderState: null,
+  pingState: null,
 };
 
 interface SuccessDatalessResponse {
@@ -33,10 +35,10 @@ function isSuccessDatalessResponse(
 export const preflightConnection = createAsyncThunk(
   "ping/pingApiConnection",
   async (_, thunkAPI) => {
-    const axiosInstance = createAxiosInstance();
-    const maxRetries = 15;
+    const axiosInstance = createShortTimeoutAxiosInstance();
+    const maxRetries = 2;
 
-    const makeRequest = async (retries = 0): Promise<void> => {
+    const makeRequest = async (retries = 0): Promise<string> => {
       try {
         console.log("ping request");
         const response = await axiosInstance.get("/ping");
@@ -47,7 +49,7 @@ export const preflightConnection = createAsyncThunk(
             responseObject.success &&
             responseObject.message === "Connection OK"
           ) {
-            thunkAPI.fulfillWithValue(true);
+            return "Request fulfilled";
           } else {
             throw new Error("Invalid response");
           }
@@ -57,15 +59,19 @@ export const preflightConnection = createAsyncThunk(
       } catch (err) {
         retries++;
         if (retries < maxRetries) {
-          await new Promise((resolve) => setTimeout(resolve, 5000));
-          return makeRequest(retries++);
+          await new Promise((resolve) => setTimeout(resolve, 1000));
+          return makeRequest(retries);
         }
-
-        thunkAPI.rejectWithValue(false);
+        return Promise.reject(new Error("Connection timeout"));
       }
     };
 
-    return makeRequest();
+    try {
+      const result = await makeRequest();
+      return thunkAPI.fulfillWithValue(result);
+    } catch (err) {
+      return thunkAPI.rejectWithValue("Connection timeout");
+    }
   }
 );
 
@@ -76,13 +82,25 @@ export const apiConnectionSlice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(preflightConnection.pending, (state) => {
-        state.loaderState = null;
+        if (state.loaderState !== "success") {
+          state.loaderState = null;
+        } else {
+          state.pingState = null;
+        }
       })
       .addCase(preflightConnection.fulfilled, (state) => {
-        state.loaderState = "success";
+        if (state.loaderState !== "success") {
+          state.loaderState = "success";
+        } else {
+          state.pingState = "success";
+        }
       })
       .addCase(preflightConnection.rejected, (state) => {
-        state.loaderState = "error";
+        if (state.loaderState !== "success") {
+          state.loaderState = "error";
+        } else {
+          state.pingState = "error";
+        }
       });
   },
 });

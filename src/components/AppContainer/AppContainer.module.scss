@@ -24,3 +24,22 @@
 *::after {
   box-sizing: border-box;
 }
+
+.background-wrapper {
+  align-items: left;
+  background-color: hsl(0deg 0% 100%);
+  display: flex;
+  height: auto;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100vw;
+}
+
+body {
+  box-sizing: border-box;
+  font-family: "Kumbh Sans";
+  font-variation-settings:
+    "wght" 300,
+    "YOPQ" 300;
+  margin: 0;
+}

@@ -3,7 +3,11 @@ import css from "./LoadingView.module.scss";
 import {PuffLoader} from "react-spinners";
 import classNames from "classnames";
 
-const InvalidPageView: FC = () => {
+interface Props {
+  hasError: boolean;
+}
+
+const InvalidPageView: FC<Props> = ({hasError}) => {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
@@ -16,12 +20,17 @@ const InvalidPageView: FC = () => {
     };
   }, []);
 
+  const headerText = hasError ? "We have an error :(" : "Loading, please wait";
+  const paraText = hasError
+    ? "Please reload the page or try again later"
+    : "API spins down after period of inactivity and needs around 60 seconds to spin up again.";
+
   return (
     <div className={css["view-container"]}>
       <div
         className={classNames(css.header, isVisible && css["element-visible"])}
       >
-        Loading, please wait
+        {headerText}
       </div>
       <div
         className={classNames(
@@ -29,7 +38,7 @@ const InvalidPageView: FC = () => {
           isVisible && css["element-visible"]
         )}
       >
-        <PuffLoader />
+        {hasError ? <></> : <PuffLoader />}
       </div>
       <div
         className={classNames(
@@ -37,8 +46,7 @@ const InvalidPageView: FC = () => {
           isVisible && css["element-visible"]
         )}
       >
-        API spins down after period of inactivity and needs around 60 seconds to
-        spin up again.
+        {paraText}
       </div>
     </div>
   );
