@@ -36,7 +36,7 @@ export const preflightConnection = createAsyncThunk(
   "ping/pingApiConnection",
   async (_, thunkAPI) => {
     const axiosInstance = createShortTimeoutAxiosInstance();
-    const maxRetries = 2;
+    const maxRetries = 10;
 
     const makeRequest = async (retries = 0): Promise<string> => {
       try {
@@ -59,7 +59,7 @@ export const preflightConnection = createAsyncThunk(
       } catch (err) {
         retries++;
         if (retries < maxRetries) {
-          await new Promise((resolve) => setTimeout(resolve, 1000));
+          await new Promise((resolve) => setTimeout(resolve, 5000));
           return makeRequest(retries);
         }
         return Promise.reject(new Error("Connection timeout"));

@@ -9,6 +9,7 @@ interface Props {
 
 const InvalidPageView: FC<Props> = ({hasError}) => {
   const [isVisible, setIsVisible] = useState(false);
+  const [seconds, setSeconds] = useState(0);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -19,6 +20,18 @@ const InvalidPageView: FC<Props> = ({hasError}) => {
       clearTimeout(timer);
     };
   }, []);
+
+  useEffect(() => {
+    if (!isVisible) return;
+
+    const interval = setInterval(() => {
+      setSeconds((prevSeconds) => prevSeconds + 1);
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [isVisible]);
 
   const headerText = hasError ? "We have an error :(" : "Loading, please wait";
   const paraText = hasError
@@ -48,6 +61,16 @@ const InvalidPageView: FC<Props> = ({hasError}) => {
       >
         {paraText}
       </div>
+      {!hasError && (
+        <div
+          className={classNames(
+            css["counter-copntainer"],
+            isVisible && css["element-visible"]
+          )}
+        >
+          Time elapsed: {seconds} seconds
+        </div>
+      )}
     </div>
   );
 };
