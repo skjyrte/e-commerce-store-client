@@ -110,6 +110,7 @@ const ProductsSwiper: FC<Props> = (props) => {
       ) : (
         <>
           <div className={css["component-background-banner"]}></div>
+
           <div className={css["swiper-content"]}>
             <div className={css["products-swiper-header"]}>
               <div className={css["products-swiper-title"]}> {headerText} </div>
