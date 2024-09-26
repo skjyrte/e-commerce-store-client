@@ -37,7 +37,13 @@ https://e-commerce-store-client.vercel.app
 
 4. Set up environment variables (explained below).
 
-5. Running the app:
+5. Prepare husky
+
+   ```bash
+   npm run husky
+   ```
+
+6. Running the app:
 
    5.1) If you want to run dev server:
 
