@@ -45,13 +45,13 @@ https://e-commerce-store-client.vercel.app
 
 6. Running the app:
 
-   5.1) If you want to run dev server:
+   6.1) If you want to run dev server:
 
    ```bash
    npm run dev
    ```
 
-   5.2) If you want to build the app for production:
+   6.2) If you want to build the app for production:
 
    ```bash
    npm run build
