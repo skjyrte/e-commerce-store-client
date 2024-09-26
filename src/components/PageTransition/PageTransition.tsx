@@ -31,7 +31,7 @@ const PageTransition: React.FC<Props> = (props) => {
       exit="out"
       variants={pageVariants}
       transition={pageTransition}
-      style={{width: "100vw", height: "100vh"}}
+      style={{width: "100%", height: "100%"}}
     >
       {children}
     </motion.div>

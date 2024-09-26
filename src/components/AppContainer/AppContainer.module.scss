@@ -1,22 +1,10 @@
-.global-app-container {
-  background-color: hsl(0deg 0% 100%);
-  display: flex;
-  flex-direction: column;
-  width: 100vw;
-}
-
-@media (width >= 1200px) {
-  .global-app-container {
-    align-items: center;
-    background-color: hsl(0deg 0% 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: left;
-    margin-left: auto;
-    margin-right: auto;
-    min-height: 100vh;
-    width: 1200px;
-  }
+body {
+  box-sizing: border-box;
+  font-family: "Kumbh Sans";
+  font-variation-settings:
+    "wght" 300,
+    "YOPQ" 300;
+  margin: 0;
 }
 
 *,
@@ -33,13 +21,23 @@
   justify-content: center;
   min-height: 100vh;
   width: 100vw;
-}
 
-body {
-  box-sizing: border-box;
-  font-family: "Kumbh Sans";
-  font-variation-settings:
-    "wght" 300,
-    "YOPQ" 300;
-  margin: 0;
+  .global-app-container {
+    background-color: hsl(0deg 0% 100%);
+    display: flex;
+    flex-direction: column;
+    width: 100vw;
+
+    @media (width >= 1200px) {
+      align-items: center;
+      background-color: hsl(0deg 0% 100%);
+      display: flex;
+      flex-direction: column;
+      justify-content: left;
+      margin-left: auto;
+      margin-right: auto;
+      min-height: 100vh;
+      width: 1200px;
+    }
+  }
 }
