@@ -42,7 +42,7 @@ https://e-commerce-store-client.vercel.app
    5.1) If you want to run dev server:
 
    ```bash
-   npm run start
+   npm run dev
    ```
 
    5.2) If you want to build the app for production:
