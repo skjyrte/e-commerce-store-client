@@ -1,4 +1,4 @@
-import React, {FC, forwardRef, ForwardedRef} from "react";
+import React, {FC, forwardRef} from "react";
 import css from "./FeaturesAccordion.module.scss";
 import * as Accordion from "@radix-ui/react-accordion";
 import classNames from "classnames";

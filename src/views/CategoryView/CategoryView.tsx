@@ -1,10 +1,9 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useState} from "react";
 import {useParams, Link} from "react-router-dom";
 import css from "./CategoryView.module.scss";
 import CategoryProductThumbnail from "../../components/thumbnails/CategoryProductThumbnail";
 import useMakeRequest from "../../hooks/useMakeRequest";
 import CategoryProductPlaceholder from "../../components/loaders/CategoryProductPlaceholder/CategoryProductPlaceholder";
-import useCart from "../../hooks/useCart";
 
 enum RequestType {
   GET = "GET",
@@ -68,7 +67,7 @@ const CategoryView: FC = () => {
       <div className={css["no-products-found"]}>some different case</div>;
     }
   };
-  return <div className={css.gridWrapper}>{categoryContent()}</div>;
+  return <div className={css["grid-wrapper"]}>{categoryContent()}</div>;
 };
 
 export default CategoryView;

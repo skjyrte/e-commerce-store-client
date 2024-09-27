@@ -64,8 +64,8 @@ const CartView: FC = () => {
   } else {
     return (
       <div className={css["cart-view-container"]}>
-        <div className={css.emptyCartView}>
-          <div className={css.emptyCart}>YOUR CART IS EMPTY</div>
+        <div className={css["empty-cart-view"]}>
+          <div className={css["empty-cart"]}>YOUR CART IS EMPTY</div>
         </div>
       </div>
     );

@@ -1,5 +1,5 @@
 import {FC} from "react";
-const IconNoPhoto: FC<{}> = () => {
+const IconNoPhoto: FC = () => {
   return (
     <svg
       fill="rgb(226, 226, 226)"

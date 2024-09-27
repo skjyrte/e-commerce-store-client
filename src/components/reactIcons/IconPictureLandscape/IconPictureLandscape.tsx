@@ -1,8 +1,8 @@
 import {FC} from "react";
 
-type Props = {
+interface Props {
   className: string;
-};
+}
 
 const IconPictureLandscape: FC<Props> = ({className}) => {
   return (

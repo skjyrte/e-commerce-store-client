@@ -18,7 +18,7 @@ const HomeView: FC = () => {
   }
 
   return (
-    <div className={css.gridWrapper}>
+    <div className={css["grid-wrapper"]}>
       <div className={css["general-header"]}>Home</div>
       <div className={css.productSwiperWrapper}>
         <ProductsSwiper

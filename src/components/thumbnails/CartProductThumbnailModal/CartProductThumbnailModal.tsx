@@ -27,7 +27,7 @@ const CartProductThumbnailModal: FC<Props> = (props) => {
   const {product} = props;
   const [isLoading, setIsLoading] = useState(true);
   const {id, size, quantity} = product;
-  const {brand, model, gender, price, thumbnail, max_order} = product.itemData;
+  const {brand, model, price, thumbnail} = product.itemData;
 
   const onLoad = (p: boolean) => {
     setIsLoading(p);
@@ -35,8 +35,8 @@ const CartProductThumbnailModal: FC<Props> = (props) => {
 
   const subtotal = (Math.round(price * quantity * 100) / 100).toFixed(2);
   return (
-    <Link className={css.cartProduct} to={`/product/${id}`}>
-      <div className={css.cartProductThumbnail}>
+    <Link className={css["cart-product"]} to={`/product/${id}`}>
+      <div className={css["cart-product-thumbnail"]}>
         <AccessibleFigure
           thumbnailUrl={thumbnail}
           hoverActions={false}
@@ -46,17 +46,17 @@ const CartProductThumbnailModal: FC<Props> = (props) => {
           swiperComponent={false}
         />
       </div>
-      <div className={css.textBox}>
-        <div className={css.boldChildBox}>
-          <div className={css.companyProdNameBox}>
+      <div className={css["text-box"]}>
+        <div className={css["bold-child-box"]}>
+          <div className={css["company-prod-name-box"]}>
             <div className={css.company}>{brand}</div>
-            <div className={css.productName}>{model}</div>
+            <div className={css["product-name"]}>{model}</div>
           </div>
           <div className={css.price}>${subtotal}</div>
         </div>
-        <div className={css.shadedChildBox}>
-          <div className={css.productSize}>SIZE {size}</div>
-          <div className={css.productCount}>COUNT: {quantity}</div>
+        <div className={css["shaded-child-box"]}>
+          <div className={css["product-size"]}>SIZE {size}</div>
+          <div className={css["product-count"]}>COUNT: {quantity}</div>
         </div>
       </div>
     </Link>

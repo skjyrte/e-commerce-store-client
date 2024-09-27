@@ -21,7 +21,7 @@ const CartModal: FC = () => {
   const renderCartList = () => {
     if (items) {
       return (
-        <div className={css.cartOverflowContainer}>
+        <div className={css["cart-overflow-container"]}>
           {items.map((product) => (
             <CartProductThumbnailModal
               product={product}
@@ -46,9 +46,9 @@ const CartModal: FC = () => {
   const renderEmptyCart = () => {
     return (
       <>
-        <div className={css.emptyCart}>YOUR CART IS EMPTY</div>
-        <div className={css.redirectToOther}>DON’T KNOW WHERE TO START?</div>
-        <Link className={css.linkElement} to="/home">
+        <div className={css["empty-cart"]}>YOUR CART IS EMPTY</div>
+        <div className={css["redirect-text"]}>DON’T KNOW WHERE TO START?</div>
+        <Link className={css["cart-link-element"]} to="/home">
           CHECK NEW OFFERS
         </Link>
       </>
@@ -58,17 +58,22 @@ const CartModal: FC = () => {
   if (sumOfCartItems) {
     return (
       <>
-        <div className={css.cartModalWrapper}>
+        <div className={css["cart-modal-container"]}>
           {renderCartList()}
           {renderCartFooter()}
-          <Link className={classNames(css.linkElement, css.cart)} to="/cart">
+          <Link
+            className={classNames(css["cart-link-element"], css.cart)}
+            to="/cart"
+          >
             View cart
           </Link>
         </div>
       </>
     );
   } else {
-    return <div className={css.cartModalWrapper}>{renderEmptyCart()}</div>;
+    return (
+      <div className={css["cart-modal-container"]}>{renderEmptyCart()}</div>
+    );
   }
 };
 

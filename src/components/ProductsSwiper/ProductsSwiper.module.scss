@@ -58,6 +58,7 @@
         cursor: pointer;
       }
 
+      /* stylelint-disable-next-line selector-pseudo-class-no-unknown */
       &:global(.swiper-button-disabled) {
         border: 4px solid transparent;
         opacity: 0.3;
@@ -80,16 +81,19 @@
   padding: 10px;
 }
 
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.thumbnail-gallery-swiper) {
   padding-bottom: 20px;
 }
 
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.swiper-scrollbar-drag) {
   &:hover {
     cursor: pointer;
   }
 }
 
+/* stylelint-disable-next-line selector-pseudo-class-no-unknown */
 :global(.swiper-scrollbar-horizontal) {
   --swiper-scrollbar-size: 6px;
   --swiper-scrollbar-bottom: 6px;

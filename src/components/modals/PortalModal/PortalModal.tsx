@@ -5,6 +5,7 @@ import {motion, AnimatePresence} from "framer-motion";
 
 interface Props {
   visible: boolean;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   children: any;
   lockBodyScroll?: boolean;
 }

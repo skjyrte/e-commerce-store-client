@@ -1,4 +1,4 @@
-.cartModalWrapper {
+.cart-modal-container {
   display: none;
 
   @media (width >= 600px) {
@@ -9,67 +9,64 @@
     max-height: 530px;
     padding: 10px;
     position: absolute;
-    right: -4px; //override parent border 4px
-    top: 56px; //override parent border 4px
+    right: -4px; // override parent border 4px
+    top: 56px; // override parent border 4px
     width: 430px;
     z-index: 1;
   }
-}
 
-.cartOverflowContainer {
-  overflow-y: scroll;
-  width: 100%;
-}
-
-.cartOverflowContainer::-webkit-scrollbar {
-  display: none;
-}
-
-.cartOverflowContainer {
-  -ms-overflow-style: none; /* IE and Edge */
-  scrollbar-width: none; /* Firefox */
-}
-
-.emptyCart {
-  font-size: 18px;
-  font-variation-settings:
-    "wght" 600,
-    "YOPQ" 300;
-  padding-bottom: 10px;
-}
-
-.redirectToOther {
-  font-size: 14px;
-  padding-bottom: 5px;
-}
-
-.linkElement {
-  align-items: center;
-  background-color: black;
-  border: 2px solid whitesmoke;
-  color: white;
-  font-family: inherit;
-  font-variation-settings:
-    "wght" 600,
-    "YOPQ" 300;
-  height: auto;
-  justify-content: center;
-  letter-spacing: 0.2rem;
-  padding: 10px;
-  text-decoration: none;
-
-  &:hover {
-    filter: invert(75%);
-    transition: filter 0.2s;
-  }
-
-  &.cart {
-    text-align: center;
+  .cart-overflow-container {
+    -ms-overflow-style: none; /* IE and Edge */
+    overflow-y: scroll;
+    scrollbar-width: none; /* Firefox */
     width: 100%;
   }
 
-  &:active {
-    background-color: rgb(131 131 131);
-    filter: unset;
+  .cart-overflow-container::-webkit-scrollbar {
+    display: none;
+  }
+
+  .empty-cart {
+    font-size: 18px;
+    font-variation-settings:
+      "wght" 600,
+      "YOPQ" 300;
+    padding-bottom: 10px;
+  }
+
+  .redirect-text {
+    font-size: 14px;
+    padding-bottom: 5px;
+  }
+
+  .cart-link-element {
+    align-items: center;
+    background-color: black;
+    border: 2px solid whitesmoke;
+    color: white;
+    font-family: inherit;
+    font-variation-settings:
+      "wght" 600,
+      "YOPQ" 300;
+    height: auto;
+    justify-content: center;
+    letter-spacing: 0.2rem;
+    padding: 10px;
+    text-decoration: none;
+
+    &:hover {
+      filter: invert(75%);
+      transition: filter 0.2s;
+    }
+
+    &.cart {
+      text-align: center;
+      width: 100%;
+    }
+
+    &:active {
+      background-color: rgb(131 131 131);
+      filter: unset;
+    }
   }
 }
