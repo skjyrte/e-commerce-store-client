@@ -2,7 +2,6 @@
   align-items: center;
   display: none;
   height: 80px;
-  padding: 0 20px;
   position: absolute;
   top: 80px;
   transition: height 0.1s;
@@ -16,6 +15,7 @@
 
   .choose-category-list {
     align-self: center;
+    box-shadow: 0 2px 2px rgb(223 223 223);
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
