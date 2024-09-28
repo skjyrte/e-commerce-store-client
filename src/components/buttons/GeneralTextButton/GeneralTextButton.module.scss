@@ -191,6 +191,45 @@
   }
 }
 
+/* button for user view, logout */
+.link-button {
+  align-items: center;
+  border: 4px solid transparent;
+  color: black;
+  display: flex;
+  font-family: inherit;
+  font-variation-settings:
+    "wght" 600,
+    "YOPQ" 300;
+  height: auto;
+  justify-content: center;
+  letter-spacing: 0.1rem;
+  padding: 10px 0;
+  text-decoration: none;
+  width: 100%;
+
+  &:disabled {
+    background-color: rgb(221 221 221);
+  }
+
+  &:active {
+    background-color: rgb(48 48 48);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+      filter: invert(75%);
+      transition: filter 0.2s;
+
+      &:disabled {
+        cursor: unset;
+        filter: unset;
+      }
+    }
+  }
+}
+
 /* styles for clip loader, override defaults */
 @keyframes custom-clip-spin {
   0% {

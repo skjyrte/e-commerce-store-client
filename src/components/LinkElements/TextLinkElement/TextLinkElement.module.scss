@@ -92,3 +92,26 @@
     }
   }
 }
+
+.user-modal-links {
+  &:disabled {
+    background-color: rgb(221 221 221);
+  }
+
+  &:active {
+    background-color: rgb(48 48 48);
+  }
+
+  @media (hover: hover) {
+    &:hover {
+      cursor: pointer;
+      filter: invert(75%);
+      transition: filter 0.2s;
+
+      &:disabled {
+        cursor: unset;
+        filter: unset;
+      }
+    }
+  }
+}

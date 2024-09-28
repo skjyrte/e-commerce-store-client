@@ -70,13 +70,9 @@ const AuthStatus: FC = () => {
     }
 
     if (userLoggedIn) {
-      return (
-        <div className={css["welcome-message"]}>
-          Hello, <span className={css["user-name"]}>{user.first_name}!</span>
-        </div>
-      );
+      return <div className={css["welcome-message"]}>Hello!</div>;
     } else {
-      return <div>{/* Log in */}</div>;
+      return <div> </div>;
     }
   };
 
@@ -84,6 +80,7 @@ const AuthStatus: FC = () => {
     <div className={css["login-container"]}>
       <div className={css["user-avatar-wrapper"]}>
         <IconUserProfile />
+        {/*  <UserModal /> */}
       </div>
       {displayText()}
     </div>

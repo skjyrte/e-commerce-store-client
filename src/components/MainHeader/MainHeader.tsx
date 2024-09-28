@@ -10,11 +10,14 @@ import AuthStatus from "../AuthStatus";
 import {Link} from "react-router-dom";
 import {selectAuth} from "../../redux/slices/authSlice";
 import {useSelector} from "react-redux";
+import UserModal from "../modals/UserModal";
 
 const Header: FC = () => {
   const [activeDrawer, setActiveDrawer] = useState<null | "men" | "women">(
     null
   );
+  const [isUserModalHovered, setIsUserModalHovered] = useState(false);
+
   const auth = useSelector(selectAuth);
   const {user, loginState, validateUserTokenState} = auth;
 
@@ -98,7 +101,18 @@ const Header: FC = () => {
             <div className={css["cart-button-wrapper"]}>
               <CartLinkElement />
             </div>
-            <div className={css["user-profile-button-wrapper"]}>
+            <div
+              onMouseEnter={() => {
+                setIsUserModalHovered(true);
+              }}
+              onMouseLeave={() => {
+                setIsUserModalHovered(false);
+              }}
+              className={css["user-profile-button-wrapper"]}
+            >
+              <UserModal
+                isHovered={location.pathname !== "/user" && isUserModalHovered}
+              />
               <Link
                 to={userLoggedIn ? "/user" : "/login"}
                 className={css["user-profile-button-wrapper"]}
