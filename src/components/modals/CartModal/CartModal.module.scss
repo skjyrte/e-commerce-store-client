@@ -53,6 +53,7 @@
     letter-spacing: 0.2rem;
     padding: 10px;
     text-decoration: none;
+    user-select: none;
 
     &:hover {
       filter: invert(75%);
