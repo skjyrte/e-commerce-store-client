@@ -202,8 +202,7 @@ export const addToCart = createAsyncThunk<
 );
 
 export const deleteCartItem = createAsyncThunk<
-  CartProductItem,
-  //eslint-disable-next-line
+  {id: string; size: string; quantity: 0},
   {product_id: string; product_size: string},
   {rejectValue: string}
 >("newCart/deleteItem", async ({product_id, product_size}, thunkAPI) => {
@@ -222,7 +221,7 @@ export const deleteCartItem = createAsyncThunk<
         quantity: 0,
       });
     } else {
-      return thunkAPI.rejectWithValue("Invalid response");
+      throw new Error("ABCD");
     }
   } catch (err: unknown) {
     console.error("DELETE cart error", err);
@@ -249,6 +248,31 @@ function updateCartItem(state: CartState, payload: CartProductItem) {
     state.items = state.items.length === 0 ? null : state.items;
   } else {
     state.items = [{...payload}];
+  }
+}
+
+function onSuccessDelete(
+  state: CartState,
+  payload: {id: string; size: string; quantity: 0}
+) {
+  if (state.items) {
+    const existingProduct = state.items.find(
+      (product) => product.id === payload.id && product.size === payload.size
+    );
+
+    if (existingProduct) {
+      state.items = state.items.map((product) =>
+        product.id === payload.id && product.size === payload.size
+          ? {...product, quantity: payload.quantity}
+          : product
+      );
+    } else {
+      return;
+    }
+    state.items = state.items.filter((product) => product.quantity !== 0);
+    state.items = state.items.length === 0 ? null : state.items;
+  } else {
+    return;
   }
 }
 
@@ -288,7 +312,7 @@ const newCartSlice = createSlice({
       })
       .addCase(deleteCartItem.fulfilled, (state, action) => {
         state.loaderState = null;
-        updateCartItem(state, action.payload);
+        onSuccessDelete(state, action.payload);
       });
   },
 });

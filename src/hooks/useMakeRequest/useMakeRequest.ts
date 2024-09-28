@@ -18,7 +18,7 @@ enum RequestType {
 interface GetConfig {
   gender?: string;
   category?: string;
-  product_id?: string;
+  id?: string;
 }
 
 interface ErrorObject {
@@ -111,7 +111,7 @@ function useMakeRequest<
 
   const memoConfig = useMemo(
     () => config,
-    [config.gender, config.category, config.product_id]
+    [config.gender, config.category, config.id]
   );
 
   const handleGetData = async (config: GetConfig) => {
