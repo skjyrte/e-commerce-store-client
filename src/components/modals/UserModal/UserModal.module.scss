@@ -33,36 +33,51 @@
       width: 200px;
 
       .user-account {
+        align-items: center;
         border-bottom: 2px solid rgb(226 226 226);
+        display: flex;
         height: 50px;
+        justify-content: center;
         text-align: center;
         width: 100%;
       }
 
       .user-login {
+        align-items: center;
         border-bottom: 2px solid rgb(226 226 226);
+        display: flex;
         height: 50px;
+        justify-content: center;
         text-align: center;
         width: 100%;
       }
 
       .user-logout {
+        align-items: center;
         border-bottom: 2px solid rgb(226 226 226);
+        display: flex;
         height: 50px;
+        justify-content: center;
         text-align: center;
         width: 100%;
       }
 
       .user-register {
+        align-items: center;
         border-bottom: 2px solid rgb(226 226 226);
+        display: flex;
         height: 50px;
+        justify-content: center;
         text-align: center;
         width: 100%;
       }
 
       .user-not-valid {
+        align-items: center;
         border-bottom: 2px solid rgb(226 226 226);
+        display: flex;
         height: auto;
+        justify-content: center;
         text-align: center;
         width: 100%;
       }

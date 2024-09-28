@@ -195,18 +195,21 @@
 .link-button {
   align-items: center;
   border: 4px solid transparent;
+  box-sizing: border-box;
   color: black;
   display: flex;
   font-family: inherit;
   font-variation-settings:
     "wght" 600,
     "YOPQ" 300;
-  height: auto;
+  height: calc(100% - 10px);
+
+  /*   height: auto; */
   justify-content: center;
   letter-spacing: 0.1rem;
-  padding: 10px 0;
+  padding: 10px;
   text-decoration: none;
-  width: 100%;
+  width: calc(100% - 10px);
 
   &:disabled {
     background-color: rgb(221 221 221);
