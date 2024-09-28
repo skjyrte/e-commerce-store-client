@@ -10,6 +10,7 @@
   height: 80px;
   justify-content: center;
   max-width: 200px;
+  position: relative;
   text-align: center;
 
   @media (width >= 600px) {
@@ -18,7 +19,15 @@
 
   .user-name {
     color: black;
-    letter-spacing: 0.1rem;
+    display: flex;
+    height: 40px;
+    overflow: hidden;
+    position: absolute;
+    right: 0;
+    text-align: center;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    width: 100px;
   }
 
   .user-avatar-wrapper {
