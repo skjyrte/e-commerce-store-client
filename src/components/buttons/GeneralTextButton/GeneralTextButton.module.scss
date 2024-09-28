@@ -209,6 +209,7 @@
   letter-spacing: 0.1rem;
   padding: 10px;
   text-decoration: none;
+  user-select: none;
   width: calc(100% - 10px);
 
   &:disabled {

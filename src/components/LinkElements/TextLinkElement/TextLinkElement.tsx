@@ -33,6 +33,7 @@ const TextLinkElement: FC<Props> = ({
 
   return (
     <Link
+      draggable={false}
       onClick={onClick}
       data-testid={dataTestId}
       className={classTitle}
